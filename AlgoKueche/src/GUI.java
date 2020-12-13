@@ -3,6 +3,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -43,13 +44,17 @@ public class GUI {
 	public GUI() {
 		initFrame();
 		initCanvas();
-		initActionPanel();
 
-		initTestGUI();
+		int actionHeight = (int) (height * 0.7);
+		//int commentHeight = (int) (height * 0.2);
+		int testHeight = (int) (height * 0.1);
+		
+		initActionPanel(actionHeight);
+		initTestGUI(testHeight);
 
 		canvas.add(actionPanel);
 		canvas.add(testPanel);
-		
+
 		frame.add(canvas);
 		frame.setVisible(true);
 
@@ -59,6 +64,13 @@ public class GUI {
 	}
 
 	// Init Methods
+	private void initMap() {
+		map = new HashMap<String, Slide>();
+		for (int i = 0; i < methods.length; i++) {
+			map.put(methods[i], new Slide(methods[i], colors[i]));
+		}
+	}
+
 	private void initFrame() {
 		frame = new JFrame("Hallo Welt");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -68,30 +80,24 @@ public class GUI {
 	private void initCanvas() {
 		canvas = new JPanel();
 		canvas.setVisible(true);
-		canvas.setBackground(Color.red);
+		canvas.setBackground(Color.white);
 
 		canvas.setLayout(new BoxLayout(canvas, BoxLayout.Y_AXIS));
 	}
 
-
-	private void initActionPanel() {
+	private void initActionPanel(int h) {
 		actionPanel = new JPanel();
 		actionPanel.setVisible(true);
 		actionPanel.setBackground(Color.red);
+		actionPanel.setPreferredSize(new Dimension(width, h));
 	}
 
-	private void initMap() {
-		map = new HashMap<String, Slide>();
-		for (int i = 0; i < methods.length; i++) {
-			map.put(methods[i], new Slide(methods[i], colors[i]));
-		}
-	}
-
-	private void initTestGUI(){
+	private void initTestGUI(int h) {
 		testPanel = new JPanel();
 		testPanel.setVisible(true);
 		testPanel.setBackground(Color.lightGray);
 
+		testPanel.setPreferredSize(new Dimension(width, h));
 		initButtons();
 	}
 
@@ -103,13 +109,13 @@ public class GUI {
 		left.setVisible(true);
 		left.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				currentSlideIdx = (currentSlideIdx + methods.length - 1)%methods.length;
+				currentSlideIdx = (currentSlideIdx + methods.length - 1) % methods.length;
 				System.out.println("links");
 				goToFrame(methods[currentSlideIdx]);
 			}
 		});
 
-		unknown = new JButton("None"); 
+		unknown = new JButton("None");
 		unknown.setSize(80, 80);
 		unknown.setVisible(true);
 		unknown.addActionListener(new ActionListener() {
@@ -119,13 +125,12 @@ public class GUI {
 			}
 		});
 
-
 		right = new JButton(">");
 		right.setSize(80, 80);
 		right.setVisible(true);
 		right.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				currentSlideIdx = (currentSlideIdx + 1)%methods.length;
+				currentSlideIdx = (currentSlideIdx + 1) % methods.length;
 				System.out.println("rechts");
 				goToFrame(methods[currentSlideIdx]);
 			}
