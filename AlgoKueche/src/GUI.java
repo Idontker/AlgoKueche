@@ -23,6 +23,7 @@ public class GUI {
 	private static final int WIDTH = (int) (SCALE * HEIGHT / 9 * 16);
 
 	private static final Color DEFAULT_COLOR = Color.lightGray;
+
 	// GUI Main
 	public static void main(String args[]) {
 		GUI g = new GUI();
@@ -47,9 +48,9 @@ public class GUI {
 		initCanvas();
 
 		int actionHeight = (int) (HEIGHT * 0.7);
-		//int commentHeight = (int) (height * 0.2);
+		// int commentHeight = (int) (height * 0.2);
 		int testHeight = (int) (HEIGHT * 0.1);
-		
+
 		initActionPanel(actionHeight);
 		initTestGUI(testHeight);
 
@@ -81,7 +82,7 @@ public class GUI {
 	private void initCanvas() {
 		canvas = new JPanel();
 		canvas.setVisible(true);
-		canvas.setBackground(Color.white);
+		canvas.setBackground(DEFAULT_COLOR);
 
 		canvas.setLayout(new BoxLayout(canvas, BoxLayout.Y_AXIS));
 	}
@@ -96,7 +97,7 @@ public class GUI {
 	private void initTestGUI(int h) {
 		testPanel = new JPanel();
 		testPanel.setVisible(true);
-		testPanel.setBackground(Color.lightGray);
+		testPanel.setBackground(DEFAULT_COLOR);
 
 		testPanel.setPreferredSize(new Dimension(WIDTH, h));
 		initButtons();
