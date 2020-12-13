@@ -23,9 +23,6 @@ public class GUI {
 	// GUI Main
 	public static void main(String args[]) {
 		GUI g = new GUI();
-		//while (true) {
-		//	g.slideShow();
-		//}
 	}
 
 	// GUI attributes
@@ -56,7 +53,7 @@ public class GUI {
 
 	// Init Methods
 	private void initFrame() {
-		frame = new JFrame("Hallo Wetlt");
+		frame = new JFrame("Hallo Welt");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(width, height);
 	}
