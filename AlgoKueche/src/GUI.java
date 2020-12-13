@@ -27,7 +27,9 @@ public class GUI {
 
 	// GUI Main
 	public static void main(String args[]) {
-		GUI g = new GUI();
+		// startTestGUI();
+		GUI g = startGUI();
+		g.slideShow();
 	}
 
 	// GUI attributes
@@ -48,7 +50,15 @@ public class GUI {
 	private JButton right; // go to the next slide of the slide-list
 	private int currentSlideIdx; // idx of the current or last valid slide
 
-	public GUI() {
+	public static GUI startGUI(){
+		return new GUI(false);
+	}
+	
+	public static GUI startTestGUI(){
+		return new GUI(true);
+	}
+
+	private GUI(boolean testing) {
 		initFrame();
 		initCanvas();
 
@@ -58,11 +68,15 @@ public class GUI {
 
 		initActionPanel(actionHeight);
 		initCommentPanel(commentHeight);
-		initTestGUI(testHeight);
+		if(testing){
+			initTestGUI(testHeight);
+		}
 
 		canvas.add(actionPanel);
 		canvas.add(commentPanel);
-		canvas.add(testPanel);
+		if(testing){
+			canvas.add(testPanel);
+		}
 
 		frame.add(canvas);
 		frame.setVisible(true);
@@ -191,12 +205,14 @@ public class GUI {
 	private void slideShow() {
 		for (String key : methods) {
 			goToFrame(key);
+			setComment(key);
 			try {
 				Thread.sleep(800);
 			} catch (Exception e) {
 			}
 		}
-		goToFrame("NaN");
+		goToFrame("b4df00d");
+		setComment("b4df00d");
 		try {
 			Thread.sleep(500);
 		} catch (Exception e) {
