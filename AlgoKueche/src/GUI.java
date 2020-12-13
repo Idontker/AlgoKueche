@@ -1,4 +1,5 @@
 import javax.swing.JFrame;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import java.awt.Color;
@@ -27,11 +28,13 @@ public class GUI {
 
 	// GUI attributes
 	private JFrame frame;
+	private JPanel canvas;
 	private JPanel actionPanel;
 
 	private HashMap<String, Slide> map;
 
 	// Buttons for testing
+	private JPanel testPanel;
 	private JButton left; // go to the previous slide of the slide-list
 	private JButton unknown; // show the slide for unknown inputs
 	private JButton right; // go to the next slide of the slide-list
@@ -39,11 +42,15 @@ public class GUI {
 
 	public GUI() {
 		initFrame();
+		initCanvas();
 		initActionPanel();
 
-		initButtons();
+		initTestGUI();
 
-		frame.add(actionPanel);
+		canvas.add(actionPanel);
+		canvas.add(testPanel);
+		
+		frame.add(canvas);
 		frame.setVisible(true);
 
 		initMap();
@@ -58,6 +65,15 @@ public class GUI {
 		frame.setSize(width, height);
 	}
 
+	private void initCanvas() {
+		canvas = new JPanel();
+		canvas.setVisible(true);
+		canvas.setBackground(Color.red);
+
+		canvas.setLayout(new BoxLayout(canvas, BoxLayout.Y_AXIS));
+	}
+
+
 	private void initActionPanel() {
 		actionPanel = new JPanel();
 		actionPanel.setVisible(true);
@@ -69,6 +85,14 @@ public class GUI {
 		for (int i = 0; i < methods.length; i++) {
 			map.put(methods[i], new Slide(methods[i], colors[i]));
 		}
+	}
+
+	private void initTestGUI(){
+		testPanel = new JPanel();
+		testPanel.setVisible(true);
+		testPanel.setBackground(Color.lightGray);
+
+		initButtons();
 	}
 
 	private void initButtons() {
@@ -107,9 +131,9 @@ public class GUI {
 			}
 		});
 
-		actionPanel.add(left);
-		actionPanel.add(unknown);
-		actionPanel.add(right);
+		testPanel.add(left);
+		testPanel.add(unknown);
+		testPanel.add(right);
 
 	}
 
