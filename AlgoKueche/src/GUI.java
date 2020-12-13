@@ -18,10 +18,11 @@ public class GUI {
 			Color.orange, Color.red, Color.yellow, new Color(50, 200, 10), new Color(200, 100, 50) };
 
 	// static values
-	private static final double scale = 0.5;
-	private static final int height = (int) (scale * 720);
-	private static final int width = (int) (scale * height / 9 * 16);
+	private static final double SCALE = 0.5;
+	private static final int HEIGHT = (int) (SCALE * 720);
+	private static final int WIDTH = (int) (SCALE * HEIGHT / 9 * 16);
 
+	private static final Color DEFAULT_COLOR = Color.lightGray;
 	// GUI Main
 	public static void main(String args[]) {
 		GUI g = new GUI();
@@ -45,9 +46,9 @@ public class GUI {
 		initFrame();
 		initCanvas();
 
-		int actionHeight = (int) (height * 0.7);
+		int actionHeight = (int) (HEIGHT * 0.7);
 		//int commentHeight = (int) (height * 0.2);
-		int testHeight = (int) (height * 0.1);
+		int testHeight = (int) (HEIGHT * 0.1);
 		
 		initActionPanel(actionHeight);
 		initTestGUI(testHeight);
@@ -74,7 +75,7 @@ public class GUI {
 	private void initFrame() {
 		frame = new JFrame("Hallo Welt");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setSize(width, height);
+		frame.setSize(WIDTH, HEIGHT);
 	}
 
 	private void initCanvas() {
@@ -89,7 +90,7 @@ public class GUI {
 		actionPanel = new JPanel();
 		actionPanel.setVisible(true);
 		actionPanel.setBackground(Color.red);
-		actionPanel.setPreferredSize(new Dimension(width, h));
+		actionPanel.setPreferredSize(new Dimension(WIDTH, h));
 	}
 
 	private void initTestGUI(int h) {
@@ -97,7 +98,7 @@ public class GUI {
 		testPanel.setVisible(true);
 		testPanel.setBackground(Color.lightGray);
 
-		testPanel.setPreferredSize(new Dimension(width, h));
+		testPanel.setPreferredSize(new Dimension(WIDTH, h));
 		initButtons();
 	}
 
