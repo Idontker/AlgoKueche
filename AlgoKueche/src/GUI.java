@@ -33,6 +33,7 @@ public class GUI {
 	private JFrame frame;
 	private JPanel canvas;
 	private JPanel actionPanel;
+	private JPanel commentPanel;
 
 	private HashMap<String, Slide> map;
 
@@ -47,14 +48,16 @@ public class GUI {
 		initFrame();
 		initCanvas();
 
-		int actionHeight = (int) (HEIGHT * 0.7);
-		// int commentHeight = (int) (height * 0.2);
+		int actionHeight = (int) (HEIGHT * 0.8);
+		int commentHeight = (int) (HEIGHT * 0.1);
 		int testHeight = (int) (HEIGHT * 0.1);
 
 		initActionPanel(actionHeight);
+		initCommentPanel(commentHeight);
 		initTestGUI(testHeight);
 
 		canvas.add(actionPanel);
+		canvas.add(commentPanel);
 		canvas.add(testPanel);
 
 		frame.add(canvas);
@@ -92,6 +95,14 @@ public class GUI {
 		actionPanel.setVisible(true);
 		actionPanel.setBackground(Color.red);
 		actionPanel.setPreferredSize(new Dimension(WIDTH, h));
+	}
+
+	private void initCommentPanel(int h) {
+		commentPanel = new JPanel();
+		commentPanel.setVisible(true);
+		commentPanel.setBackground(Color.white);
+		commentPanel.setPreferredSize(new Dimension(WIDTH, h));
+
 	}
 
 	private void initTestGUI(int h) {
