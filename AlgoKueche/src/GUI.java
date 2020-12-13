@@ -1,4 +1,5 @@
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -31,9 +32,12 @@ public class GUI {
 
 	// GUI attributes
 	private JFrame frame;
+
 	private JPanel canvas;
 	private JPanel actionPanel;
 	private JPanel commentPanel;
+
+	private JLabel commentBox;
 
 	private HashMap<String, Slide> map;
 
@@ -103,6 +107,8 @@ public class GUI {
 		commentPanel.setBackground(Color.white);
 		commentPanel.setPreferredSize(new Dimension(WIDTH, h));
 
+		commentBox = new JLabel("Willkommen in der AlgoKueche");
+		commentPanel.add(commentBox);
 	}
 
 	private void initTestGUI(int h) {
@@ -124,6 +130,7 @@ public class GUI {
 			public void actionPerformed(ActionEvent e) {
 				currentSlideIdx = (currentSlideIdx + methods.length - 1) % methods.length;
 				System.out.println("links");
+				setComment(methods[currentSlideIdx]);
 				goToFrame(methods[currentSlideIdx]);
 			}
 		});
@@ -133,7 +140,8 @@ public class GUI {
 		unknown.setVisible(true);
 		unknown.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("unknow");
+				System.out.println("unknown");
+				setComment("unknown");
 				goToFrame("b4df00d");
 			}
 		});
@@ -145,6 +153,7 @@ public class GUI {
 			public void actionPerformed(ActionEvent e) {
 				currentSlideIdx = (currentSlideIdx + 1) % methods.length;
 				System.out.println("rechts");
+				setComment(methods[currentSlideIdx]);
 				goToFrame(methods[currentSlideIdx]);
 			}
 		});
@@ -156,13 +165,12 @@ public class GUI {
 	}
 
 	// public methods
-
 	public void samSays() {
 		// TODO: implement the (random) occurences of useless and funny comments of Sam
 	}
 
-	public void setComment() {
-		// TODO: implement
+	public void setComment(String msg) {
+		commentBox.setText(msg);
 	}
 
 	// TODO: rename method
