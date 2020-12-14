@@ -17,6 +17,8 @@ public class GUI {
 			"schneide", "wirfInTopf", "koche", "istGewuerzt", "serviere", "reactionHappy", "reactionSad" };
 	private final static Color[] colors = new Color[] { Color.blue, Color.cyan, Color.gray, Color.green, Color.magenta,
 			Color.orange, Color.red, Color.yellow, new Color(50, 200, 10), new Color(200, 100, 50) };
+	private final static String[] imageNames = new String[] { "book.png", "fridge.png", "fridge.png", "scheiden.jpg",
+			"topf.png", "kochen.jpg", "abschmecken.png", "glocke.jpg", "happy.png", "sad.png" };
 
 	// static values
 	private static final double SCALE = 0.5;
@@ -50,11 +52,11 @@ public class GUI {
 	private JButton right; // go to the next slide of the slide-list
 	private int currentSlideIdx; // idx of the current or last valid slide
 
-	public static GUI startGUI(){
+	public static GUI startGUI() {
 		return new GUI(false);
 	}
-	
-	public static GUI startTestGUI(){
+
+	public static GUI startTestGUI() {
 		return new GUI(true);
 	}
 
@@ -68,13 +70,13 @@ public class GUI {
 
 		initActionPanel(actionHeight);
 		initCommentPanel(commentHeight);
-		if(testing){
+		if (testing) {
 			initTestGUI(testHeight);
 		}
 
 		canvas.add(actionPanel);
 		canvas.add(commentPanel);
-		if(testing){
+		if (testing) {
 			canvas.add(testPanel);
 		}
 
@@ -223,10 +225,17 @@ public class GUI {
 class Slide {
 	String method;
 	Color c;
+	JLabel image;
 
 	Slide(String method, Color c) {
 		this.method = method;
 		this.c = c;
+	}
+
+	Slide(String method, Color c, JLabel image) {
+		this.method = method;
+		this.c = c;
+		this.image = image;
 	}
 
 	@Override
