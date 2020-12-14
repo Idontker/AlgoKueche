@@ -3,11 +3,14 @@ import javax.swing.JLabel;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.imageio.ImageIO;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.util.HashMap;
 
 public class GUI {
@@ -92,7 +95,14 @@ public class GUI {
 	private void initMap() {
 		map = new HashMap<String, Slide>();
 		for (int i = 0; i < methods.length; i++) {
-			map.put(methods[i], new Slide(methods[i], colors[i]));
+			try{
+				String pathToImage = "../res" + imageNames[i];
+				BufferedImage buf = ImageIO.read(new File(pathToImage));
+				map.put(methods[i], new Slide(methods[i], colors[i],buf));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
 		}
 	}
 
@@ -225,14 +235,14 @@ public class GUI {
 class Slide {
 	String method;
 	Color c;
-	JLabel image;
+	BufferedImage image;
 
 	Slide(String method, Color c) {
 		this.method = method;
 		this.c = c;
 	}
 
-	Slide(String method, Color c, JLabel image) {
+	Slide(String method, Color c, BufferedImage image) {
 		this.method = method;
 		this.c = c;
 		this.image = image;
