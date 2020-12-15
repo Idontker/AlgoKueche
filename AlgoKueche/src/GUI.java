@@ -8,6 +8,7 @@ import javax.imageio.ImageIO;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
@@ -222,7 +223,9 @@ public class GUI {
 				if (imageLabel != null) {
 					actionPanel.remove(imageLabel);
 				}
-				imageLabel = new JLabel(new ImageIcon(next.image));
+				ImageIcon icon = new ImageIcon(next.image.getScaledInstance(actionPanel.getWidth(),
+						actionPanel.getHeight(), Image.SCALE_SMOOTH));
+				imageLabel = new JLabel(icon);
 				imageLabel.setVisible(true);
 				actionPanel.add(imageLabel);
 			}
@@ -271,6 +274,6 @@ class Slide {
 
 	@Override
 	public String toString() {
-		return "[name=" + method + ", color= (" + c.getRed() + ", " + c.getGreen() + ", " + c.getBlue() + ") ]";
+		return "[name=" + method + ", color=(" + c.getRed() + ", " + c.getGreen() + ", " + c.getBlue() + ") ]";
 	}
 }
