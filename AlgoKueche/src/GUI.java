@@ -12,6 +12,7 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.HashMap;
+import java.util.Scanner;
 
 public class GUI {
 
@@ -20,7 +21,7 @@ public class GUI {
 			"schneide", "wirfInTopf", "koche", "istGewuerzt", "serviere", "reactionHappy", "reactionSad" };
 	private final static Color[] colors = new Color[] { Color.blue, Color.cyan, Color.gray, Color.green, Color.magenta,
 			Color.orange, Color.red, Color.yellow, new Color(50, 200, 10), new Color(200, 100, 50) };
-	private final static String[] imageNames = new String[] { "book.png", "fridge.png", "fridge.png", "scheiden.jpg",
+	private final static String[] imageNames = new String[] { "book.png", "fridge.png", "fridge.png", "schneiden.jpg",
 			"topf.png", "kochen.jpg", "abschmecken.png", "glocke.jpg", "happy.png", "sad.png" };
 
 	// static values
@@ -93,13 +94,17 @@ public class GUI {
 
 	// Init Methods
 	private void initMap() {
+		
 		map = new HashMap<String, Slide>();
 		for (int i = 0; i < methods.length; i++) {
-			try{
-				String pathToImage = "../res" + imageNames[i];
-				BufferedImage buf = ImageIO.read(new File(pathToImage));
-				map.put(methods[i], new Slide(methods[i], colors[i],buf));
+			String pathToImage = "AlgoKueche/res/" + imageNames[i];
+			try {
+				File f = new File(pathToImage);
+				BufferedImage buf = ImageIO.read(f);
+
+				map.put(methods[i], new Slide(methods[i], colors[i], buf));
 			} catch (Exception e) {
+				System.err.println("[ERROR]:Failed loading Image for\t" + methods[i] + "\t<" + pathToImage + ">");
 				e.printStackTrace();
 			}
 
