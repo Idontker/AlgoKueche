@@ -1,6 +1,7 @@
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.imageio.ImageIO;
@@ -12,7 +13,6 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.HashMap;
-import java.util.Scanner;
 
 public class GUI {
 
@@ -45,6 +45,7 @@ public class GUI {
 	private JPanel actionPanel;
 	private JPanel commentPanel;
 
+	private JLabel imageLabel;
 	private JLabel commentBox;
 
 	private HashMap<String, Slide> map;
@@ -94,7 +95,7 @@ public class GUI {
 
 	// Init Methods
 	private void initMap() {
-		
+
 		map = new HashMap<String, Slide>();
 		for (int i = 0; i < methods.length; i++) {
 			String pathToImage = "AlgoKueche/res/" + imageNames[i];
@@ -126,10 +127,15 @@ public class GUI {
 	}
 
 	private void initActionPanel(int h) {
+		imageLabel = new JLabel();
+		imageLabel.setVisible(false);
+
 		actionPanel = new JPanel();
 		actionPanel.setVisible(true);
 		actionPanel.setBackground(Color.red);
 		actionPanel.setPreferredSize(new Dimension(WIDTH, h));
+
+		actionPanel.add(imageLabel);
 	}
 
 	private void initCommentPanel(int h) {
@@ -206,10 +212,20 @@ public class GUI {
 
 	// TODO: rename method
 	public void goToFrame(String slideName) {
+		imageLabel.setVisible(false);
 		Slide next = map.get(slideName);
 		if (next != null) {
 			System.out.println(next);
+
 			actionPanel.setBackground(next.c);
+			if (next.image != null) {
+				if (imageLabel != null) {
+					actionPanel.remove(imageLabel);
+				}
+				imageLabel = new JLabel(new ImageIcon(next.image));
+				imageLabel.setVisible(true);
+				actionPanel.add(imageLabel);
+			}
 		} else {
 			System.out.println("Slide: " + slideName + " not found in Database");
 			actionPanel.setBackground(Color.black);
