@@ -1,3 +1,5 @@
+package main;
+
 public class Lehrling {
     private String aktZutat;
     private Feedback kunde;
