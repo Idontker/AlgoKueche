@@ -13,6 +13,6 @@ public class Feedback {
     
     public Comment feedback() {
         //TODO
-        return "";
+        return Comment.richtig;
     }
 }
