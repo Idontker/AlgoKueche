@@ -49,18 +49,15 @@ public class Lehrling {
             kunde.arbeitschritt("istGewuerztFalse");
             animation.goToFrame("istGewuerztFalse");
             return false;
-        }
-        if(wuerze == 0) {
+        } else if(wuerze == 0) {
             wuerze--;
             kunde.arbeitschritt("istGewuerztTrue");
             animation.goToFrame("istGewuerztTrue");
             return true;
-        }
-        if(wuerze < 0){
+        } else { // if(wuerze < 0){
             wuerze = (int)Math.random()*3;
             return istGewuerzt();
         }
-        return true;
     }
 
     public void serviere(){
