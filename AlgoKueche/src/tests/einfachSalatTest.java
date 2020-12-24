@@ -30,8 +30,46 @@ public class einfachSalatTest extends FeedbackTest {
         wirKochenJetzt("simpler Salat");
         nimmAusSchrank("Salat");
         schneide();
+        legAufdenTeller();
+        nimmAusSchrank("Salat");
+        schneide();
+        legAufdenTeller();
         serviere();
-        Assert.assertEquals(Comment.serviereLeerenTeller, kunde.feedback());
+        Assert.assertEquals(Comment.zuVielServiert, kunde.feedback());
+    }
+
+    @Test
+    public void simpler_salat_4() {
+        wirKochenJetzt("simpler Salat");
+        nimmAusSchrank("Salat");
+        legAufdenTeller();
+        serviere();
+        Assert.assertEquals(Comment.unfertigeZutatenServiert, kunde.feedback());
+    }
+
+    @Test
+    public void simpler_salat_5() {
+        wirKochenJetzt("simpler Salat");
+        nimmAusSchrank("Salat");
+        schneide();
+        legAufdenTeller();
+        nimmAusSchrank("Tomaten");
+        schneide();
+        legAufdenTeller();
+        serviere();
+        Assert.assertEquals(Comment.falscheZutatEnthalten, kunde.feedback());
+    }
+
+    @Test
+    public void simpler_salat_6() {
+        wirKochenJetzt("simpler Salat");
+        nimmAusSchrank("Salat");
+        schneide();
+        legAufdenTeller();
+        nimmAusSchrank("Tomaten");
+        legAufdenTeller();
+        serviere();
+        Assert.assertEquals(Comment.falscheZutatEnthalten, kunde.feedback());
     }
 
 }
