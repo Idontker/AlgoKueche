@@ -60,6 +60,12 @@ public class Lehrling {
         }
     }
 
+    public void legAufdenTeller() {
+        aktZutat = "leer";
+        kunde.arbeitschritt("legAufdenTeller");
+        animation.goToFrame("legAufdenTeller");
+    }
+
     public void serviere(){
         kunde.bewerte();
         animation.goToFrame("serviere");
