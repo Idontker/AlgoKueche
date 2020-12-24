@@ -9,5 +9,10 @@ public class Feedback {
 
 	public void bewerte() {
         //TODO
-	}
+    }
+    
+    public Comment feedback() {
+        //TODO
+        return "";
+    }
 }
