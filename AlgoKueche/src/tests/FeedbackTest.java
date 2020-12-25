@@ -42,9 +42,9 @@ public abstract class FeedbackTest {
         kunde.arbeitschritt("istGewuerzt" + s);
     }
 
-    protected void legAufdenTeller() {
+    protected void legAufTeller() {
         aktZutat = "leer";
-        kunde.arbeitschritt("legAufdenTeller");
+        kunde.arbeitschritt("legAufTeller");
     }
 
     protected void serviere() {

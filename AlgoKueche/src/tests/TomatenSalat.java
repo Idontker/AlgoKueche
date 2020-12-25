@@ -11,10 +11,10 @@ public class TomatenSalat extends FeedbackTest {
         wirKochenJetzt("Salat mit Tomaten");
         nimmAusSchrank("Salat");
         schneide();
-        legAufdenTeller();
+        legAufTeller();
         nimmAusSchrank("Tomate");
         schneide();
-        legAufdenTeller();
+        legAufTeller();
         serviere();
         Assert.assertEquals(Comment.richtig, kunde.feedback());
     }
@@ -24,10 +24,10 @@ public class TomatenSalat extends FeedbackTest {
         wirKochenJetzt("Salat mit Tomaten");
         nimmAusSchrank("Tomate");
         schneide();
-        legAufdenTeller();
+        legAufTeller();
         nimmAusSchrank("Salat");
         schneide();
-        legAufdenTeller();
+        legAufTeller();
         serviere();
         Assert.assertEquals(Comment.richtig, kunde.feedback());
     }
@@ -38,12 +38,12 @@ public class TomatenSalat extends FeedbackTest {
         if (schneide1) {
             schneide();
         }
-        legAufdenTeller();
+        legAufTeller();
         nimmAusSchrank(zutat2);
         if (schneide2) {
             schneide();
         }
-        legAufdenTeller();
+        legAufTeller();
         serviere();
     }
 

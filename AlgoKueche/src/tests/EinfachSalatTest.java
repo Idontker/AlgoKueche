@@ -11,7 +11,7 @@ public class EinfachSalatTest extends FeedbackTest {
         wirKochenJetzt("simpler Salat");
         nimmAusSchrank("Salat");
         schneide();
-        legAufdenTeller();
+        legAufTeller();
         serviere();
         Assert.assertEquals(Comment.richtig, kunde.feedback());
     }
@@ -30,10 +30,10 @@ public class EinfachSalatTest extends FeedbackTest {
         wirKochenJetzt("simpler Salat");
         nimmAusSchrank("Salat");
         schneide();
-        legAufdenTeller();
+        legAufTeller();
         nimmAusSchrank("Salat");
         schneide();
-        legAufdenTeller();
+        legAufTeller();
         serviere();
         Assert.assertEquals(Comment.zuVielServiert, kunde.feedback());
     }
@@ -42,7 +42,7 @@ public class EinfachSalatTest extends FeedbackTest {
     public void simpler_salat_4() {
         wirKochenJetzt("simpler Salat");
         nimmAusSchrank("Salat");
-        legAufdenTeller();
+        legAufTeller();
         serviere();
         Assert.assertEquals(Comment.unfertigeZutatenServiert, kunde.feedback());
     }
@@ -52,10 +52,10 @@ public class EinfachSalatTest extends FeedbackTest {
         wirKochenJetzt("simpler Salat");
         nimmAusSchrank("Salat");
         schneide();
-        legAufdenTeller();
+        legAufTeller();
         nimmAusSchrank("Tomaten");
         schneide();
-        legAufdenTeller();
+        legAufTeller();
         serviere();
         Assert.assertEquals(Comment.falscheZutatEnthalten, kunde.feedback());
     }
@@ -65,9 +65,9 @@ public class EinfachSalatTest extends FeedbackTest {
         wirKochenJetzt("simpler Salat");
         nimmAusSchrank("Salat");
         schneide();
-        legAufdenTeller();
+        legAufTeller();
         nimmAusSchrank("Tomaten");
-        legAufdenTeller();
+        legAufTeller();
         serviere();
         Assert.assertEquals(Comment.falscheZutatEnthalten, kunde.feedback());
     }
