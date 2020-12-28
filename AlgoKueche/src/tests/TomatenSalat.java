@@ -227,4 +227,44 @@ public class TomatenSalat extends FeedbackTest {
         Assert.assertEquals(Comment.serviereLeerenTeller, kunde.feedback());
     }
 
+    @Test
+    public void schneidenOhneZutat_1(){
+        wirKochenJetzt("Salat mit Tomaten");
+        schneide();
+        Assert.assertEquals(Comment.schneidenOhneZutat, kunde.feedback());
+    }
+
+    @Test
+    public void schneidenOhneZutat_2(){
+        wirKochenJetzt("Salat mit Tomaten");
+        schneide();
+        legAufTeller();
+        nimmAusSchrank("Tomate");
+        schneide();
+        serviere();
+        Assert.assertEquals(Comment.schneidenOhneZutat, kunde.feedback());
+    }
+
+    @Test
+    public void schneidenOhneZutat_3(){
+        wirKochenJetzt("Salat mit Tomaten");
+        nimmAusSchrank("Salat");
+        schneide();
+        legAufTeller();
+        schneide();
+        serviere();
+        Assert.assertEquals(Comment.schneidenOhneZutat, kunde.feedback());
+    }
+
+    @Test
+    public void flascheZutatEnthalten_1(){
+        wirKochenJetzt("Salat mit Tomaten");
+        schneide();
+        legAufTeller();
+        nimmAusSchrank("Tomate");
+        schneide();
+        serviere();
+        Assert.assertEquals(Comment.falscheZutatEnthalten, kunde.feedback());
+    }
+
 }
