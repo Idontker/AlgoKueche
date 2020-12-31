@@ -3,13 +3,18 @@ package main;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.imageio.ImageIO;
+
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.util.HashMap;
 
 public class GUI {
@@ -19,6 +24,8 @@ public class GUI {
 			"schneide", "wirfInTopf", "koche", "istGewuerzt", "serviere", "reactionHappy", "reactionSad" };
 	private final static Color[] colors = new Color[] { Color.blue, Color.cyan, Color.gray, Color.green, Color.magenta,
 			Color.orange, Color.red, Color.yellow, new Color(50, 200, 10), new Color(200, 100, 50) };
+	private final static String[] imageNames = new String[] { "book.png", "fridge.png", "fridge.png", "schneiden.jpg",
+			"topf.png", "kochen.jpg", "abschmecken.png", "glocke.jpg", "happy.png", "sad.png" };
 
 	// static values
 	private static final double SCALE = 0.5;
@@ -41,6 +48,7 @@ public class GUI {
 	private JPanel actionPanel;
 	private JPanel commentPanel;
 
+	private JLabel imageLabel;
 	private JLabel commentBox;
 
 	private HashMap<String, Slide> map;
@@ -52,11 +60,11 @@ public class GUI {
 	private JButton right; // go to the next slide of the slide-list
 	private int currentSlideIdx; // idx of the current or last valid slide
 
-	public static GUI startGUI(){
+	public static GUI startGUI() {
 		return new GUI(false);
 	}
-	
-	public static GUI startTestGUI(){
+
+	public static GUI startTestGUI() {
 		return new GUI(true);
 	}
 
@@ -70,13 +78,13 @@ public class GUI {
 
 		initActionPanel(actionHeight);
 		initCommentPanel(commentHeight);
-		if(testing){
+		if (testing) {
 			initTestGUI(testHeight);
 		}
 
 		canvas.add(actionPanel);
 		canvas.add(commentPanel);
-		if(testing){
+		if (testing) {
 			canvas.add(testPanel);
 		}
 
@@ -90,9 +98,20 @@ public class GUI {
 
 	// Init Methods
 	private void initMap() {
+
 		map = new HashMap<String, Slide>();
 		for (int i = 0; i < methods.length; i++) {
-			map.put(methods[i], new Slide(methods[i], colors[i]));
+			String pathToImage = "AlgoKueche/res/" + imageNames[i];
+			try {
+				File f = new File(pathToImage);
+				BufferedImage buf = ImageIO.read(f);
+
+				map.put(methods[i], new Slide(methods[i], colors[i], buf));
+			} catch (Exception e) {
+				System.err.println("[ERROR]:Failed loading Image for\t" + methods[i] + "\t<" + pathToImage + ">");
+				e.printStackTrace();
+			}
+
 		}
 	}
 
@@ -111,10 +130,15 @@ public class GUI {
 	}
 
 	private void initActionPanel(int h) {
+		imageLabel = new JLabel();
+		imageLabel.setVisible(false);
+
 		actionPanel = new JPanel();
 		actionPanel.setVisible(true);
 		actionPanel.setBackground(Color.red);
 		actionPanel.setPreferredSize(new Dimension(WIDTH, h));
+
+		actionPanel.add(imageLabel);
 	}
 
 	private void initCommentPanel(int h) {
@@ -191,10 +215,22 @@ public class GUI {
 
 	// TODO: rename method
 	public void goToFrame(String slideName) {
+		imageLabel.setVisible(false);
 		Slide next = map.get(slideName);
 		if (next != null) {
 			System.out.println(next);
+
 			actionPanel.setBackground(next.c);
+			if (next.image != null) {
+				if (imageLabel != null) {
+					actionPanel.remove(imageLabel);
+				}
+				ImageIcon icon = new ImageIcon(next.image.getScaledInstance(actionPanel.getWidth(),
+						actionPanel.getHeight(), Image.SCALE_SMOOTH));
+				imageLabel = new JLabel(icon);
+				imageLabel.setVisible(true);
+				actionPanel.add(imageLabel);
+			}
 		} else {
 			System.out.println("Slide: " + slideName + " not found in Database");
 			actionPanel.setBackground(Color.black);
@@ -225,14 +261,21 @@ public class GUI {
 class Slide {
 	String method;
 	Color c;
+	BufferedImage image;
 
 	Slide(String method, Color c) {
 		this.method = method;
 		this.c = c;
 	}
 
+	Slide(String method, Color c, BufferedImage image) {
+		this.method = method;
+		this.c = c;
+		this.image = image;
+	}
+
 	@Override
 	public String toString() {
-		return "[name=" + method + ", color= (" + c.getRed() + ", " + c.getGreen() + ", " + c.getBlue() + ") ]";
+		return "[name=" + method + ", color=(" + c.getRed() + ", " + c.getGreen() + ", " + c.getBlue() + ") ]";
 	}
 }
