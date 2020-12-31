@@ -16,6 +16,7 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.HashMap;
+import java.util.concurrent.LinkedBlockingQueue;
 
 public class GUI {
 
@@ -26,6 +27,7 @@ public class GUI {
 			Color.orange, Color.red, Color.yellow, new Color(50, 200, 10), new Color(200, 100, 50) };
 	private final static String[] imageNames = new String[] { "book.png", "fridge.png", "fridge.png", "schneiden.jpg",
 			"topf.png", "kochen.jpg", "abschmecken.png", "glocke.jpg", "happy.png", "sad.png" };
+	private final static Slide BADF00D = new Slide("badf00d", Color.black);
 
 	// static values
 	private static final double SCALE = 0.5;
@@ -36,14 +38,13 @@ public class GUI {
 
 	// GUI Main
 	public static void main(String args[]) {
-		// startTestGUI();
-		GUI g = startGUI();
-		g.slideShow();
+		startTestGUI();
+		// GUI g = startGUI();
+		// g.slideShow();
 	}
 
 	// GUI attributes
 	private JFrame frame;
-
 	private JPanel canvas;
 	private JPanel actionPanel;
 	private JPanel commentPanel;
@@ -52,6 +53,8 @@ public class GUI {
 	private JLabel commentBox;
 
 	private HashMap<String, Slide> map;
+	private LinkedBlockingQueue<Slide> queuedImages;
+	private SlideThread slideThread;
 
 	// Buttons for testing
 	private JPanel testPanel;
@@ -76,6 +79,10 @@ public class GUI {
 		int commentHeight = (int) (HEIGHT * 0.1);
 		int testHeight = (int) (HEIGHT * 0.1);
 
+		queuedImages = new LinkedBlockingQueue<Slide>();
+		slideThread = new SlideThread(3000);
+		slideThread.start();
+
 		initActionPanel(actionHeight);
 		initCommentPanel(commentHeight);
 		if (testing) {
@@ -98,8 +105,8 @@ public class GUI {
 
 	// Init Methods
 	private void initMap() {
-
 		map = new HashMap<String, Slide>();
+
 		for (int i = 0; i < methods.length; i++) {
 			String pathToImage = "AlgoKueche/res/" + imageNames[i];
 			try {
@@ -215,27 +222,17 @@ public class GUI {
 
 	// TODO: rename method
 	public void goToFrame(String slideName) {
-		imageLabel.setVisible(false);
 		Slide next = map.get(slideName);
-		if (next != null) {
-			System.out.println(next);
-
-			actionPanel.setBackground(next.c);
-			if (next.image != null) {
-				if (imageLabel != null) {
-					actionPanel.remove(imageLabel);
-				}
-				ImageIcon icon = new ImageIcon(next.image.getScaledInstance(actionPanel.getWidth(),
-						actionPanel.getHeight(), Image.SCALE_SMOOTH));
-				imageLabel = new JLabel(icon);
-				imageLabel.setVisible(true);
-				actionPanel.add(imageLabel);
-			}
-		} else {
+		if (next == null) {
 			System.out.println("Slide: " + slideName + " not found in Database");
-			actionPanel.setBackground(Color.black);
-
+			next = BADF00D;
 		}
+		try {
+			queuedImages.put(next);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
 	}
 
 	// methods for testing.
@@ -254,6 +251,41 @@ public class GUI {
 		try {
 			Thread.sleep(500);
 		} catch (Exception e) {
+		}
+	}
+
+	private void showSlide(Slide next) {
+		actionPanel.setBackground(next.c);
+		if (next.image != null) {
+			if (imageLabel != null) {
+				actionPanel.remove(imageLabel);
+			}
+			ImageIcon icon = new ImageIcon(
+					next.image.getScaledInstance(actionPanel.getWidth(), actionPanel.getHeight(), Image.SCALE_SMOOTH));
+			imageLabel = new JLabel(icon);
+			imageLabel.setVisible(true);
+			actionPanel.add(imageLabel);
+		}
+	}
+
+	class SlideThread extends Thread {
+		private int sleepTime;
+
+		SlideThread(int sleepTime) {
+			this.sleepTime = sleepTime;
+		}
+
+		@Override
+		public void run() {
+			while (true) {
+				try {
+					Slide next = queuedImages.take();
+					showSlide(next);
+					Thread.sleep(sleepTime);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
 		}
 	}
 }
