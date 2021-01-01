@@ -39,8 +39,8 @@ public class GUI {
 	// GUI Main
 	public static void main(String args[]) {
 		startTestGUI();
-		//GUI g = startGUI();
-		//g.slideShow();
+		// GUI g = startGUI();
+		// g.slideShow();
 	}
 
 	// GUI attributes
@@ -242,18 +242,23 @@ public class GUI {
 	}
 
 	private void showSlide(Slide next) {
-		actionPanel.setBackground(next.c);
-		commentBox.setText(next.comment);
-		if (next.image != null) {
-			if (imageLabel != null) {
-				actionPanel.remove(imageLabel);
-			}
+		JLabel tmp = null;
+		if (next.image != null) {	//create new Label with ImageIcon
 			ImageIcon icon = new ImageIcon(
 					next.image.getScaledInstance(actionPanel.getWidth(), actionPanel.getHeight(), Image.SCALE_SMOOTH));
-			imageLabel = new JLabel(icon);
-			imageLabel.setVisible(true);
-			actionPanel.add(imageLabel);
+			tmp = new JLabel(icon);
+			tmp.setVisible(true);
 		}
+		if (imageLabel != null) { //remove old Label with ImageIcon
+			actionPanel.remove(imageLabel);
+		}
+		if (tmp != null) { // add new Label with ImageIcon
+			actionPanel.add(tmp);
+			imageLabel = tmp;
+		}
+		// update Background and comment
+		actionPanel.setBackground(next.c);
+		commentBox.setText(next.comment);
 	}
 
 	class SlideThread extends Thread {
@@ -270,6 +275,7 @@ public class GUI {
 					Slide next = queuedImages.take();
 					showSlide(next);
 					Thread.sleep(sleepTime);
+					System.out.println("sleep done");
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
