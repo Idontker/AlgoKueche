@@ -177,7 +177,6 @@ public class GUI {
 			public void actionPerformed(ActionEvent e) {
 				currentSlideIdx = (currentSlideIdx + methods.length - 1) % methods.length;
 				System.out.println("links");
-				setComment(methods[currentSlideIdx]);
 				goToFrame(methods[currentSlideIdx]);
 			}
 		});
@@ -188,7 +187,6 @@ public class GUI {
 		unknown.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("unknown");
-				setComment("unknown");
 				goToFrame("b4df00d");
 			}
 		});
@@ -200,7 +198,6 @@ public class GUI {
 			public void actionPerformed(ActionEvent e) {
 				currentSlideIdx = (currentSlideIdx + 1) % methods.length;
 				System.out.println("rechts");
-				setComment(methods[currentSlideIdx]);
 				goToFrame(methods[currentSlideIdx]);
 			}
 		});
@@ -214,10 +211,6 @@ public class GUI {
 	// public methods
 	public void samSays() {
 		// TODO: implement the (random) occurences of useless and funny comments of Sam
-	}
-
-	public void setComment(String msg) {
-		commentBox.setText(msg);
 	}
 
 	// TODO: rename method
@@ -240,14 +233,8 @@ public class GUI {
 	private void slideShow() {
 		for (String key : methods) {
 			goToFrame(key);
-			setComment(key);
-			try {
-				Thread.sleep(800);
-			} catch (Exception e) {
-			}
 		}
 		goToFrame("b4df00d");
-		setComment("b4df00d");
 		try {
 			Thread.sleep(500);
 		} catch (Exception e) {
@@ -256,6 +243,7 @@ public class GUI {
 
 	private void showSlide(Slide next) {
 		actionPanel.setBackground(next.c);
+		commentBox.setText(next.comment);
 		if (next.image != null) {
 			if (imageLabel != null) {
 				actionPanel.remove(imageLabel);
@@ -292,18 +280,21 @@ public class GUI {
 
 class Slide {
 	String method;
+	String comment;
 	Color c;
 	BufferedImage image;
 
 	Slide(String method, Color c) {
 		this.method = method;
 		this.c = c;
+		this.comment = method;
 	}
 
 	Slide(String method, Color c, BufferedImage image) {
 		this.method = method;
 		this.c = c;
 		this.image = image;
+		this.comment = method;
 	}
 
 	@Override
