@@ -39,8 +39,8 @@ public class GUI {
 	// GUI Main
 	public static void main(String args[]) {
 		startTestGUI();
-		// GUI g = startGUI();
-		// g.slideShow();
+		//GUI g = startGUI();
+		//g.slideShow();
 	}
 
 	// GUI attributes
@@ -123,7 +123,7 @@ public class GUI {
 	}
 
 	private void initFrame() {
-		frame = new JFrame("Hallo Welt");
+		frame = new JFrame("AlgoKueche");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(WIDTH, HEIGHT);
 	}
