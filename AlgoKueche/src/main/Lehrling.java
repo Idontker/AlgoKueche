@@ -2,15 +2,19 @@ package main;
 
 public class Lehrling {
     private String aktZutat;
-    private Feedback kunde;
+    private Kunde kunde;
     private GUI animation;
     private int wuerze;
+    private boolean bearbeitet;
+    private boolean inTopf;
 
     public Lehrling(){
         aktZutat = "leer";
-        kunde = new Feedback();
+        kunde = new Kunde();
         animation = GUI.startGUI();
         wuerze = -1;
+        bearbeitet = false;
+        inTopf = false;
     }
 
     public void wirKochenJetzt(String rezept){
@@ -19,41 +23,65 @@ public class Lehrling {
     }
 
     public void nimmAusSchrank(String zutat) {
+        if(!aktZutat.isEmpty()){
+            kunde.meldeFehler(Comment.mehrAlsEineZutatInDerHand);
+        }
         aktZutat = entscheideZutat(zutat);
-        kunde.arbeitschritt("nimmAusSchrank" + zutat);
         animation.goToFrame("nimmAusSchrank");
     }
 
     public void stellZurueck() {
-        aktZutat = "leer";
-        kunde.arbeitschritt("stellZurueck");
+        if(bearbeitet){
+            kunde.meldeFehler(Comment.verschwendung);
+        }
+        inTopf = false; //oel darf in den Topf gegben werden, vor dem Braten.
+        aktZutat = "";
         animation.goToFrame("stellZurueck");
     }
 
     public void schneide() {
-        kunde.arbeitschritt("schneide" + aktZutat);
+        bearbeitet = true;
+        aktZutat = aktZutat + "geschnitten,";
         animation.goToFrame("schneide");
     }
 
     public void gebeInTopf() {
-        kunde.arbeitschritt("gebeInTopf" + aktZutat);
+        inTopf = true;
+        if(aktZutat.equals("oel(")){ kunde.arbeitsschritt("topfGeoelt"); }
         animation.goToFrame("gebeInTopf");
     }
 
     public void koche(int zeit) {
-        kunde.arbeitschritt("koche" + zeit);
-        animation.goToFrame("koche");
+        if(!aktZutat.isEmpty() && inTopf){
+            bearbeitet = true;
+            aktZutat = aktZutat + "gekocht" + zeit + ",";
+            animation.goToFrame("koche");
+        }
+        else{
+            kunde.meldeFehler(Comment.kochtLeerenTopf);
+        }
     }
 
-    public boolean istGewuerzt() {
+    public void gebeAufTeller() {
+            if(aktZutat.endsWith(",")) {
+                aktZutat = aktZutat.substring(0, aktZutat.length()-2);
+            }  
+            kunde.arbeitsschritt(aktZutat + ")");
+            animation.goToFrame("gebeAufTeller");
+
+            if(istKeinGewuerz(aktZutat)){aktZutat = "";}
+        }
+
+        
+
+        public boolean istGewuerzt() {
         if(wuerze > 0) {
             wuerze--;
-            kunde.arbeitschritt("istGewuerztFalse");
             animation.goToFrame("istGewuerztFalse");
             return false;
         } else if(wuerze == 0) {
             wuerze--;
-            kunde.arbeitschritt("istGewuerztTrue");
+            kunde.arbeitsschritt("istGewuerzt");
             animation.goToFrame("istGewuerztTrue");
             return true;
         } else { // wuerze < 0
@@ -62,61 +90,31 @@ public class Lehrling {
         }
     }
 
-    public void legAufTeller() {
-        aktZutat = "leer";
-        kunde.arbeitschritt("legAufTeller");
-        animation.goToFrame("legAufTeller");
-    }
-
     public void serviere(){
         kunde.bewerte();
         animation.goToFrame("serviere");
     }
 
+    private boolean istKeinGewuerz(String zutat) {
+        switch (zutat) {
+            case "oel(":
+            case "essig(":
+            case "salz(":    
+                return false;
+            default:
+                return true;
+        }
+    }
+
     /*
     entfernt gross-/kleinschreibung.
+    hängt ein "(" an das Ende
     bekannte zutaten:
-        salat, oel, zwiebel, gurke Oliven, Feta, Salz
+        salat, oel, zwiebel, gurke Oliven, Feta, Salz, Essig
     */
-    private String entscheideZutat(String zutatAlt) {
-        String zutat = "";
-        switch (zutatAlt) {//"Zwiebel", "Gruke", "Oliven", "Feta"
-            case "salat":
-            case "Salat":
-            case "salatkopf":
-            case "Salatkopf":
-            case "einen salat":
-            case "einen Salat":
-                zutat = "salat";
-                break;
-            case "oel":
-            case "Oel":
-                zutat = "oel";
-                break;
-            case "zwiebel":
-            case "Zwiebel":
-                zutat = "zwiebel";
-                break;
-            case "gurke":
-            case "Gurke":
-                zutat = "gurke";
-                break;
-            case "oliven":
-            case "Oliven":
-                zutat = "oliven";
-                break;
-            case "feta":
-            case "Feta":
-                zutat = "feta";
-                break;
-            case "salz":
-            case "Salz":
-                zutat = "salz";
-                break;
-
-            default:
-                zutat = "unbekannt";
-        }
-        return zutat;
+    private String entscheideZutat(String eingabe) {
+        String zutat = eingabe;
+        
+        return zutat+"(";
     }
 }

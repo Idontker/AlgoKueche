@@ -14,7 +14,7 @@ public class Kunde
     
     public Kunde()
     {
-
+        //leer
     }
     
     public void giveMeRecipeToCheck(String t1, int t2) {
@@ -51,7 +51,7 @@ public class Kunde
     }
     
     public boolean checkIfNotDisgusting() {
-        if(b!=null&&b==false) {
+        if(b!=null&& !b) {
             return false;
         }
         Matcher matcher = pattern.matcher(s);
@@ -60,9 +60,13 @@ public class Kunde
         }
         return true;
     }
+
+    public void meldeFehler(Comment c){
+        // TODO
+    }
     
     public String whyIsItDisgusting() {
-        if(b!=null&&b==false) {
+        if(b!=null&& !b) {
             return "It's bland!";
         }
         for(int i=0;i<errorCases.size();i++) {
@@ -91,5 +95,11 @@ public class Kunde
             return null;
         }
     }
+
+	public void rezeptauswahl(String rezept) {
+	}
+
+	public void bewerte() {
+	}
 
 }
