@@ -19,7 +19,7 @@ public class Lehrling {
     }
 
     public void nimmAusSchrank(String zutat) {
-        aktZutat = zutat;
+        aktZutat = entscheideZutat(zutat);
         kunde.arbeitschritt("nimmAusSchrank" + zutat);
         animation.goToFrame("nimmAusSchrank");
     }
@@ -56,7 +56,7 @@ public class Lehrling {
             kunde.arbeitschritt("istGewuerztTrue");
             animation.goToFrame("istGewuerztTrue");
             return true;
-        } else { // if(wuerze < 0){
+        } else { // wuerze < 0
             wuerze = (int)Math.random()*3;
             return istGewuerzt();
         }
@@ -71,5 +71,52 @@ public class Lehrling {
     public void serviere(){
         kunde.bewerte();
         animation.goToFrame("serviere");
+    }
+
+    /*
+    entfernt gross-/kleinschreibung.
+    bekannte zutaten:
+        salat, oel, zwiebel, gurke Oliven, Feta, Salz
+    */
+    private String entscheideZutat(String zutatAlt) {
+        String zutat = "";
+        switch (zutatAlt) {//"Zwiebel", "Gruke", "Oliven", "Feta"
+            case "salat":
+            case "Salat":
+            case "salatkopf":
+            case "Salatkopf":
+            case "einen salat":
+            case "einen Salat":
+                zutat = "salat";
+                break;
+            case "oel":
+            case "Oel":
+                zutat = "oel";
+                break;
+            case "zwiebel":
+            case "Zwiebel":
+                zutat = "zwiebel";
+                break;
+            case "gurke":
+            case "Gurke":
+                zutat = "gurke";
+                break;
+            case "oliven":
+            case "Oliven":
+                zutat = "oliven";
+                break;
+            case "feta":
+            case "Feta":
+                zutat = "feta";
+                break;
+            case "salz":
+            case "Salz":
+                zutat = "salz";
+                break;
+
+            default:
+                zutat = "unbekannt";
+        }
+        return zutat;
     }
 }
