@@ -41,11 +41,11 @@ public class Kunde
         errorCases.add(new ErrorCase(t1, t2));
     }
     
-    public String giveMeStringToEat(String t) {
+    public String arbeitsschritt(String t) {
         s+=t;
         curr++;
         if(curr>=max) {
-            return "Just stop! The Customer already left!";
+            return "Das Rezept hat zu lange gedauert. Mittlerweile ist der Kunde gegangen.";
         }
         return null;
     }
