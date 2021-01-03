@@ -27,6 +27,7 @@ public class GriechischerSalat extends FeedbackTest {
         legAufTeller();
         nimmAusSchrank("Oel");
         legAufTeller();
+        stellZurueck();
         serviere();
     }
 
