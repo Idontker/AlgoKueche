@@ -1,0 +1,33 @@
+Hallo Julia, 
+hier die Befehle mit Erklärungen (Ich nutze hier Leerzeichen statt CamelCase, ist einfacher zu lesen)
+Der Lehrling heißt Sam, der Küchenchef Alfred.
+
+Ein Bild je von Sam und Alfred. Um sie den SchülerInnen vorzustellen und für die Arbeitsblätter. 
+Alfred hatte einen Arbeitsunfall, der ihn am Kochen hindert, wäre schön, wenn man das sehen kann.
+
+Wir kochen jetzt:
+	Einmaliger Anfangsbefehl, zeigt Sam "Gewehr bei Fuß", bereit loszulegen.
+	
+nimm aus Schrank:
+	Sam nimmt etwas aus dem Schrank/Speisekammer
+	
+stell Zurück:
+	Sam stellt zurück, was er gerade in der Hand hat. Kann vermutlich das Bild von "Nimm" nutzen
+	
+schneide:
+	Sam schneidet etwas auf einem Brett klein
+
+werfe in Topf:
+	Sam wirft was er gerade in der Hand hat in den Topf. 
+	Es gibt da ein paar Variationen:
+		- Manchmal ergibt eine Schüssel mehr Sinn als ein Topf (Salat o.Ä.) 
+		- Manchmal sind das frisch geschnittene Sachen, die vom Brett geschoben werden manchmal aber 
+			auch Gewürze oder etwas aus einer Flasche. 
+	Es genügt ein einfaches Bild mit undefinierbarem, dass in den Topf kommt. Wenn es aber nur wenig
+	Zusatzaufwand ist so kleine Teile des Bildes zu ändern, wären situative Bilder cool.
+	
+koche:
+	der Inhalt des Topf des Topfes wird gekocht
+	
+serviere:
+	Sam serviert das Gericht. 
