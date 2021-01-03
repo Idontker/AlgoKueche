@@ -30,7 +30,7 @@ public class GUI {
 	private final static Slide BADF00D = new Slide("badf00d", Color.black);
 
 	// static values
-	private static final double SCALE = 0.5;
+	private static final double SCALE = 0.9;
 	private static final int HEIGHT = (int) (SCALE * 720);
 	private static final int WIDTH = (int) (SCALE * HEIGHT / 9 * 16);
 
@@ -55,6 +55,9 @@ public class GUI {
 	private HashMap<String, Slide> map;
 	private LinkedBlockingQueue<Slide> queuedImages;
 	private SlideThread slideThread;
+
+	private JLabel loadingBar;
+	private JLabel whitespace;
 
 	// Buttons for testing
 	private JPanel testPanel;
@@ -152,10 +155,27 @@ public class GUI {
 		commentPanel = new JPanel();
 		commentPanel.setVisible(true);
 		commentPanel.setBackground(Color.white);
-		commentPanel.setPreferredSize(new Dimension(WIDTH, h));
+		commentPanel.setSize(new Dimension(WIDTH, h));
 
 		commentBox = new JLabel("Willkommen in der AlgoKueche");
 		commentPanel.add(commentBox);
+
+		try {
+			File f = new File("AlgoKueche/res/w.png");
+			BufferedImage w = ImageIO.read(f);
+			whitespace = new JLabel(new ImageIcon(w.getScaledInstance((int) (0.3 * WIDTH), h, Image.SCALE_SMOOTH)));
+			whitespace.setSize((int) (0.3 * WIDTH), h);
+			whitespace.setVisible(true);
+			commentPanel.add(whitespace);
+		} catch (Exception e) {
+		}
+
+		ImageIcon gif = new ImageIcon("AlgoKueche/res/circle-black.gif");
+		loadingBar = new JLabel(gif);
+
+		loadingBar.setVisible(true);
+		loadingBar.setSize(h, h);
+		commentPanel.add(loadingBar);
 	}
 
 	private void initTestGUI(int h) {
@@ -243,13 +263,13 @@ public class GUI {
 
 	private void showSlide(Slide next) {
 		JLabel tmp = null;
-		if (next.image != null) {	//create new Label with ImageIcon
+		if (next.image != null) { // create new Label with ImageIcon
 			ImageIcon icon = new ImageIcon(
 					next.image.getScaledInstance(actionPanel.getWidth(), actionPanel.getHeight(), Image.SCALE_SMOOTH));
 			tmp = new JLabel(icon);
 			tmp.setVisible(true);
 		}
-		if (imageLabel != null) { //remove old Label with ImageIcon
+		if (imageLabel != null) { // remove old Label with ImageIcon
 			actionPanel.remove(imageLabel);
 		}
 		if (tmp != null) { // add new Label with ImageIcon
@@ -274,7 +294,11 @@ public class GUI {
 				try {
 					Slide next = queuedImages.take();
 					showSlide(next);
+					loadingBar.setVisible(true);
 					Thread.sleep(sleepTime);
+					// actionPanel.remove(loadingBar);
+					loadingBar.setVisible(false);
+					Thread.sleep(200);
 					System.out.println("sleep done");
 				} catch (InterruptedException e) {
 					e.printStackTrace();
