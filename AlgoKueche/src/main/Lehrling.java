@@ -1,5 +1,7 @@
 package main;
 
+import java.util.Arrays;
+
 public class Lehrling {
     private String aktZutat;
     protected Kunde kunde;
@@ -109,11 +111,61 @@ public class Lehrling {
 
     /*
      * entfernt gross-/kleinschreibung. hängt ein "(" an das Ende bekannte zutaten:
-     * salat, oel, zwiebel, gurke Oliven, Feta, Salz, Essig
+     * salat, oel, zwiebel, gurke, oliven, feta, salz, essig
      */
     private String entscheideZutat(String eingabe) {
-        String zutat = eingabe;
+        String artikel[] = new String[] { "ein", "eine", "der", "die", "das" };
+        String zutat = "";
 
-        return zutat + "(";
+        eingabe = eingabe.trim().toLowerCase();
+        String str[] = eingabe.split(" ");
+
+        if (str.length == 2 && Arrays.asList(artikel).contains(str[0])) {
+            zutat = str[1];
+        } else if (str.length == 1) {
+            zutat = str[0];
+        }
+
+        switch (zutat) {
+            default:
+                zutat = null;
+                break;
+            case "essig":
+            case "feta":
+            case "salz":
+                // zutat = zutat;
+                break;
+            case "gurke":
+            case "gurken":
+                zutat = "gurke";
+                break;
+            case "öl":
+            case "oel":
+                zutat = "oel";
+                break;
+            case "oliven":
+            case "olive":
+                zutat = "olive";
+                break;
+            case "salat":
+            case "salate":
+            case "salatkopf":
+                zutat = "salat";
+                break;
+            case "tomate":
+            case "tomaten":
+                zutat = "tomate";
+                break;
+            case "zwiebel":
+            case "zwiebeln":
+                zutat = "zwiebel";
+                break;
+
+        }
+        if (zutat != null) {
+            return zutat + "(";
+        } else {
+            return "badf00d";
+        }
     }
 }
