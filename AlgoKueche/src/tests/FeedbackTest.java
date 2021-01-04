@@ -55,7 +55,7 @@ public abstract class FeedbackTest {
         lehrling.serviere();
     }
 
-    protected Comment getComment() {
+    protected Comment feedback() {
         return ((Traitor) lehrling).getComment();
     }
 

@@ -16,7 +16,7 @@ public class TomatenSalat extends FeedbackTest {
         schneide();
         legAufTeller();
         serviere();
-        Assert.assertEquals(Comment.richtig, kunde.feedback());
+        Assert.assertEquals(Comment.richtig, feedback());
     }
 
     @Test
@@ -29,7 +29,7 @@ public class TomatenSalat extends FeedbackTest {
         schneide();
         legAufTeller();
         serviere();
-        Assert.assertEquals(Comment.richtig, kunde.feedback());
+        Assert.assertEquals(Comment.richtig, feedback());
     }
 
     private void unfertigeZutatenServiert(String zutat1, String zutat2, boolean schneide1, boolean schneide2) {
@@ -50,44 +50,44 @@ public class TomatenSalat extends FeedbackTest {
     @Test
     public void unfertigeZutatenServiert_1() {
         unfertigeZutatenServiert("Tomate", "Salat", false, true);
-        Assert.assertEquals(Comment.unfertigeZutatenServiert, kunde.feedback());
+        Assert.assertEquals(Comment.unfertigeZutatenServiert, feedback());
     }
 
     @Test
     public void unfertigeZutatenServiert_2() {
         unfertigeZutatenServiert("Tomate", "Salat", true, false);
-        Assert.assertEquals(Comment.unfertigeZutatenServiert, kunde.feedback());
+        Assert.assertEquals(Comment.unfertigeZutatenServiert, feedback());
     }
 
     @Test
     public void unfertigeZutatenServiert_3() {
         unfertigeZutatenServiert("Salat", "Tomate", false, true);
-        Assert.assertEquals(Comment.unfertigeZutatenServiert, kunde.feedback());
+        Assert.assertEquals(Comment.unfertigeZutatenServiert, feedback());
     }
 
     @Test
     public void unfertigeZutatenServiert_4() {
         unfertigeZutatenServiert("Salat", "Tomate", true, false);
-        Assert.assertEquals(Comment.unfertigeZutatenServiert, kunde.feedback());
+        Assert.assertEquals(Comment.unfertigeZutatenServiert, feedback());
     }
 
     @Test
     public void unfertigeZutatenServiert_5() {
         unfertigeZutatenServiert("Tomate", "Salat", true, false);
-        Assert.assertEquals(Comment.unfertigeZutatenServiert, kunde.feedback());
+        Assert.assertEquals(Comment.unfertigeZutatenServiert, feedback());
     }
 
     @Test
     public void unfertigeZutatenServiert_6() {
         unfertigeZutatenServiert("Salat", "Tomate", false, true);
-        Assert.assertEquals(Comment.unfertigeZutatenServiert, kunde.feedback());
+        Assert.assertEquals(Comment.unfertigeZutatenServiert, feedback());
     }
 
     @Test
     public void serviereLeerenTeller_1() {
         wirKochenJetzt("Salat mit Tomaten");
         serviere();
-        Assert.assertEquals(Comment.serviereLeerenTeller, kunde.feedback());
+        Assert.assertEquals(Comment.serviereLeerenTeller, feedback());
     }
 
     @Test
@@ -96,7 +96,7 @@ public class TomatenSalat extends FeedbackTest {
         nimmAusSchrank("Tomate");
         schneide();
         serviere();
-        Assert.assertEquals(Comment.serviereLeerenTeller, kunde.feedback());
+        Assert.assertEquals(Comment.serviereLeerenTeller, feedback());
     }
 
     @Test
@@ -105,7 +105,7 @@ public class TomatenSalat extends FeedbackTest {
         nimmAusSchrank("Salat");
         schneide();
         serviere();
-        Assert.assertEquals(Comment.serviereLeerenTeller, kunde.feedback());
+        Assert.assertEquals(Comment.serviereLeerenTeller, feedback());
     }
 
     @Test
@@ -114,7 +114,7 @@ public class TomatenSalat extends FeedbackTest {
         nimmAusSchrank("Kartoffel");
         schneide();
         serviere();
-        Assert.assertEquals(Comment.serviereLeerenTeller, kunde.feedback());
+        Assert.assertEquals(Comment.serviereLeerenTeller, feedback());
     }
 
     @Test
@@ -126,7 +126,7 @@ public class TomatenSalat extends FeedbackTest {
         nimmAusSchrank("Salat");
         schneide();
         serviere();
-        Assert.assertEquals(Comment.serviereLeerenTeller, kunde.feedback());
+        Assert.assertEquals(Comment.serviereLeerenTeller, feedback());
     }
 
     @Test
@@ -138,7 +138,7 @@ public class TomatenSalat extends FeedbackTest {
         nimmAusSchrank("Tomate");
         schneide();
         serviere();
-        Assert.assertEquals(Comment.serviereLeerenTeller, kunde.feedback());
+        Assert.assertEquals(Comment.serviereLeerenTeller, feedback());
     }
 
     @Test
@@ -150,7 +150,7 @@ public class TomatenSalat extends FeedbackTest {
         nimmAusSchrank("Salat");
         schneide();
         serviere();
-        Assert.assertEquals(Comment.serviereLeerenTeller, kunde.feedback());
+        Assert.assertEquals(Comment.serviereLeerenTeller, feedback());
     }
 
     @Test
@@ -162,10 +162,8 @@ public class TomatenSalat extends FeedbackTest {
         nimmAusSchrank("Tomate");
         schneide();
         serviere();
-        Assert.assertEquals(Comment.serviereLeerenTeller, kunde.feedback());
+        Assert.assertEquals(Comment.serviereLeerenTeller, feedback());
     }
-
-
 
     @Test
     public void serviereLeerenTeller_4a() {
@@ -179,7 +177,7 @@ public class TomatenSalat extends FeedbackTest {
         nimmAusSchrank("Kartoffel");
         schneide();
         serviere();
-        Assert.assertEquals(Comment.serviereLeerenTeller, kunde.feedback());
+        Assert.assertEquals(Comment.serviereLeerenTeller, feedback());
     }
 
     @Test
@@ -194,7 +192,7 @@ public class TomatenSalat extends FeedbackTest {
         nimmAusSchrank("Kartoffel");
         schneide();
         serviere();
-        Assert.assertEquals(Comment.serviereLeerenTeller, kunde.feedback());
+        Assert.assertEquals(Comment.serviereLeerenTeller, feedback());
     }
 
     @Test
@@ -209,7 +207,7 @@ public class TomatenSalat extends FeedbackTest {
         nimmAusSchrank("Kartoffel");
         schneide();
         serviere();
-        Assert.assertEquals(Comment.serviereLeerenTeller, kunde.feedback());
+        Assert.assertEquals(Comment.serviereLeerenTeller, feedback());
     }
 
     @Test
@@ -224,47 +222,47 @@ public class TomatenSalat extends FeedbackTest {
         nimmAusSchrank("Kartoffel");
         schneide();
         serviere();
-        Assert.assertEquals(Comment.serviereLeerenTeller, kunde.feedback());
+        Assert.assertEquals(Comment.serviereLeerenTeller, feedback());
     }
 
     @Test
-    public void schneidenOhneZutat_1(){
+    public void schneidenOhneZutat_1() {
         wirKochenJetzt("Salat mit Tomaten");
         schneide();
-        Assert.assertEquals(Comment.schneidenOhneZutat, kunde.feedback());
+        Assert.assertEquals(Comment.schneidenOhneZutat, feedback());
     }
 
     @Test
-    public void schneidenOhneZutat_2(){
+    public void schneidenOhneZutat_2() {
         wirKochenJetzt("Salat mit Tomaten");
         schneide();
         legAufTeller();
         nimmAusSchrank("Tomate");
         schneide();
         serviere();
-        Assert.assertEquals(Comment.schneidenOhneZutat, kunde.feedback());
+        Assert.assertEquals(Comment.schneidenOhneZutat, feedback());
     }
 
     @Test
-    public void schneidenOhneZutat_3(){
+    public void schneidenOhneZutat_3() {
         wirKochenJetzt("Salat mit Tomaten");
         nimmAusSchrank("Salat");
         schneide();
         legAufTeller();
         schneide();
         serviere();
-        Assert.assertEquals(Comment.schneidenOhneZutat, kunde.feedback());
+        Assert.assertEquals(Comment.schneidenOhneZutat, feedback());
     }
 
     @Test
-    public void flascheZutatEnthalten_1(){
+    public void flascheZutatEnthalten_1() {
         wirKochenJetzt("Salat mit Tomaten");
         schneide();
         legAufTeller();
         nimmAusSchrank("Tomate");
         schneide();
         serviere();
-        Assert.assertEquals(Comment.falscheZutatEnthalten, kunde.feedback());
+        Assert.assertEquals(Comment.falscheZutatEnthalten, feedback());
     }
 
 }

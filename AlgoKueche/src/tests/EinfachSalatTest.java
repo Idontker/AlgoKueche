@@ -13,7 +13,7 @@ public class EinfachSalatTest extends FeedbackTest {
         schneide();
         legAufTeller();
         serviere();
-        Assert.assertEquals(Comment.richtig, kunde.feedback());
+        Assert.assertEquals(Comment.richtig, feedback());
     }
 
     @Test
@@ -22,7 +22,7 @@ public class EinfachSalatTest extends FeedbackTest {
         nimmAusSchrank("Salat");
         schneide();
         serviere();
-        Assert.assertEquals(Comment.serviereLeerenTeller, kunde.feedback());
+        Assert.assertEquals(Comment.serviereLeerenTeller, feedback());
     }
 
     @Test
@@ -35,7 +35,7 @@ public class EinfachSalatTest extends FeedbackTest {
         schneide();
         legAufTeller();
         serviere();
-        Assert.assertEquals(Comment.zuVielServiert, kunde.feedback());
+        Assert.assertEquals(Comment.zuVielServiert, feedback());
     }
 
     @Test
@@ -44,7 +44,7 @@ public class EinfachSalatTest extends FeedbackTest {
         nimmAusSchrank("Salat");
         legAufTeller();
         serviere();
-        Assert.assertEquals(Comment.unfertigeZutatenServiert, kunde.feedback());
+        Assert.assertEquals(Comment.unfertigeZutatenServiert, feedback());
     }
 
     @Test
@@ -57,7 +57,7 @@ public class EinfachSalatTest extends FeedbackTest {
         schneide();
         legAufTeller();
         serviere();
-        Assert.assertEquals(Comment.falscheZutatEnthalten, kunde.feedback());
+        Assert.assertEquals(Comment.falscheZutatEnthalten, feedback());
     }
 
     @Test
@@ -69,7 +69,7 @@ public class EinfachSalatTest extends FeedbackTest {
         nimmAusSchrank("Tomaten");
         legAufTeller();
         serviere();
-        Assert.assertEquals(Comment.falscheZutatEnthalten, kunde.feedback());
+        Assert.assertEquals(Comment.falscheZutatEnthalten, feedback());
     }
 
 }
