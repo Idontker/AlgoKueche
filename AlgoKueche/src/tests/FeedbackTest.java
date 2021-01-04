@@ -4,54 +4,59 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.junit.Before;
-import main.Feedback;
+
+import main.Comment;
+import main.GUI;
+import main.Kunde;
+import main.Lehrling;
 
 public abstract class FeedbackTest {
-    protected Feedback kunde;
-    protected String aktZutat;
+
+    protected Lehrling lehrling;
 
     @Before
     public void initTest() {
-        kunde = new Feedback();
+        lehrling = new Traitor();
     }
 
     protected void wirKochenJetzt(String rezept) {
-        kunde.rezeptauswahl(rezept);
+        lehrling.wirKochenJetzt(rezept);
     }
 
     protected void nimmAusSchrank(String zutat) {
-        aktZutat = zutat;
-        kunde.arbeitschritt("nimmAusSchrank" + zutat);
+        lehrling.nimmAusSchrank(zutat);
     }
 
     protected void stellZurueck() {
-        aktZutat = "leer";
-        kunde.arbeitschritt("stellZurueck");
+        lehrling.stellZurueck();
     }
 
     protected void schneide() {
-        kunde.arbeitschritt("schneide" + aktZutat);
+        lehrling.schneide();
     }
 
     protected void gebeInTopf() {
-        kunde.arbeitschritt("gebeInTopf" + aktZutat);
+        lehrling.gebeInTopf();
     }
 
     protected void koche(int zeit) {
-        kunde.arbeitschritt("koche" + zeit);
+        lehrling.koche(zeit);
     }
 
-    protected void istGewuerzt(String s) {
-        kunde.arbeitschritt("istGewuerzt" + s);
+    protected boolean istGewuerzt() {
+        return lehrling.istGewuerzt();
     }
 
     protected void legAufTeller() {
-        aktZutat = "leer";
-        kunde.arbeitschritt("legAufTeller");
+        lehrling.gebeAufTeller();
     }
 
     protected void serviere() {
-        kunde.bewerte();
+        lehrling.serviere();
+    }
+
+    protected Comment getComment() {
+        return ((Traitor) lehrling).getComment();
     }
 
     protected static ArrayList<int[]> perms(int n) {
@@ -87,13 +92,23 @@ public abstract class FeedbackTest {
         input[b] = tmp;
     }
 
-
-    public static void main(String[] args){
+    public static void main(String[] args) {
         ArrayList<int[]> sols = perms(9);
-        for(int[] a : sols){
+        for (int[] a : sols) {
             System.out.println(Arrays.toString(a));
         }
         System.out.println(sols.size());
 
+    }
+}
+
+class Traitor extends Lehrling {
+    Traitor() {
+        super();
+        animation = GUI.startDummyGUI();
+    }
+
+    public Comment getComment() {
+        return kunde.bewerte();
     }
 }

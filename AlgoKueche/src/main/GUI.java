@@ -42,6 +42,7 @@ public class GUI {
 	}
 
 	// GUI attributes
+	private static boolean notActive;
 	private JFrame frame;
 
 	private JPanel canvas;
@@ -64,8 +65,16 @@ public class GUI {
 		return new GUI(false);
 	}
 
+	public static GUI startDummyGUI() {
+		return new GUI();
+	}
+
 	public static GUI startTestGUI() {
 		return new GUI(true);
+	}
+
+	private GUI() {
+		notActive = true;
 	}
 
 	private GUI(boolean testing) {
@@ -206,15 +215,21 @@ public class GUI {
 
 	// public methods
 	public void samSays() {
+		if (notActive)
+			return;
 		// TODO: implement the (random) occurences of useless and funny comments of Sam
 	}
 
 	public void setComment(String msg) {
+		if (notActive)
+			return;
 		commentBox.setText(msg);
 	}
 
 	// TODO: rename method
 	public void goToFrame(String slideName) {
+		if (notActive)
+			return;
 		imageLabel.setVisible(false);
 		Slide next = map.get(slideName);
 		if (next != null) {
