@@ -7,7 +7,6 @@ import org.junit.Before;
 
 import main.Comment;
 import main.GUI;
-import main.Kunde;
 import main.Lehrling;
 
 public abstract class FeedbackTest {
