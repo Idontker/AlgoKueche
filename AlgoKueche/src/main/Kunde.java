@@ -19,7 +19,6 @@ public class Kunde {
                                       // unten).
 
     public Kunde() {
-        // TODO: init menueMap
         initMap();
     }
 
