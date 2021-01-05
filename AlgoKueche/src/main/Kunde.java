@@ -1,16 +1,21 @@
+package main;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Kunde
 {
     private String serviert;
     private Boolean gewuerzt;
     private int zeit; //-1 fuer keine ueberpruefung der Zeit.
+    private HashMap<String,Rezept> menueMap; 
+   
     private ArrayList<RezeptKomponente> komponenten;
     private String gemeldeterFehler; //frage an alle: wollen wir die Fehler nicht doch als Strings codieren? Dadurch waere eine viel genauere bestimmung des Fehlers moeglich (siehe meinen Code unten).
 
     public Kunde()
     {
-
+        //TODO: init menueMap
     }
 
     public void rezeptauswahl(int t1) {
