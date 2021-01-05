@@ -13,7 +13,7 @@ public class Lehrling {
     private boolean inTopf;
 
     public Lehrling() {
-        aktZutat = "leer";
+        aktZutat = "";
         kunde = new Kunde();
         animation = GUI.startGUI();
         wuerze = -1;
