@@ -53,7 +53,7 @@ public class Lehrling {
         inTopf = true;
         zutatenInTopf.add(aktZutat);
         if (aktZutat.equals("oel(")) {
-            kunde.arbeitsschritt("topfGeoelt");
+            kunde.arbeitsschritt("topfGeoelt()"); //ist eher schlecht fuer den Kunden, da keine reihenfolge geprueft wird
         }
         animation.goToFrame("gebeInTopf");
     }
@@ -87,7 +87,7 @@ public class Lehrling {
             return false;
         } else if (wuerze == 0) {
             wuerze--;
-            kunde.arbeitsschritt("istGewuerzt");
+            kunde.arbeitsschritt("istGewuerzt"); //setze bitte den boolean in Kunde
             animation.goToFrame("istGewuerztTrue");
             return true;
         } else { // wuerze < 0
