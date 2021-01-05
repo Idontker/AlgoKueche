@@ -1,0 +1,3 @@
+reiner Salat:Salat(geschnitten)
+Tomatensalat:Salat(geschnitten) Tomate(geschnitten) Tomate(geschnitten) 
+gTomatensalat:Salat(geschnitten) Tomate(geschnitten) Tomate(geschnitten) Essig:gewuerzt
