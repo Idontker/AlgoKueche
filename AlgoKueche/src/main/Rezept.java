@@ -12,7 +12,7 @@ public class Rezept {
         this.wirdGewuerzt = wirdGewuerzt;
         rezeptKomponenten = new ArrayList<RezeptKomponente>();
 
-        zutatenString = zutatenString.replaceAll(")", "");
+        zutatenString = zutatenString.replaceAll("\\)", "");
         String zutaten[] = zutatenString.split(" ");
         for (int i = 0; i < zutaten.length; i++) {
             RezeptKomponente r = createRezeptKomponente(zutaten[i]);
