@@ -20,6 +20,9 @@
 *.tar
 *.zip
 
+# build Settings #
+settings.json
+
 # Logs and databases #
 ######################
 *.log
