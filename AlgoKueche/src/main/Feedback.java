@@ -13,30 +13,35 @@ public class Feedback {
     }
 
     public String gibFeedbackString() {
-        // TODO:
         switch (fehlerTyp) {
             case richtig:
-                return "";
+                return "Schmeckt gut. :)";
             case falsch:
-                return "";
+                return "Hier lief etwas falsch. :(";
             case schneidenOhneZutat:
-                return "";
+                return "Das Gericht passt, allerdings hast du schneiden ohne Zutat aufgerufen. :(";
             case serviereLeerenTeller:
-                return "";
+                return "Du hast einen leeren Teller serviert. :(";
             case falscheZutatEnthalten:
-                return "";
+                return zutat+" gehoert nicht in das Gericht. :(";
             case mehrAlsEineZutatInDerHand:
-                return "";
+                return "Das Gericht passt, allerdings hast du eine Zutat in die Hand genommen, waehrend du schon eine Zutat in der Hand hattest. :(";
             case unfertigeZutatenServiert:
-                return "";
+                return "Eine der Zutaten war leider noch nicht fertig gekocht. :(";
             case zuVielServiert:
-                return "";
+                return "Du hast zu viel "+zutat+" ("+zubereitungsArt+") auf den Teller gelegt. :(";
             case verschwendung:
-                return "";
+                return "Das Gericht passt, allerdings hast du Zutaten verschwendet. :(";
             case zutatUnbekannt:
-                return "";
+                return "Das Gericht passt, allerdings hast du versucht eine unbekannte Zutat zu nehmen. :(";
             case kochtLeerenTopf:
-                return "";
+                return "Das Gericht passt, allerdings hast du einen leeren Topf gekocht. :(";
+			case falschGewuerzt:
+				return "Die Zutaten stimmen, aber leider ist es nicht richtig gewuerzt. :(";
+			case fehlendeZutat:
+				return "Es fehlt "+zutat+" ("+zubereitungsArt+"). :(";
+			case falschZubereitet:
+				return zutat+" wurde falsch zubereitet. Sie sollte eigentlich "+zubereitungsArt+" sein. :(";
             default:
                 return null;
 
