@@ -31,7 +31,8 @@ public class GUI {
 	private static final double SCALE = 0.5;
 	private static final int HEIGHT = (int) (SCALE * 720);
 	private static final int WIDTH = (int) (SCALE * HEIGHT / 9 * 16);
-
+	private static final int waittingTime = 1500;
+	
 	private static final Color DEFAULT_COLOR = Color.lightGray;
 
 	// GUI Main
@@ -101,8 +102,6 @@ public class GUI {
 		frame.setVisible(true);
 
 		initMap();
-
-		goToFrame(methods[currentSlideIdx]);
 	}
 
 	// Init Methods
@@ -234,6 +233,7 @@ public class GUI {
 		Slide next = map.get(slideName);
 		if (next != null) {
 			System.out.println(next);
+			setComment(next.method);
 
 			actionPanel.setBackground(next.c);
 			if (next.image != null) {
@@ -248,7 +248,13 @@ public class GUI {
 			}
 		} else {
 			System.out.println("Slide: " + slideName + " not found in Database");
+			setComment(slideName);
 			actionPanel.setBackground(Color.black);
+
+		}
+		try {
+			Thread.sleep(waittingTime);
+		} catch (Exception e) {
 
 		}
 	}
