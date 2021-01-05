@@ -1,9 +1,11 @@
 package main;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Lehrling {
     private String aktZutat;
+    private ArrayList<String> zutatenInTopf;
     protected Kunde kunde;
     protected GUI animation;
     private int wuerze;
@@ -49,6 +51,7 @@ public class Lehrling {
 
     public void gebeInTopf() {
         inTopf = true;
+        zutatenInTopf.add(aktZutat);
         if (aktZutat.equals("oel(")) {
             kunde.arbeitsschritt("topfGeoelt");
         }
@@ -127,13 +130,11 @@ public class Lehrling {
         }
 
         switch (zutat) {
-            default:
-                zutat = null;
-                break;
+            
             case "essig":
             case "feta":
             case "salz":
-                // zutat = zutat;
+                // zutat = zutat
                 break;
             case "gurke":
             case "gurken":
@@ -160,7 +161,9 @@ public class Lehrling {
             case "zwiebeln":
                 zutat = "zwiebel";
                 break;
-
+            default:
+                zutat = null;
+                break;
         }
         if (zutat != null) {
             return zutat + "(";

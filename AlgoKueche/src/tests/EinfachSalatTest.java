@@ -8,7 +8,7 @@ public class EinfachSalatTest extends FeedbackTest {
 
     @Test
     public void simpler_salat_1() {
-        wirKochenJetzt("simpler Salat");
+        wirKochenJetzt("reiner Salat");
         nimmAusSchrank("Salat");
         schneide();
         legAufTeller();
@@ -18,7 +18,7 @@ public class EinfachSalatTest extends FeedbackTest {
 
     @Test
     public void simpler_salat_2() {
-        wirKochenJetzt("simpler Salat");
+        wirKochenJetzt("reiner Salat");
         nimmAusSchrank("Salat");
         schneide();
         serviere();
@@ -27,7 +27,7 @@ public class EinfachSalatTest extends FeedbackTest {
 
     @Test
     public void simpler_salat_3() {
-        wirKochenJetzt("simpler Salat");
+        wirKochenJetzt("reiner Salat");
         nimmAusSchrank("Salat");
         schneide();
         legAufTeller();
@@ -40,7 +40,7 @@ public class EinfachSalatTest extends FeedbackTest {
 
     @Test
     public void simpler_salat_4() {
-        wirKochenJetzt("simpler Salat");
+        wirKochenJetzt("reiner Salat");
         nimmAusSchrank("Salat");
         legAufTeller();
         serviere();
@@ -49,7 +49,7 @@ public class EinfachSalatTest extends FeedbackTest {
 
     @Test
     public void simpler_salat_5() {
-        wirKochenJetzt("simpler Salat");
+        wirKochenJetzt("reiner Salat");
         nimmAusSchrank("Salat");
         schneide();
         legAufTeller();
@@ -62,7 +62,7 @@ public class EinfachSalatTest extends FeedbackTest {
 
     @Test
     public void simpler_salat_6() {
-        wirKochenJetzt("simpler Salat");
+        wirKochenJetzt("reiner Salat");
         nimmAusSchrank("Salat");
         schneide();
         legAufTeller();
