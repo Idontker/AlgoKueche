@@ -91,16 +91,6 @@ public abstract class FeedbackTest {
         input[b] = tmp;
     }
 
-    public static void main(String[] args) {
-        ArrayList<int[]> sols = perms(9);
-        for (int[] a : sols) {
-            System.out.println(Arrays.toString(a));
-        }
-        System.out.println(sols.size());
-
-    }
-}
-
 class Traitor extends Lehrling {
     Traitor() {
         //TODO: geniert trotzdem ein neues frame, aendert aber nicht die Slides
