@@ -55,8 +55,8 @@ public abstract class FeedbackTest {
         lehrling.serviere();
     }
 
-    protected Comment feedback() {
-        return ((Traitor) lehrling).getComment();
+    protected Feedback feedback() {
+        return ((Traitor) lehrling).getFeedback();
     }
 
     protected static ArrayList<int[]> perms(int n) {
