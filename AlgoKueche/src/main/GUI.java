@@ -253,6 +253,11 @@ public class GUI {
 		}
 	}
 
+	public void goToFeedback(Feedback f){
+		// TODO: setze Comment und Slide abhängig vom Feedback
+	}
+
+
 	// methods for testing.
 
 	private void slideShow() {
