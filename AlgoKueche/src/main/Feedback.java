@@ -4,12 +4,12 @@ public class Feedback {
 
     private Comment fehlerTyp;
     private String zutat;
-    private String zubereitungSoll;
+    private String zubereitungsArt;
 
-    public Feedback(Comment fehlerTyp, String zutat, String zubereitungSoll){
+    public Feedback(Comment fehlerTyp, String zutat, String zubereitungsArt){
         this.fehlerTyp = fehlerTyp;
         this.zutat = zutat;
-        this.zubereitungSoll = zubereitungSoll;
+        this.zubereitungsArt = zubereitungsArt;
     }
 
     public String gibFeedbackString() {
