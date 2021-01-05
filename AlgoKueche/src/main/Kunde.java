@@ -52,7 +52,7 @@ public class Kunde
     }
 
 
-    public void rezeptauswahl(int t1) {
+    public void rezeptauswahl(String rezept) {
         serviert="";
         gemeldeterFehler=null;
         gewuerzt=null;
