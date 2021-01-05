@@ -26,7 +26,7 @@ public class Kunde
     private void initMap() {
         menueMap = new HashMap<String,Rezept>();
 
-        File file = new File(pathToRecipes); 
+        File file = new File("AlgoKueche/res/rezpete.txt"); 
         try{
             BufferedReader br = new BufferedReader(new FileReader(file)); 
             
@@ -50,27 +50,44 @@ public class Kunde
         }
 
     }
+	
+   public void rezeptauswahl(String t) {
+        serviert="";
+        gemeldeterFehler=null;
+	Rezept r=menueMap.get(t);
+	if(r==null) {
+		System.out.println("Das Rezept "+t+" gibt es nicht");
+	} else {
+	    if(r.wirdGewuerzt()) {
+		gewuerzt=new Boolean();
+		gewuerzt=false;
+	    } else {
+		gewuerzt=null;
+	    }
+	    komponenten=r.gibRezeptKomponenten();
+	}
+    }
 
 
-    public void rezeptauswahl(String rezept) {
+    public void rezeptauswahl() {
         serviert="";
         gemeldeterFehler=null;
         gewuerzt=null;
         komponenten=new ArrayList<RezeptKomponente>();
     }
 
-    public void rezeptauswahl(Boolean t1) {
+    public void rezeptauswahl(Boolean t) {
         serviert="";
         gemeldeterFehler=null;
-        gewuerzt=t1;
+        gewuerzt=t;
         komponenten=new ArrayList<RezeptKomponente>();
     }
 
-    public void rezeptauswahl(ArrayList<RezeptKomponente> t1) {
+    public void rezeptauswahl(ArrayList<RezeptKomponente> t) {
         serviert="";
         gemeldeterFehler=null;
         gewuerzt=null;
-        komponenten=t1;
+        komponenten=t;
     }
 
     public void rezeptauswahl(Boolean t1, ArrayList<RezeptKomponente> t2) {
@@ -86,6 +103,10 @@ public class Kunde
 
     public void arbeitsschritt(String t) {
         serviert+=t;
+    }
+	
+    public void setzeGewuerzt(boolean t) {
+	gewuerzt=t;
     }
 
     public void meldeFehler(Comment t) {
