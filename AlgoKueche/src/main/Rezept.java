@@ -27,15 +27,12 @@ public class Rezept {
 
     private RezeptKomponente createRezeptKomponente(String str) {
         String zutat = "";
-        ArrayList<String> zubereitung = new ArrayList<String>();
+        String zubereitung = ""; 
 
         String tmp[] = str.split("\\(");
         zutat = tmp[0];
         if (tmp.length == 2) {
-            tmp = tmp[1].split(",");
-            for (String zub : tmp) {
-                zubereitung.add(zub);
-            }
+            zubereitung = tmp[1];
         } else if (tmp.length > 2) {
             System.err.println("Rezept " + name + " falsch eingelesen: " + str + " hat keine korrekte Syntax");
         }
@@ -45,45 +42,5 @@ public class Rezept {
 
     public ArrayList<RezeptKomponente> gibRezeptKomponenten() {
         return rezeptKomponenten;
-    }
-}
-
-class RezeptKomponente {
-    private String zutat;
-    private ArrayList<String> zubereitung;
-
-    public RezeptKomponente(String zutat, ArrayList<String> zubereitung) {
-        this.zutat = zutat;
-        this.zubereitung = zubereitung;
-    }
-
-    private String gibZutat() {
-        return zutat;
-    }
-
-    private ArrayList<String> gibZubereitung() {
-        return zubereitung;
-    }
-
-    private boolean komponenteIstVorhanden(String t) {
-        if (t.contains(zutat)) {
-            return true;
-        }
-        return false;
-    }
-
-    private boolean komponenteUndZubereitungIstVorhanden(String t) {
-        if (t.contains(zutat + zubereitung)) {
-            return true;
-        }
-        return false;
-    }
-
-    private String entferneKomponente(String t) {
-        return t.replaceFirst(zutat, "");
-    }
-
-    private String entferneKomponenteUndZubereitung(String t) {
-        return t.replaceFirst(zutat + zubereitung, "");
     }
 }
