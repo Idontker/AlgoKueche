@@ -9,7 +9,7 @@ import java.util.HashMap;
 
 public class Kunde
 {
-    private final String pathToRecipes= "pathToRecipes";
+    private final String pathToRecipes= "AlgoKueche/res/rezpete.txt";
     private String serviert;
     private Boolean gewuerzt;
     private HashMap<String,Rezept> menueMap; 
@@ -26,7 +26,7 @@ public class Kunde
     private void initMap() {
         menueMap = new HashMap<String,Rezept>();
 
-        File file = new File("AlgoKueche/res/rezpete.txt"); 
+        File file = new File("fixed history"); 
         try{
             BufferedReader br = new BufferedReader(new FileReader(file)); 
             
