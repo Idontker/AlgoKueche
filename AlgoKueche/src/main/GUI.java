@@ -21,11 +21,11 @@ public class GUI {
 
 	// static fields
 	private final static String[] methods = new String[] { "wirKochenJetzt", "nimmAusSchrank", "stellZurueck",
-			"schneide", "wirfInTopf", "koche", "istGewuerzt", "serviere", "reactionHappy", "reactionSad" };
+			"schneide", "wirfInTopf", "koche", "istGewuerzt", "serviere", "reactionHappy", "reactionSad" , "gebeAufTeller"};
 	private final static Color[] colors = new Color[] { Color.blue, Color.cyan, Color.gray, Color.green, Color.magenta,
-			Color.orange, Color.red, Color.yellow, new Color(50, 200, 10), new Color(200, 100, 50) };
+			Color.orange, Color.red, Color.yellow, new Color(50, 200, 10), new Color(200, 100, 50), Color.pink };
 	private final static String[] imageNames = new String[] { "book.png", "fridge.png", "fridge.png", "schneiden.jpg",
-			"topf.png", "kochen.jpg", "abschmecken.png", "glocke.jpg", "happy.png", "sad.png" };
+			"topf.png", "kochen.jpg", "abschmecken.png", "glocke.jpg", "happy.png", "sad.png", "teller.png"};
 	private final static Slide BADF00D = new Slide("badf00d", Color.black);
 
 	// static values
@@ -225,9 +225,11 @@ public class GUI {
 		Slide next = map.get(slideName);
 		if (next != null) {
 			showSlide(next);
+			commentBox.setText(next.comment);
 		} else {
 			System.err.println("Slide: " + slideName + " not found in Database");
 			showSlide(BADF00D);
+			commentBox.setText(BADF00D.comment);
 		}
 		try {
 			Thread.sleep(waittingTime);
@@ -237,7 +239,20 @@ public class GUI {
 	}
 
 	public void goToFeedback(Feedback f) {
-		// TODO: setze Comment und Slide abhängig vom Feedback
+		int k = f.bewertungsKategorie();
+		Slide next;
+		if(k == 0){
+			next = map.get("reactionSad");
+		}else if (k == 1) {
+			next = map.get("reactionSad");
+		} else if (k== 2){
+			next = map.get("reactionHappy");
+		} else {
+			next = BADF00D;
+		}
+		
+		showSlide(next);
+		commentBox.setText(f.gibFeedbackString());
 	}
 
 	private void showSlide(Slide next) {
@@ -258,7 +273,6 @@ public class GUI {
 		// update Background and comment
 		actionPanel.setBackground(next.c);
 		System.out.println("show:" + next);
-		commentBox.setText(next.comment);
 	}
 
 	// methods for testing.

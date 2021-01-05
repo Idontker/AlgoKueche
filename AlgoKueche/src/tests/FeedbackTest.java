@@ -5,7 +5,6 @@ import java.util.Arrays;
 
 import org.junit.Before;
 
-import main.Comment;
 import main.Feedback;
 import main.GUI;
 import main.Lehrling;
