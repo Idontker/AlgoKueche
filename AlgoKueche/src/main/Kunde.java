@@ -26,7 +26,7 @@ public class Kunde
     private void initMap() {
         menueMap = new HashMap<String,Rezept>();
 
-        File file = new File("fixed history"); 
+        File file = new File("pathToRecipes"); 
         try{
             BufferedReader br = new BufferedReader(new FileReader(file)); 
             
