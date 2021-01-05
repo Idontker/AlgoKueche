@@ -1,147 +1,141 @@
+package main;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Kunde
 {
     private String serviert;
     private Boolean gewuerzt;
-    private int zeit; //-1 fuer keine ueberpruefung der Zeit.
+    private HashMap<String,Rezept> menueMap; 
+   
     private ArrayList<RezeptKomponente> komponenten;
-    private String gemeldeterFehler; //frage an alle: wollen wir die Fehler nicht doch als Strings codieren? Dadurch waere eine viel genauere bestimmung des Fehlers moeglich (siehe meinen Code unten).
+    private Comment gemeldeterFehler; //frage an alle: wollen wir die Fehler nicht doch als Strings codieren? Dadurch waere eine viel genauere bestimmung des Fehlers moeglich (siehe meinen Code unten).
 
     public Kunde()
     {
-
+        //TODO: init menueMap
     }
 
-    public void rezeptauswahl(int t1) {
+    public void rezeptauswahl() {
         serviert="";
         gemeldeterFehler="";
-        zeit=t1;
         gewuerzt=null;
         komponenten=new ArrayList<RezeptKomponente>();
     }
 
-    public void rezeptauswahl(int t1, Boolean t2) {
+    public void rezeptauswahl(Boolean t1) {
         serviert="";
         gemeldeterFehler="";
-        zeit=t1;
-        gewuerzt=t2;
+        gewuerzt=t1;
         komponenten=new ArrayList<RezeptKomponente>();
     }
 
-    public void rezeptauswahl(int t1, ArrayList<RezeptKomponente> t2) {
+    public void rezeptauswahl(ArrayList<RezeptKomponente> t1) {
         serviert="";
         gemeldeterFehler="";
-        zeit=t1;
         gewuerzt=null;
+        komponenten=t1;
+    }
+
+    public void rezeptauswahl(Boolean t1, ArrayList<RezeptKomponente> t2) {
+        serviert="";
+        gemeldeterFehler="";
+        gewuerzt=t1;
         komponenten=t2;
-    }
-
-    public void rezeptauswahl(int t1, Boolean t2, ArrayList<RezeptKomponente> t3) {
-        serviert="";
-        gemeldeterFehler="";
-        zeit=t1;
-        gewuerzt=t2;
-        komponenten=t3;
     }
 
     public void komponenteHinzufuegen(String t1, String t2) {
         komponenten.add(new RezeptKomponente(t1, t2));
     }
 
-    public String arbeitsschritt(String t) {
+    public void arbeitsschritt(String t) {
         serviert+=t;
-        if(zeit>0) {
-            zeit--;
-        }
-        if(zeit==0) {
-            return "Das hat zu lange gedauert. Der Kunde ist mittlerweile gegangen. :("; //evtl Exception werfen um Programm zu unterbrechen?
-        }
-        return null;
     }
 
-    public void meldeFehler(String t) {
+    public void meldeFehler(Comment t) {
         gemeldeterFehler=t;
     }
 
-    public String bewerte() {
+    public Feedback bewerte() {
         if(serviert.length()==0) { //pruefe ob nichts serviert wurde.
-            return "Leerer Teller. :(";
+            return new Feedback(Comment.serviereLeerenTeller, "", "");
         }
-        serviert=serviert.replaceAll("[()]",""); //entferne die Klammern, da sonst replaceFirst() Probleme hat (regulaere Ausdruecke in Java).
 
         for(int i=0;i<komponenten.size();i++) {
             RezeptKomponente komponente=komponenten.get(i);
-            if(komponente.komponenteIstVorhanden(serviert)) { //ist die Komponente vorhanden?
-                if(komponente.komponenteUndZubereitungIstVorhanden(serviert)) { //ist die Komponente auch in der richtigen zubereitungsart vorhanden?
-                    serviert=komponente.entferneKomponenteUndZubereitung(serviert); //falls ja, entferne sie damit auch mehrfach benötigte Komponenten abgefragt werden koennen.
+            if(komponente.zutatIstVorhanden(serviert)) { //ist die Komponente vorhanden?
+                if(komponente.zutatUndZubereitungIstVorhanden(serviert)) { //ist die Komponente auch in der richtigen zubereitungsart vorhanden?
+                    serviert=komponente.entferneZutatUndZubereitung(serviert); //falls ja, entferne sie damit auch mehrfach benötigte Komponenten abgefragt werden koennen.
                 } else {
-                    return komponente.gibKomponente()+" falsch zubereitet. Sollte "+komponente.gibZubereitung()+" sein. :("; //falls nein, gebe aus wie die Komponente haette zubereitet werden sollen.
+					return new Feedback(Comment.falschZubereitet, komponente.gibZutat(), komponente.gibZubereitung());
+                    //return komponente.gibZutat()+" falsch zubereitet. Sollte "+komponente.gibZubereitung()+" sein. :("; //falls nein, gebe aus wie die Komponente haette zubereitet werden sollen.
                 }
             } else {
-                return "Es fehlt "+komponente.gibKomponente()+komponente.gibZubereitung()+". :("; //falls die Komponente gar nicht mehr vorhanden ist, gebe aus was fehlt.
+				return new Feedback(Comment.fehlendeZutat, komponente.gibZutat(), komponente.gibZubereitung());
+                //return "Es fehlt "+komponente.gibZutat()+komponente.gibZubereitung()+". :("; //falls die Komponente gar nicht mehr vorhanden ist, gebe aus was fehlt.
             }
         }
         if(serviert.length()!=0) { //ist ausserhalb der benoetigten Komponenten noch etwas uebrig?
             for(int i=0;i<komponenten.size();i++) { //handelt es sich um eine Zutat aus dem Rezept die nur zu oft da ist? Falls ja, gib sie aus (falls sie auch noch richtig zubereitet wurde mit der Zubereitungsart).
                 RezeptKomponente komponente=komponenten.get(i);
-                if(komponente.komponenteIstVorhanden(serviert)) {
-                    if(komponente.komponenteUndZubereitungIstVorhanden(serviert)) {
-                        return "Zu viele "+komponente.gibKomponente()+komponente.gibZubereitung()+". :(";
-                    } else {
-                        return "Zu viele "+komponente.gibKomponente()+". :(";
-                    }
+                if(komponente.zutatIstVorhanden(serviert)) {
+					return new Feedback(Comment.zuVielServiert, komponente.gibZutat(), komponente.gibZubereitung());
+                    //return "Zu viele "+komponente.gibZutat()+komponente.gibZubereitung()+". :(";
                 }
             }
-            return serviert+" gehoert da nicht rein. :("; //falls es sich um unbekannte Komponenten handelt, gib sie alle aus.
+			return new Feedback(Comment.falscheZutatEnthalten, serviert, "");
+            //return serviert+" gehoert da nicht rein. :("; //falls es sich um unbekannte Komponenten handelt, gib sie alle aus.
         }
         if(gewuerzt!=null&&gewuerzt==false) { //falls es auf die Wuerzung ankommt ueberpruefe sie, und gib aus, falls sie falsch ist.
-            return "Die Zutaten stimmen, aber leider ist es nicht richtig gewuerzt. :(";
+			return new Feedback(Comment.falschGewuerzt, "", "");
+            //return "Die Zutaten stimmen, aber leider ist es nicht richtig gewuerzt. :(";
         }
         if(gemeldeterFehler.length()!=0) { //falls ein Fehler während des Kochens geschehen ist, gib ihn aus. Zum Beispiel: Zutatenverschwendung
-            return gemeldeterFehler;
+			return new Feedback(gemeldeterFehler, "", "");
+            //return gemeldeterFehler;
         }
-
-        return "Schmeckt gut. :)"; //falls nichts falsch ist, sollte es gut schmecken :).
+		return new Feedback(Comment.richtig, "", "");
+        //return "Schmeckt gut. :)"; //falls nichts falsch ist, sollte es gut schmecken :).
     }
 
     public class RezeptKomponente {
-        private String komponente; //zutat
+        private String zutat; //zutat
         private String zubereitung; //zubereitungsart: Achtung, wegen der Syntax regulärer Ausdrücke in Java hier bitte keine Klammern verwenden
 
         private RezeptKomponente(String t1, String t2) {
-            komponente=t1;
-            zubereitung=t2;
+            zutat=""+t1;
+            zubereitung=""+t2;
         }
 
-        private String gibKomponente() {
-            return komponente;
+        private String gibZutat() {
+            return zutat;
         }
 
         private String gibZubereitung() {
             return zubereitung;
         }
 
-        private boolean komponenteIstVorhanden(String t) {
-            if(t.contains(komponente)) {
+        private boolean zutatIstVorhanden(String t) {
+            if(t.contains(zutat)) {
                 return true;
             }
             return false;
         }
 
-        private boolean komponenteUndZubereitungIstVorhanden(String t) {
-            if(t.contains(komponente+zubereitung)) {
+        private boolean zutatUndZubereitungIstVorhanden(String t) {
+            if(t.contains(zutat+"("+zubereitung+")")) {
                 return true;
             }
             return false;
         }
 
-        private String entferneKomponente(String t) {
-            return t.replaceFirst(komponente, "");
+        private String entferneZutat(String t) {
+            return t.replaceFirst(zutat, "");
         }
 
-        private String entferneKomponenteUndZubereitung(String t) {
-            return t.replaceFirst(komponente+zubereitung, "");
+        private String entferneZutatUndZubereitung(String t) {
+            return t.replaceFirst(zutat+"\\("+zubereitung+"\\)", "");
         }
     }
 }
