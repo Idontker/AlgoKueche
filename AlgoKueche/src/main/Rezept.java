@@ -5,9 +5,11 @@ import java.util.ArrayList;
 public class Rezept {
     private String name;
     private ArrayList<RezeptKomponente> rezeptKomponenten;
+    private boolean wirdGewuerzt;
 
-    public Rezept(String name, String zutatenString, boolean wirdGewuert) {
+    public Rezept(String name, String zutatenString, boolean wirdGewuerzt) {
         this.name = name;
+        this.wirdGewuerzt = wirdGewuerzt;
         rezeptKomponenten = new ArrayList<RezeptKomponente>();
 
         zutatenString = zutatenString.replaceAll(")", "");
@@ -17,6 +19,10 @@ public class Rezept {
             rezeptKomponenten.add(r);
         }
 
+    }
+    
+    public boolean wirdGewuerzt() {
+        return wirdGewuerzt;
     }
 
     private RezeptKomponente createRezeptKomponente(String str) {
