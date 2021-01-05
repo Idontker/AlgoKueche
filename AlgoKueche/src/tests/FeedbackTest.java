@@ -6,6 +6,7 @@ import java.util.Arrays;
 import org.junit.Before;
 
 import main.Comment;
+import main.Feedback;
 import main.GUI;
 import main.Lehrling;
 
@@ -103,11 +104,12 @@ public abstract class FeedbackTest {
 
 class Traitor extends Lehrling {
     Traitor() {
+        //TODO: geniert trotzdem ein neues frame, aendert aber nicht die Slides
         super();
-        animation = GUI.startDummyGUI();
+        animation = GUI.startDummyGUI(); 
     }
 
-    public Comment getComment() {
+    public Feedback getFeedback() {
         return kunde.bewerte();
     }
 }
