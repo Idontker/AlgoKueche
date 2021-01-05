@@ -94,8 +94,8 @@ public class Lehrling {
     }
 
     public void serviere() {
-        kunde.bewerte();
         animation.goToFrame("serviere");
+        animation.goToFeedback(kunde.bewerte());
     }
 
     private boolean istKeinGewuerz(String zutat) {

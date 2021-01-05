@@ -6,11 +6,38 @@ public class Rezept {
     private String name;
     private ArrayList<RezeptKomponente> rezeptKomponenten;
 
-    public Rezept(String name, String str){
-        // TODO:
+    public Rezept(String name, String zutatenString, boolean wirdGewuert) {
+        this.name = name;
+        rezeptKomponenten = new ArrayList<RezeptKomponente>();
+
+        zutatenString = zutatenString.replaceAll(")", "");
+        String zutaten[] = zutatenString.split(" ");
+        for (int i = 0; i < zutaten.length; i++) {
+            RezeptKomponente r = createRezeptKomponente(zutaten[i]);
+            rezeptKomponenten.add(r);
+        }
+
     }
 
-    public ArrayList<RezeptKomponente> gibRezeptKomponenten(){
+    private RezeptKomponente createRezeptKomponente(String str) {
+        String zutat = "";
+        ArrayList<String> zubereitung = new ArrayList<String>();
+
+        String tmp[] = str.split("\\(");
+        zutat = tmp[0];
+        if (tmp.length == 2) {
+            tmp = tmp[1].split(",");
+            for (String zub : tmp) {
+                zubereitung.add(zub);
+            }
+        } else if (tmp.length > 2) {
+            System.err.println("Rezept " + name + " falsch eingelesen: " + str + " hat keine korrekte Syntax");
+        }
+
+        return new RezeptKomponente(zutat, zubereitung);
+    }
+
+    public ArrayList<RezeptKomponente> gibRezeptKomponenten() {
         return rezeptKomponenten;
     }
 }
@@ -19,9 +46,9 @@ class RezeptKomponente {
     private String zutat;
     private ArrayList<String> zubereitung;
 
-    private RezeptKomponente(String t1, String t2) {
-        zutat = t1;
-        zubereitung = new ArrayList<String>();
+    public RezeptKomponente(String zutat, ArrayList<String> zubereitung) {
+        this.zutat = zutat;
+        this.zubereitung = zubereitung;
     }
 
     private String gibZutat() {

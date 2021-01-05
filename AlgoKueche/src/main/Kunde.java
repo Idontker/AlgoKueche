@@ -1,10 +1,15 @@
 package main;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Kunde
 {
+    private final String pathToRecipes= "AlgoKueche/res/rezpete.txt";
     private String serviert;
     private Boolean gewuerzt;
     private int zeit; //-1 fuer keine ueberpruefung der Zeit.
@@ -16,7 +21,37 @@ public class Kunde
     public Kunde()
     {
         //TODO: init menueMap
+        initMap();
     }
+
+    private void initMap() {
+        menueMap = new HashMap<String,Rezept>();
+
+        File file = new File("AlgoKueche/res/rezpete.txt"); 
+        try{
+            BufferedReader br = new BufferedReader(new FileReader(file)); 
+            
+            String line; 
+            int i = 0;
+            while ((line = br.readLine()) != null){
+                String s[] = line.split(":");
+                if(s.length != 2 && s.length != 3){
+                    System.err.println("Error reading line " + i);
+                    continue;
+                }
+                boolean wirdGewuert = s.length == 3;
+                String name = s[0];
+                String zutaten = s[1];
+                menueMap.put(name, new Rezept(name, zutaten, wirdGewuert)); 
+                i++;
+            } 
+        }catch(IOException e){
+            e.printStackTrace();
+            System.exit(1);
+        }
+
+    }
+
 
     public void rezeptauswahl(int t1) {
         serviert="";
