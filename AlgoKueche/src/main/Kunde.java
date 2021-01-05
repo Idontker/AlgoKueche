@@ -9,7 +9,7 @@ import java.util.HashMap;
 
 public class Kunde
 {
-    private final String pathToRecipes= "AlgoKueche/res/rezpete.txt";
+    private final String pathToRecipes= "pathToRecipes";
     private String serviert;
     private Boolean gewuerzt;
     private HashMap<String,Rezept> menueMap; 
