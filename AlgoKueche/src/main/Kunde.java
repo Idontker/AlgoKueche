@@ -26,7 +26,7 @@ public class Kunde {
     private void initMap() {
         menueMap = new HashMap<String, Rezept>();
 
-        File file = new File("pathToRecipes");
+        File file = new File(pathToRecipes);
         try {
             BufferedReader br = new BufferedReader(new FileReader(file));
 
@@ -44,6 +44,7 @@ public class Kunde {
                 menueMap.put(name, new Rezept(name, zutaten, wirdGewuert));
                 i++;
             }
+            br.close();
         } catch (IOException e) {
             e.printStackTrace();
             System.exit(1);
