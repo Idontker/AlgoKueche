@@ -73,7 +73,7 @@ public class Kunde
         if(serviert.length()==0) { //pruefe ob nichts serviert wurde.
             return "Leerer Teller. :(";
         }
-        serviert=serviert.replaceAll("[()]",""); //entferne die Klammern, da sonst replaceFirst() Probleme hat (regulaere Ausdruecke in Java).
+        //serviert=serviert.replaceAll("[()]",""); //entferne die Klammern, da sonst replaceFirst() Probleme hat (regulaere Ausdruecke in Java).
 
         for(int i=0;i<komponenten.size();i++) {
             RezeptKomponente komponente=komponenten.get(i);
@@ -115,8 +115,8 @@ public class Kunde
         private String zubereitung; //zubereitungsart: Achtung, wegen der Syntax regulärer Ausdrücke in Java hier bitte keine Klammern verwenden
 
         private RezeptKomponente(String t1, String t2) {
-            komponente=t1;
-            zubereitung=t2;
+            komponente=""+t1;
+            zubereitung=""+t2;
         }
 
         private String gibKomponente() {
@@ -135,7 +135,7 @@ public class Kunde
         }
 
         private boolean komponenteUndZubereitungIstVorhanden(String t) {
-            if(t.contains(komponente+zubereitung)) {
+            if(t.contains(komponente+"("+zubereitung+")")) {
                 return true;
             }
             return false;
@@ -146,7 +146,7 @@ public class Kunde
         }
 
         private String entferneKomponenteUndZubereitung(String t) {
-            return t.replaceFirst(komponente+zubereitung, "");
+            return t.replaceFirst(komponente+"\\("+zubereitung+"\\)", "");
         }
     }
 }
