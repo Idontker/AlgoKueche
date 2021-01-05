@@ -70,7 +70,7 @@ public class Lehrling {
 
     public void gebeAufTeller() {
         if (aktZutat.endsWith(",")) {
-            aktZutat = aktZutat.substring(0, aktZutat.length() - 2);
+            aktZutat = aktZutat.substring(0, aktZutat.length() - 1);
         }
         kunde.arbeitsschritt(aktZutat + ")");
         animation.goToFrame("gebeAufTeller");
@@ -117,7 +117,7 @@ public class Lehrling {
      * salat, oel, zwiebel, gurke, oliven, feta, salz, essig
      */
     private String entscheideZutat(String eingabe) {
-        String artikel[] = new String[] { "ein", "eine", "der", "die", "das" };
+        String artikel[] = new String[] { "ein", "eine", "einen", "der", "die", "das" };
         String zutat = "";
 
         eingabe = eingabe.trim().toLowerCase();
@@ -168,7 +168,7 @@ public class Lehrling {
         if (zutat != null) {
             return zutat + "(";
         } else {
-            return "badf00d";
+            return "badf00d(";
         }
     }
 }

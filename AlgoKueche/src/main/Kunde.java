@@ -33,6 +33,7 @@ public class Kunde {
             String line;
             int i = 0;
             while ((line = br.readLine()) != null) {
+                line = line.toLowerCase();
                 String s[] = line.split(":");
                 if (s.length != 2 && s.length != 3) {
                     System.err.println("Error reading line " + i);
@@ -53,6 +54,7 @@ public class Kunde {
     }
 
     public void rezeptauswahl(String t) {
+        t = t.toLowerCase();
         serviert = "";
         gemeldeterFehler = null;
         Rezept r = menueMap.get(t);
