@@ -26,13 +26,14 @@ public class GUI {
 			Color.orange, Color.red, Color.yellow, new Color(50, 200, 10), new Color(200, 100, 50) };
 	private final static String[] imageNames = new String[] { "book.png", "fridge.png", "fridge.png", "schneiden.jpg",
 			"topf.png", "kochen.jpg", "abschmecken.png", "glocke.jpg", "happy.png", "sad.png" };
+	private final static Slide BADF00D = new Slide("badf00d", Color.black);
 
 	// static values
-	private static final double SCALE = 0.5;
+	private static final double SCALE = 0.8;
 	private static final int HEIGHT = (int) (SCALE * 720);
 	private static final int WIDTH = (int) (SCALE * HEIGHT / 9 * 16);
 	private static final int waittingTime = 1500;
-	
+
 	private static final Color DEFAULT_COLOR = Color.lightGray;
 
 	// GUI Main
@@ -124,7 +125,7 @@ public class GUI {
 	}
 
 	private void initFrame() {
-		frame = new JFrame("Hallo Welt");
+		frame = new JFrame("AlgoKüche");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(WIDTH, HEIGHT);
 	}
@@ -178,7 +179,6 @@ public class GUI {
 			public void actionPerformed(ActionEvent e) {
 				currentSlideIdx = (currentSlideIdx + methods.length - 1) % methods.length;
 				System.out.println("links");
-				setComment(methods[currentSlideIdx]);
 				goToFrame(methods[currentSlideIdx]);
 			}
 		});
@@ -189,7 +189,6 @@ public class GUI {
 		unknown.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("unknown");
-				setComment("unknown");
 				goToFrame("b4df00d");
 			}
 		});
@@ -201,7 +200,6 @@ public class GUI {
 			public void actionPerformed(ActionEvent e) {
 				currentSlideIdx = (currentSlideIdx + 1) % methods.length;
 				System.out.println("rechts");
-				setComment(methods[currentSlideIdx]);
 				goToFrame(methods[currentSlideIdx]);
 			}
 		});
@@ -219,38 +217,17 @@ public class GUI {
 		// TODO: implement the (random) occurences of useless and funny comments of Sam
 	}
 
-	public void setComment(String msg) {
-		if (notActive)
-			return;
-		commentBox.setText(msg);
-	}
-
 	// TODO: rename method
 	public void goToFrame(String slideName) {
 		if (notActive)
 			return;
-		imageLabel.setVisible(false);
+
 		Slide next = map.get(slideName);
 		if (next != null) {
-			System.out.println(next);
-			setComment(next.method);
-
-			actionPanel.setBackground(next.c);
-			if (next.image != null) {
-				if (imageLabel != null) {
-					actionPanel.remove(imageLabel);
-				}
-				ImageIcon icon = new ImageIcon(next.image.getScaledInstance(actionPanel.getWidth(),
-						actionPanel.getHeight(), Image.SCALE_SMOOTH));
-				imageLabel = new JLabel(icon);
-				imageLabel.setVisible(true);
-				actionPanel.add(imageLabel);
-			}
+			showSlide(next);
 		} else {
-			System.out.println("Slide: " + slideName + " not found in Database");
-			setComment(slideName);
-			actionPanel.setBackground(Color.black);
-
+			System.err.println("Slide: " + slideName + " not found in Database");
+			showSlide(BADF00D);
 		}
 		try {
 			Thread.sleep(waittingTime);
@@ -259,24 +236,37 @@ public class GUI {
 		}
 	}
 
-	public void goToFeedback(Feedback f){
+	public void goToFeedback(Feedback f) {
 		// TODO: setze Comment und Slide abhängig vom Feedback
 	}
 
+	private void showSlide(Slide next) {
+		JLabel tmp = null;
+		if (next.image != null) { // create new Label with ImageIcon
+			ImageIcon icon = new ImageIcon(
+					next.image.getScaledInstance(actionPanel.getWidth(), actionPanel.getHeight(), Image.SCALE_SMOOTH));
+			tmp = new JLabel(icon);
+			tmp.setVisible(true);
+		}
+		if (imageLabel != null) { // remove old Label with ImageIcon
+			actionPanel.remove(imageLabel);
+		}
+		if (tmp != null) { // add new Label with ImageIcon
+			actionPanel.add(tmp);
+			imageLabel = tmp;
+		}
+		// update Background and comment
+		actionPanel.setBackground(next.c);
+		System.out.println("show:" + next);
+		commentBox.setText(next.comment);
+	}
 
 	// methods for testing.
-
 	private void slideShow() {
 		for (String key : methods) {
 			goToFrame(key);
-			setComment(key);
-			try {
-				Thread.sleep(800);
-			} catch (Exception e) {
-			}
 		}
 		goToFrame("b4df00d");
-		setComment("b4df00d");
 		try {
 			Thread.sleep(500);
 		} catch (Exception e) {
@@ -288,20 +278,27 @@ class Slide {
 	String method;
 	Color c;
 	BufferedImage image;
+	String comment;
 
 	Slide(String method, Color c) {
 		this.method = method;
 		this.c = c;
+		this.comment = method;
+	}
+
+	Slide(String method, Color c, String comment) {
+		this(method, c);
+		this.comment = comment;
 	}
 
 	Slide(String method, Color c, BufferedImage image) {
-		this.method = method;
-		this.c = c;
+		this(method, c);
 		this.image = image;
 	}
 
 	@Override
 	public String toString() {
-		return "[name=" + method + ", color=(" + c.getRed() + ", " + c.getGreen() + ", " + c.getBlue() + ") ]";
+		return "[name=" + method + ", comment=" + comment + ", color=(" + c.getRed() + ", " + c.getGreen() + ", "
+				+ c.getBlue() + ") ]";
 	}
 }
