@@ -90,6 +90,7 @@ public abstract class FeedbackTest {
         input[a] = input[b];
         input[b] = tmp;
     }
+}
 
 class Traitor extends Lehrling {
     Traitor() {
