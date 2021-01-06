@@ -8,7 +8,7 @@ public class Lehrling {
     private ArrayList<String> zutatenInTopf;
     protected Kunde kunde;
     protected GUI animation;
-    private int wuerze;
+    private int aktWuerze;
     private boolean bearbeitet;
     private boolean inTopf;
     private boolean serviert;
@@ -22,7 +22,7 @@ public class Lehrling {
         //init
         serviert = false;
         aktZutat = "";
-        wuerze = -1;
+        aktWuerze = 42;
         bearbeitet = false;
         inTopf = false;
         kunde.rezeptauswahl(rezept);
@@ -90,19 +90,32 @@ public class Lehrling {
     }
 
     public boolean istGewuerzt() {
-        if (wuerze > 0) {
-            wuerze--;
-            animation.goToFrame("istGewuerztFalse");
-            return false;
-        } else if (wuerze == 0) {
-            wuerze--;
+        if (aktWuerze == 0) {
             kunde.setzeGewuerzt(true); //setze bitte den boolean in Kunde
             animation.goToFrame("istGewuerztTrue");
             return true;
-        } else { // wuerze < 0
-            wuerze = (int) Math.random() * 3;
-            return istGewuerzt();
+        } 
+        if(aktWuerze > 0){
+            animation.goToFrame("istGewuerztFalse");
+            kunde.setzeGewuerzt(false);
+            return false;
         }
+        if(aktWuerze < 0){
+            animation.goToFrame("istGewuerztFalse");
+            kunde.setzeGewuerzt(false);
+            kunde.meldeFehler(Comment.versalzen);
+            return true;
+        }
+        return true;
+        
+    
+    }
+
+    public void wuerze(){
+        if(aktWuerze == 42){
+            aktWuerze = (int) (Math.random() * 3) + 1;
+        }
+        aktWuerze--; 
     }
 
     public void serviere() {
@@ -180,6 +193,7 @@ public class Lehrling {
         if (zutat != null) {
             return zutat + "(";
         } else {
+            kunde.meldeFehler(Comment.zutatUnbekannt);
             return "badf00d(";
         }
     }
