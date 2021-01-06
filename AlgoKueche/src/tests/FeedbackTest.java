@@ -36,7 +36,7 @@ public abstract class FeedbackTest {
     }
 
     protected void gebeInTopf() {
-        lehrling.gebeInTopf();
+        lehrling.gibInTopf();
     }
 
     protected void koche(int zeit) {
@@ -48,7 +48,7 @@ public abstract class FeedbackTest {
     }
 
     protected void legAufTeller() {
-        lehrling.gebeAufTeller();
+        lehrling.gibAufTeller();
     }
 
     protected void serviere() {

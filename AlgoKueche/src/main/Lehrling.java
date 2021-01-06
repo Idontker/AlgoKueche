@@ -52,7 +52,7 @@ public class Lehrling {
         animation.goToFrame("schneide");
     }
 
-    public void gebeInTopf() {
+    public void gibInTopf() {
         inTopf = true;
         zutatenInTopf.add(aktZutat);
         if (aktZutat.equals("oel(")) {
@@ -71,7 +71,7 @@ public class Lehrling {
         }
     }
 
-    public void gebeAufTeller() {
+    public void gibAufTeller() {
         if (aktZutat.endsWith(",")) {
             aktZutat = aktZutat.substring(0, aktZutat.length() - 1);
         }
