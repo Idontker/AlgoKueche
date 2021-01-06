@@ -55,6 +55,10 @@ public abstract class FeedbackTest {
         lehrling.serviere();
     }
 
+    protected void nsl(String zutat) {
+        ((Traitor) lehrling).nsl(zutat);
+    }
+
     protected Feedback feedback() {
         return ((Traitor) lehrling).getFeedback();
     }
@@ -100,5 +104,11 @@ class Traitor extends Lehrling {
 
     public Feedback getFeedback() {
         return kunde.bewerte();
+    }
+
+    public void nsl(String zutat) {
+        nimmAusSchrank(zutat);
+        schneide();
+        gibAufTeller();
     }
 }
