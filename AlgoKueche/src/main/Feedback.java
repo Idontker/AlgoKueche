@@ -65,7 +65,7 @@ public class Feedback {
             case verschwendung:
                 return "Das Gericht passt, allerdings hast du Zutaten verschwendet. :(";
             case zutatUnbekannt:
-                return "Das Gericht passt, allerdings ist eine der Zutaten: "+zutat+" unbekannt. :(";
+                return "Das Gericht passt, allerdings hast du versucht eine unbekannte Zutat zu nehmen. :(";
             case kochtLeerenTopf:
                 return "Das Gericht passt, allerdings hast du einen leeren Topf gekocht. :(";
             case falschGewuerzt:
