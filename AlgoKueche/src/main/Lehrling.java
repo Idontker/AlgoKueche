@@ -47,9 +47,15 @@ public class Lehrling {
     }
 
     public void schneide() {
-        bearbeitet = true;
-        aktZutat = aktZutat + "geschnitten,";
-        animation.goToFrame("schneide");
+        if(aktZutat.isEmpty()){
+            kunde.meldeFehler(Comment.schneidenOhneZutat);
+        }
+        else{
+            bearbeitet = true;
+            aktZutat = aktZutat + "geschnitten,";
+            animation.goToFrame("schneide");
+        }
+        
     }
 
     public void gibInTopf() {
@@ -90,7 +96,7 @@ public class Lehrling {
             return false;
         } else if (wuerze == 0) {
             wuerze--;
-            kunde.arbeitsschritt("istGewuerzt"); //setze bitte den boolean in Kunde
+            kunde.setzeGewuerzt(true); //setze bitte den boolean in Kunde
             animation.goToFrame("istGewuerztTrue");
             return true;
         } else { // wuerze < 0
