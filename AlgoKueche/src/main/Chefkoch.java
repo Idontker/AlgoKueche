@@ -17,7 +17,7 @@ public class Chefkoch {
         sam.wirKochenJetzt("reiner Salat");
         sam.nimmAusSchrank("einen Salat");
         sam.schneide();
-        sam.gibAufTeller();
+        sam.gibZutatAufTeller();
         sam.serviere();
     }
 }

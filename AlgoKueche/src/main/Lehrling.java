@@ -63,9 +63,6 @@ public class Lehrling {
     public void gibInTopf() {
         inTopf = true;
         zutatenInTopf.add(aktZutat);
-        if (aktZutat.equals("oel(")) {
-            kunde.arbeitsschritt("topfGeoelt()"); //ist eher schlecht fuer den Kunden, da keine reihenfolge geprueft wird
-        }
         animation.goToFrame("gebeInTopf");
     }
 
@@ -79,7 +76,13 @@ public class Lehrling {
         }
     }
 
-    public void gibAufTeller() {
+    public void gibTopfAufTeller() {
+        animation.goToFrame("gebeAufTeller");
+
+        
+    }
+
+    public void gibZutatAufTeller() {
         if (aktZutat.endsWith(",")) {
             aktZutat = aktZutat.substring(0, aktZutat.length() - 1);
         }

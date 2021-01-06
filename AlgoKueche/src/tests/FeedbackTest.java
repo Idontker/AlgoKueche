@@ -48,7 +48,7 @@ public abstract class FeedbackTest {
     }
 
     protected void legAufTeller() {
-        lehrling.gibAufTeller();
+        lehrling.gibZutatAufTeller();
     }
 
     protected void serviere() {
