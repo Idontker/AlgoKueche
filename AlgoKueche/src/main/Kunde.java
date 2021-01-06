@@ -68,38 +68,6 @@ public class Kunde {
         }
     }
 
-    public void rezeptauswahl() {
-        serviert = "";
-        gemeldeterFehler = null;
-        gewuerzt = null;
-        komponenten = new ArrayList<RezeptKomponente>();
-    }
-
-    public void rezeptauswahl(Boolean t) {
-        serviert = "";
-        gemeldeterFehler = null;
-        gewuerzt = t;
-        komponenten = new ArrayList<RezeptKomponente>();
-    }
-
-    public void rezeptauswahl(ArrayList<RezeptKomponente> t) {
-        serviert = "";
-        gemeldeterFehler = null;
-        gewuerzt = null;
-        komponenten = t;
-    }
-
-    public void rezeptauswahl(Boolean t1, ArrayList<RezeptKomponente> t2) {
-        serviert = "";
-        gemeldeterFehler = null;
-        gewuerzt = t1;
-        komponenten = t2;
-    }
-
-    public void komponenteHinzufuegen(String t1, String t2) {
-        komponenten.add(new RezeptKomponente(t1, t2));
-    }
-
     public void arbeitsschritt(String t) {
         serviert += t;
     }
