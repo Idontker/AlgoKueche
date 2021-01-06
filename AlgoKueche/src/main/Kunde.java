@@ -39,7 +39,7 @@ public class Kunde {
                 }
                 boolean wirdGewuert = s.length == 3;
                 String name = s[0];
-                String zutaten = s[1];
+                String zutaten = s[1].trim();
                 menueMap.put(name, new Rezept(name, zutaten, wirdGewuert));
                 i++;
             }
