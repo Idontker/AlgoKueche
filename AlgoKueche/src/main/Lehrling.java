@@ -25,6 +25,7 @@ public class Lehrling {
         wuerze = -1;
         bearbeitet = false;
         inTopf = false;
+        zutatenInTopf = new ArrayList<String>();
         kunde.rezeptauswahl(rezept);
         animation.goToFrame("wirKochenJetzt");
     }
