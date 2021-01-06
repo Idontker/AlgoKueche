@@ -34,6 +34,7 @@ public class Lehrling {
         if (!aktZutat.isEmpty()) {
             kunde.meldeFehler(Comment.mehrAlsEineZutatInDerHand);
         }
+        bearbeitet = false;
         aktZutat = entscheideZutat(zutat);
         animation.goToFrame("nimmAusSchrank");
     }
@@ -85,7 +86,7 @@ public class Lehrling {
         kunde.arbeitsschritt(aktZutat + ")");
         animation.goToFrame("gebeAufTeller");
 
-        if (istKeinGewuerz(aktZutat)) {
+        if (wirdNichtVerbraucht(aktZutat)) {
             aktZutat = "";
         }
     }
@@ -127,7 +128,7 @@ public class Lehrling {
         else{System.out.println("Das Gericht wurde bereits serviert.");}
     }
 
-    private boolean istKeinGewuerz(String zutat) {
+    private boolean wirdNichtVerbraucht(String zutat) {
         switch (zutat) {
             case "oel(":
             case "essig(":
