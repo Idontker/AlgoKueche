@@ -15,7 +15,6 @@ public abstract class FeedbackTest {
 
     @Before
     public void initTest() {
-        System.err.println("Before");
         GUI.runningTestcase = true;
         lehrling = new Traitor();
     }
