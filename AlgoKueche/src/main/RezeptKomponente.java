@@ -33,10 +33,14 @@ public class RezeptKomponente {
     }
 
     public String entferneZutat(String t) {
-        return t.replaceFirst(zutat, "");
+        if(zutat.length!=0) {
+            return t.replaceFirst(zutat, "");
+        }
     }
 
     public String entferneZutatUndZubereitung(String t) {
-        return t.replaceFirst(zutat + "\\(" + zubereitung + "\\)", "");
+        if(zutat.length!=0) {
+            return t.replaceFirst(zutat + "\\(" + zubereitung + "\\)", "");
+        }
     }
 }
