@@ -1,5 +1,7 @@
 package tests;
 
+import java.util.ArrayList;
+
 import org.junit.Assert;
 import org.junit.Test;
 import main.Comment;
@@ -268,14 +270,29 @@ public class TomatenSalat extends FeedbackTest {
     }
 
     @Test
-    public void flascheZutatEnthalten_1() {
+    public void flascheZutatEnthalten_All() {
+        String z[] = new String[] {"Tomate","ein Salat", "Feta"};
+        ArrayList<int[]> ps = perms(z.length);
+        for (int[] p : ps) {
+            flascheZutatEnthalten(z[p[0]],z[p[1]],z[p[2]]);
+            String call = "flascheZutatEnthalten(" + z[p[0]] + ", " + z[p[1]]+ ", "+ z[p[2]]+ ")";
+            System.out.println(call);
+            Assert.assertEquals(call,Comment.falscheZutatEnthalten, feedback().getComment());
+        }
+    }
+
+    private void flascheZutatEnthalten(String z1, String z2, String z3) {
         wirKochenJetzt("Tomatensalat");
+        nimmAusSchrank(z1);
         schneide();
         legAufTeller();
-        nimmAusSchrank("Tomate");
+        nimmAusSchrank(z2);
         schneide();
+        legAufTeller();
+        nimmAusSchrank(z3);
+        schneide();
+        legAufTeller();
         serviere();
-        Assert.assertEquals(Comment.falscheZutatEnthalten, feedback().getComment());
     }
 
 }
