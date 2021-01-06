@@ -60,7 +60,7 @@ public class Kunde {
             System.out.println("Das Rezept " + t + " gibt es nicht");
         } else {
             if (r.wirdGewuerzt()) {
-                gewuerzt = new Boolean(false);
+                gewuerzt = false;
             } else {
                 gewuerzt = null;
             }

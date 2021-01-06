@@ -11,17 +11,20 @@ public class Lehrling {
     private int wuerze;
     private boolean bearbeitet;
     private boolean inTopf;
+    private boolean serviert;
 
     public Lehrling() {
-        aktZutat = "";
-        kunde = new Kunde();
         animation = GUI.startGUI();
-        wuerze = -1;
-        bearbeitet = false;
-        inTopf = false;
+        kunde = new Kunde(); 
     }
 
     public void wirKochenJetzt(String rezept) {
+        //init
+        serviert = false;
+        aktZutat = "";
+        wuerze = -1;
+        bearbeitet = false;
+        inTopf = false;
         kunde.rezeptauswahl(rezept);
         animation.goToFrame("wirKochenJetzt");
     }
@@ -97,8 +100,11 @@ public class Lehrling {
     }
 
     public void serviere() {
-        animation.goToFrame("serviere");
+        if(!serviert){
+            animation.goToFrame("serviere");
         animation.goToFeedback(kunde.bewerte());
+        }
+        else{System.out.println("Das Gericht wurde bereits serviert.");}
     }
 
     private boolean istKeinGewuerz(String zutat) {
