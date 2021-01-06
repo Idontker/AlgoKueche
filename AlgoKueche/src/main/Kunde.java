@@ -113,16 +113,17 @@ public class Kunde {
     }
 
     public Feedback bewerte() {
-        if (serviert.length() == 0) { // pruefe ob nichts serviert wurde.
+        String serviertKlon=serviert.clone();
+        if (serviertKlon.length() == 0) { // pruefe ob nichts serviert wurde.
             return new Feedback(Comment.serviereLeerenTeller, "", "");
         }
 
         for (int i = 0; i < komponenten.size(); i++) {
             RezeptKomponente komponente = komponenten.get(i);
-            if (komponente.zutatIstVorhanden(serviert)) { // ist die Komponente vorhanden?
-                if (komponente.zutatUndZubereitungIstVorhanden(serviert)) { // ist die Komponente auch in der richtigen
+            if (komponente.zutatIstVorhanden(serviertKlon)) { // ist die Komponente vorhanden?
+                if (komponente.zutatUndZubereitungIstVorhanden(serviertKlon)) { // ist die Komponente auch in der richtigen
                                                                             // zubereitungsart vorhanden?
-                    serviert = komponente.entferneZutatUndZubereitung(serviert); // falls ja, entferne sie damit auch
+                    serviertKlon = komponente.entferneZutatUndZubereitung(serviertKlon); // falls ja, entferne sie damit auch
                                                                                  // mehrfach benötigte Komponenten
                                                                                  // abgefragt werden koennen.
                 } else {
@@ -137,17 +138,17 @@ public class Kunde {
                 // //falls die Komponente gar nicht mehr vorhanden ist, gebe aus was fehlt.
             }
         }
-        if (serviert.length() != 0) { // ist ausserhalb der benoetigten Komponenten noch etwas uebrig?
+        if (serviertKlon.length() != 0) { // ist ausserhalb der benoetigten Komponenten noch etwas uebrig?
             for (int i = 0; i < komponenten.size(); i++) { // handelt es sich um eine Zutat aus dem Rezept die nur zu
                                                            // oft da ist? Falls ja, gib sie aus (falls sie auch noch
                                                            // richtig zubereitet wurde mit der Zubereitungsart).
                 RezeptKomponente komponente = komponenten.get(i);
-                if (komponente.zutatIstVorhanden(serviert)) {
+                if (komponente.zutatIstVorhanden(serviertKlon)) {
                     return new Feedback(Comment.zuVielServiert, komponente.gibZutat(), komponente.gibZubereitung());
                     // return "Zu viele "+komponente.gibZutat()+komponente.gibZubereitung()+". :(";
                 }
             }
-            return new Feedback(Comment.falscheZutatEnthalten, serviert, "");
+            return new Feedback(Comment.falscheZutatEnthalten, serviertKlon, "");
             // return serviert+" gehoert da nicht rein. :("; //falls es sich um unbekannte
             // Komponenten handelt, gib sie alle aus.
         }
