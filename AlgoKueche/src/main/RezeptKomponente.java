@@ -26,6 +26,9 @@ public class RezeptKomponente {
     }
 
     public boolean zutatUndZubereitungIstVorhanden(String t) {
+        if(zutat.length==0) {
+            return true;
+        }
         if (t.contains(zutat + "(" + zubereitung + ")")) {
             return true;
         }
