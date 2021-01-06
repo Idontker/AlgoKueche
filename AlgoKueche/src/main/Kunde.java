@@ -64,8 +64,13 @@ public class Kunde {
             } else {
                 gewuerzt = null;
             }
-            komponenten = r.gibRezeptKomponenten();
+            komponenten = new ArrayList<RezeptKomponente>();
+            komponenten.addAll(r.gibRezeptKomponenten());
         }
+    }
+    
+    public void komponenteHinzufuegen(String t1, String t2) {
+        komponenten.add(new RezeptKomponente(t1, t2));
     }
 
     public void arbeitsschritt(String t) {
