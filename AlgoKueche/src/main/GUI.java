@@ -137,7 +137,7 @@ public class GUI {
 	}
 
 	private void initFrame() {
-		frame = new JFrame("AlgoKüche");
+		frame = new JFrame("AlgoKueche");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(WIDTH, HEIGHT);
 	}
