@@ -44,7 +44,7 @@ public class EinfachSalatTest extends FeedbackTest {
         nimmAusSchrank("Salat");
         legAufTeller();
         serviere();
-        Assert.assertEquals(Comment.unfertigeZutatenServiert, feedback().getComment());
+        Assert.assertEquals(Comment.falschZubereitet, feedback().getComment());
     }
 
     @Test

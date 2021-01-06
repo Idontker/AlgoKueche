@@ -86,7 +86,7 @@ public class Kunde {
     }
 
     public Feedback bewerte() {
-        String serviertKlon=serviert.clone();
+        String serviertKlon = new String(serviert); //  ich denke String serviertKlon = serviert sollte auch gehen
         if (serviertKlon.length() == 0) { // pruefe ob nichts serviert wurde.
             return new Feedback(Comment.serviereLeerenTeller, "", "");
         }

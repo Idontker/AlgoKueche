@@ -8,7 +8,7 @@ public class TomatenSalat extends FeedbackTest {
 
     @Test
     public void richtig_1() {
-        wirKochenJetzt("Salat mit Tomaten");
+        wirKochenJetzt("Tomatensalat");
         nimmAusSchrank("Salat");
         schneide();
         legAufTeller();
@@ -21,7 +21,7 @@ public class TomatenSalat extends FeedbackTest {
 
     @Test
     public void richtig_2() {
-        wirKochenJetzt("Salat mit Tomaten");
+        wirKochenJetzt("Tomatensalat");
         nimmAusSchrank("Tomate");
         schneide();
         legAufTeller();
@@ -33,7 +33,7 @@ public class TomatenSalat extends FeedbackTest {
     }
 
     private void unfertigeZutatenServiert(String zutat1, String zutat2, boolean schneide1, boolean schneide2) {
-        wirKochenJetzt("Salat mit Tomaten");
+        wirKochenJetzt("Tomatensalat");
         nimmAusSchrank(zutat1);
         if (schneide1) {
             schneide();
@@ -85,14 +85,14 @@ public class TomatenSalat extends FeedbackTest {
 
     @Test
     public void serviereLeerenTeller_1() {
-        wirKochenJetzt("Salat mit Tomaten");
+        wirKochenJetzt("Tomatensalat");
         serviere();
         Assert.assertEquals(Comment.serviereLeerenTeller, feedback().getComment());
     }
 
     @Test
     public void serviereLeerenTeller_2a() {
-        wirKochenJetzt("Salat mit Tomaten");
+        wirKochenJetzt("Tomatensalat");
         nimmAusSchrank("Tomate");
         schneide();
         serviere();
@@ -101,7 +101,7 @@ public class TomatenSalat extends FeedbackTest {
 
     @Test
     public void serviereLeerenTeller_2b() {
-        wirKochenJetzt("Salat mit Tomaten");
+        wirKochenJetzt("Tomatensalat");
         nimmAusSchrank("Salat");
         schneide();
         serviere();
@@ -110,7 +110,7 @@ public class TomatenSalat extends FeedbackTest {
 
     @Test
     public void serviereLeerenTeller_2c() {
-        wirKochenJetzt("Salat mit Tomaten");
+        wirKochenJetzt("Tomatensalat");
         nimmAusSchrank("Kartoffel");
         schneide();
         serviere();
@@ -119,7 +119,7 @@ public class TomatenSalat extends FeedbackTest {
 
     @Test
     public void serviereLeerenTeller_3a() {
-        wirKochenJetzt("Salat mit Tomaten");
+        wirKochenJetzt("Tomatensalat");
         nimmAusSchrank("Tomate");
         schneide();
         stellZurueck();
@@ -131,7 +131,7 @@ public class TomatenSalat extends FeedbackTest {
 
     @Test
     public void serviereLeerenTeller_3b() {
-        wirKochenJetzt("Salat mit Tomaten");
+        wirKochenJetzt("Tomatensalat");
         nimmAusSchrank("Salat");
         schneide();
         stellZurueck();
@@ -143,7 +143,7 @@ public class TomatenSalat extends FeedbackTest {
 
     @Test
     public void serviereLeerenTeller_3c() {
-        wirKochenJetzt("Salat mit Tomaten");
+        wirKochenJetzt("Tomatensalat");
         nimmAusSchrank("Tomate");
         schneide();
         gebeInTopf();
@@ -155,7 +155,7 @@ public class TomatenSalat extends FeedbackTest {
 
     @Test
     public void serviereLeerenTeller_3d() {
-        wirKochenJetzt("Salat mit Tomaten");
+        wirKochenJetzt("Tomatensalat");
         nimmAusSchrank("Salat");
         schneide();
         gebeInTopf();
@@ -167,7 +167,7 @@ public class TomatenSalat extends FeedbackTest {
 
     @Test
     public void serviereLeerenTeller_4a() {
-        wirKochenJetzt("Salat mit Tomaten");
+        wirKochenJetzt("Tomatensalat");
         nimmAusSchrank("Tomate");
         schneide();
         stellZurueck();
@@ -182,7 +182,7 @@ public class TomatenSalat extends FeedbackTest {
 
     @Test
     public void serviereLeerenTeller_4sb() {
-        wirKochenJetzt("Salat mit Tomaten");
+        wirKochenJetzt("Tomatensalat");
         nimmAusSchrank("Salat");
         schneide();
         stellZurueck();
@@ -197,7 +197,7 @@ public class TomatenSalat extends FeedbackTest {
 
     @Test
     public void serviereLeerenTeller_4c() {
-        wirKochenJetzt("Salat mit Tomaten");
+        wirKochenJetzt("Tomatensalat");
         nimmAusSchrank("Tomate");
         schneide();
         gebeInTopf();
@@ -212,7 +212,7 @@ public class TomatenSalat extends FeedbackTest {
 
     @Test
     public void serviereLeerenTeller_4d() {
-        wirKochenJetzt("Salat mit Tomaten");
+        wirKochenJetzt("Tomatensalat");
         nimmAusSchrank("Salat");
         schneide();
         gebeInTopf();
@@ -227,14 +227,21 @@ public class TomatenSalat extends FeedbackTest {
 
     @Test
     public void schneidenOhneZutat_1() {
-        wirKochenJetzt("Salat mit Tomaten");
+        wirKochenJetzt("Tomatensalat");
         schneide();
+        nimmAusSchrank("Salat");
+        schneide();
+        legAufTeller();
+        nimmAusSchrank("eine Tomate");
+        schneide();
+        legAufTeller();
+        serviere();
         Assert.assertEquals(Comment.schneidenOhneZutat, feedback().getComment());
     }
 
     @Test
     public void schneidenOhneZutat_2() {
-        wirKochenJetzt("Salat mit Tomaten");
+        wirKochenJetzt("Tomatensalat");
         schneide();
         legAufTeller();
         nimmAusSchrank("Tomate");
@@ -245,7 +252,7 @@ public class TomatenSalat extends FeedbackTest {
 
     @Test
     public void schneidenOhneZutat_3() {
-        wirKochenJetzt("Salat mit Tomaten");
+        wirKochenJetzt("Tomatensalat");
         nimmAusSchrank("Salat");
         schneide();
         legAufTeller();
@@ -256,7 +263,7 @@ public class TomatenSalat extends FeedbackTest {
 
     @Test
     public void flascheZutatEnthalten_1() {
-        wirKochenJetzt("Salat mit Tomaten");
+        wirKochenJetzt("Tomatensalat");
         schneide();
         legAufTeller();
         nimmAusSchrank("Tomate");
