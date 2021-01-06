@@ -37,7 +37,7 @@ public class GriechischerSalat extends FeedbackTest {
         ArrayList<int[]> perms = FeedbackTest.perms(zutat.length);
         for (int[] p : perms) {
             richtig(zutat[p[0]], zutat[p[1]], zutat[p[2]], zutat[p[3]], zutat[p[4]]);
-            Assert.assertEquals(Comment.richtig, feedback());
+            Assert.assertEquals(Comment.richtig, feedback().getComment());
         }
     }
 }
