@@ -73,7 +73,7 @@ public class Feedback {
             case fehlendeZutat:
                 return "Es fehlt " + zutat + " (" + zubereitungsArt + "). :(";
             case falschZubereitet:
-                return zutat + " wurde falsch zubereitet. Sie sollte eigentlich " + zubereitungsArt + " sein. :(";
+                return zutat + " wurde falsch zubereitet. Sollte eigentlich " + zubereitungsArt + " sein. :(";
             default:
                 return null;
 
