@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.junit.Assert;
 import org.junit.Test;
 import main.Comment;
+import main.Feedback;
 
 public class GriechischerSalat extends FeedbackTest {
 
@@ -33,11 +34,14 @@ public class GriechischerSalat extends FeedbackTest {
 
     @Test
     public void richtigTestAll() {
-        String zutat[] = new String[] { "Tomate", "Zwiebel", "Gruke", "Oliven", "Feta" };
+        String zutat[] = new String[] { "Tomate", "Zwiebel", "Gurke", "Oliven", "Feta" };
         ArrayList<int[]> perms = FeedbackTest.perms(zutat.length);
         for (int[] p : perms) {
             richtig(zutat[p[0]], zutat[p[1]], zutat[p[2]], zutat[p[3]], zutat[p[4]]);
-            Assert.assertEquals(Comment.richtig, feedback().getComment());
+            String call = "richtig(" + zutat[p[0]] + ", " + zutat[p[1]] + ", " + zutat[p[2]] + ", " + zutat[p[3]] + ", "
+                    + zutat[p[4]];
+            Feedback f = feedback();
+            Assert.assertEquals(call + "\t" + f.gibFeedbackString(), Comment.richtig, f.getComment());
         }
     }
 }
