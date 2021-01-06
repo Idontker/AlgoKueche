@@ -82,7 +82,9 @@ public class Kunde {
     }
 
     public void meldeFehler(Comment t) {
-        gemeldeterFehler = t;
+        if(gemeldeterFehler==null||!gemeldeterFehler==Comment.zutatUnbekannt) {
+            gemeldeterFehler = t;
+        }
     }
 
     public Feedback bewerte() {
@@ -90,7 +92,7 @@ public class Kunde {
         if (serviertKlon.length() == 0) { // pruefe ob nichts serviert wurde.
             return new Feedback(Comment.serviereLeerenTeller, "", "");
         }
-
+        
         for (int i = 0; i < komponenten.size(); i++) {
             RezeptKomponente komponente = komponenten.get(i);
             if (komponente.zutatIstVorhanden(serviertKlon)) { // ist die Komponente vorhanden?
@@ -112,6 +114,10 @@ public class Kunde {
             }
         }
         if (serviertKlon.length() != 0) { // ist ausserhalb der benoetigten Komponenten noch etwas uebrig?
+            if (gemeldeterFehler != null&&gemeldeterFehler == Comment.zutatUnbekannt) { // falls ein unbekannte Zutat Fehler während des Kochens geschehen ist, gib ihn aus.
+            return new Feedback(gemeldeterFehler, serviertKlon, "");
+            // return gemeldeterFehler;
+            }
             for (int i = 0; i < komponenten.size(); i++) { // handelt es sich um eine Zutat aus dem Rezept die nur zu
                                                            // oft da ist? Falls ja, gib sie aus (falls sie auch noch
                                                            // richtig zubereitet wurde mit der Zubereitungsart).

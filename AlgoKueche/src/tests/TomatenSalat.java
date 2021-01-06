@@ -32,7 +32,7 @@ public class TomatenSalat extends FeedbackTest {
         Assert.assertEquals(Comment.richtig, feedback().getComment());
     }
 
-    private void unfertigeZutatenServiert(String zutat1, String zutat2, boolean schneide1, boolean schneide2) {
+    private void falschZubereitet(String zutat1, String zutat2, boolean schneide1, boolean schneide2) {
         wirKochenJetzt("Tomatensalat");
         nimmAusSchrank(zutat1);
         if (schneide1) {
@@ -48,39 +48,39 @@ public class TomatenSalat extends FeedbackTest {
     }
 
     @Test
-    public void unfertigeZutatenServiert_1() {
-        unfertigeZutatenServiert("Tomate", "Salat", false, true);
-        Assert.assertEquals(Comment.unfertigeZutatenServiert, feedback().getComment());
+    public void falschZubereitet_1() {
+        falschZubereitet("Tomate", "Salat", false, true);
+        Assert.assertEquals(Comment.falschZubereitet, feedback().getComment());
     }
 
     @Test
-    public void unfertigeZutatenServiert_2() {
-        unfertigeZutatenServiert("Tomate", "Salat", true, false);
-        Assert.assertEquals(Comment.unfertigeZutatenServiert, feedback().getComment());
+    public void falschZubereitet_2() {
+        falschZubereitet("Tomate", "Salat", true, false);
+        Assert.assertEquals(Comment.falschZubereitet, feedback().getComment());
     }
 
     @Test
-    public void unfertigeZutatenServiert_3() {
-        unfertigeZutatenServiert("Salat", "Tomate", false, true);
-        Assert.assertEquals(Comment.unfertigeZutatenServiert, feedback().getComment());
+    public void falschZubereitet_3() {
+        falschZubereitet("Salat", "Tomate", false, true);
+        Assert.assertEquals(Comment.falschZubereitet, feedback().getComment());
     }
 
     @Test
-    public void unfertigeZutatenServiert_4() {
-        unfertigeZutatenServiert("Salat", "Tomate", true, false);
-        Assert.assertEquals(Comment.unfertigeZutatenServiert, feedback().getComment());
+    public void falschZubereitet_4() {
+        falschZubereitet("Salat", "Tomate", true, false);
+        Assert.assertEquals(Comment.falschZubereitet, feedback().getComment());
     }
 
     @Test
-    public void unfertigeZutatenServiert_5() {
-        unfertigeZutatenServiert("Tomate", "Salat", true, false);
-        Assert.assertEquals(Comment.unfertigeZutatenServiert, feedback().getComment());
+    public void falschZubereitet_5() {
+        falschZubereitet("Tomate", "Salat", true, false);
+        Assert.assertEquals(Comment.falschZubereitet, feedback().getComment());
     }
 
     @Test
-    public void unfertigeZutatenServiert_6() {
-        unfertigeZutatenServiert("Salat", "Tomate", false, true);
-        Assert.assertEquals(Comment.unfertigeZutatenServiert, feedback().getComment());
+    public void falschZubereitet_6() {
+        falschZubereitet("Salat", "Tomate", false, true);
+        Assert.assertEquals(Comment.falschZubereitet, feedback().getComment());
     }
 
     @Test
@@ -242,10 +242,13 @@ public class TomatenSalat extends FeedbackTest {
     @Test
     public void schneidenOhneZutat_2() {
         wirKochenJetzt("Tomatensalat");
+        nimmAusSchrank("Salat");
         schneide();
         legAufTeller();
-        nimmAusSchrank("Tomate");
         schneide();
+        nimmAusSchrank("eine Tomate");
+        schneide();
+        legAufTeller();
         serviere();
         Assert.assertEquals(Comment.schneidenOhneZutat, feedback().getComment());
     }
@@ -254,6 +257,9 @@ public class TomatenSalat extends FeedbackTest {
     public void schneidenOhneZutat_3() {
         wirKochenJetzt("Tomatensalat");
         nimmAusSchrank("Salat");
+        schneide();
+        legAufTeller();
+        nimmAusSchrank("eine Tomate");
         schneide();
         legAufTeller();
         schneide();
