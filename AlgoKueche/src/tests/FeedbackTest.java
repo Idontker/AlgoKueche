@@ -15,6 +15,8 @@ public abstract class FeedbackTest {
 
     @Before
     public void initTest() {
+        System.err.println("Before");
+        GUI.runningTestcase = true;
         lehrling = new Traitor();
     }
 
@@ -94,9 +96,7 @@ public abstract class FeedbackTest {
 
 class Traitor extends Lehrling {
     Traitor() {
-        //TODO: geniert trotzdem ein neues frame, aendert aber nicht die Slides
         super();
-        animation = GUI.startDummyGUI(); 
     }
 
     public Feedback getFeedback() {

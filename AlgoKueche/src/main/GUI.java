@@ -18,14 +18,17 @@ import java.io.File;
 import java.util.HashMap;
 
 public class GUI {
+	public static final String pathToAlgoKueche = "C:/Users/Karol/proj/AlgoKueche/AlgoKueche/";
+
 
 	// static fields
 	private final static String[] methods = new String[] { "wirKochenJetzt", "nimmAusSchrank", "stellZurueck",
-			"schneide", "wirfInTopf", "koche", "istGewuerzt", "serviere", "reactionHappy", "reactionSad" , "gebeAufTeller"};
+			"schneide", "wirfInTopf", "koche", "istGewuerzt", "serviere", "reactionHappy", "reactionSad",
+			"gebeAufTeller" };
 	private final static Color[] colors = new Color[] { Color.blue, Color.cyan, Color.gray, Color.green, Color.magenta,
 			Color.orange, Color.red, Color.yellow, new Color(50, 200, 10), new Color(200, 100, 50), Color.pink };
 	private final static String[] imageNames = new String[] { "book.png", "fridge.png", "fridge.png", "schneiden.jpg",
-			"topf.png", "kochen.jpg", "abschmecken.png", "glocke.jpg", "happy.png", "sad.png", "teller.png"};
+			"topf.png", "kochen.jpg", "abschmecken.png", "glocke.jpg", "happy.png", "sad.png", "teller.png" };
 	private final static Slide BADF00D = new Slide("badf00d", Color.black);
 
 	// static values
@@ -33,6 +36,7 @@ public class GUI {
 	private static final int HEIGHT = (int) (SCALE * 720);
 	private static final int WIDTH = (int) (SCALE * HEIGHT / 9 * 16);
 	private static final int waittingTime = 1500;
+	public static boolean runningTestcase = false;
 
 	private static final Color DEFAULT_COLOR = Color.lightGray;
 
@@ -64,7 +68,11 @@ public class GUI {
 	private int currentSlideIdx; // idx of the current or last valid slide
 
 	public static GUI startGUI() {
-		return new GUI(false);
+		if(runningTestcase){
+			return startDummyGUI();
+		} else {
+			return new GUI(false);
+		}
 	}
 
 	public static GUI startDummyGUI() {
@@ -72,7 +80,11 @@ public class GUI {
 	}
 
 	public static GUI startTestGUI() {
-		return new GUI(true);
+		if(runningTestcase){
+			return startDummyGUI();
+		} else {
+			return new GUI(true);
+		}
 	}
 
 	private GUI() {
@@ -110,7 +122,7 @@ public class GUI {
 
 		map = new HashMap<String, Slide>();
 		for (int i = 0; i < methods.length; i++) {
-			String pathToImage = "AlgoKueche/res/" + imageNames[i];
+			String pathToImage = pathToAlgoKueche + "res/" + imageNames[i];
 			try {
 				File f = new File(pathToImage);
 				BufferedImage buf = ImageIO.read(f);
@@ -239,18 +251,20 @@ public class GUI {
 	}
 
 	public void goToFeedback(Feedback f) {
+		if (notActive)
+			return;
 		int k = f.bewertungsKategorie();
 		Slide next;
-		if(k == 0){
+		if (k == 0) {
 			next = map.get("reactionSad");
-		}else if (k == 1) {
+		} else if (k == 1) {
 			next = map.get("reactionSad");
-		} else if (k== 2){
+		} else if (k == 2) {
 			next = map.get("reactionHappy");
 		} else {
 			next = BADF00D;
 		}
-		
+
 		showSlide(next);
 		commentBox.setText(f.gibFeedbackString());
 	}

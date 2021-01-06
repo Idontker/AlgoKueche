@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Kunde {
-    private final String pathToRecipes = "AlgoKueche/res/rezpete.txt";
+    private final String pathToRecipes = "res/rezpete.txt";
     private String serviert;
     private Boolean gewuerzt;
     private HashMap<String, Rezept> menueMap;
@@ -24,8 +24,7 @@ public class Kunde {
 
     private void initMap() {
         menueMap = new HashMap<String, Rezept>();
-
-        File file = new File(pathToRecipes);
+        File file = new File(GUI.pathToAlgoKueche + pathToRecipes);
         try {
             BufferedReader br = new BufferedReader(new FileReader(file));
 

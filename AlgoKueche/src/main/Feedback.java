@@ -12,6 +12,10 @@ public class Feedback {
         this.zubereitungsArt = zubereitungsArt;
     }
 
+    public Comment getComment(){
+        return fehlerTyp;
+    }
+
     /**
      * @return 0 == negativ, 1 == neutral, 2 == positiv
      */
