@@ -1,3 +1,5 @@
+package main; 
+
 /**
  * Die Klasse Lehrling
  * @author Karol Bakas, Stefan Gebhart, Silas Kuder
@@ -54,7 +56,7 @@ public class Lehrling {
     }
 
     /**
-     * Stellt die aktuelle Zutat zurück. 
+     * Stellt die aktuelle Zutat zurï¿½ck. 
      */
     public void stellZurueck() {
         if (bearbeitet) {
@@ -81,7 +83,7 @@ public class Lehrling {
     }
 
     /**
-     * Gibt die aktuelle Zutat in den Topf. Sie kann jetzt gekocht werden. Der Lehrling hat jetzt wieder die Hände frei.
+     * Gibt die aktuelle Zutat in den Topf. Sie kann jetzt gekocht werden. Der Lehrling hat jetzt wieder die Hï¿½nde frei.
      */
     public void gibInTopf() {
         inTopf = true;
@@ -91,7 +93,7 @@ public class Lehrling {
     }
 
     /**
-     * Kocht alle Zutaten im Topf. Der Lehrling ist solange mit Umrühren beschaftigt.
+     * Kocht alle Zutaten im Topf. Der Lehrling ist solange mit Umrï¿½hren beschaftigt.
      * @param zeit Die Kochzeit in Minuten
      */
     public void koche(int zeit) {
@@ -128,9 +130,9 @@ public class Lehrling {
     }
 
     /**
-     * Probiert, ob das Gericht bereits ausreichend gewürzt ist.
-     * @return false, wenn noch nicht genug gewürzt wurde und 
-     * true, sobald genug gewürzt wurde (oder bereits zu viel)
+     * Probiert, ob das Gericht bereits ausreichend gewuerzt ist.
+     * @return false, wenn noch nicht genug gewuerzt wurde und 
+     * true, sobald genug gewuerzt wurde (oder bereits zu viel)
      */
     public boolean istGewuerzt() {
         if (aktWuerze == 0) {

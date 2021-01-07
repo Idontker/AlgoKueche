@@ -1,4 +1,4 @@
- 
+package main;  
 
 public enum Comment { //in Summe 14
     richtig, falsch, schneidenOhneZutat, serviereLeerenTeller, falscheZutatEnthalten, mehrAlsEineZutatInDerHand,

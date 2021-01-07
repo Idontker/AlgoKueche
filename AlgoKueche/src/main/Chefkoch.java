@@ -1,6 +1,8 @@
+package main; 
+
 /**
  * Das ist die Klasse Chefkoch, in der ihr arbeiten werdet. 
- * Alle Arbeitsaufträge stehen auf dem jeweiligen Arbeitsblatt.
+ * Alle Arbeitsauftrï¿½ge stehen auf dem jeweiligen Arbeitsblatt.
  * Die Arbeitsschritte, die Sam beherrscht, findet ihr in der Dokumentation des Lehrlings 
  * @Author Karol Bakas, Stefan Gebhart, Silas Kuder
  */ 
