@@ -1,0 +1,69 @@
+Class documentation
+<---- javadoc command: ---->
+D:\Hilfsprogramme\BlueJ\jdk\bin\javadoc.exe
+-author
+-version
+-nodeprecated
+-package
+-Xdoclint:none
+-noindex
+-notree
+-nohelp
+-nonavbar
+-source
+11
+-classpath
+D:\Hilfsprogramme\BlueJ\lib\bluejcore.jar;D:\Hilfsprogramme\BlueJ\lib\junit-4.11.jar;D:\Hilfsprogramme\BlueJ\lib\hamcrest-core-1.3.jar;D:\Hilfsprogramme\BlueJ\lib\lang-stride.jar;D:\Hilfsprogramme\BlueJ\lib\javafx\lib\javafx.base.jar;D:\Hilfsprogramme\BlueJ\lib\javafx\lib\javafx.controls.jar;D:\Hilfsprogramme\BlueJ\lib\javafx\lib\javafx.fxml.jar;D:\Hilfsprogramme\BlueJ\lib\javafx\lib\javafx.graphics.jar;D:\Hilfsprogramme\BlueJ\lib\javafx\lib\javafx.media.jar;D:\Hilfsprogramme\BlueJ\lib\javafx\lib\javafx.properties.jar;D:\Hilfsprogramme\BlueJ\lib\javafx\lib\javafx.swing.jar;D:\Hilfsprogramme\BlueJ\lib\javafx\lib\javafx.web.jar;D:\XData\Dokumente\Ausbildung\Uni\7.Semester\Studienbegl Praktikum\AlgoKueche\AlgoKueche\src\main
+-d
+D:\XData\Dokumente\Ausbildung\Uni\7.Semester\Studienbegl Praktikum\AlgoKueche\AlgoKueche\src\main\doc
+-encoding
+windows-1252
+-charset
+windows-1252
+D:\XData\Dokumente\Ausbildung\Uni\7.Semester\Studienbegl Praktikum\AlgoKueche\AlgoKueche\src\main\Lehrling.java
+<---- end of javadoc command ---->
+Loading source file D:\XData\Dokumente\Ausbildung\Uni\7.Semester\Studienbegl Praktikum\AlgoKueche\AlgoKueche\src\main\Lehrling.java...
+Constructing Javadoc information...
+D:\XData\Dokumente\Ausbildung\Uni\7.Semester\Studienbegl Praktikum\AlgoKueche\AlgoKueche\src\main\Lehrling.java:12: error: cannot access Kunde
+    protected Kunde kunde;
+              ^
+  bad source file: D:\XData\Dokumente\Ausbildung\Uni\7.Semester\Studienbegl Praktikum\AlgoKueche\AlgoKueche\src\main\Kunde.java
+    file does not contain class Kunde
+    Please remove or make sure it appears in the correct subdirectory of the sourcepath.
+D:\XData\Dokumente\Ausbildung\Uni\7.Semester\Studienbegl Praktikum\AlgoKueche\AlgoKueche\src\main\Lehrling.java:13: error: cannot access GUI
+    protected GUI animation;
+              ^
+  bad source file: D:\XData\Dokumente\Ausbildung\Uni\7.Semester\Studienbegl Praktikum\AlgoKueche\AlgoKueche\src\main\GUI.java
+    file does not contain class GUI
+    Please remove or make sure it appears in the correct subdirectory of the sourcepath.
+D:\XData\Dokumente\Ausbildung\Uni\7.Semester\Studienbegl Praktikum\AlgoKueche\AlgoKueche\src\main\Kunde.java:14: error: cannot find symbol
+    private HashMap<String, Rezept> menueMap;
+                            ^
+  symbol:   class Rezept
+  location: class Kunde
+D:\XData\Dokumente\Ausbildung\Uni\7.Semester\Studienbegl Praktikum\AlgoKueche\AlgoKueche\src\main\Kunde.java:16: error: cannot find symbol
+    private ArrayList<RezeptKomponente> komponenten;
+                      ^
+  symbol:   class RezeptKomponente
+  location: class Kunde
+D:\XData\Dokumente\Ausbildung\Uni\7.Semester\Studienbegl Praktikum\AlgoKueche\AlgoKueche\src\main\Kunde.java:17: error: cannot find symbol
+    private Comment gemeldeterFehler; // frage an alle: wollen wir die Fehler nicht doch als Strings codieren? Dadurch
+            ^
+  symbol:   class Comment
+  location: class Kunde
+D:\XData\Dokumente\Ausbildung\Uni\7.Semester\Studienbegl Praktikum\AlgoKueche\AlgoKueche\src\main\Kunde.java:84: error: cannot find symbol
+    public void meldeFehler(Comment t) {
+                            ^
+  symbol:   class Comment
+  location: class Kunde
+D:\XData\Dokumente\Ausbildung\Uni\7.Semester\Studienbegl Praktikum\AlgoKueche\AlgoKueche\src\main\Kunde.java:90: error: cannot find symbol
+    public Feedback bewerte() {
+           ^
+  symbol:   class Feedback
+  location: class Kunde
+D:\XData\Dokumente\Ausbildung\Uni\7.Semester\Studienbegl Praktikum\AlgoKueche\AlgoKueche\src\main\GUI.java:253: error: cannot find symbol
+	public void goToFeedback(Feedback f) {
+	                         ^
+  symbol:   class Feedback
+  location: class GUI
+8 errors
