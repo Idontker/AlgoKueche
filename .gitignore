@@ -29,3 +29,4 @@ settings.json
 *.log
 *.sql
 *.sqlite
+*.ctxt
