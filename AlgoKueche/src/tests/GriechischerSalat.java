@@ -29,12 +29,14 @@ public class GriechischerSalat extends FeedbackTest {
         nimmAusSchrank("Oel");
         legAufTeller();
         stellZurueck();
+        nimmAusSchrank("Olive");
+        legAufTeller();
         serviere();
     }
 
     @Test
     public void richtigTestAll() {
-        String zutat[] = new String[] { "Tomate", "Zwiebel", "Gurke", "Oliven", "Feta" };
+        String zutat[] = new String[] { "Tomate", "Zwiebel", "Gurke", "Salat", "Feta" };
         ArrayList<int[]> perms = FeedbackTest.perms(zutat.length);
         for (int[] p : perms) {
             richtig(zutat[p[0]], zutat[p[1]], zutat[p[2]], zutat[p[3]], zutat[p[4]]);
