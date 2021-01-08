@@ -1,4 +1,4 @@
-package main; 
+package main;
 
 /**
  * Die Klasse Lehrling
@@ -56,7 +56,7 @@ public class Lehrling {
     }
 
     /**
-     * Stellt die aktuelle Zutat zur�ck. 
+     * Stellt die aktuelle Zutat zurueck. 
      */
     public void stellZurueck() {
         if (bearbeitet) {
@@ -79,11 +79,24 @@ public class Lehrling {
             aktZutat = aktZutat + "geschnitten,";
             animation.goToFrame("schneide");
         }
-
     }
 
     /**
-     * Gibt die aktuelle Zutat in den Topf. Sie kann jetzt gekocht werden. Der Lehrling hat jetzt wieder die H�nde frei.
+     * Rollt ein Sushibällchen, dieses ist nun die aktuelle Zutat.
+     */
+    public void rolle() {
+        if(aktZutat.isEmpty()){
+            kunde.meldeFehler(Comment.rollenOhneZutat);
+        }
+        else{
+            bearbeitet = true;
+            aktZutat = aktZutat + "gerollt,";
+            animation.goToFrame("schneide");
+        }
+    }
+
+    /**
+     * Gibt die aktuelle Zutat in den Topf. Sie kann jetzt gekocht werden. Der Lehrling hat jetzt wieder die Haende frei.
      */
     public void gibInTopf() {
         inTopf = true;
@@ -93,7 +106,7 @@ public class Lehrling {
     }
 
     /**
-     * Kocht alle Zutaten im Topf. Der Lehrling ist solange mit Umr�hren beschaftigt.
+     * Kocht alle Zutaten im Topf. Der Lehrling ist solange mit Umruehren beschaftigt.
      * @param zeit Die Kochzeit in Minuten
      */
     public void koche(int zeit) {
@@ -177,6 +190,9 @@ public class Lehrling {
         else{System.out.println("Das Gericht wurde bereits serviert.");}
     }
 
+    /*
+    * Testet, ob eine Zutat verbraucht wird, oder wieder zurück gestellt werden muss
+    */
     private boolean wirdNichtVerbraucht(String zutat) {
         switch (zutat) {
             case "oel(":
@@ -189,7 +205,7 @@ public class Lehrling {
     }
 
     /*
-     * entfernt gross-/kleinschreibung. haengt ein "(" an das Ende bekannte zutaten:
+     * Entfernt gross-/kleinschreibung. haengt ein "(" an das Ende bekannte zutaten:
      * salat, oel, zwiebel, gurke, oliven, feta, salz, essig
      */
     private String entscheideZutat(String eingabe) {

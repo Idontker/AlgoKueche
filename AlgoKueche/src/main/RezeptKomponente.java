@@ -1,4 +1,4 @@
-package main; 
+package main;
 
 public class RezeptKomponente {
     private String zutat; // zutat
