@@ -39,10 +39,9 @@ public class GUI {
 	}
 
 	// GUI attributes
-	private static boolean notActive;
-	private JFrame frame;
+	private boolean notActive;
+	private MainFrame frame;
 
-	private JPanel canvas;
 	private JPanel actionPanel;
 	private JPanel commentPanel;
 
@@ -84,8 +83,7 @@ public class GUI {
 	}
 
 	private GUI(boolean testing) {
-		initFrame();
-		initCanvas();
+		frame = new MainFrame();
 
 		int actionHeight = (int) (HEIGHT * 0.8);
 		int commentHeight = (int) (HEIGHT * 0.1);
@@ -97,33 +95,18 @@ public class GUI {
 			initTestGUI(testHeight);
 		}
 
-		canvas.add(actionPanel);
-		canvas.add(commentPanel);
+		frame.addToCanvas(actionPanel);
+		frame.addToCanvas(commentPanel);
 		if (testing) {
-			canvas.add(testPanel);
+			frame.addToCanvas(testPanel);
 		}
 
-		frame.add(canvas);
 		frame.setVisible(true);
 
 		map = new SlideMap();
 	}
 
 	// Init Methods
-
-	private void initFrame() {
-		frame = new JFrame("AlgoKueche");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setSize(WIDTH, HEIGHT);
-	}
-
-	private void initCanvas() {
-		canvas = new JPanel();
-		canvas.setVisible(true);
-		canvas.setBackground(DEFAULT_COLOR);
-
-		canvas.setLayout(new BoxLayout(canvas, BoxLayout.Y_AXIS));
-	}
 
 	private void initActionPanel(int h) {
 		imageLabel = new JLabel();
