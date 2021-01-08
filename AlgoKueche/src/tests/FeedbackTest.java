@@ -38,6 +38,10 @@ public abstract class FeedbackTest {
     protected void gebeInTopf() {
         lehrling.gibInTopf();
     }
+    
+    protected void gibTopfAufTeller() {
+        lehrling.gibTopfAufTeller();
+    }
 
     protected void koche(int zeit) {
         lehrling.koche(zeit);
