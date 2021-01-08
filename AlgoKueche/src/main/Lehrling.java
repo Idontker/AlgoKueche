@@ -109,7 +109,7 @@ public class Lehrling {
     public void koche(int zeit) {
         if (zutatenInTopf.size()!=0) {
             for(int i=0;i<zutatenInTopf.size();i++) {
-                String GEKOCHT = "gekocht_";
+                final String GEKOCHT = "gekocht_";
                 if(zutatenInTopf.get(i).contains(GEKOCHT)) {
                     int zeitZutat = Integer.parseInt(zutatenInTopf.get(i).substring(0,zutatenInTopf.get(i).indexOf(GEKOCHT)+8));
                     zutatenInTopf.set(i, zutatenInTopf.get(i).substring(0,zutatenInTopf.get(i).indexOf(GEKOCHT)-1) + GEKOCHT + zeitZutat);
