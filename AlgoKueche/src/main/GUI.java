@@ -256,22 +256,30 @@ public class GUI {
 			commentBox.setText(BADF00D.comment);
 		}
 
-		countDownLatch = new CountDownLatch(2);
+		countDownLatch = new CountDownLatch(1);
+		long startTime = System.currentTimeMillis();
 		(new Thread() {
 			@Override
 			public void run() {
-				awaitCountdown(waittingTime);
+				awaitCountdown(waittingTime, "waiter");
 			}
 		}).start();
 		clickAble = true;
-		awaitCountdown(100);
+		try {
+			countDownLatch.await();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		long endTime = System.currentTimeMillis();
 		clickAble = false;
+		System.out.println("counter:" + countDownLatch.getCount() + "\ttime:" + (endTime - startTime));
 	}
 
-	private static void awaitCountdown(int waitBefore) {
+	private static void awaitCountdown(int waitBefore, String who) {
 		while (true) {
 			try {
 				Thread.sleep(waitBefore);
+				System.out.println("who:" + who + " triggered\twaitTime:" +waitBefore);
 				countDownLatch.countDown();
 				countDownLatch.await();
 				return;
@@ -332,13 +340,14 @@ public class GUI {
 		}
 	}
 
-
 	private void initInterruptMouseAdapter() {
 		MouseAdapter adapter = new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				System.out.println("Mouse");
 				if (clickAble) {
-					GUI.awaitCountdown(0);
+					GUI.awaitCountdown(50, "mouse");
+					clickAble = false;
 				}
 			}
 		};
@@ -348,8 +357,10 @@ public class GUI {
 	private void initInterruptKeyAdapter() {
 		KeyAdapter adapter = new KeyAdapter() {
 			public void keyPressed(KeyEvent e) {
+				System.out.println("Key");
 				if (clickAble) {
-					GUI.awaitCountdown(0);
+					GUI.awaitCountdown(50, "key");
+					clickAble = false;
 				}
 			}
 		};
