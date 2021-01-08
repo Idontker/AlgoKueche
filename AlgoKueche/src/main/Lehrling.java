@@ -131,14 +131,16 @@ public class Lehrling {
      * Platziert die Aktuelle Zutat auf dem Servierteller.
      */
     public void gibZutatAufTeller() {
-        if (aktZutat.endsWith(",")) {
-            aktZutat = aktZutat.substring(0, aktZutat.length() - 1);
-        }
-        kunde.arbeitsschritt(aktZutat + ")");
-        animation.goToFrame("gebeAufTeller");
+        if(!aktZutat.isEmpty()){
+            if (aktZutat.endsWith(",")) {
+                aktZutat = aktZutat.substring(0, aktZutat.length() - 1);
+            }
+            kunde.arbeitsschritt(aktZutat + ")");
+            animation.goToFrame("gebeAufTeller");
 
-        if (wirdNichtVerbraucht(aktZutat)) {
-            aktZutat = "";
+            if (wirdVerbraucht(aktZutat)) {
+                aktZutat = "";
+            }
         }
     }
 
@@ -193,7 +195,7 @@ public class Lehrling {
     /*
     * Testet, ob eine Zutat verbraucht wird, oder wieder zurück gestellt werden muss
     */
-    private boolean wirdNichtVerbraucht(String zutat) {
+    private boolean wirdVerbraucht(String zutat) {
         switch (zutat) {
             case "oel(":
             case "essig(":
