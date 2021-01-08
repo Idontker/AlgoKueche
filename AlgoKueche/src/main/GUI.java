@@ -340,8 +340,10 @@ public class GUI {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if (clickAble) {
-					GUI.awaitCountdown(50, countDownLatch);
-					clickAble = false;
+					if (e.getButton() == MouseEvent.BUTTON1) {
+						clickAble = false;
+						GUI.awaitCountdown(50, countDownLatch);
+					}
 				}
 			}
 		};
@@ -350,10 +352,14 @@ public class GUI {
 
 	private void initInterruptKeyAdapter() {
 		KeyAdapter adapter = new KeyAdapter() {
+
 			public void keyPressed(KeyEvent e) {
 				if (clickAble) {
-					GUI.awaitCountdown(50, countDownLatch);
-					clickAble = false;
+					if (e.getKeyCode() == KeyEvent.VK_SPACE || e.getKeyCode() == KeyEvent.VK_RIGHT
+							|| e.getKeyCode() == KeyEvent.VK_KP_RIGHT) {
+						clickAble = false;
+						GUI.awaitCountdown(50, countDownLatch);
+					}
 				}
 			}
 		};
