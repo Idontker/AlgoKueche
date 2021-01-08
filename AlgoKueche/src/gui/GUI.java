@@ -4,6 +4,12 @@ import main.Feedback;
 import java.awt.Color;
 import java.util.ArrayList;
 
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyAdapter;
+import java.util.concurrent.CountDownLatch;
+
 public class GUI {
 	public static final String pathToAlgoKueche = "C:/Users/Karol/proj/AlgoKueche/AlgoKueche/";
 
@@ -31,6 +37,9 @@ public class GUI {
 	private CommentPanel commentPanel;
 
 	private SlideMap map;
+
+	private static CountDownLatch countDownLatch;
+	private boolean clickAble;
 
 	// for testing
 	private TestPanel testPanel;
@@ -66,14 +75,11 @@ public class GUI {
 
 		frame.addToCanvas(actionPanel);
 		frame.addToCanvas(commentPanel);
-
 		if (testing) {
-			ArrayList<String> keys = new ArrayList<String>();
-			keys.addAll((map.keySet()));
-
-			testPanel = new TestPanel(this, keys.toArray(new String[keys.size()]), GUI.WIDTH, testHeight);
-			frame.addToCanvas(testPanel);
+			initTestEnvoirment(testHeight);
 		}
+
+		addInterruptAdapter();
 
 		frame.setVisible(true);
 	}
@@ -99,11 +105,23 @@ public class GUI {
 			showSlide(BADF00D);
 			commentPanel.setText(BADF00D.comment);
 		}
-		try {
-			Thread.sleep(waittingTime);
-		} catch (Exception e) {
 
+		countDownLatch = new CountDownLatch(1);
+
+		(new Thread() {
+			@Override
+			public void run() {
+				awaitCountdown(waittingTime, countDownLatch);
+			}
+		}).start();
+
+		clickAble = true;
+		try {
+			countDownLatch.await();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
 		}
+		clickAble = false;
 	}
 
 	public void goToFeedback(Feedback f) {
@@ -130,6 +148,52 @@ public class GUI {
 		System.out.println("show:" + next);
 	}
 
+	private void addInterruptAdapter() {
+		MouseAdapter adapterM = new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (clickAble) {
+					if (e.getButton() == MouseEvent.BUTTON1) {
+						clickAble = false;
+						GUI.awaitCountdown(50, countDownLatch);
+					}
+				}
+			}
+		};
+		KeyAdapter adapterK = new KeyAdapter() {
+			public void keyPressed(KeyEvent e) {
+				if (clickAble) {
+					if (e.getKeyCode() == KeyEvent.VK_SPACE || e.getKeyCode() == KeyEvent.VK_RIGHT
+							|| e.getKeyCode() == KeyEvent.VK_KP_RIGHT) {
+						clickAble = false;
+						GUI.awaitCountdown(50, countDownLatch);
+					}
+				}
+			}
+		};
+		frame.addMouseListener(adapterM);
+		frame.addKeyListener(adapterK);
+	}
+
+	private static void awaitCountdown(int waitBefore, CountDownLatch countDown) {
+		try {
+			Thread.sleep(waitBefore);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		countDown.countDown();
+
+	}
+
+	// init Test
+	public void initTestEnvoirment(int testHeight) {
+		ArrayList<String> keys = new ArrayList<String>();
+		keys.addAll((map.keySet()));
+
+		testPanel = new TestPanel(this, keys.toArray(new String[keys.size()]), GUI.WIDTH, testHeight);
+		frame.addToCanvas(testPanel);
+	}
+
 	// methods for testing.
 	private void slideShow() {
 		for (String key : map.keySet()) {
@@ -137,4 +201,5 @@ public class GUI {
 		}
 		goToFrame("b4df00d");
 	}
+
 }

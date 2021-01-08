@@ -35,6 +35,8 @@ class SlideMap extends HashMap<String, Slide> {
         this.put("reactionHappy", new Slide("reactionHappy", new Color(50, 200, 10), "happy.png", "Der Kunde ist glücklich!"));
         this.put("reactionSad", new Slide("reactionSad", new Color(200, 100, 50), "sad.png", "Der Kunde ist unzufrieden!"));
         this.put("gebeAufTeller", new Slide("gebeAufTeller", Color.pink, "teller.png", "Sam hat folgendes dem Teller beigefuegt:"));
+        this.put("istGewuerztTrue", new Slide("istGewuerztTrue", Color.green, "abschmecken.png", "Sam hat abgeschmeckt: Es schmeckt lecker!"));
+        this.put("istGewuerztFalse", new Slide("istGewuerztFalse", Color.red, "abschmecken.png", "Sam hat abgeschmeckt: Es schmeckt lecker!"));
     }
 
 }
