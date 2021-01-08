@@ -4,18 +4,18 @@ package main;
  * Die Klasse Lehrling
  * @author Karol Bakas, Stefan Gebhart, Silas Kuder
  */
-// import java.util.ArrayList;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Lehrling {
 
     private String aktZutat;
-    //private ArrayList<String> zutatenInTopf;
+    private ArrayList<String> zutatenInTopf;
     protected Kunde kunde;
     protected GUI animation;
     private int aktWuerze;
     private boolean bearbeitet;
-    private boolean inTopf;
+    //private boolean inTopf;
     private boolean serviert;
     /**
      * Initialisiert einen Lehrling.
@@ -36,8 +36,8 @@ public class Lehrling {
         aktZutat = "";
         aktWuerze = 42;
         bearbeitet = false;
-        inTopf = false;
-        //zutatenInTopf = new ArrayList<String>();
+        //inTopf = false;
+        zutatenInTopf = new ArrayList<String>();
         kunde.rezeptauswahl(rezept);
         animation.goToFrame("wirKochenJetzt");
     }
@@ -62,7 +62,7 @@ public class Lehrling {
         if (bearbeitet) {
             kunde.meldeFehler(Comment.verschwendung);
         }
-        inTopf = false; // oel darf in den Topf gegben werden, vor dem Braten.
+        //inTopf = false; // oel darf in den Topf gegben werden, vor dem Braten.
         aktZutat = "";
         animation.goToFrame("stellZurueck");
     }
@@ -99,9 +99,8 @@ public class Lehrling {
      * Gibt die aktuelle Zutat in den Topf. Sie kann jetzt gekocht werden. Der Lehrling hat jetzt wieder die Haende frei.
      */
     public void gibInTopf() {
-        inTopf = true;
-        //zutatenInTopf.add(aktZutat);
-        //aktZutat = "";
+        zutatenInTopf.add(aktZutat);
+        aktZutat = "";
         animation.goToFrame("gebeInTopf");
     }
 
@@ -110,9 +109,15 @@ public class Lehrling {
      * @param zeit Die Kochzeit in Minuten
      */
     public void koche(int zeit) {
-        if (!aktZutat.isEmpty() && inTopf) {
-            bearbeitet = true;
-            aktZutat = aktZutat + "gekocht" + zeit + ",";
+        if (zutatenInTopf.size()!=0) {
+            for(int i=0;i<zutatenInTopf.size();i++) {
+                if(zutatenInTopf.get(i).contains("gekocht")) {
+                    int zeitZutat = Integer.parseInt(zutatenInTopf.get(i).substring(0,zutatenInTopf.get(i).indexOf("gekocht")+7));
+                    zutatenInTopf.set(i, zutatenInTopf.get(i).substring(0,zutatenInTopf.get(i).indexOf("gekocht")-1) + "gekocht" + zeitZutat);
+                } else {
+                    zutatenInTopf.set(i, zutatenInTopf.get(i) + "gekocht" + zeit);
+                }
+            }
             animation.goToFrame("koche");
         } else {
             kunde.meldeFehler(Comment.kochtLeerenTopf);
@@ -123,20 +128,42 @@ public class Lehrling {
      * Platziert den Inhalt des Topfes auf dem Servierteller.
      */
     public void gibTopfAufTeller() {
+        for(int i=0 ; i<zutatenInTopf.size() ; i++) {
+            if(!zutatenInTopf.get(i).contains("gekocht")) {
+                String zutat = zutatenInTopf.get(i);
+                if (zutat.endsWith(",")) {
+                    zutat = zutat.substring(0, zutat.length() - 1);
+                }
+                kunde.arbeitsschritt(zutat + ")");
+                zutatenInTopf.remove(i);
+                i--;
+            }
+        }
+        zutatenInTopf.sort(null);
+        String zusammenGekocht = "zusammengekocht";
+        for(int i=0;i<zutatenInTopf.size();i++) {
+            zusammenGekocht += zutatenInTopf.get(i).substring(0,zutatenInTopf.get(i).indexOf("("));
+        }
+        zusammenGekocht += ")";
+        for(int i=0;i<zutatenInTopf.size();i++) {
+            kunde.arbeitsschritt(zutatenInTopf.get(i) + zusammenGekocht);
+        }
+        zutatenInTopf.clear();
         animation.goToFrame("gebeAufTeller");
-
     }
 
     /**
      * Platziert die Aktuelle Zutat auf dem Servierteller.
      */
     public void gibZutatAufTeller() {
-        if(!aktZutat.isEmpty()){
-            if (aktZutat.endsWith(",")) {
-                aktZutat = aktZutat.substring(0, aktZutat.length() - 1);
-            }
-            kunde.arbeitsschritt(aktZutat + ")");
-            animation.goToFrame("gebeAufTeller");
+        if (aktZutat.endsWith(",")) {//entfernt das letzte Komma
+            aktZutat = aktZutat.substring(0, aktZutat.length() - 1);
+        }
+        if(aktZutat.length()!=0) {
+        kunde.arbeitsschritt(aktZutat + ")");
+        }
+        animation.goToFrame("gebeAufTeller");
+
 
             if (wirdVerbraucht(aktZutat)) {
                 aktZutat = "";
@@ -254,6 +281,14 @@ public class Lehrling {
             case "zwiebel":
             case "zwiebeln":
             zutat = "zwiebel";
+            break;
+            case "kartoffel":
+            case "kartoffeln":
+            zutat = "kartoffel";
+            break;
+            case "paprika":
+            case "paprikas":
+            zutat = "paprika";
             break;
             default:
             zutat = null;

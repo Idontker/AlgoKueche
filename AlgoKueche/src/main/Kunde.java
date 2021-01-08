@@ -92,10 +92,18 @@ public class Kunde {
         if (serviertKlon.length() == 0) { // pruefe ob nichts serviert wurde.
             return new Feedback(Comment.serviereLeerenTeller, "", "");
         }
-
+        
+        System.out.println(serviertKlon);
+        
         for (int i = 0; i < komponenten.size(); i++) {
             RezeptKomponente komponente = komponenten.get(i);
-            if (komponente.zutatIstVorhanden(serviertKlon)) { // ist die Komponente vorhanden?
+            if (!komponente.zutatIstVorhanden(serviertKlon)) { // ist die Komponente nicht vorhanden?
+                return new Feedback(Comment.fehlendeZutat, komponente.gibZutat(), komponente.gibZubereitung());
+            }
+        }
+        
+        for (int i = 0; i < komponenten.size(); i++) {
+            RezeptKomponente komponente = komponenten.get(i);
                 if (komponente.zutatUndZubereitungIstVorhanden(serviertKlon)) { // ist die Komponente auch in der
                                                                                 // richtigen
                     // zubereitungsart vorhanden?
@@ -109,12 +117,8 @@ public class Kunde {
                     // "+komponente.gibZubereitung()+" sein. :("; //falls nein, gebe aus wie die
                     // Komponente haette zubereitet werden sollen.
                 }
-            } else {
-                return new Feedback(Comment.fehlendeZutat, komponente.gibZutat(), komponente.gibZubereitung());
-                // return "Es fehlt "+komponente.gibZutat()+komponente.gibZubereitung()+". :(";
-                // //falls die Komponente gar nicht mehr vorhanden ist, gebe aus was fehlt.
-            }
         }
+        System.out.println(serviertKlon);
         if (serviertKlon.length() != 0) { // ist ausserhalb der benoetigten Komponenten noch etwas uebrig?
             for (int i = 0; i < komponenten.size(); i++) { // handelt es sich um eine Zutat aus dem Rezept die nur zu
                                                            // oft da ist? Falls ja, gib sie aus (falls sie auch noch
