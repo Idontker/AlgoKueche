@@ -1,13 +1,7 @@
 package gui;
 
 import main.Feedback;
-
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-
 import java.awt.Color;
-import java.awt.Dimension;
-
 import java.util.ArrayList;
 
 public class GUI {
@@ -34,9 +28,7 @@ public class GUI {
 	private MainFrame frame;
 	private ActionPanel actionPanel;
 
-	private JPanel commentPanel;
-
-	private JLabel commentBox;
+	private CommentPanel commentPanel;
 
 	private SlideMap map;
 
@@ -78,11 +70,11 @@ public class GUI {
 		int testHeight = (int) (HEIGHT * 0.1);
 
 		actionPanel = new ActionPanel(GUI.WIDTH, actionHeight);
-		initCommentPanel(commentHeight);
+		commentPanel = new CommentPanel(GUI.WIDTH, commentHeight);
 
 		frame.addToCanvas(actionPanel);
 		frame.addToCanvas(commentPanel);
-		
+
 		if (testing) {
 			ArrayList<String> keys = new ArrayList<String>();
 			keys.addAll((map.keySet()));
@@ -93,16 +85,6 @@ public class GUI {
 
 		frame.setVisible(true);
 
-	}
-
-	private void initCommentPanel(int h) {
-		commentPanel = new JPanel();
-		commentPanel.setVisible(true);
-		commentPanel.setBackground(Color.white);
-		commentPanel.setPreferredSize(new Dimension(WIDTH, h));
-
-		commentBox = new JLabel("Willkommen in der AlgoKueche");
-		commentPanel.add(commentBox);
 	}
 
 	// public methods
@@ -120,11 +102,11 @@ public class GUI {
 		Slide next = map.get(slideName);
 		if (next != null) {
 			showSlide(next);
-			commentBox.setText(next.comment);
+			commentPanel.setText(next.comment);
 		} else {
 			System.err.println("Slide: " + slideName + " not found in Database");
 			showSlide(BADF00D);
-			commentBox.setText(BADF00D.comment);
+			commentPanel.setText(BADF00D.comment);
 		}
 		try {
 			Thread.sleep(waittingTime);
@@ -149,7 +131,7 @@ public class GUI {
 		}
 
 		showSlide(next);
-		commentBox.setText(f.gibFeedbackString());
+		commentPanel.setText(f.gibFeedbackString());
 	}
 
 	private void showSlide(Slide next) {
