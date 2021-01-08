@@ -39,11 +39,10 @@ public class GUI {
 	// GUI attributes
 	private boolean notActive;
 	private MainFrame frame;
+	private ActionPanel actionPanel;
 
-	private JPanel actionPanel;
 	private JPanel commentPanel;
 
-	private JLabel imageLabel;
 	private JLabel commentBox;
 
 	private SlideMap map;
@@ -87,7 +86,8 @@ public class GUI {
 		int commentHeight = (int) (HEIGHT * 0.1);
 		int testHeight = (int) (HEIGHT * 0.1);
 
-		initActionPanel(actionHeight);
+		actionPanel = new ActionPanel(GUI.WIDTH, actionHeight);
+
 		initCommentPanel(commentHeight);
 		if (testing) {
 			initTestGUI(testHeight);
@@ -104,19 +104,6 @@ public class GUI {
 		map = new SlideMap();
 	}
 
-	// Init Methods
-
-	private void initActionPanel(int h) {
-		imageLabel = new JLabel();
-		imageLabel.setVisible(false);
-
-		actionPanel = new JPanel();
-		actionPanel.setVisible(true);
-		actionPanel.setBackground(Color.red);
-		actionPanel.setPreferredSize(new Dimension(WIDTH, h));
-
-		actionPanel.add(imageLabel);
-	}
 
 	private void initCommentPanel(int h) {
 		commentPanel = new JPanel();
@@ -233,22 +220,7 @@ public class GUI {
 	}
 
 	private void showSlide(Slide next) {
-		JLabel tmp = null;
-		if (next.image != null) { // create new Label with ImageIcon
-			ImageIcon icon = new ImageIcon(
-					next.image.getScaledInstance(actionPanel.getWidth(), actionPanel.getHeight(), Image.SCALE_SMOOTH));
-			tmp = new JLabel(icon);
-			tmp.setVisible(true);
-		}
-		if (imageLabel != null) { // remove old Label with ImageIcon
-			actionPanel.remove(imageLabel);
-		}
-		if (tmp != null) { // add new Label with ImageIcon
-			actionPanel.add(tmp);
-			imageLabel = tmp;
-		}
-		// update Background and comment
-		actionPanel.setBackground(next.c);
+		actionPanel.showSlide(next);
 		System.out.println("show:" + next);
 	}
 
