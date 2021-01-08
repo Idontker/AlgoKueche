@@ -146,7 +146,9 @@ public class Lehrling {
         if (aktZutat.endsWith(",")) {
             aktZutat = aktZutat.substring(0, aktZutat.length() - 1);
         }
+        if(aktZutat.length!=0) {
         kunde.arbeitsschritt(aktZutat + ")");
+        }
         animation.goToFrame("gebeAufTeller");
 
         if (wirdNichtVerbraucht(aktZutat)) {
