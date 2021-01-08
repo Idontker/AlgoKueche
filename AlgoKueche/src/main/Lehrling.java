@@ -119,7 +119,7 @@ public class Lehrling {
             if(!zutatenInTopf.get(i).contains("gekocht")) {
                 String zutat = zutatenInTopf.get(i);
                 if (zutat.endsWith(",")) {
-                    zutat.substring(0, zutat.length() - 1);
+                    zutat = zutat.substring(0, zutat.length() - 1);
                 }
                 kunde.arbeitsschritt(zutat + ")");
                 zutatenInTopf.remove(i);
