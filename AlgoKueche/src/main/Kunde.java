@@ -39,7 +39,7 @@ public class Kunde {
                 }
                 boolean wirdGewuert = s.length == 3;
                 String name = s[0];
-                String zutaten = s[1];
+                String zutaten = s[1].trim();
                 menueMap.put(name, new Rezept(name, zutaten, wirdGewuert));
                 i++;
             }
@@ -68,7 +68,7 @@ public class Kunde {
             komponenten.addAll(r.gibRezeptKomponenten());
         }
     }
-    
+
     public void komponenteHinzufuegen(String t1, String t2) {
         komponenten.add(new RezeptKomponente(t1, t2));
     }
@@ -82,25 +82,27 @@ public class Kunde {
     }
 
     public void meldeFehler(Comment t) {
-        if(gemeldeterFehler==null) {
+        if (gemeldeterFehler == null) {
             gemeldeterFehler = t;
         }
     }
 
     public Feedback bewerte() {
-        String serviertKlon = new String(serviert); //  ich denke String serviertKlon = serviert sollte auch gehen
+        String serviertKlon = new String(serviert); // ich denke String serviertKlon = serviert sollte auch gehen
         if (serviertKlon.length() == 0) { // pruefe ob nichts serviert wurde.
             return new Feedback(Comment.serviereLeerenTeller, "", "");
         }
-        
+
         for (int i = 0; i < komponenten.size(); i++) {
             RezeptKomponente komponente = komponenten.get(i);
             if (komponente.zutatIstVorhanden(serviertKlon)) { // ist die Komponente vorhanden?
-                if (komponente.zutatUndZubereitungIstVorhanden(serviertKlon)) { // ist die Komponente auch in der richtigen
-                                                                            // zubereitungsart vorhanden?
-                    serviertKlon = komponente.entferneZutatUndZubereitung(serviertKlon); // falls ja, entferne sie damit auch
-                                                                                 // mehrfach benötigte Komponenten
-                                                                                 // abgefragt werden koennen.
+                if (komponente.zutatUndZubereitungIstVorhanden(serviertKlon)) { // ist die Komponente auch in der
+                                                                                // richtigen
+                    // zubereitungsart vorhanden?
+                    serviertKlon = komponente.entferneZutatUndZubereitung(serviertKlon); // falls ja, entferne sie damit
+                                                                                         // auch
+                    // mehrfach benötigte Komponenten
+                    // abgefragt werden koennen.
                 } else {
                     return new Feedback(Comment.falschZubereitet, komponente.gibZutat(), komponente.gibZubereitung());
                     // return komponente.gibZutat()+" falsch zubereitet. Sollte

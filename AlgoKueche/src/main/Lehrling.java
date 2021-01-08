@@ -4,7 +4,7 @@ package main;
  * Die Klasse Lehrling
  * @author Karol Bakas, Stefan Gebhart, Silas Kuder
  */
-import java.util.ArrayList;
+// import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Lehrling {

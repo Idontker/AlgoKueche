@@ -20,7 +20,6 @@ import java.util.HashMap;
 public class GUI {
 	public static final String pathToAlgoKueche = "C:/Users/Karol/proj/AlgoKueche/AlgoKueche/";
 
-
 	// static fields
 	private final static String[] methods = new String[] { "wirKochenJetzt", "nimmAusSchrank", "stellZurueck",
 			"schneide", "wirfInTopf", "koche", "istGewuerzt", "serviere", "reactionHappy", "reactionSad",
@@ -68,7 +67,7 @@ public class GUI {
 	private int currentSlideIdx; // idx of the current or last valid slide
 
 	public static GUI startGUI() {
-		if(runningTestcase){
+		if (runningTestcase) {
 			return startDummyGUI();
 		} else {
 			return new GUI(false);
@@ -80,7 +79,7 @@ public class GUI {
 	}
 
 	public static GUI startTestGUI() {
-		if(runningTestcase){
+		if (runningTestcase) {
 			return startDummyGUI();
 		} else {
 			return new GUI(true);
@@ -137,7 +136,7 @@ public class GUI {
 	}
 
 	private void initFrame() {
-		frame = new JFrame("AlgoKüche");
+		frame = new JFrame("AlgoKueche");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(WIDTH, HEIGHT);
 	}

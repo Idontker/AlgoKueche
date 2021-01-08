@@ -5,11 +5,11 @@ package main;
  * Alle Arbeitsauftraege stehen auf dem jeweiligen Arbeitsblatt.
  * Die Arbeitsschritte, die Sam beherrscht, findet ihr in der Dokumentation des Lehrlings 
  * @Author Karol Bakas, Stefan Gebhart, Silas Kuder
- */ 
+ */
 
 public class Chefkoch {
 
-    private Lehrling sam; //Alberts Lehrling Sam, er kocht die Rezepte
+    private Lehrling sam; // Alberts Lehrling Sam, er kocht die Rezepte
 
     public static void main(String args[]) {
         Chefkoch albert = new Chefkoch();
@@ -19,7 +19,7 @@ public class Chefkoch {
     public Chefkoch() {
         sam = new Lehrling();
     }
-    
+
     /**
      * Die Mustermethode aus der ersten Stunde.
      */
@@ -30,6 +30,5 @@ public class Chefkoch {
         sam.gibZutatAufTeller();
         sam.serviere();
     }
-    
-    
+
 }
