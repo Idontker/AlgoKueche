@@ -18,11 +18,11 @@ class ActionPanel extends JPanel {
         imageLabel = new JLabel();
 		imageLabel.setVisible(false);
 
-		this.setVisible(true);
 		this.setBackground(Color.red);
 		this.setPreferredSize(new Dimension(w, h));
-
+		
 		this.add(imageLabel);
+		this.setVisible(true);
     }
 
     public void showSlide(Slide next) {

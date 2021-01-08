@@ -16,7 +16,6 @@ class MainFrame extends JFrame {
     private static final int HEIGHT = (int) (SCALE * 720);
     private static final int WIDTH = (int) (SCALE * HEIGHT / 9 * 16);
 
-    private static final Color DEFAULT_COLOR = Color.lightGray;
 
     private JPanel canvas;
 
@@ -38,7 +37,7 @@ class MainFrame extends JFrame {
     private void initCanvas() {
         canvas = new JPanel();
         canvas.setVisible(true);
-        canvas.setBackground(DEFAULT_COLOR);
+        canvas.setBackground(GUI.DEFAULT_COLOR);
 
         canvas.setLayout(new BoxLayout(canvas, BoxLayout.Y_AXIS));
     }
