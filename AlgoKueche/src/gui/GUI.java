@@ -78,18 +78,16 @@ public class GUI {
 		int testHeight = (int) (HEIGHT * 0.1);
 
 		actionPanel = new ActionPanel(GUI.WIDTH, actionHeight);
-
 		initCommentPanel(commentHeight);
+
+		frame.addToCanvas(actionPanel);
+		frame.addToCanvas(commentPanel);
+		
 		if (testing) {
 			ArrayList<String> keys = new ArrayList<String>();
 			keys.addAll((map.keySet()));
 
 			testPanel = new TestPanel(this, keys.toArray(new String[keys.size()]), GUI.WIDTH, testHeight);
-		}
-
-		frame.addToCanvas(actionPanel);
-		frame.addToCanvas(commentPanel);
-		if (testing) {
 			frame.addToCanvas(testPanel);
 		}
 
