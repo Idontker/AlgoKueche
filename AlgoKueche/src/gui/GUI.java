@@ -18,9 +18,9 @@ public class GUI {
 
 	// GUI Main
 	public static void main(String args[]) {
-		startTestGUI();
-		// GUI g = startGUI();
-		// g.slideShow();
+		// startTestGUI();
+		GUI g = startGUI();
+		g.slideShow();
 	}
 
 	// GUI attributes
@@ -38,22 +38,14 @@ public class GUI {
 
 	public static GUI startGUI() {
 		if (runningTestcase) {
-			return startDummyGUI();
+			return new GUI();
 		} else {
 			return new GUI(false);
 		}
 	}
 
-	public static GUI startDummyGUI() {
-		return new GUI();
-	}
-
-	public static GUI startTestGUI() {
-		if (runningTestcase) {
-			return startDummyGUI();
-		} else {
-			return new GUI(true);
-		}
+	public static GUI startGUI_TEST() {
+		return new GUI(true);
 	}
 
 	private GUI() {
@@ -84,7 +76,6 @@ public class GUI {
 		}
 
 		frame.setVisible(true);
-
 	}
 
 	// public methods
