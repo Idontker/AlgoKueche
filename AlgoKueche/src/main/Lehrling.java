@@ -15,7 +15,6 @@ public class Lehrling {
     protected GUI animation;
     private int aktWuerze;
     private boolean bearbeitet;
-    //private boolean inTopf;
     private boolean serviert;
     /**
      * Initialisiert einen Lehrling.
@@ -36,7 +35,6 @@ public class Lehrling {
         aktZutat = "";
         aktWuerze = 42;
         bearbeitet = false;
-        //inTopf = false;
         zutatenInTopf = new ArrayList<String>();
         kunde.rezeptauswahl(rezept);
         animation.goToFrame("wirKochenJetzt");
@@ -111,11 +109,12 @@ public class Lehrling {
     public void koche(int zeit) {
         if (zutatenInTopf.size()!=0) {
             for(int i=0;i<zutatenInTopf.size();i++) {
-                if(zutatenInTopf.get(i).contains("gekocht")) {
-                    int zeitZutat = Integer.parseInt(zutatenInTopf.get(i).substring(0,zutatenInTopf.get(i).indexOf("gekocht_")+8));
-                    zutatenInTopf.set(i, zutatenInTopf.get(i).substring(0,zutatenInTopf.get(i).indexOf("gekocht_")-1) + "gekocht_" + zeitZutat);
+                String GEKOCHT = "gekocht_";
+                if(zutatenInTopf.get(i).contains(GEKOCHT)) {
+                    int zeitZutat = Integer.parseInt(zutatenInTopf.get(i).substring(0,zutatenInTopf.get(i).indexOf(GEKOCHT)+8));
+                    zutatenInTopf.set(i, zutatenInTopf.get(i).substring(0,zutatenInTopf.get(i).indexOf(GEKOCHT)-1) + GEKOCHT + zeitZutat);
                 } else {
-                    zutatenInTopf.set(i, zutatenInTopf.get(i) + "gekocht_" + zeit);
+                    zutatenInTopf.set(i, zutatenInTopf.get(i) + GEKOCHT + zeit);
                 }
             }
             animation.goToFrame("koche");
@@ -255,43 +254,43 @@ public class Lehrling {
             case "feta":
             case "salz":
             // zutat = zutat
-            break;
+                break;
             case "gurke":
             case "gurken":
-            zutat = "gurke";
-            break;
+                zutat = "gurke";
+                break;
             case "öl":
             case "oel":
-            zutat = "oel";
-            break;
+                zutat = "oel";
+                break;
             case "oliven":
             case "olive":
-            zutat = "olive";
-            break;
+                zutat = "olive";
+                break;
             case "salat":
             case "salate":
             case "salatkopf":
-            zutat = "salat";
-            break;
+                zutat = "salat";
+                break;
             case "tomate":
             case "tomaten":
-            zutat = "tomate";
-            break;
+                zutat = "tomate";
+                break;
             case "zwiebel":
             case "zwiebeln":
-            zutat = "zwiebel";
-            break;
+                zutat = "zwiebel";
+                break;
             case "kartoffel":
             case "kartoffeln":
-            zutat = "kartoffel";
-            break;
+                zutat = "kartoffel";
+                break;
             case "paprika":
             case "paprikas":
-            zutat = "paprika";
-            break;
+                zutat = "paprika";
+                break;
             default:
-            zutat = null;
-            break;
+                zutat = null;
+                break;
         }
         if (zutat != null) {
             return zutat + "(";
