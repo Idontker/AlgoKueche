@@ -14,14 +14,13 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseListener;
+import java.awt.event.KeyAdapter;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.HashMap;
-import java.util.concurrent.BrokenBarrierException;
-import java.util.concurrent.CyclicBarrier;
+import java.util.concurrent.CountDownLatch;
 
 public class GUI {
 	public static final String pathToAlgoKueche = "C:/Users/Karol/proj/AlgoKueche/AlgoKueche/";
@@ -67,7 +66,7 @@ public class GUI {
 
 	private HashMap<String, Slide> map;
 
-	private static CyclicBarrier barrier;
+	private static CountDownLatch countDownLatch;
 	private boolean clickAble;
 
 	// Buttons for testing
@@ -254,27 +253,26 @@ public class GUI {
 			commentBox.setText(BADF00D.comment);
 		}
 
-		barrier = new CyclicBarrier(2);
+		countDownLatch = new CountDownLatch(2);
 		(new Thread() {
 			@Override
 			public void run() {
-				awaitBarier(waittingTime);
+				awaitCountdown(waittingTime);
 			}
 		}).start();
-		// clickAble = true;
-		awaitBarier(100);
-		// clickAble = false;
+		clickAble = true;
+		awaitCountdown(100);
+		clickAble = false;
 	}
 
-	private static void awaitBarier(int waitBefore) {
+	private static void awaitCountdown(int waitBefore) {
 		while (true) {
 			try {
 				Thread.sleep(waitBefore);
-				GUI.barrier.await();
+				countDownLatch.countDown();
+				countDownLatch.await();
 				return;
 			} catch (InterruptedException e) {
-				e.printStackTrace();
-			} catch (BrokenBarrierException e) {
 				e.printStackTrace();
 			}
 		}
@@ -331,49 +329,27 @@ public class GUI {
 		}
 	}
 
-	private MouseListener getInterruptMouseListener() {
-		return new MouseListener() {
+
+	private void initMouseAdapter() {
+		MouseAdapter adapter = new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if (clickAble) {
-					GUI.awaitBarier(0);
+					GUI.awaitCountdown(0);
 				}
-			}
-
-			@Override
-			public void mousePressed(MouseEvent e) {
-			}
-
-			@Override
-			public void mouseReleased(MouseEvent e) {
-			}
-
-			@Override
-			public void mouseEntered(MouseEvent e) {
-			}
-
-			@Override
-			public void mouseExited(MouseEvent e) {
 			}
 		};
 	}
 
-	private KeyListener getInterruptKeyListener() {
-		return new KeyListener() {
+	private void getInterruptKeyListener() {
+		KeyAdapter adapter = new KeyAdapter() {
 			public void keyPressed(KeyEvent e) {
 				if (clickAble) {
-					GUI.awaitBarier(0);
+					GUI.awaitCountdown(0);
 				}
-			}
-
-			public void keyReleased(KeyEvent e) {
-			}
-
-			public void keyTyped(KeyEvent e) {
 			}
 		};
 	}
-
 }
 
 class Slide {
