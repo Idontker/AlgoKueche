@@ -3,4 +3,4 @@ Tomatensalat:Salat(geschnitten) Tomate(geschnitten)
 Tomatensalat extra Tomate:Salat(geschnitten) Tomate(geschnitten) Tomate(geschnitten)
 gTomatensalat:Salat(geschnitten) Tomate(geschnitten) Tomate(geschnitten) Essig:gewuerzt
 griechischer Salat:Salat(geschnitten) Tomate(geschnitten) Zwiebel(geschnitten) Gurke(geschnitten) Feta(geschnitten) Oel Olive
-Eintopf(vegetarisch): Kartoffel(geschnitten,gekocht10ZusammenGekochtKartoffelPaprikaZwiebel) Zwiebel(geschnitten,gekocht10ZusammenGekochtKartoffelPaprikaZwiebel) Paprika(geschnitten,gekocht10ZusammenGekochtKartoffelPaprikaZwiebel)
+Eintopf(vegetarisch): Kartoffel(geschnitten,gekocht_10_ZusammenGekocht_Kartoffel_Paprika_Zwiebel) Zwiebel(geschnitten,gekocht_10_ZusammenGekocht_Kartoffel_Paprika_Zwiebel) Paprika(geschnitten,gekocht_10_ZusammenGekocht_Kartoffel_Paprika_Zwiebel)
