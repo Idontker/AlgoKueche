@@ -35,8 +35,12 @@ public abstract class FeedbackTest {
         lehrling.schneide();
     }
 
-    protected void gebeInTopf() {
+    protected void gibInTopf() {
         lehrling.gibInTopf();
+    }
+    
+    protected void gibTopfAufTeller() {
+        lehrling.gibTopfAufTeller();
     }
 
     protected void koche(int zeit) {
