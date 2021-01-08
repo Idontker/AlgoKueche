@@ -23,11 +23,13 @@ public class GUI {
 	// static fields
 	private final static String[] methods = new String[] { "wirKochenJetzt", "nimmAusSchrank", "stellZurueck",
 			"schneide", "wirfInTopf", "koche", "istGewuerzt", "serviere", "reactionHappy", "reactionSad",
-			"gebeAufTeller" };
+			"gebeAufTeller", " istGewuerztTrue", "istGewuerztFalse" };
 	private final static Color[] colors = new Color[] { Color.blue, Color.cyan, Color.gray, Color.green, Color.magenta,
-			Color.orange, Color.red, Color.yellow, new Color(50, 200, 10), new Color(200, 100, 50), Color.pink };
+			Color.orange, Color.red, Color.yellow, new Color(50, 200, 10), new Color(200, 100, 50), Color.pink,
+			Color.green, Color.red };
 	private final static String[] imageNames = new String[] { "book.png", "fridge.png", "fridge.png", "schneiden.jpg",
-			"topf.png", "kochen.jpg", "abschmecken.png", "glocke.jpg", "happy.png", "sad.png", "teller.png" };
+			"topf.png", "kochen.jpg", "abschmecken.png", "glocke.jpg", "happy.png", "sad.png", "teller.png",
+			"abschmecken.png", "abschmecken.png" };
 	private final static Slide BADF00D = new Slide("badf00d", Color.black);
 
 	// static values
