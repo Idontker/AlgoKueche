@@ -6,7 +6,7 @@ import java.util.Arrays;
 import org.junit.Before;
 
 import main.Feedback;
-import main.GUI;
+import gui.GUI;
 import main.Lehrling;
 
 public abstract class FeedbackTest {
