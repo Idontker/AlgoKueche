@@ -148,7 +148,7 @@ public class TomatenSalat extends FeedbackTest {
         wirKochenJetzt("Tomatensalat");
         nimmAusSchrank("Tomate");
         schneide();
-        gebeInTopf();
+        gibInTopf();
         nimmAusSchrank("Salat");
         schneide();
         serviere();
@@ -160,7 +160,7 @@ public class TomatenSalat extends FeedbackTest {
         wirKochenJetzt("Tomatensalat");
         nimmAusSchrank("Salat");
         schneide();
-        gebeInTopf();
+        gibInTopf();
         nimmAusSchrank("Tomate");
         schneide();
         serviere();
@@ -202,7 +202,7 @@ public class TomatenSalat extends FeedbackTest {
         wirKochenJetzt("Tomatensalat");
         nimmAusSchrank("Tomate");
         schneide();
-        gebeInTopf();
+        gibInTopf();
         nimmAusSchrank("Salat");
         schneide();
         stellZurueck();
@@ -217,7 +217,7 @@ public class TomatenSalat extends FeedbackTest {
         wirKochenJetzt("Tomatensalat");
         nimmAusSchrank("Salat");
         schneide();
-        gebeInTopf();
+        gibInTopf();
         nimmAusSchrank("Tomate");
         schneide();
         stellZurueck();

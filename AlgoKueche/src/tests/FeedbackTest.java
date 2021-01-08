@@ -35,7 +35,7 @@ public abstract class FeedbackTest {
         lehrling.schneide();
     }
 
-    protected void gebeInTopf() {
+    protected void gibInTopf() {
         lehrling.gibInTopf();
     }
     
