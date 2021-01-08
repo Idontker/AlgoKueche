@@ -258,7 +258,7 @@ public class GUI {
 			}
 		}).start();
 		// clickAble = true;
-		awaitBarier(0);
+		awaitBarier(100);
 		// clickAble = false;
 	}
 
