@@ -99,7 +99,7 @@ public class Lehrling {
         if (zutatenInTopf.size()!=0) {
             for(int i=0;i<zutatenInTopf.size();i++) {
                 if(zutatenInTopf.get(i).contains("gekocht")) {
-                    int zeitZutat = Integer.parseInt(zutatenInTopf.get(i).indexOf("gekocht")+7);
+                    int zeitZutat = Integer.parseInt(zutatenInTopf.get(i).indexOf("gekocht") + 7);
                     zutatenInTopf.set(i, zutatenInTopf.get(i).substring(0,zutatenInTopf.get(i).indexOf("gekocht")-1) + "gekocht" + zeitZutat);
                 } else {
                     zutatenInTopf.set(i, zutatenInTopf.get(i) + "gekocht" + zeit);
@@ -127,15 +127,15 @@ public class Lehrling {
             }
         }
         zutatenInTopf.sort(null);
-        String zusammenGekocht = "ZusammenGekocht+";
+        String zusammenGekocht = "ZusammenGekocht";
         for(int i=0;i<zutatenInTopf.size();i++) {
-            zusammenGekocht+=zutatenInTopf.get(i).substring(0,zutatenInTopf.get(i).indexOf("(")-1)+"+";
+            zusammenGekocht += "+" + zutatenInTopf.get(i).substring(0,zutatenInTopf.get(i).indexOf("(")-1);
         }
-        String zusammenGekocht = zusammenGekocht.substring(0,zusammenGekocht.length()-2);
+        zusammenGekocht += ")";
         for(int i=0;i<zutatenInTopf.size();i++) {
-            zutatenInTopf.get(i)+=zusammenGekocht+")";
-            kunde.arbeitsschritt(zutatenInTopf.get(i));
+            kunde.arbeitsschritt(zutatenInTopf.get(i) + zusammenGekocht);
         }
+        zutatenInTopf.clear();
         animation.goToFrame("gebeAufTeller");
     }
 
@@ -143,10 +143,10 @@ public class Lehrling {
      * Platziert die Aktuelle Zutat auf dem Servierteller.
      */
     public void gibZutatAufTeller() {
-        if (aktZutat.endsWith(",")) {
+        if (aktZutat.endsWith(",")) {//entfernt das letzte Komma
             aktZutat = aktZutat.substring(0, aktZutat.length() - 1);
         }
-        if(aktZutat.length!=0) {
+        if(aktZutat.length()!=0) {
         kunde.arbeitsschritt(aktZutat + ")");
         }
         animation.goToFrame("gebeAufTeller");
