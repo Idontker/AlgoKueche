@@ -79,7 +79,20 @@ public class Lehrling {
             aktZutat = aktZutat + "geschnitten,";
             animation.goToFrame("schneide");
         }
+    }
 
+    /**
+     * Rollt ein Sushibällchen, dieses ist nun die aktuelle Zutat.
+     */
+    public void rolle() {
+        if(aktZutat.isEmpty()){
+            kunde.meldeFehler(Comment.rollenOhneZutat);
+        }
+        else{
+            bearbeitet = true;
+            aktZutat = aktZutat + "gerollt,";
+            animation.goToFrame("schneide");
+        }
     }
 
     /**
@@ -151,8 +164,10 @@ public class Lehrling {
         }
         animation.goToFrame("gebeAufTeller");
 
-        if (wirdNichtVerbraucht(aktZutat)) {
-            aktZutat = "";
+
+            if (wirdVerbraucht(aktZutat)) {
+                aktZutat = "";
+            }
         }
     }
 
@@ -204,7 +219,10 @@ public class Lehrling {
         else{System.out.println("Das Gericht wurde bereits serviert.");}
     }
 
-    private boolean wirdNichtVerbraucht(String zutat) {
+    /*
+    * Testet, ob eine Zutat verbraucht wird, oder wieder zurück gestellt werden muss
+    */
+    private boolean wirdVerbraucht(String zutat) {
         switch (zutat) {
             case "oel(":
             case "essig(":
@@ -216,7 +234,7 @@ public class Lehrling {
     }
 
     /*
-     * entfernt gross-/kleinschreibung. haengt ein "(" an das Ende bekannte zutaten:
+     * Entfernt gross-/kleinschreibung. haengt ein "(" an das Ende bekannte zutaten:
      * salat, oel, zwiebel, gurke, oliven, feta, salz, essig
      */
     private String entscheideZutat(String eingabe) {

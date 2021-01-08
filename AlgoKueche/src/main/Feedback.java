@@ -52,7 +52,9 @@ public class Feedback {
                 return "Hier lief etwas falsch. :(";
             case schneidenOhneZutat:
                 return "Das Gericht passt, allerdings hast du schneiden ohne Zutat aufgerufen. :(";
-            case serviereLeerenTeller:
+            case rollenOhneZutat:
+                return "Das Gericht passt, allerdings hast du rollen ohne Zutat aufgerufen. :(";
+                case serviereLeerenTeller:
                 return "Du hast einen leeren Teller serviert. :(";
             case falscheZutatEnthalten:
                 return zutat + " gehoert nicht in das Gericht. :(";
