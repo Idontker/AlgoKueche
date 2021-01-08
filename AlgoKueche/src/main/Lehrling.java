@@ -254,7 +254,11 @@ public class Lehrling {
             case "essig":
             case "feta":
             case "salz":
+            case "reis":
             // zutat = zutat
+            break;
+            case "avocado":
+            case "avocados":
             break;
             case "gurke":
             case "gurken":
@@ -284,6 +288,11 @@ public class Lehrling {
             case "kartoffel":
             case "kartoffeln":
             zutat = "kartoffel";
+            break;
+            case "blatt":
+            case "nori":
+            case "noriblatt":
+            zutat = "noriblatt";
             break;
             case "paprika":
             case "paprikas":

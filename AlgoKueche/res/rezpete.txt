@@ -4,3 +4,6 @@ Tomatensalat extra Tomate:Salat(geschnitten) Tomate(geschnitten) Tomate(geschnit
 gTomatensalat:Salat(geschnitten) Tomate(geschnitten) Tomate(geschnitten) Essig:gewuerzt
 griechischer Salat:Salat(geschnitten) Tomate(geschnitten) Zwiebel(geschnitten) Gurke(geschnitten) Feta(geschnitten) Oel Olive
 Eintopf(vegetarisch): Kartoffel(geschnitten,gekocht_10_ZusammenGekocht_Kartoffel_Paprika_Zwiebel) Zwiebel(geschnitten,gekocht_10_ZusammenGekocht_Kartoffel_Paprika_Zwiebel) Paprika(geschnitten,gekocht_10_ZusammenGekocht_Kartoffel_Paprika_Zwiebel)
+Sushi mit Gurke: 6_Reis(gekocht) 6_Gurke(geschnitten) 6_Noriblatt
+Sushi mit Fisch: 6_Reis(gekocht) 6_Fisch(geschnitten) 6_Noriblatt
+California Role: 6_Reis(gekocht) 6_Fisch(geschnitten) 6_Avocado(geschnitten) 6_Noriblatt
