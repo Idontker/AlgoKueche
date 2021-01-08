@@ -15,8 +15,21 @@ public class Rezept {
         zutatenString = zutatenString.replaceAll("\\)", "");
         String zutaten[] = zutatenString.split(" ");
         for (int i = 0; i < zutaten.length; i++) {
-            RezeptKomponente r = createRezeptKomponente(zutaten[i]);
-            rezeptKomponenten.add(r);
+            int wdh = 1;
+            String zutat = zutaten[i];
+            if (zutat.contains("_")) {
+                String tmp[] = name.split("_");
+                if (tmp.length > 2) {
+                    System.err.println("Error in " + name + ": in " + zutat + " sind haben zu viele _ und wird daher übersprungen");
+                    continue;
+                }
+                wdh = Integer.parseInt(tmp[0]);
+                zutat = tmp[1];
+            }
+            for (int j = 0; j < wdh; j++) {
+                RezeptKomponente r = createRezeptKomponente(zutat);
+                rezeptKomponenten.add(r);
+            }
         }
 
     }
