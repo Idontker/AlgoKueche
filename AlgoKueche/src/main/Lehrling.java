@@ -4,7 +4,7 @@ package main;
  * Die Klasse Lehrling
  * @author Karol Bakas, Stefan Gebhart, Silas Kuder
  */
-// import java.util.ArrayList;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Lehrling {
@@ -56,7 +56,7 @@ public class Lehrling {
     }
 
     /**
-     * Stellt die aktuelle Zutat zur�ck. 
+     * Stellt die aktuelle Zutat zurueck. 
      */
     public void stellZurueck() {
         if (bearbeitet) {
@@ -83,27 +83,26 @@ public class Lehrling {
     }
 
     /**
-     * Gibt die aktuelle Zutat in den Topf. Sie kann jetzt gekocht werden. Der Lehrling hat jetzt wieder die H�nde frei.
+     * Gibt die aktuelle Zutat in den Topf. Sie kann jetzt gekocht werden. Der Lehrling hat jetzt wieder die Haende frei.
      */
     public void gibInTopf() {
-        //inTopf = true;
         zutatenInTopf.add(aktZutat);
         aktZutat = "";
         animation.goToFrame("gebeInTopf");
     }
 
     /**
-     * Kocht alle Zutaten im Topf. Der Lehrling ist solange mit Umr�hren beschaftigt.
+     * Kocht alle Zutaten im Topf. Der Lehrling ist solange mit Umruehren beschaftigt.
      * @param zeit Die Kochzeit in Minuten
      */
     public void koche(int zeit) {
         if (zutatenInTopf.size()!=0) {
             for(int i=0;i<zutatenInTopf.size();i++) {
                 if(zutatenInTopf.get(i).contains("gekocht")) {
-                    int zeitZutat = Integer.parseInt(zutatenInTopf.substring(zutatenInTopf.get(i).indexOf("gekocht")+7));
-                    zutatenInTopf.get(i) = zutatenInTopf.get(i).substring(0,zutatenInTopf.get(i).indexOf("gekocht")-1)) + "gekocht" + zeitZutat;
+                    int zeitZutat = Integer.parseInt(zutatenInTopf.get(i).indexOf("gekocht")+7);
+                    zutatenInTopf.set(i, zutatenInTopf.get(i).substring(0,zutatenInTopf.get(i).indexOf("gekocht")-1) + "gekocht" + zeitZutat);
                 } else {
-                    zutatenInTopf.get(i) = zutatenInTopf.get(i) + "gekocht" + zeit;
+                    zutatenInTopf.set(i, zutatenInTopf.get(i) + "gekocht" + zeit);
                 }
             }
             animation.goToFrame("koche");
@@ -116,22 +115,23 @@ public class Lehrling {
      * Platziert den Inhalt des Topfes auf dem Servierteller.
      */
     public void gibTopfAufTeller() {
-        for(int i=0;i<zutatenInTopf.size();i++) {
+        for(int i=0 ; i<zutatenInTopf.size() ; i++) {
             if(!zutatenInTopf.get(i).contains("gekocht")) {
-                 if (zutatenInTopf.get(i).endsWith(",")) {
-                    zutatenInTopf.get(i) = zutatenInTopf.get(i).substring(0, zutatenInTopf.get(i).length() - 1);
-                 }
-                kunde.arbeitsschritt(zutatenInTopf.get(i) + ")");
+                String zutat = zutatenInTopf.get(i);
+                if (zutat.endsWith(",")) {
+                    zutat.substring(0, zutat.length() - 1);
+                }
+                kunde.arbeitsschritt(zutat + ")");
                 zutatenInTopf.remove(i);
                 i--;
             }
         }
-        zutatenInTopf.sort(Comparator.comparing(String::toString));
-        String zusammenGekocht="ZusammenGekocht+";
+        zutatenInTopf.sort(null);
+        String zusammenGekocht = "ZusammenGekocht+";
         for(int i=0;i<zutatenInTopf.size();i++) {
             zusammenGekocht+=zutatenInTopf.get(i).substring(0,zutatenInTopf.get(i).indexOf("(")-1)+"+";
         }
-        String zusammenGekocht=zusammenGekocht.substring(0,zusammenGekocht.length()-2);
+        String zusammenGekocht = zusammenGekocht.substring(0,zusammenGekocht.length()-2);
         for(int i=0;i<zutatenInTopf.size();i++) {
             zutatenInTopf.get(i)+=zusammenGekocht+")";
             kunde.arbeitsschritt(zutatenInTopf.get(i));
