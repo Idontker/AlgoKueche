@@ -253,7 +253,7 @@ public class Lehrling {
             case "essig":
             case "feta":
             case "salz":
-            // zutat = zutat
+                // zutat = zutat
                 break;
             case "gurke":
             case "gurken":
