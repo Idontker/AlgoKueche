@@ -288,6 +288,10 @@ public class Lehrling {
             case "paprikas":
                 zutat = "paprika";
                 break;
+            case "fleisch":
+            case "steak":
+            zutat = "fleisch";
+            break;
             default:
                 zutat = null;
                 break;
