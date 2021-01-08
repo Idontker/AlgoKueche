@@ -16,6 +16,8 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.HashMap;
+import java.util.concurrent.BrokenBarrierException;
+import java.util.concurrent.CyclicBarrier;
 
 public class GUI {
 	public static final String pathToAlgoKueche = "C:/Users/Karol/proj/AlgoKueche/AlgoKueche/";
@@ -60,6 +62,9 @@ public class GUI {
 	private JLabel commentBox;
 
 	private HashMap<String, Slide> map;
+
+	private CyclicBarrier barrier;
+	// private boolean clickAble;
 
 	// Buttons for testing
 	private JPanel testPanel;
@@ -244,10 +249,30 @@ public class GUI {
 			showSlide(BADF00D);
 			commentBox.setText(BADF00D.comment);
 		}
-		try {
-			Thread.sleep(waittingTime);
-		} catch (Exception e) {
 
+		barrier = new CyclicBarrier(2);
+		(new Thread() {
+			@Override
+			public void run() {
+				awaitBarier(waittingTime);
+			}
+		}).start();
+		// clickAble = true;
+		awaitBarier(0);
+		// clickAble = false;
+	}
+
+	private void awaitBarier(int waitBefore) {
+		while (true) {
+			try {
+				Thread.sleep(waitBefore);
+				barrier.await();
+				return;
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			} catch (BrokenBarrierException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
