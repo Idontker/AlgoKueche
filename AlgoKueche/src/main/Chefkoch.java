@@ -31,5 +31,21 @@ public class Chefkoch {
         sam.gibZutatAufTeller();
         sam.serviere();
     }
+    
+    public void Eintopf_vegetarisch_1() {
+        sam.wirKochenJetzt("Eintopf(vegetarisch)");
+        sam.nimmAusSchrank("Kartoffel");
+        sam.schneide();
+        sam.gibInTopf();
+        sam.nimmAusSchrank("Zwiebel");
+        sam.schneide();
+        sam.gibInTopf();
+        sam.nimmAusSchrank("Paprika");
+        sam.schneide();
+        sam.gibInTopf();
+        sam.koche(10);
+        sam.gibTopfAufTeller();
+        sam.serviere();
+    }
 
 }

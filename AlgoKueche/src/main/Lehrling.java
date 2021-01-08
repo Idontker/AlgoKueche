@@ -99,7 +99,7 @@ public class Lehrling {
         if (zutatenInTopf.size()!=0) {
             for(int i=0;i<zutatenInTopf.size();i++) {
                 if(zutatenInTopf.get(i).contains("gekocht")) {
-                    int zeitZutat = Integer.parseInt(zutatenInTopf.get(i).indexOf("gekocht") + 7);
+                    int zeitZutat = Integer.parseInt(zutatenInTopf.get(i).substring(0,zutatenInTopf.get(i).indexOf("gekocht")+7));
                     zutatenInTopf.set(i, zutatenInTopf.get(i).substring(0,zutatenInTopf.get(i).indexOf("gekocht")-1) + "gekocht" + zeitZutat);
                 } else {
                     zutatenInTopf.set(i, zutatenInTopf.get(i) + "gekocht" + zeit);
@@ -127,9 +127,9 @@ public class Lehrling {
             }
         }
         zutatenInTopf.sort(null);
-        String zusammenGekocht = "ZusammenGekocht";
+        String zusammenGekocht = "zusammengekocht";
         for(int i=0;i<zutatenInTopf.size();i++) {
-            zusammenGekocht += "+" + zutatenInTopf.get(i).substring(0,zutatenInTopf.get(i).indexOf("(")-1);
+            zusammenGekocht += zutatenInTopf.get(i).substring(0,zutatenInTopf.get(i).indexOf("("));
         }
         zusammenGekocht += ")";
         for(int i=0;i<zutatenInTopf.size();i++) {
@@ -263,6 +263,14 @@ public class Lehrling {
             case "zwiebel":
             case "zwiebeln":
             zutat = "zwiebel";
+            break;
+            case "kartoffel":
+            case "kartoffeln":
+            zutat = "kartoffel";
+            break;
+            case "paprika":
+            case "paprikas":
+            zutat = "paprika";
             break;
             default:
             zutat = null;
