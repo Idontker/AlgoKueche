@@ -26,7 +26,7 @@ public class RezeptKomponente {
     }
 
     public boolean zutatUndZubereitungIstVorhanden(String t) {
-        if(zutat.length()==0) {
+        if (zutat.length() == 0) {
             return true;
         }
         if (t.contains(zutat + "(" + zubereitung + ")")) {
@@ -36,14 +36,14 @@ public class RezeptKomponente {
     }
 
     public String entferneZutat(String t) {
-        if(zutat.length()!=0) {
+        if (zutat.length() != 0) {
             return t.replaceFirst(zutat, "");
         }
         return t;
     }
-    
+
     public String entferneZutatUndZubereitung(String t) {
-        if(zutat.length()!=0) {
+        if (zutat.length() != 0) {
             return t.replaceFirst(zutat + "\\(" + zubereitung + "\\)", "");
         }
         return t;

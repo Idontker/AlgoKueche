@@ -48,7 +48,7 @@ public abstract class FeedbackTest {
     }
 
     protected void legAufTeller() {
-        lehrling.gibAufTeller();
+        lehrling.gibZutatAufTeller();
     }
 
     protected void serviere() {
@@ -109,6 +109,6 @@ class Traitor extends Lehrling {
     public void nsl(String zutat) {
         nimmAusSchrank(zutat);
         schneide();
-        gibAufTeller();
+        gibZutatAufTeller();
     }
 }

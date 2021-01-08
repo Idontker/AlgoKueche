@@ -12,7 +12,7 @@ public class Feedback {
         this.zubereitungsArt = zubereitungsArt;
     }
 
-    public Comment getComment(){
+    public Comment getComment() {
         return fehlerTyp;
     }
 

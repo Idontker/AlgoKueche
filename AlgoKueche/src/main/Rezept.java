@@ -20,14 +20,14 @@ public class Rezept {
         }
 
     }
-    
+
     public boolean wirdGewuerzt() {
         return wirdGewuerzt;
     }
 
     private RezeptKomponente createRezeptKomponente(String str) {
         String zutat = "";
-        String zubereitung = ""; 
+        String zubereitung = "";
 
         String tmp[] = str.split("\\(");
         zutat = tmp[0];
