@@ -3,7 +3,7 @@ package gui;
 import java.awt.Color;
 import java.util.HashMap;
 
-public class SlideMap extends HashMap<String, Slide> {
+class SlideMap extends HashMap<String, Slide> {
 
     private static final long serialVersionUID = 42L;
 

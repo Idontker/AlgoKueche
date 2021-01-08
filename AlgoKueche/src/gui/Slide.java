@@ -5,7 +5,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import javax.imageio.ImageIO;
 
-public class Slide {
+class Slide {
 	String method;
 	Color c;
 	BufferedImage image;
