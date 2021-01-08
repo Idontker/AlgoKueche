@@ -13,6 +13,8 @@ import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.HashMap;
@@ -63,8 +65,8 @@ public class GUI {
 
 	private HashMap<String, Slide> map;
 
-	private CyclicBarrier barrier;
-	// private boolean clickAble;
+	private static CyclicBarrier barrier;
+	private boolean clickAble;
 
 	// Buttons for testing
 	private JPanel testPanel;
@@ -262,11 +264,11 @@ public class GUI {
 		// clickAble = false;
 	}
 
-	private void awaitBarier(int waitBefore) {
+	private static void awaitBarier(int waitBefore) {
 		while (true) {
 			try {
 				Thread.sleep(waitBefore);
-				barrier.await();
+				GUI.barrier.await();
 				return;
 			} catch (InterruptedException e) {
 				e.printStackTrace();
@@ -325,6 +327,33 @@ public class GUI {
 			Thread.sleep(500);
 		} catch (Exception e) {
 		}
+	}
+
+	private MouseListener getMouseListener() {
+		return new MouseListener() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (clickAble) {
+					GUI.awaitBarier(0);
+				}
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+			}
+		};
 	}
 }
 
