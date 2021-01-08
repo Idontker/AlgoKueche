@@ -157,6 +157,9 @@ public class GUI {
 		canvas.setBackground(DEFAULT_COLOR);
 
 		canvas.setLayout(new BoxLayout(canvas, BoxLayout.Y_AXIS));
+
+		initInterruptMouseAdapter();
+		initInterruptKeyAdapter();
 	}
 
 	private void initActionPanel(int h) {
@@ -330,7 +333,7 @@ public class GUI {
 	}
 
 
-	private void initMouseAdapter() {
+	private void initInterruptMouseAdapter() {
 		MouseAdapter adapter = new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -339,9 +342,10 @@ public class GUI {
 				}
 			}
 		};
+		canvas.addMouseListener(adapter);
 	}
 
-	private void getInterruptKeyListener() {
+	private void initInterruptKeyAdapter() {
 		KeyAdapter adapter = new KeyAdapter() {
 			public void keyPressed(KeyEvent e) {
 				if (clickAble) {
@@ -349,6 +353,7 @@ public class GUI {
 				}
 			}
 		};
+		canvas.addKeyListener(adapter);
 	}
 }
 
