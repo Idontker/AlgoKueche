@@ -112,10 +112,10 @@ public class Lehrling {
         if (zutatenInTopf.size()!=0) {
             for(int i=0;i<zutatenInTopf.size();i++) {
                 if(zutatenInTopf.get(i).contains("gekocht")) {
-                    int zeitZutat = Integer.parseInt(zutatenInTopf.get(i).substring(0,zutatenInTopf.get(i).indexOf("gekocht")+7));
-                    zutatenInTopf.set(i, zutatenInTopf.get(i).substring(0,zutatenInTopf.get(i).indexOf("gekocht")-1) + "gekocht" + zeitZutat);
+                    int zeitZutat = Integer.parseInt(zutatenInTopf.get(i).substring(0,zutatenInTopf.get(i).indexOf("gekocht_")+8));
+                    zutatenInTopf.set(i, zutatenInTopf.get(i).substring(0,zutatenInTopf.get(i).indexOf("gekocht_")-1) + "gekocht_" + zeitZutat);
                 } else {
-                    zutatenInTopf.set(i, zutatenInTopf.get(i) + "gekocht" + zeit);
+                    zutatenInTopf.set(i, zutatenInTopf.get(i) + "gekocht_" + zeit);
                 }
             }
             animation.goToFrame("koche");
@@ -129,7 +129,7 @@ public class Lehrling {
      */
     public void gibTopfAufTeller() {
         for(int i=0 ; i<zutatenInTopf.size() ; i++) {
-            if(!zutatenInTopf.get(i).contains("gekocht")) {
+            if(!zutatenInTopf.get(i).contains("gekocht_")) {
                 String zutat = zutatenInTopf.get(i);
                 if (zutat.endsWith(",")) {
                     zutat = zutat.substring(0, zutat.length() - 1);
@@ -140,9 +140,9 @@ public class Lehrling {
             }
         }
         zutatenInTopf.sort(null);
-        String zusammenGekocht = "zusammengekocht";
+        String zusammenGekocht = "_zusammengekocht";
         for(int i=0;i<zutatenInTopf.size();i++) {
-            zusammenGekocht += zutatenInTopf.get(i).substring(0,zutatenInTopf.get(i).indexOf("("));
+            zusammenGekocht += "_" + zutatenInTopf.get(i).substring(0,zutatenInTopf.get(i).indexOf("("));
         }
         zusammenGekocht += ")";
         for(int i=0;i<zutatenInTopf.size();i++) {
