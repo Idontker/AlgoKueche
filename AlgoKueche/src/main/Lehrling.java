@@ -159,15 +159,14 @@ public class Lehrling {
         if (aktZutat.endsWith(",")) {//entfernt das letzte Komma
             aktZutat = aktZutat.substring(0, aktZutat.length() - 1);
         }
-        if(aktZutat.length()!=0) {
-        kunde.arbeitsschritt(aktZutat + ")");
+            if(aktZutat.length()!=0) {
+            kunde.arbeitsschritt(aktZutat + ")");
         }
         animation.goToFrame("gebeAufTeller");
 
 
-            if (wirdVerbraucht(aktZutat)) {
-                aktZutat = "";
-            }
+        if (wirdVerbraucht(aktZutat)) {
+            aktZutat = "";
         }
     }
 
