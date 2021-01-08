@@ -8,29 +8,19 @@ import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
-import javax.imageio.ImageIO;
 
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.util.HashMap;
 
+import java.util.ArrayList;
 
 public class GUI {
 	public static final String pathToAlgoKueche = "C:/Users/Karol/proj/AlgoKueche/AlgoKueche/";
 
 	// static fields
-	private final static String[] methods = new String[] { "wirKochenJetzt", "nimmAusSchrank", "stellZurueck",
-			"schneide", "wirfInTopf", "koche", "istGewuerzt", "serviere", "reactionHappy", "reactionSad",
-			"gebeAufTeller" };
-	private final static Color[] colors = new Color[] { Color.blue, Color.cyan, Color.gray, Color.green, Color.magenta,
-			Color.orange, Color.red, Color.yellow, new Color(50, 200, 10), new Color(200, 100, 50), Color.pink };
-	private final static String[] imageNames = new String[] { "book.png", "fridge.png", "fridge.png", "schneiden.jpg",
-			"topf.png", "kochen.jpg", "abschmecken.png", "glocke.jpg", "happy.png", "sad.png", "teller.png" };
 	private final static Slide BADF00D = new Slide("badf00d", Color.black);
 
 	// static values
@@ -38,7 +28,6 @@ public class GUI {
 	private static final int HEIGHT = (int) (SCALE * 720);
 	private static final int WIDTH = (int) (SCALE * HEIGHT / 9 * 16);
 	private static final int waittingTime = 1500;
-	public static boolean runningTestcase = false;
 
 	private static final Color DEFAULT_COLOR = Color.lightGray;
 
@@ -60,9 +49,10 @@ public class GUI {
 	private JLabel imageLabel;
 	private JLabel commentBox;
 
-	private HashMap<String, Slide> map;
+	private SlideMap map;
 
-	// Buttons for testing
+	// for testing
+	public static boolean runningTestcase = false;
 	private JPanel testPanel;
 	private JButton left; // go to the previous slide of the slide-list
 	private JButton unknown; // show the slide for unknown inputs
@@ -116,27 +106,10 @@ public class GUI {
 		frame.add(canvas);
 		frame.setVisible(true);
 
-		initMap();
+		map = new SlideMap();
 	}
 
 	// Init Methods
-	private void initMap() {
-
-		map = new HashMap<String, Slide>();
-		for (int i = 0; i < methods.length; i++) {
-			String pathToImage = pathToAlgoKueche + "res/" + imageNames[i];
-			try {
-				File f = new File(pathToImage);
-				BufferedImage buf = ImageIO.read(f);
-
-				map.put(methods[i], new Slide(methods[i], colors[i], buf));
-			} catch (Exception e) {
-				System.err.println("[ERROR]:Failed loading Image for\t" + methods[i] + "\t<" + pathToImage + ">");
-				e.printStackTrace();
-			}
-
-		}
-	}
 
 	private void initFrame() {
 		frame = new JFrame("AlgoKueche");
@@ -186,14 +159,19 @@ public class GUI {
 	private void initButtons() {
 		currentSlideIdx = 0;
 
+		ArrayList<String> keySet = new ArrayList<String>();
+		keySet.addAll(map.keySet());
+
 		left = new JButton("<");
 		left.setSize(80, 80);
 		left.setVisible(true);
 		left.addActionListener(new ActionListener() {
+			ArrayList<String> methods = keySet;
+
 			public void actionPerformed(ActionEvent e) {
-				currentSlideIdx = (currentSlideIdx + methods.length - 1) % methods.length;
+				currentSlideIdx = (currentSlideIdx + methods.size() - 1) % methods.size();
 				System.out.println("links");
-				goToFrame(methods[currentSlideIdx]);
+				goToFrame(methods.get(currentSlideIdx));
 			}
 		});
 
@@ -211,10 +189,12 @@ public class GUI {
 		right.setSize(80, 80);
 		right.setVisible(true);
 		right.addActionListener(new ActionListener() {
+			ArrayList<String> methods = keySet;
+
 			public void actionPerformed(ActionEvent e) {
-				currentSlideIdx = (currentSlideIdx + 1) % methods.length;
+				currentSlideIdx = (currentSlideIdx + 1) % methods.size();
 				System.out.println("rechts");
-				goToFrame(methods[currentSlideIdx]);
+				goToFrame(methods.get(currentSlideIdx));
 			}
 		});
 
@@ -293,13 +273,9 @@ public class GUI {
 
 	// methods for testing.
 	private void slideShow() {
-		for (String key : methods) {
+		for (String key : map.keySet()) {
 			goToFrame(key);
 		}
 		goToFrame("b4df00d");
-		try {
-			Thread.sleep(500);
-		} catch (Exception e) {
-		}
 	}
 }
