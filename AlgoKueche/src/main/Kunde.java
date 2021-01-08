@@ -34,7 +34,7 @@ public class Kunde {
                 line = line.toLowerCase();
                 String s[] = line.split(":");
                 if (s.length != 2 && s.length != 3) {
-                    System.err.println("Error reading line " + i);
+                    System.err.println("Error reading line " + i + "\tSyntax for recepie is brocken, too many :");
                     continue;
                 }
                 boolean wirdGewuert = s.length == 3;

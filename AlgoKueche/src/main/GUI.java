@@ -13,9 +13,14 @@ import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyAdapter;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.HashMap;
+import java.util.concurrent.CountDownLatch;
 
 public class GUI {
 	public static final String pathToAlgoKueche = "C:/Users/Karol/proj/AlgoKueche/AlgoKueche/";
@@ -23,11 +28,13 @@ public class GUI {
 	// static fields
 	private final static String[] methods = new String[] { "wirKochenJetzt", "nimmAusSchrank", "stellZurueck",
 			"schneide", "wirfInTopf", "koche", "istGewuerzt", "serviere", "reactionHappy", "reactionSad",
-			"gebeAufTeller" };
+			"gebeAufTeller", " istGewuerztTrue", "istGewuerztFalse" };
 	private final static Color[] colors = new Color[] { Color.blue, Color.cyan, Color.gray, Color.green, Color.magenta,
-			Color.orange, Color.red, Color.yellow, new Color(50, 200, 10), new Color(200, 100, 50), Color.pink };
+			Color.orange, Color.red, Color.yellow, new Color(50, 200, 10), new Color(200, 100, 50), Color.pink,
+			Color.green, Color.red };
 	private final static String[] imageNames = new String[] { "book.png", "fridge.png", "fridge.png", "schneiden.jpg",
-			"topf.png", "kochen.jpg", "abschmecken.png", "glocke.jpg", "happy.png", "sad.png", "teller.png" };
+			"topf.png", "kochen.jpg", "abschmecken.png", "glocke.jpg", "happy.png", "sad.png", "teller.png",
+			"abschmecken.png", "abschmecken.png" };
 	private final static Slide BADF00D = new Slide("badf00d", Color.black);
 
 	// static values
@@ -58,6 +65,9 @@ public class GUI {
 	private JLabel commentBox;
 
 	private HashMap<String, Slide> map;
+
+	private static CountDownLatch countDownLatch;
+	private boolean clickAble;
 
 	// Buttons for testing
 	private JPanel testPanel;
@@ -147,6 +157,9 @@ public class GUI {
 		canvas.setBackground(DEFAULT_COLOR);
 
 		canvas.setLayout(new BoxLayout(canvas, BoxLayout.Y_AXIS));
+
+		initInterruptMouseAdapter();
+		initInterruptKeyAdapter();
 	}
 
 	private void initActionPanel(int h) {
@@ -242,11 +255,33 @@ public class GUI {
 			showSlide(BADF00D);
 			commentBox.setText(BADF00D.comment);
 		}
-		try {
-			Thread.sleep(waittingTime);
-		} catch (Exception e) {
 
+		countDownLatch = new CountDownLatch(1);
+
+		(new Thread() {
+			@Override
+			public void run() {
+				awaitCountdown(waittingTime, countDownLatch);
+			}
+		}).start();
+
+		clickAble = true;
+		try {
+			countDownLatch.await();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
 		}
+		clickAble = false;
+	}
+
+	private static void awaitCountdown(int waitBefore, CountDownLatch countDown) {
+		try {
+			Thread.sleep(waitBefore);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		countDown.countDown();
+
 	}
 
 	public void goToFeedback(Feedback f) {
@@ -285,7 +320,7 @@ public class GUI {
 		}
 		// update Background and comment
 		actionPanel.setBackground(next.c);
-		System.out.println("show:" + next);
+		// System.out.println("show:" + next);
 	}
 
 	// methods for testing.
@@ -298,6 +333,37 @@ public class GUI {
 			Thread.sleep(500);
 		} catch (Exception e) {
 		}
+	}
+
+	private void initInterruptMouseAdapter() {
+		MouseAdapter adapter = new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (clickAble) {
+					if (e.getButton() == MouseEvent.BUTTON1) {
+						clickAble = false;
+						GUI.awaitCountdown(50, countDownLatch);
+					}
+				}
+			}
+		};
+		canvas.addMouseListener(adapter);
+	}
+
+	private void initInterruptKeyAdapter() {
+		KeyAdapter adapter = new KeyAdapter() {
+
+			public void keyPressed(KeyEvent e) {
+				if (clickAble) {
+					if (e.getKeyCode() == KeyEvent.VK_SPACE || e.getKeyCode() == KeyEvent.VK_RIGHT
+							|| e.getKeyCode() == KeyEvent.VK_KP_RIGHT) {
+						clickAble = false;
+						GUI.awaitCountdown(50, countDownLatch);
+					}
+				}
+			}
+		};
+		frame.addKeyListener(adapter);
 	}
 }
 
