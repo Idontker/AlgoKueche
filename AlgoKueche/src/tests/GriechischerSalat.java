@@ -43,6 +43,9 @@ public class GriechischerSalat extends FeedbackTest {
         nsl(z5);
         nimmAusSchrank("Oel");
         legAufTeller();
+        stellZurueck();
+        nimmAusSchrank("Olive");
+        legAufTeller();
         serviere();
     }
 
@@ -56,6 +59,8 @@ public class GriechischerSalat extends FeedbackTest {
         legAufTeller();
         stellZurueck();
         nsl(z5);
+        nimmAusSchrank("Olive");
+        legAufTeller();
         serviere();
     }
 
@@ -69,6 +74,8 @@ public class GriechischerSalat extends FeedbackTest {
         stellZurueck();
         nsl(z4);
         nsl(z5);
+        nimmAusSchrank("Olive");
+        legAufTeller();
         serviere();
     }
 
@@ -82,6 +89,8 @@ public class GriechischerSalat extends FeedbackTest {
         nsl(z3);
         nsl(z4);
         nsl(z5);
+        nimmAusSchrank("Olive");
+        legAufTeller();
         serviere();
     }
 
@@ -95,6 +104,8 @@ public class GriechischerSalat extends FeedbackTest {
         nsl(z3);
         nsl(z4);
         nsl(z5);
+        nimmAusSchrank("Olive");
+        legAufTeller();
         serviere();
     }
 
@@ -108,6 +119,8 @@ public class GriechischerSalat extends FeedbackTest {
         nsl(z3);
         nsl(z4);
         nsl(z5);
+        nimmAusSchrank("Olive");
+        legAufTeller();
         serviere();
     }
 
