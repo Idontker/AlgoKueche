@@ -2,9 +2,7 @@ package gui;
 
 import main.Feedback;
 
-import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
