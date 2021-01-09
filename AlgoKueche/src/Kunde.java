@@ -59,7 +59,7 @@ public class Kunde {
         gemeldeterFehler = null;
         Rezept r = menueMap.get(t);
         if (r == null) {
-            System.out.println("Das Rezept " + t + " gibt es nicht");
+            System.err.println("Das Rezept " + t + " gibt es nicht");
         } else {
             if (r.wirdGewuerzt()) {
                 gewuerzt = false;
@@ -94,9 +94,7 @@ public class Kunde {
         if (serviertKlon.length() == 0) { // pruefe ob nichts serviert wurde.
             return new Feedback(Comment.serviereLeerenTeller, "", "");
         }
-        
-        System.out.println(serviertKlon);
-        
+
         for (int i = 0; i < komponenten.size(); i++) {
             RezeptKomponente komponente = komponenten.get(i);
             if (!komponente.zutatIstVorhanden(serviertKlon)) { // ist die Komponente nicht vorhanden?

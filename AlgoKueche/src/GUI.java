@@ -35,7 +35,7 @@ public class GUI {
 	private static CountDownLatch countDownLatch;
 	private boolean clickAble;
 
-	public static GUI startGUI() {	
+	public static GUI startGUI() {
 		return new GUI();
 	}
 
@@ -119,7 +119,6 @@ public class GUI {
 
 	private void showSlide(Slide next) {
 		actionPanel.showSlide(next);
-		System.out.println("show:" + next);
 	}
 
 	private void addInterruptAdapter() {
