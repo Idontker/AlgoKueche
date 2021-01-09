@@ -65,7 +65,6 @@ public class Lehrling {
         if (bearbeitet) {
             kunde.meldeFehler(Comment.verschwendung);
         }
-        // inTopf = false; // oel darf in den Topf gegben werden, vor dem Braten.
         aktZutat = "";
         animation.goToFrame("stellZurueck");
     }
@@ -85,25 +84,14 @@ public class Lehrling {
     }
 
     /**
-     * Rollt ein Sushibällchen, dieses ist nun die aktuelle Zutat.
-     */
-    public void rolle() {
-        if (aktZutat.isEmpty()) {
-            kunde.meldeFehler(Comment.rollenOhneZutat);
-        } else {
-            bearbeitet = true;
-            aktZutat = aktZutat + "gerollt,";
-            animation.goToFrame("schneide");
-        }
-    }
-
-    /**
      * Gibt die aktuelle Zutat in den Topf. Sie kann jetzt gekocht werden. Der
      * Lehrling hat jetzt wieder die Haende frei.
      */
     public void gibInTopf() {
         zutatenInTopf.add(aktZutat);
-        aktZutat = "";
+        if(wirdVerbraucht(aktZutat)){
+            aktZutat = "";
+        }
         animation.goToFrame("gebeInTopf");
     }
 
@@ -170,11 +158,10 @@ public class Lehrling {
         if (aktZutat.length() != 0) {
             kunde.arbeitsschritt(aktZutat + ")");
         }
-        animation.goToFrame("gebeAufTeller");
-
         if (wirdVerbraucht(aktZutat)) {
             aktZutat = "";
         }
+        animation.goToFrame("gebeAufTeller");
     }
 
     /**
