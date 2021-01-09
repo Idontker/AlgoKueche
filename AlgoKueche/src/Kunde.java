@@ -118,7 +118,7 @@ public class Kunde {
                     // Komponente haette zubereitet werden sollen.
                 }
         }
-        System.out.println(serviertKlon);
+        //System.out.println(serviertKlon);
         if (serviertKlon.length() != 0) { // ist ausserhalb der benoetigten Komponenten noch etwas uebrig?
             for (int i = 0; i < komponenten.size(); i++) { // handelt es sich um eine Zutat aus dem Rezept die nur zu
                                                            // oft da ist? Falls ja, gib sie aus (falls sie auch noch
