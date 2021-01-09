@@ -1,5 +1,7 @@
 package main;
 
+import gui.GUI;
+
 /**
  * Die Klasse Lehrling
  * @author Karol Bakas, Stefan Gebhart, Silas Kuder
