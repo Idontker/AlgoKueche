@@ -67,13 +67,21 @@ public class GUI {
 
 	// TODO: rename method
 	public void goToFrame(String slideName) {
+		goToFrame(slideName, "");
+	}
+
+	public void goToFrame(String slideName, String note) {
 		if (notActive)
 			return;
 
 		Slide next = map.get(slideName);
 		if (next != null) {
 			showSlide(next);
-			commentPanel.setText(next.getComment());
+			if (next.moreInfo()) {
+				commentPanel.setText(next.getComment() + "        " + note);
+			} else {
+				commentPanel.setText(next.getComment());
+			}
 		} else {
 			System.err.println("Slide: " + slideName + " not found in Database");
 			showSlide(BADF00D);
@@ -106,7 +114,7 @@ public class GUI {
 		if (k == 0) {
 			next = map.get("reactionSad");
 		} else if (k == 1) {
-			next = map.get("reactionSad");
+			next = map.get("reactionHappy");
 		} else if (k == 2) {
 			next = map.get("reactionHappy");
 		} else {
@@ -114,7 +122,7 @@ public class GUI {
 		}
 
 		showSlide(next);
-		commentPanel.setText(f.gibFeedbackString());
+		commentPanel.setText(next.getComment() + "        " + f.gibFeedbackString());
 	}
 
 	private void showSlide(Slide next) {

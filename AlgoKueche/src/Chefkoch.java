@@ -23,4 +23,34 @@ public class Chefkoch {
         sam.gibZutatAufTeller();
         sam.serviere();
     }
+    
+    public void reinerSalat2() {
+        sam.wirKochenJetzt("reiner Salat");
+        sam.nimmAusSchrank("einen Salat");
+        sam.stellZurueck();
+        sam.nimmAusSchrank("einen Salat");
+        sam.schneide();
+        sam.gibZutatAufTeller();
+        sam.serviere();
+    }
+    
+    public void reinerSalat3() {
+        sam.wirKochenJetzt("reiner Salat");
+        sam.nimmAusSchrank("einen Salat");
+        sam.schneide();
+        sam.stellZurueck();
+        sam.nimmAusSchrank("einen Salat");
+        sam.schneide();
+        sam.gibZutatAufTeller();
+        sam.serviere();
+    }
+    
+    public void reinerSalat4() {
+        sam.wirKochenJetzt("reiner Salat");
+        sam.schneide();
+        sam.nimmAusSchrank("einen Salat");
+        sam.schneide();
+        sam.gibZutatAufTeller();
+        sam.serviere();
+    }
 }

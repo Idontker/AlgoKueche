@@ -10,11 +10,13 @@ public class Slide {
 	Color c;
 	BufferedImage image;
 	String comment;
+	boolean moreInfo;
 
 	public Slide(String method, Color c) {
 		this.method = method;
 		this.c = c;
 		this.comment = method;
+		this.moreInfo = false;
 	}
 
 	public Slide(String method, Color c, String comment) {
@@ -40,8 +42,17 @@ public class Slide {
 		}
 	}
 
+	public Slide(String method, Color c, String imageName, String comment,boolean moreInfo) {
+		this(method,c,imageName,comment);
+		this.moreInfo = moreInfo;
+	}
+
 	public String getComment(){
 		return comment;
+	}
+
+	public boolean moreInfo(){
+		return moreInfo;
 	}
 
 	@Override
