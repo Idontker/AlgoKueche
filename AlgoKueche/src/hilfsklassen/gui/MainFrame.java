@@ -11,7 +11,7 @@ import java.awt.Color;
 public class MainFrame extends JFrame {
     
     private static final long serialVersionUID = 2L;
-    public static final String pathToAlgoKueche = "C:/Users/Karol/proj/AlgoKueche/AlgoKueche/";
+    public static String pathToAlgoKueche = "./hilfsklassen/";
     
 	public static final Color DEFAULT_COLOR = Color.lightGray;
 
