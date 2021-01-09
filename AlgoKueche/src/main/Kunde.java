@@ -80,7 +80,9 @@ public class Kunde {
     }
 
     public void setzeGewuerzt(boolean t) {
-        gewuerzt = t;
+        if(gewuerzt!=null) {
+            gewuerzt = t;
+        }
     }
 
     public void meldeFehler(Comment t) {
