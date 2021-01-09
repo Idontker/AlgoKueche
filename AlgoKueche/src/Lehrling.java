@@ -1,6 +1,4 @@
-package main;
-
-import gui.GUI;
+import hilfsklassen.main.*;
 
 /**
  * Die Klasse Lehrling

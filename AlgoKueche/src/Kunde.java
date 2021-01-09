@@ -1,6 +1,6 @@
-package main;
+import hilfsklassen.main.*;
+import hilfsklassen.gui.MainFrame;
 
-import gui.GUI;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -26,7 +26,7 @@ public class Kunde {
 
     private void initMap() {
         menueMap = new HashMap<String, Rezept>();
-        File file = new File(GUI.pathToAlgoKueche + pathToRecipes);
+        File file = new File(MainFrame.pathToAlgoKueche + pathToRecipes);
         try {
             BufferedReader br = new BufferedReader(new FileReader(file));
 

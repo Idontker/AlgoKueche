@@ -1,9 +1,9 @@
-package gui;
+package hilfsklassen.gui;
 
 import java.awt.Color;
 import java.util.HashMap;
 
-class SlideMap extends HashMap<String, Slide> {
+public class SlideMap extends HashMap<String, Slide> {
 
     private static final long serialVersionUID = 42L;
 

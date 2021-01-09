@@ -1,4 +1,4 @@
-package main;
+package hilfsklassen.main;
 
 public class Feedback {
 

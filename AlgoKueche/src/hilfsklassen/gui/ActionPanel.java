@@ -1,4 +1,4 @@
-package gui;
+package hilfsklassen.gui;
 
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
@@ -8,7 +8,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
 
-class ActionPanel extends JPanel {
+public class ActionPanel extends JPanel {
 
     private static final long serialVersionUID = 3L;
 

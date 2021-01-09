@@ -1,9 +1,7 @@
-package gui;
+import hilfsklassen.main.Feedback;
+import hilfsklassen.gui.*;
 
-import main.Feedback;
 import java.awt.Color;
-import java.util.ArrayList;
-
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.KeyEvent;
@@ -11,8 +9,6 @@ import java.awt.event.KeyAdapter;
 import java.util.concurrent.CountDownLatch;
 
 public class GUI {
-	public static final String pathToAlgoKueche = "C:/Users/Karol/proj/AlgoKueche/AlgoKueche/";
-
 	// static values
 	private static final double SCALE = 0.8;
 	private static final int HEIGHT = (int) (SCALE * 720);
@@ -20,11 +16,9 @@ public class GUI {
 	private static final int waittingTime = 1500;
 
 	private final static Slide BADF00D = new Slide("badf00d", Color.black);
-	public static final Color DEFAULT_COLOR = Color.lightGray;
 
 	// GUI Main
 	public static void main(String args[]) {
-		// startTestGUI();
 		GUI g = startGUI();
 		g.slideShow();
 	}
@@ -41,43 +35,23 @@ public class GUI {
 	private static CountDownLatch countDownLatch;
 	private boolean clickAble;
 
-	// for testing
-	private TestPanel testPanel;
-	public static boolean runningTestcase = false;
-
-	public static GUI startGUI() {
-		if (runningTestcase) {
-			return new GUI();
-		} else {
-			return new GUI(false);
-		}
-	}
-
-	public static GUI startGUI_TEST() {
-		return new GUI(true);
+	public static GUI startGUI() {	
+		return new GUI();
 	}
 
 	private GUI() {
-		notActive = true;
-	}
-
-	private GUI(boolean testing) {
 		map = new SlideMap();
 
 		frame = new MainFrame();
 
 		int actionHeight = (int) (HEIGHT * 0.8);
 		int commentHeight = (int) (HEIGHT * 0.1);
-		int testHeight = (int) (HEIGHT * 0.1);
 
 		actionPanel = new ActionPanel(GUI.WIDTH, actionHeight);
 		commentPanel = new CommentPanel(GUI.WIDTH, commentHeight);
 
 		frame.addToCanvas(actionPanel);
 		frame.addToCanvas(commentPanel);
-		if (testing) {
-			initTestEnvoirment(testHeight);
-		}
 
 		addInterruptAdapter();
 
@@ -99,11 +73,11 @@ public class GUI {
 		Slide next = map.get(slideName);
 		if (next != null) {
 			showSlide(next);
-			commentPanel.setText(next.comment);
+			commentPanel.setText(next.getComment());
 		} else {
 			System.err.println("Slide: " + slideName + " not found in Database");
 			showSlide(BADF00D);
-			commentPanel.setText(BADF00D.comment);
+			commentPanel.setText(BADF00D.getComment());
 		}
 
 		countDownLatch = new CountDownLatch(1);
@@ -183,15 +157,6 @@ public class GUI {
 		}
 		countDown.countDown();
 
-	}
-
-	// init Test
-	public void initTestEnvoirment(int testHeight) {
-		ArrayList<String> keys = new ArrayList<String>();
-		keys.addAll((map.keySet()));
-
-		testPanel = new TestPanel(this, keys.toArray(new String[keys.size()]), GUI.WIDTH, testHeight);
-		frame.addToCanvas(testPanel);
 	}
 
 	// methods for testing.

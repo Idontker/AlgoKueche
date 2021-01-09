@@ -1,5 +1,3 @@
-package main;
-
 /**
  * Das ist die Klasse Chefkoch, in der ihr arbeiten werdet. 
  * Alle Arbeitsauftraege stehen auf dem jeweiligen Arbeitsblatt.
