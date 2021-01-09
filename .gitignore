@@ -19,7 +19,7 @@
 *.rar
 *.tar
 *.zip
-*.bluej
+#*.bluej
 
 # build Settings #
 settings.json
