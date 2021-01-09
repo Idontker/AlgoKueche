@@ -16,7 +16,7 @@ public class CommentPanel extends JPanel {
         this.setBackground(Color.white);
         this.setPreferredSize(new Dimension(w, h));
 
-        commentBox = new JLabel("Willkommen in der AlgoKueche");
+        commentBox = new JLabel("");
         this.add(commentBox);
         this.setVisible(true);
     }

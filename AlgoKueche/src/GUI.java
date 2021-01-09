@@ -7,7 +7,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyAdapter;
 import java.util.concurrent.CountDownLatch;
-
+ 
 public class GUI {
 	// static values
 	private static final double SCALE = 0.8;
@@ -56,6 +56,7 @@ public class GUI {
 		addInterruptAdapter();
 
 		frame.setVisible(true);
+		goToFrame("welcome");
 	}
 
 	// public methods

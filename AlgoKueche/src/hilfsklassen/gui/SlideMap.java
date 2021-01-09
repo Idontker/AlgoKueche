@@ -8,7 +8,7 @@ public class SlideMap extends HashMap<String, Slide> {
     private static final long serialVersionUID = 42L;
 
     public SlideMap() {
-        String[] methods = new String[] { "wirKochenJetzt", "nimmAusSchrank", "stellZurueck", "schneide", "gibInTopf",
+        String[] methods = new String[] { "welcome", "wirKochenJetzt", "nimmAusSchrank", "stellZurueck", "schneide", "gibInTopf",
                 "koche", "serviere", "reactionHappy", "reactionSad", "gebeAufTeller" };
         initSlides();
         for (String s : methods) {
@@ -24,6 +24,7 @@ public class SlideMap extends HashMap<String, Slide> {
     }
 
     private void initSlides() {
+        this.put("welcome", new Slide("welcome", Color.cyan, "kueche.png", "Willkommen in der AlgoKueche!"));
         this.put("wirKochenJetzt", new Slide("wirKochenJetzt", Color.blue, "book.png", "Sam ist bereit!"));
         this.put("nimmAusSchrank", new Slide("nimmAusSchrank", Color.cyan, "fridge.png", "Sam hat aus dem Schrank genommen:",true));
         this.put("stellZurueck", new Slide("stellZurueck", Color.gray, "fridge.png", "Sam hat zurueck gestellt:",true));
