@@ -19,7 +19,7 @@ public class RezeptKomponente {
     }
 
     public boolean zutatIstVorhanden(String t) {
-        if (t.contains(zutat)) {
+        if (t.contains(zutat+"(")) {
             return true;
         }
         return false;
