@@ -23,6 +23,7 @@ public class Chefkoch {
     private Lehrling sam; // Alberts Lehrling Sam, er kocht die Rezepte
 
     public Chefkoch() {
+        MainFrame.pathToAlgoKueche = "./main/hilfsklassen/";
         sam = new Lehrling();
     }
 
