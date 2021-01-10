@@ -5,6 +5,7 @@ import java.util.Arrays;
 
 import org.junit.Before;
 
+import main.hilfsklassen.gui.MainFrame;
 import main.hilfsklassen.cooking.Feedback;
 import main.GUI;
 import main.Lehrling;
@@ -15,6 +16,9 @@ public abstract class FeedbackTest {
 
     @Before
     public void initTest() {
+        // If your or your IDE complie the files right here, you can uncomment this line
+        // Otherwise set this path to the hilfsklassen folder.
+        MainFrame.pathToAlgoKueche = "C:/Users/Karol/proj/AlgoKueche/AlgoKueche/src/main/hilfsklassen/";
         GUI.runningTestcase = true;
         lehrling = new Traitor();
     }
@@ -38,7 +42,7 @@ public abstract class FeedbackTest {
     protected void gibInTopf() {
         lehrling.gibInTopf();
     }
-    
+
     protected void gibTopfAufTeller() {
         lehrling.gibTopfAufTeller();
     }
