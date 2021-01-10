@@ -17,8 +17,8 @@ public class Rezept {
         for (int i = 0; i < zutaten.length; i++) {
             int wdh = 1;
             String zutat = zutaten[i];
-            if (zutat.contains("\\?")) {
-                String tmp[] = name.split("\\?");
+            if (zutat.contains("?")) {
+                String tmp[] = zutat.split("\\?");
                 if (tmp.length > 2) {
                     System.err.println("Error in " + name + ": in " + zutat + " sind haben zu viele _ und wird daher übersprungen");
                     continue;
