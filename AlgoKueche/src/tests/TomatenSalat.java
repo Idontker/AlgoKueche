@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import org.junit.Assert;
 import org.junit.Test;
-import main.Comment;
+import main.hilfsklassen.cooking.Comment;
 
 public class TomatenSalat extends FeedbackTest {
 

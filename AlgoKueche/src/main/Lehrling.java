@@ -1,6 +1,6 @@
 package main;
 
-import gui.GUI;
+import main.hilfsklassen.cooking.*;
 
 /**
  * Die Klasse Lehrling
@@ -41,7 +41,7 @@ public class Lehrling {
         bearbeitet = false;
         zutatenInTopf = new ArrayList<String>();
         kunde.rezeptauswahl(rezept);
-        animation.goToFrame("wirKochenJetzt");
+        animation.goToFrame("wirKochenJetzt", rezept);
     }
 
     /**
@@ -57,7 +57,7 @@ public class Lehrling {
         }
         bearbeitet = false;
         aktZutat = entscheideZutat(zutat);
-        animation.goToFrame("nimmAusSchrank");
+        animation.goToFrame("nimmAusSchrank", aktZutat + ")");
     }
 
     /**
@@ -67,9 +67,8 @@ public class Lehrling {
         if (bearbeitet) {
             kunde.meldeFehler(Comment.verschwendung);
         }
-        // inTopf = false; // oel darf in den Topf gegben werden, vor dem Braten.
+        animation.goToFrame("stellZurueck", aktZutat + ")");
         aktZutat = "";
-        animation.goToFrame("stellZurueck");
     }
 
     /**
@@ -78,24 +77,12 @@ public class Lehrling {
      */
     public void schneide() {
         if (aktZutat.isEmpty()) {
+            animation.goToFrame("schneide", "nichts");
             kunde.meldeFehler(Comment.schneidenOhneZutat);
         } else {
+            animation.goToFrame("schneide", aktZutat + ")");
             bearbeitet = true;
             aktZutat = aktZutat + "geschnitten,";
-            animation.goToFrame("schneide");
-        }
-    }
-
-    /**
-     * Rollt ein Sushibällchen, dieses ist nun die aktuelle Zutat.
-     */
-    public void rolle() {
-        if (aktZutat.isEmpty()) {
-            kunde.meldeFehler(Comment.rollenOhneZutat);
-        } else {
-            bearbeitet = true;
-            aktZutat = aktZutat + "gerollt,";
-            animation.goToFrame("schneide");
         }
     }
 
@@ -104,9 +91,11 @@ public class Lehrling {
      * Lehrling hat jetzt wieder die Haende frei.
      */
     public void gibInTopf() {
+        animation.goToFrame("gibInTopf", aktZutat + ")");
         zutatenInTopf.add(aktZutat);
-        aktZutat = "";
-        animation.goToFrame("gebeInTopf");
+        if(wirdVerbraucht(aktZutat)){
+            aktZutat = "";
+        }
     }
 
     /**
@@ -117,6 +106,7 @@ public class Lehrling {
      */
     public void koche(int zeit) {
         if (zutatenInTopf.size() != 0) {
+            animation.goToFrame("koche", zeit + " Minuten");
             for (int i = 0; i < zutatenInTopf.size(); i++) {
                 final String GEKOCHT = "gekocht_";
                 if (zutatenInTopf.get(i).contains(GEKOCHT)) {
@@ -128,7 +118,6 @@ public class Lehrling {
                     zutatenInTopf.set(i, zutatenInTopf.get(i) + GEKOCHT + zeit);
                 }
             }
-            animation.goToFrame("koche");
         } else {
             kunde.meldeFehler(Comment.kochtLeerenTopf);
         }
@@ -159,7 +148,7 @@ public class Lehrling {
             kunde.arbeitsschritt(zutatenInTopf.get(i) + zusammenGekocht);
         }
         zutatenInTopf.clear();
-        animation.goToFrame("gebeAufTeller");
+        animation.goToFrame("gebeAufTeller", "alles aus dem Topf");
     }
 
     /**
@@ -172,8 +161,7 @@ public class Lehrling {
         if (aktZutat.length() != 0) {
             kunde.arbeitsschritt(aktZutat + ")");
         }
-        animation.goToFrame("gebeAufTeller");
-
+        animation.goToFrame("gebeAufTeller", aktZutat + ")");
         if (wirdVerbraucht(aktZutat)) {
             aktZutat = "";
         }
@@ -278,7 +266,7 @@ public class Lehrling {
             case "gurken":
                 zutat = "gurke";
                 break;
-            case "öl":
+            case "�l":
             case "oel":
                 zutat = "oel";
                 break;

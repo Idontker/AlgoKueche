@@ -1,14 +1,13 @@
-package gui;
+package main.hilfsklassen.gui;
 
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
 
-class ActionPanel extends JPanel {
+public class ActionPanel extends JPanel {
 
     private static final long serialVersionUID = 3L;
 
@@ -18,7 +17,7 @@ class ActionPanel extends JPanel {
         imageLabel = new JLabel();
 		imageLabel.setVisible(false);
 
-		this.setBackground(Color.red);
+		this.setBackground(MainFrame.DEFAULT_COLOR);
 		this.setPreferredSize(new Dimension(w, h));
 		
 		this.add(imageLabel);
