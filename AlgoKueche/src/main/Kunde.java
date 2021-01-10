@@ -98,14 +98,16 @@ public class Kunde {
         if (serviertKlon.length() == 0) { // pruefe ob nichts serviert wurde.
             return new Feedback(Comment.serviereLeerenTeller, "", "");
         }
-
+        
         for (int i = 0; i < komponenten.size(); i++) {
             RezeptKomponente komponente = komponenten.get(i);
             if (!komponente.zutatIstVorhanden(serviertKlon)) { // ist die Komponente nicht vorhanden?
                 return new Feedback(Comment.fehlendeZutat, komponente.gibZutat(), komponente.gibZubereitung());
+            } else {
+                serviertKlon = komponente.entferneZutat(serviertKlon);
             }
         }
-        
+        String serviertKlon = new String(serviert);
         for (int i = 0; i < komponenten.size(); i++) {
             RezeptKomponente komponente = komponenten.get(i);
                 if (komponente.zutatUndZubereitungIstVorhanden(serviertKlon)) { // ist die Komponente auch in der
