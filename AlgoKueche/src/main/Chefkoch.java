@@ -11,19 +11,9 @@ import main.hilfsklassen.gui.MainFrame;
  */
 
 public class Chefkoch {
-
-    public static void main(String args[]) {
-        // If your or your IDE complie the files right here, you can uncomment this line
-        // Otherwise set this path to the hilfsklassen folder.
-        MainFrame.pathToAlgoKueche = "C:/Users/Karol/proj/AlgoKueche/AlgoKueche/src/main/hilfsklassen/";
-        Chefkoch c = new Chefkoch();
-        c.sushi();
-    }
-
     private Lehrling sam; // Alberts Lehrling Sam, er kocht die Rezepte
 
     public Chefkoch() {
-        MainFrame.pathToAlgoKueche = "./main/hilfsklassen/";
         sam = new Lehrling();
     }
 
@@ -62,7 +52,7 @@ public class Chefkoch {
     }
 
     /**
-     * Aufgabe zur Motivierung von Wiederholungen mit fester Anzahl mit for gelöst
+     * Aufgabe zur Motivierung von Wiederholungen mit fester Anzahl mit for geloest
      */
     public void familienReinerSalateBesser() {
         sam.wirKochenJetzt("reiner Salat Familienportion");
