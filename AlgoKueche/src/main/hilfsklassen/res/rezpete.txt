@@ -11,6 +11,6 @@ Eintopf: Fleisch(geschnitten,gekocht_10_ZusammenGekocht_Fleisch_Kartoffel_Paprik
 Steak (rare): Fleisch(geschnitten,gekocht_5_ZusammenGekocht_Fleisch) Kartoffel(geschnitten,gekocht_20_ZusammenGekocht_Kartoffel_Zwiebel) Zwiebel(geschnitten,gekocht_20_ZusammenGekocht_Kartoffel_Zwiebel)
 Steak (medium): Fleisch(geschnitten,gekocht_8_ZusammenGekocht_Fleisch) Kartoffel(geschnitten,gekocht_20_ZusammenGekocht_Kartoffel_Zwiebel) Zwiebel(geschnitten,gekocht_20_ZusammenGekocht_Kartoffel_Zwiebel)
 Steak (well-done): Fleisch(geschnitten,gekocht_10_ZusammenGekocht_Fleisch) Kartoffel(geschnitten,gekocht_20_ZusammenGekocht_Kartoffel_Zwiebel) Zwiebel(geschnitten,gekocht_20_ZusammenGekocht_Kartoffel_Zwiebel)
-Sushi: 6?Reis(gekocht_20_ZusammenGekocht_Reis) 6?Fisch(geschnitten) 6?Noriblatt
+Sushi: 3?Reis(gekocht_20_ZusammenGekocht_Reis) 3?Fisch(geschnitten) 3?Noriblatt
 Sushi mit Gurke: 3?Reis(gekocht_20_ZusammenGekocht_Reis) 3?Gurke(geschnitten) 3?Noriblatt
 California Role: 3?Reis(gekocht_20_ZusammenGekocht_Reis) 3?Fisch(geschnitten) 3?Avocado(geschnitten) 3?Noriblatt
