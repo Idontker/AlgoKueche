@@ -19,7 +19,10 @@ public class RezeptKomponente {
     }
 
     public boolean zutatIstVorhanden(String t) {
-        if (t.contains(zutat)) {
+        if (zutat.length() == 0) {
+            return true;
+        }
+        if (t.contains(zutat+"(")) {
             return true;
         }
         return false;
@@ -37,7 +40,7 @@ public class RezeptKomponente {
 
     public String entferneZutat(String t) {
         if (zutat.length() != 0) {
-            return t.replaceFirst(zutat, "");
+            return t.replaceFirst(zutat+"\\(", "");
         }
         return t;
     }

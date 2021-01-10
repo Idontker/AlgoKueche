@@ -62,7 +62,7 @@ public class Chefkoch {
     }
 
     /**
-     * Aufgabe zur Motivierung von Wiederholungen mit fester Anzahl mit for gelöst
+     * Aufgabe zur Motivierung von Wiederholungen mit fester Anzahl mit for geloest
      */
     public void familienReinerSalateBesser() {
         sam.wirKochenJetzt("reiner Salat Familienportion");

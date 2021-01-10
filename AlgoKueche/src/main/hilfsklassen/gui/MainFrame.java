@@ -7,11 +7,12 @@ import javax.swing.JPanel;
 import java.awt.Component;
 import java.awt.Color;
 
+import java.io.File;
 
 public class MainFrame extends JFrame {
     
     private static final long serialVersionUID = 2L;
-    public static String pathToAlgoKueche = "./hilfsklassen/";
+    public static String pathToAlgoKueche = new File("").getAbsolutePath() + "/main/hilfsklassen/";
     
 	public static final Color DEFAULT_COLOR = Color.lightGray;
 
