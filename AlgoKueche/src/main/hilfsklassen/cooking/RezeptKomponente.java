@@ -40,7 +40,7 @@ public class RezeptKomponente {
 
     public String entferneZutat(String t) {
         if (zutat.length() != 0) {
-            return t.replaceFirst(zutat+"(", "");
+            return t.replaceFirst(zutat+"\\(", "");
         }
         return t;
     }
