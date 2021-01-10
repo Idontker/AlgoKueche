@@ -107,7 +107,7 @@ public class Kunde {
                 serviertKlon = komponente.entferneZutat(serviertKlon);
             }
         }
-        String serviertKlon = new String(serviert);
+        serviertKlon = new String(serviert);
         for (int i = 0; i < komponenten.size(); i++) {
             RezeptKomponente komponente = komponenten.get(i);
                 if (komponente.zutatUndZubereitungIstVorhanden(serviertKlon)) { // ist die Komponente auch in der
