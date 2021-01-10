@@ -1,4 +1,4 @@
-package gui;
+package main.hilfsklassen.gui;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -6,7 +6,7 @@ import javax.swing.JPanel;
 import java.awt.Color;
 import java.awt.Dimension;
 
-class CommentPanel extends JPanel {
+public class CommentPanel extends JPanel {
 
     private static final long serialVersionUID = 13L;
 
@@ -16,7 +16,7 @@ class CommentPanel extends JPanel {
         this.setBackground(Color.white);
         this.setPreferredSize(new Dimension(w, h));
 
-        commentBox = new JLabel("Willkommen in der AlgoKueche");
+        commentBox = new JLabel("");
         this.add(commentBox);
         this.setVisible(true);
     }

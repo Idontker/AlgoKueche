@@ -1,4 +1,4 @@
-package main;
+package main.hilfsklassen.cooking;
 
 public class RezeptKomponente {
     private String zutat; // zutat

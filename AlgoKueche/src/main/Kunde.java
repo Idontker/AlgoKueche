@@ -1,6 +1,8 @@
 package main;
 
-import gui.GUI;
+import main.hilfsklassen.cooking.*;
+import main.hilfsklassen.gui.MainFrame;
+
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -26,7 +28,7 @@ public class Kunde {
 
     private void initMap() {
         menueMap = new HashMap<String, Rezept>();
-        File file = new File(GUI.pathToAlgoKueche + pathToRecipes);
+        File file = new File(MainFrame.pathToAlgoKueche + pathToRecipes);
         try {
             BufferedReader br = new BufferedReader(new FileReader(file));
 
@@ -59,7 +61,7 @@ public class Kunde {
         gemeldeterFehler = null;
         Rezept r = menueMap.get(t);
         if (r == null) {
-            System.out.println("Das Rezept " + t + " gibt es nicht");
+            System.err.println("Das Rezept " + t + " gibt es nicht");
         } else {
             if (r.wirdGewuerzt()) {
                 gewuerzt = false;
@@ -96,9 +98,7 @@ public class Kunde {
         if (serviertKlon.length() == 0) { // pruefe ob nichts serviert wurde.
             return new Feedback(Comment.serviereLeerenTeller, "", "");
         }
-        
-        System.out.println(serviertKlon);
-        
+
         for (int i = 0; i < komponenten.size(); i++) {
             RezeptKomponente komponente = komponenten.get(i);
             if (!komponente.zutatIstVorhanden(serviertKlon)) { // ist die Komponente nicht vorhanden?
@@ -122,7 +122,7 @@ public class Kunde {
                     // Komponente haette zubereitet werden sollen.
                 }
         }
-        System.out.println(serviertKlon);
+        //System.out.println(serviertKlon);
         if (serviertKlon.length() != 0) { // ist ausserhalb der benoetigten Komponenten noch etwas uebrig?
             for (int i = 0; i < komponenten.size(); i++) { // handelt es sich um eine Zutat aus dem Rezept die nur zu
                                                            // oft da ist? Falls ja, gib sie aus (falls sie auch noch

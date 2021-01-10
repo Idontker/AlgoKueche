@@ -5,8 +5,8 @@ import java.util.Arrays;
 
 import org.junit.Before;
 
-import main.Feedback;
-import gui.GUI;
+import main.hilfsklassen.cooking.Feedback;
+import main.GUI;
 import main.Lehrling;
 
 public abstract class FeedbackTest {

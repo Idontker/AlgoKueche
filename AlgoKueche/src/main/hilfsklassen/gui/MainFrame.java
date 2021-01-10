@@ -1,14 +1,19 @@
-package gui;
+package main.hilfsklassen.gui;
 
 import javax.swing.JFrame;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
 import java.awt.Component;
+import java.awt.Color;
 
-class MainFrame extends JFrame {
 
+public class MainFrame extends JFrame {
+    
     private static final long serialVersionUID = 2L;
+    public static String pathToAlgoKueche = "./hilfsklassen/";
+    
+	public static final Color DEFAULT_COLOR = Color.lightGray;
 
     // static values
     private static final double SCALE = 0.8;
@@ -36,7 +41,7 @@ class MainFrame extends JFrame {
     private void initCanvas() {
         canvas = new JPanel();
         canvas.setVisible(true);
-        canvas.setBackground(GUI.DEFAULT_COLOR);
+        canvas.setBackground(MainFrame.DEFAULT_COLOR);
 
         canvas.setLayout(new BoxLayout(canvas, BoxLayout.Y_AXIS));
     }

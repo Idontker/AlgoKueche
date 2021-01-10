@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 import org.junit.Assert;
 import org.junit.Test;
-import main.Comment;
-import main.Feedback;
+import main.hilfsklassen.cooking.Comment;
+import main.hilfsklassen.cooking.Feedback;
 
 public class GriechischerSalat extends FeedbackTest {
 
