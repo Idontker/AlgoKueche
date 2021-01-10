@@ -48,6 +48,7 @@ public class GUI {
 		}
 	}
 	private GUI() {
+		notActive = true;
 	}
 
 	private GUI(boolean dummy) {
