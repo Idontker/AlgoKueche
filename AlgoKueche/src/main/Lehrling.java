@@ -93,7 +93,7 @@ public class Lehrling {
     public void gibInTopf() {
         animation.goToFrame("gibInTopf", aktZutat + ")");
         zutatenInTopf.add(aktZutat);
-        if(wirdVerbraucht(aktZutat)){
+        if (wirdVerbraucht(aktZutat)) {
             aktZutat = "";
         }
     }
@@ -261,6 +261,9 @@ public class Lehrling {
             case "avocado":
             case "avocados":
                 zutat = "avocado";
+            case "fisch":
+            case "fische":
+                zutat = "fisch";
                 break;
             case "gurke":
             case "gurken":
