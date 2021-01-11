@@ -261,6 +261,7 @@ public class Lehrling {
             case "avocado":
             case "avocados":
                 zutat = "avocado";
+                break;
             case "fisch":
             case "fische":
                 zutat = "fisch";

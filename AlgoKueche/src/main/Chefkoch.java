@@ -42,7 +42,7 @@ public class Chefkoch {
      * Aufgabe zur Motivierung von Wiederholungen mit fester Anzahl
      */
 
-    public void familienReinerSalate() {
+    public void familienReinerSalat() {
         sam.wirKochenJetzt("reiner Salat Familienportion");
 
         sam.nimmAusSchrank("einen Salat");
@@ -64,7 +64,7 @@ public class Chefkoch {
     /**
      * Aufgabe zur Motivierung von Wiederholungen mit fester Anzahl mit for geloest
      */
-    public void familienReinerSalateBesser() {
+    public void familienReinerSalatBesser() {
         sam.wirKochenJetzt("reiner Salat Familienportion");
 
         for (int i = 0; i < 4; i++) {
