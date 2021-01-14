@@ -8,7 +8,7 @@ public class SlideMap extends HashMap<String, Slide> {
     private static final long serialVersionUID = 42L;
 
     public SlideMap() {
-        String[] methods = new String[] { "welcome", "wirKochenJetzt", "nimmAusSchrank", "stellZurueck", "schneide", "gibInTopf",
+        String[] methods = new String[] { "welcome", "wirKochenJetzt", "nimmAusSchrank", "stellZutatZurueck", "schneide", "gibInTopf",
                 "koche", "serviere", "reactionHappy", "reactionSad", "gebeAufTeller" };
         initSlides();
         for (String s : methods) {
