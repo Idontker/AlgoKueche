@@ -15,7 +15,7 @@ public class GUI {
 	private static final double SCALE = 0.8;
 	private static final int HEIGHT = (int) (SCALE * 720);
 	private static final int WIDTH = (int) (SCALE * HEIGHT / 9 * 16);
-	private static final int waittingTime = 1500;
+	private static final int waittingTime = 4000;
 
 	private final static Slide BADF00D = new Slide("badf00d", Color.black);
 
