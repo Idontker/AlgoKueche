@@ -17,7 +17,7 @@ public class GUI {
 	private static final int WIDTH = (int) (SCALE * HEIGHT / 9 * 16);
 	private static final int waittingTime = 4000;
 
-	private final static Slide BADF00D = new Slide("badf00d", Color.black);
+	private final static Slide BADF00D = new Slide("badf00d",  Color.black, "Folie nicht gefunden!");
 
 	// GUI Main
 	public static void main(String args[]) {
@@ -89,15 +89,10 @@ public class GUI {
 
 		Slide next = map.get(slideName);
 		if (next != null) {
-			showSlide(next);
-			if (next.moreInfo()) {
-				commentPanel.setText(next.getComment() + "        " + note);
-			} else {
-				commentPanel.setText(next.getComment());
-			}
+			showSlide(next,note);
 		} else {
 			System.err.println("Slide: " + slideName + " not found in Database");
-			showSlide(BADF00D);
+			showSlide(BADF00D,"");
 			commentPanel.setText(BADF00D.getComment());
 		}
 
@@ -134,12 +129,21 @@ public class GUI {
 			next = BADF00D;
 		}
 
-		showSlide(next);
-		commentPanel.setText(next.getComment() + "        " + f.gibFeedbackString());
+		String feedbackComment =next.getComment() + "        " + f.gibFeedbackString();
+		showSlide(next, feedbackComment);
+		System.out.println("---------------------------------------------------------");
+		System.out.println();
 	}
 
-	private void showSlide(Slide next) {
+	private void showSlide(Slide next, String note) {
 		actionPanel.showSlide(next);
+		String str = next.getComment();
+		if (next.moreInfo()) {
+			str += "     \t" + note;
+			commentPanel.setText(next.getComment() + "        " + note);
+		} 
+		commentPanel.setText(str);
+		System.out.println(str);
 	}
 
 	private void addInterruptAdapter() {
