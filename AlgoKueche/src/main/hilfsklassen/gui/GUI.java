@@ -137,7 +137,7 @@ public class GUI {
 				note = note.split("\\(")[0];
 			}
 			// first Letter to uppercase
-			note =  str.substring(0, 1).toUpperCase() + str.substring(1);
+			note = note.substring(0, 1).toUpperCase() + note.substring(1);
 			str += "     \t" + note;
 		}
 		commentPanel.setText(str);
