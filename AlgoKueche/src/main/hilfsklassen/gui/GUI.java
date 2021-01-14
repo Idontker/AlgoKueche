@@ -8,7 +8,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyAdapter;
 import java.util.concurrent.CountDownLatch;
- 
+
 public class GUI {
 	// static values
 	private static final double SCALE = 0.8;
@@ -16,7 +16,7 @@ public class GUI {
 	private static final int WIDTH = (int) (SCALE * HEIGHT / 9 * 16);
 	private static final int waittingTime = 4000;
 
-	private final static Slide BADF00D = new Slide("badf00d",  Color.black, "Folie nicht gefunden!");
+	private final static Slide BADF00D = new Slide("badf00d", Color.black, "Folie nicht gefunden!");
 
 	// GUI Main
 	public static void main(String args[]) {
@@ -46,6 +46,7 @@ public class GUI {
 			return new GUI(false);
 		}
 	}
+
 	private GUI() {
 		notActive = true;
 	}
@@ -88,10 +89,10 @@ public class GUI {
 
 		Slide next = map.get(slideName);
 		if (next != null) {
-			showSlide(next,note);
+			showSlide(next, note);
 		} else {
 			System.err.println("Slide: " + slideName + " not found in Database");
-			showSlide(BADF00D,"");
+			showSlide(BADF00D, "");
 			commentPanel.setText(BADF00D.getComment());
 		}
 
@@ -128,8 +129,7 @@ public class GUI {
 			next = BADF00D;
 		}
 
-		String feedbackComment =next.getComment() + "        " + f.gibFeedbackString();
-		showSlide(next, feedbackComment);
+		showSlide(next, f.gibFeedbackString());
 		System.out.println("---------------------------------------------------------");
 		System.out.println();
 	}
@@ -137,10 +137,16 @@ public class GUI {
 	private void showSlide(Slide next, String note) {
 		actionPanel.showSlide(next);
 		String str = next.getComment();
+
+		// remove annotitations on "how was it prepeared"
 		if (next.moreInfo()) {
+			if (note.contains("(")) {
+				note = note.split("\\(")[0];
+			}
+			// first Letter to uppercase
+			note =  str.substring(0, 1).toUpperCase() + str.substring(1);
 			str += "     \t" + note;
-			commentPanel.setText(next.getComment() + "        " + note);
-		} 
+		}
 		commentPanel.setText(str);
 		System.out.println(str);
 	}
