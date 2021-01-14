@@ -31,3 +31,4 @@ logfile.txt
 *.sql
 *.sqlite
 *.ctxt
+*.bluej
