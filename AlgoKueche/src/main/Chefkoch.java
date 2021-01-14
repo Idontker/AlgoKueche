@@ -1,7 +1,5 @@
 package main;
 
-import main.hilfsklassen.gui.MainFrame;
-
 /**
  * Das ist die Klasse Chefkoch, in der ihr arbeiten werdet. Alle
  * Arbeitsauftraege stehen auf dem jeweiligen Arbeitsblatt. Die Arbeitsschritte,
