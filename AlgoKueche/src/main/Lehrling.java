@@ -63,11 +63,11 @@ public class Lehrling {
     /**
      * Stellt die aktuelle Zutat zurueck.
      */
-    public void stellZurueck() {
+    public void stellZutatZurueck() {
         if (bearbeitet) {
             kunde.meldeFehler(Comment.verschwendung);
         }
-        animation.goToFrame("stellZurueck", aktZutat + ")");
+        animation.goToFrame("stellZutatZurueck", aktZutat + ")");
         aktZutat = "";
     }
 

@@ -27,7 +27,7 @@ public class SlideMap extends HashMap<String, Slide> {
         this.put("welcome", new Slide("welcome", Color.cyan, "Albert.png", "Willkommen in der AlgoKueche!"));
         this.put("wirKochenJetzt", new Slide("wirKochenJetzt", Color.blue, "sam.png", "Sam ist bereit!"));
         this.put("nimmAusSchrank", new Slide("nimmAusSchrank", Color.cyan, "nimmAusSchrank.png", "Sam hat aus dem Schrank genommen:",true));
-        this.put("stellZurueck", new Slide("stellZurueck", Color.gray, "nimmAusSchrank.png", "Sam hat zurueck gestellt:",true));
+        this.put("stellZutatZurueck", new Slide("stellZutatZurueck", Color.gray, "nimmAusSchrank.png", "Sam hat zurueck gestellt:",true));
         this.put("schneide", new Slide("schneide", Color.green, "schneide.png", "Sam hat geschnitten:",true));
         this.put("gibInTopf", new Slide("gibInTopf", Color.magenta, "gibInTopf.png", "Sam hat in den Topf geworfen:",true));
         this.put("koche", new Slide("koche", Color.orange, "kochen.jpg", "Sam hat den Topf kochen lassen:",true));

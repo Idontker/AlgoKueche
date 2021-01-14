@@ -32,7 +32,7 @@ public abstract class FeedbackTest {
     }
 
     protected void stellZurueck() {
-        lehrling.stellZurueck();
+        lehrling.stellZutatZurueck();
     }
 
     protected void schneide() {
