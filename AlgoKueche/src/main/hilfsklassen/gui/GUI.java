@@ -71,13 +71,6 @@ public class GUI {
 		goToFrame("welcome");
 	}
 
-	// public methods
-	public void samSays() {
-		if (notActive)
-			return;
-		// TODO: implement the (random) occurences of useless and funny comments of Sam
-	}
-
 	// TODO: rename method
 	public void goToFrame(String slideName) {
 		goToFrame(slideName, "");

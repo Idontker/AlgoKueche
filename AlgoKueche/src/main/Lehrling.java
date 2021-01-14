@@ -161,8 +161,10 @@ public class Lehrling {
         }
         if (aktZutat.length() != 0) {
             kunde.arbeitsschritt(aktZutat + ")");
+            animation.goToFrame("gebeAufTeller", aktZutat + ")");
         }
-        animation.goToFrame("gebeAufTeller", aktZutat + ")");
+        else{animation.goToFrame("gebeAufTeller", "nichts");}
+        
         if (wirdVerbraucht(aktZutat)) {
             aktZutat = "";
         }
