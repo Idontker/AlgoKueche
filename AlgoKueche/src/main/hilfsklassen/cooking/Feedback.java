@@ -10,7 +10,9 @@ public class Feedback {
 
     public Feedback(Comment fehlerTyp, String zutat, String zubereitungsArt) {
         this.fehlerTyp = fehlerTyp;
-        this.zutat = zutat;
+        if(!zutat.isEmpty()){
+            this.zutat = zutat.substring(0,1).toUpperCase() + zutat.substring(1);
+        }
         this.zubereitungsArt = zubereitungsArt;
     }
 
