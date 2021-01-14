@@ -1,5 +1,6 @@
 package main;
 
+import main.hilfsklassen.gui.GUI;
 import main.hilfsklassen.cooking.*;
 
 /**
