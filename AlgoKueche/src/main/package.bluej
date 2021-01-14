@@ -1,12 +1,12 @@
 #BlueJ package file
-dependency1.from=Lehrling
-dependency1.to=Kunde
+dependency1.from=Chefkoch
+dependency1.to=Lehrling
 dependency1.type=UsesDependency
 dependency2.from=Lehrling
-dependency2.to=GUI
+dependency2.to=Kunde
 dependency2.type=UsesDependency
-dependency3.from=Chefkoch
-dependency3.to=Lehrling
+dependency3.from=Lehrling
+dependency3.to=GUI
 dependency3.type=UsesDependency
 objectbench.height=89
 objectbench.width=760
@@ -52,7 +52,7 @@ target3.y=10
 target4.height=50
 target4.name=Lehrling
 target4.naviview.expanded=false
-target4.showInterface=false
+target4.showInterface=true
 target4.type=ClassTarget
 target4.width=130
 target4.x=110
