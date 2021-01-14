@@ -24,12 +24,12 @@ public class SlideMap extends HashMap<String, Slide> {
     }
 
     private void initSlides() {
-        this.put("welcome", new Slide("welcome", Color.cyan, "kueche.png", "Willkommen in der AlgoKueche!"));
-        this.put("wirKochenJetzt", new Slide("wirKochenJetzt", Color.blue, "book.png", "Sam ist bereit!"));
-        this.put("nimmAusSchrank", new Slide("nimmAusSchrank", Color.cyan, "fridge.png", "Sam hat aus dem Schrank genommen:",true));
-        this.put("stellZurueck", new Slide("stellZurueck", Color.gray, "fridge.png", "Sam hat zurueck gestellt:",true));
-        this.put("schneide", new Slide("schneide", Color.green, "schneiden.jpg", "Sam hat geschnitten:",true));
-        this.put("gibInTopf", new Slide("gibInTopf", Color.magenta, "topf.png", "Sam hat in den Topf geworfen:",true));
+        this.put("welcome", new Slide("welcome", Color.cyan, "Albert.png", "Willkommen in der AlgoKueche!"));
+        this.put("wirKochenJetzt", new Slide("wirKochenJetzt", Color.blue, "sam.png", "Sam ist bereit!"));
+        this.put("nimmAusSchrank", new Slide("nimmAusSchrank", Color.cyan, "nimmAusSchrank.png", "Sam hat aus dem Schrank genommen:",true));
+        this.put("stellZurueck", new Slide("stellZurueck", Color.gray, "nimmAusSchrank.png", "Sam hat zurueck gestellt:",true));
+        this.put("schneide", new Slide("schneide", Color.green, "schneide.png", "Sam hat geschnitten:",true));
+        this.put("gibInTopf", new Slide("gibInTopf", Color.magenta, "gibInTopf.png", "Sam hat in den Topf geworfen:",true));
         this.put("koche", new Slide("koche", Color.orange, "kochen.jpg", "Sam hat den Topf kochen lassen:",true));
         this.put("serviere", new Slide("serviere", Color.yellow, "glocke.jpg", "Sam hat das Gericht serviert!"));
         this.put("reactionHappy", new Slide("reactionHappy", new Color(50, 200, 10), "happy.png", "Der Kunde ist zufrieden!"));
