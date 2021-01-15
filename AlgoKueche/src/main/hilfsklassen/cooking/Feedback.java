@@ -12,6 +12,8 @@ public class Feedback {
         this.fehlerTyp = fehlerTyp;
         if(!zutat.isEmpty()){
             this.zutat = zutat.substring(0,1).toUpperCase() + zutat.substring(1);
+        } else {
+            this.zutat = "leer";
         }
         this.zubereitungsArt = zubereitungsArt;
     }
