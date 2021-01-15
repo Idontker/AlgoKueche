@@ -19,7 +19,7 @@
 *.rar
 *.tar
 *.zip
-#*.bluej
+# .bluej
 
 # build Settings #
 settings.json
@@ -31,3 +31,5 @@ logfile.txt
 *.sql
 *.sqlite
 *.ctxt
+*.bluej
+*.bluej
