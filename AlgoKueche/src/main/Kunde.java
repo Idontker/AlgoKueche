@@ -3,7 +3,6 @@ package main;
 import main.hilfsklassen.cooking.*;
 import main.hilfsklassen.gui.MainFrame;
 
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -14,6 +13,7 @@ import java.util.HashMap;
 public class Kunde {
     private final String pathToRecipes = "res/rezpete.txt";
     private String serviert;
+    private String rezeptName;
     private Boolean gewuerzt;
     private HashMap<String, Rezept> menueMap;
 
@@ -55,13 +55,16 @@ public class Kunde {
 
     }
 
-    public void rezeptauswahl(String t) {
+    public boolean rezeptauswahl(String t) {
+        rezeptName = t;
         t = t.toLowerCase();
         serviert = "";
         gemeldeterFehler = null;
         Rezept r = menueMap.get(t);
         if (r == null) {
             System.err.println("Das Rezept " + t + " gibt es nicht");
+            System.err.println("Der Code kann wird nicht abgebrochen und weiter ausgefuehrt!");
+            return false;
         } else {
             if (r.wirdGewuerzt()) {
                 gewuerzt = false;
@@ -70,6 +73,7 @@ public class Kunde {
             }
             komponenten = new ArrayList<RezeptKomponente>();
             komponenten.addAll(r.gibRezeptKomponenten());
+            return true;
         }
     }
 
@@ -82,7 +86,7 @@ public class Kunde {
     }
 
     public void setzeGewuerzt(boolean t) {
-        if(gewuerzt!=null) {
+        if (gewuerzt != null) {
             gewuerzt = t;
         }
     }
@@ -98,7 +102,11 @@ public class Kunde {
         if (serviertKlon.length() == 0) { // pruefe ob nichts serviert wurde.
             return new Feedback(Comment.serviereLeerenTeller, "", "");
         }
-        
+
+        if (komponenten == null) {
+            return new Feedback(Comment.unbekanntesRezept, rezeptName, "");
+        }
+
         for (int i = 0; i < komponenten.size(); i++) {
             RezeptKomponente komponente = komponenten.get(i);
             if (!komponente.zutatIstVorhanden(serviertKlon)) { // ist die Komponente nicht vorhanden?
@@ -110,21 +118,21 @@ public class Kunde {
         serviertKlon = new String(serviert);
         for (int i = 0; i < komponenten.size(); i++) {
             RezeptKomponente komponente = komponenten.get(i);
-                if (komponente.zutatUndZubereitungIstVorhanden(serviertKlon)) { // ist die Komponente auch in der
-                                                                                // richtigen
-                    // zubereitungsart vorhanden?
-                    serviertKlon = komponente.entferneZutatUndZubereitung(serviertKlon); // falls ja, entferne sie damit
-                                                                                         // auch
-                    // mehrfach benötigte Komponenten
-                    // abgefragt werden koennen.
-                } else {
-                    return new Feedback(Comment.falschZubereitet, komponente.gibZutat(), komponente.gibZubereitung());
-                    // return komponente.gibZutat()+" falsch zubereitet. Sollte
-                    // "+komponente.gibZubereitung()+" sein. :("; //falls nein, gebe aus wie die
-                    // Komponente haette zubereitet werden sollen.
-                }
+            if (komponente.zutatUndZubereitungIstVorhanden(serviertKlon)) { // ist die Komponente auch in der
+                                                                            // richtigen
+                // zubereitungsart vorhanden?
+                serviertKlon = komponente.entferneZutatUndZubereitung(serviertKlon); // falls ja, entferne sie damit
+                                                                                     // auch
+                // mehrfach benötigte Komponenten
+                // abgefragt werden koennen.
+            } else {
+                return new Feedback(Comment.falschZubereitet, komponente.gibZutat(), komponente.gibZubereitung());
+                // return komponente.gibZutat()+" falsch zubereitet. Sollte
+                // "+komponente.gibZubereitung()+" sein. :("; //falls nein, gebe aus wie die
+                // Komponente haette zubereitet werden sollen.
+            }
         }
-        //System.out.println(serviertKlon);
+        // System.out.println(serviertKlon);
         if (serviertKlon.length() != 0) { // ist ausserhalb der benoetigten Komponenten noch etwas uebrig?
             for (int i = 0; i < komponenten.size(); i++) { // handelt es sich um eine Zutat aus dem Rezept die nur zu
                                                            // oft da ist? Falls ja, gib sie aus (falls sie auch noch
