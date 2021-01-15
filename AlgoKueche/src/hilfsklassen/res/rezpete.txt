@@ -1,0 +1,17 @@
+reiner Salat:Salat(geschnitten)
+reiner Salat Familienportion: 4?Salat(geschnitten)
+Salat mit Essig und Oel:Salat(geschnitten) Oel Essig
+Salat mit Joghurtdressing:Salat(geschnitten) Schnittlauch(geschnitten) Joghurt
+Tomatensalat:Salat(geschnitten) Tomate(geschnitten)
+Tomatensalat extra Tomate:Salat(geschnitten) Tomate(geschnitten) Tomate(geschnitten)
+Tomatensalat Familienportion: 4?Salat(geschnitten) 4?Tomate(geschnitten)
+gTomatensalat:Salat(geschnitten) Tomate(geschnitten) Tomate(geschnitten) Essig:gewuerzt
+griechischer Salat:Salat(geschnitten) Tomate(geschnitten) Zwiebel(geschnitten) Gurke(geschnitten) Feta(geschnitten) Oel Olive
+vegetarischer Eintopf: Kartoffel(geschnitten,gekocht_10_ZusammenGekocht_Kartoffel_Paprika_Zwiebel) Zwiebel(geschnitten,gekocht_10_ZusammenGekocht_Kartoffel_Paprika_Zwiebel) Paprika(geschnitten,ekocht_10_ZusammenGekocht_Kartoffel_Paprika_Zwiebel)
+Eintopf: Fleisch(geschnitten,gekocht_10_ZusammenGekocht_Fleisch_Kartoffel_Paprika_Zwiebel) Kartoffel(geschnitten,gekocht_10_ZusammenGekocht_Fleisch_Kartoffel_Paprika_Zwiebel) Zwiebel(geschnitten,gekocht_10_ZusammenGekocht_Fleisch_Kartoffel_Paprika_Zwiebel) Paprika(geschnitten,gekocht_10_ZusammenGekocht_Fleisch_Kartoffel_Paprika_Zwiebel)
+Steak rare: Fleisch(geschnitten,gekocht_5_ZusammenGekocht_Fleisch) Kartoffel(geschnitten,gekocht_20_ZusammenGekocht_Kartoffel_Zwiebel) Zwiebel(geschnitten,gekocht_20_ZusammenGekocht_Kartoffel_Zwiebel)
+Steak medium: Fleisch(geschnitten,gekocht_8_ZusammenGekocht_Fleisch) Kartoffel(geschnitten,gekocht_20_ZusammenGekocht_Kartoffel_Zwiebel) Zwiebel(geschnitten,gekocht_20_ZusammenGekocht_Kartoffel_Zwiebel)
+Steak well-done: Fleisch(geschnitten,gekocht_10_ZusammenGekocht_Fleisch) Kartoffel(geschnitten,gekocht_20_ZusammenGekocht_Kartoffel_Zwiebel) Zwiebel(geschnitten,gekocht_20_ZusammenGekocht_Kartoffel_Zwiebel)
+Sushi: 3?Reis(gekocht_20_ZusammenGekocht_Reis) 3?Fisch(geschnitten) 3?Noriblatt
+Sushi mit Gurke: 3?Reis(gekocht_20_ZusammenGekocht_Reis) 3?Gurke(geschnitten) 3?Noriblatt
+California Role: 3?Reis(gekocht_20_ZusammenGekocht_Reis) 3?Fisch(geschnitten) 3?Avocado(geschnitten) 3?Noriblatt
