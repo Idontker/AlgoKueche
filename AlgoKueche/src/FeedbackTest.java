@@ -1,14 +1,11 @@
-package tests;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.junit.Before;
 
-import main.hilfsklassen.gui.MainFrame;
-import main.hilfsklassen.gui.GUI;
-import main.hilfsklassen.cooking.Feedback;
-import main.Lehrling;
+import hilfsklassen.gui.MainFrame;
+import hilfsklassen.gui.GUI;
+import hilfsklassen.cooking.Feedback;
 
 public abstract class FeedbackTest {
 

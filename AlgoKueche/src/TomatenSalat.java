@@ -1,10 +1,8 @@
-package tests;
-
 import java.util.ArrayList;
 
 import org.junit.Assert;
 import org.junit.Test;
-import main.hilfsklassen.cooking.Comment;
+import hilfsklassen.cooking.Comment;
 
 public class TomatenSalat extends FeedbackTest {
 

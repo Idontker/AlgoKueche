@@ -1,4 +1,4 @@
-package main.hilfsklassen.cooking;
+package hilfsklassen.cooking;
 
 public enum Comment { // in Summe 14
     richtig, falsch, schneidenOhneZutat, serviereLeerenTeller, falscheZutatEnthalten, mehrAlsEineZutatInDerHand,

@@ -1,8 +1,6 @@
-package tests;
-
 import org.junit.Assert;
 import org.junit.Test;
-import main.hilfsklassen.cooking.Comment;
+import hilfsklassen.cooking.Comment;
 
 public class EintopfTest extends FeedbackTest {
 

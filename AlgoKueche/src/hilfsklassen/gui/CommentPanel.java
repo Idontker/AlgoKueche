@@ -1,4 +1,4 @@
-package main.hilfsklassen.gui;
+package hilfsklassen.gui;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;

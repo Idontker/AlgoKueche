@@ -1,6 +1,6 @@
-package main.hilfsklassen.gui;
+package hilfsklassen.gui;
 
-import main.hilfsklassen.cooking.*;
+import hilfsklassen.cooking.*;
 
 import java.awt.Color;
 import java.awt.event.MouseEvent;

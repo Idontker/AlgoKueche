@@ -1,4 +1,4 @@
-package main.hilfsklassen.gui;
+package hilfsklassen.gui;
 
 import javax.swing.JFrame;
 import javax.swing.BoxLayout;

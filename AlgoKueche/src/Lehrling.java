@@ -1,7 +1,5 @@
-package main;
-
-import main.hilfsklassen.gui.GUI;
-import main.hilfsklassen.cooking.*;
+import hilfsklassen.gui.GUI;
+import hilfsklassen.cooking.*;
 
 /**
  * Die Klasse Lehrling

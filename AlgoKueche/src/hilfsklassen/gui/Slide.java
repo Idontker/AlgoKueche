@@ -1,4 +1,4 @@
-package main.hilfsklassen.gui;
+package hilfsklassen.gui;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;

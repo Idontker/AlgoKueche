@@ -1,4 +1,4 @@
-package main.hilfsklassen.cooking;
+package hilfsklassen.cooking;
 
 import java.util.ArrayList;
 

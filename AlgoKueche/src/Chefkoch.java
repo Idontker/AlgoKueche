@@ -1,4 +1,4 @@
-package main;
+import hilfsklassen.gui.MainFrame;
 
 /**
  * Das ist die Klasse Chefkoch, in der ihr arbeiten werdet. Alle
@@ -10,6 +10,12 @@ package main;
 
 public class Chefkoch {
     private Lehrling sam; // Alberts Lehrling Sam, er kocht die Rezepte
+
+    public static void main(String args[]){
+        MainFrame.pathToAlgoKueche = "C:/Users/Karol/proj/AlgoKueche/AlgoKueche/src/main/hilfsklassen/";
+        Chefkoch c = new Chefkoch();
+        c.reinerSalat();
+    }
 
     public Chefkoch() {
         sam = new Lehrling();

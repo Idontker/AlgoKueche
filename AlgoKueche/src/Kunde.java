@@ -1,7 +1,5 @@
-package main;
-
-import main.hilfsklassen.cooking.*;
-import main.hilfsklassen.gui.MainFrame;
+import hilfsklassen.cooking.*;
+import hilfsklassen.gui.MainFrame;
 
 import java.io.BufferedReader;
 import java.io.File;
