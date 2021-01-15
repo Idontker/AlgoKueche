@@ -12,7 +12,7 @@ import java.io.File;
 public class MainFrame extends JFrame {
     
     private static final long serialVersionUID = 2L;
-    public static String pathToAlgoKueche = new File("").getAbsolutePath() + "/main/hilfsklassen/";
+    public static String pathToAlgoKueche = new File("").getAbsolutePath() + "/hilfsklassen/";
     
 	public static final Color DEFAULT_COLOR = Color.lightGray;
 
