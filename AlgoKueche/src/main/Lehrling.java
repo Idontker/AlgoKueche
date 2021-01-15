@@ -43,7 +43,8 @@ public class Lehrling {
         zutatenInTopf = new ArrayList<String>();
         boolean fine = kunde.rezeptauswahl(rezept);
         if (!fine) {
-            animation.goToFrame("alert",  "Das Rezept \"" + rezept + "\" ist nicht bekannt. Du kannst das Programm abbrechen, oder trotzdem laufen lassen");
+            animation.goToFrame("alert", "Das Rezept \"" + rezept
+                    + "\" ist nicht bekannt. Du kannst das Programm abbrechen, oder trotzdem laufen lassen");
         }
         animation.goToFrame("wirKochenJetzt", rezept);
 
@@ -262,7 +263,9 @@ public class Lehrling {
 
             case "essig":
             case "feta":
+            case "joghurt":
             case "salz":
+            case "schnittlauch":
             case "reis":
                 // zutat = zutat
                 break;
@@ -274,30 +277,13 @@ public class Lehrling {
             case "fische":
                 zutat = "fisch";
                 break;
+            case "fleisch":
+            case "steak":
+                zutat = "fleisch";
+                break;
             case "gurke":
             case "gurken":
                 zutat = "gurke";
-                break;
-            case "�l":
-            case "oel":
-                zutat = "oel";
-                break;
-            case "oliven":
-            case "olive":
-                zutat = "olive";
-                break;
-            case "salat":
-            case "salate":
-            case "salatkopf":
-                zutat = "salat";
-                break;
-            case "tomate":
-            case "tomaten":
-                zutat = "tomate";
-                break;
-            case "zwiebel":
-            case "zwiebeln":
-                zutat = "zwiebel";
                 break;
             case "kartoffel":
             case "kartoffeln":
@@ -308,13 +294,29 @@ public class Lehrling {
             case "noriblatt":
                 zutat = "noriblatt";
                 break;
+            case "salat":
+            case "salate":
+            case "salatkopf":
+                zutat = "salat";
+                break;
+            case "tomate":
+            case "tomaten":
+                zutat = "tomate";
+                break;
+            case "oel":
+                zutat = "oel";
+                break;
+            case "oliven":
+            case "olive":
+                zutat = "olive";
+                break;
             case "paprika":
             case "paprikas":
                 zutat = "paprika";
                 break;
-            case "fleisch":
-            case "steak":
-                zutat = "fleisch";
+            case "zwiebel":
+            case "zwiebeln":
+                zutat = "zwiebel";
                 break;
             default:
                 zutat = null;
