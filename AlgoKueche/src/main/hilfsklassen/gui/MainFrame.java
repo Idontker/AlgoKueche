@@ -16,11 +16,6 @@ public class MainFrame extends JFrame {
     
 	public static final Color DEFAULT_COLOR = Color.lightGray;
 
-    // static values
-    private static final double SCALE = 0.8;
-    private static final int HEIGHT = (int) (SCALE * 720);
-    private static final int WIDTH = (int) (SCALE * HEIGHT / 9 * 16);
-
 
     private JPanel canvas;
 
