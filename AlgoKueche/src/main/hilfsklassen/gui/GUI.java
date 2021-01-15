@@ -118,6 +118,8 @@ public class GUI {
 			next = map.get("reactionHappy");
 		} else if (k == 2) {
 			next = map.get("reactionHappy");
+		} else if (k == 3) {
+			next = map.get("alert");
 		} else {
 			next = BADF00D;
 		}

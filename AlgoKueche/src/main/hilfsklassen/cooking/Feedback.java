@@ -10,7 +10,11 @@ public class Feedback {
 
     public Feedback(Comment fehlerTyp, String zutat, String zubereitungsArt) {
         this.fehlerTyp = fehlerTyp;
-        this.zutat = zutat.substring(0, 1).toUpperCase() + zutat.substring(1);
+        if (zutat.length() >= 2) {
+            this.zutat = zutat.substring(0, 1).toUpperCase() + zutat.substring(1);
+        } else {
+            this.zutat = zutat;
+        }
         this.zubereitungsArt = zubereitungsArt;
     }
 
@@ -40,6 +44,8 @@ public class Feedback {
             case unfertigeZutatenServiert:
             case zuVielServiert:
                 return 0; // negativ
+            case unbekanntesRezept:
+                return 3; // falsches Rezept
             default:
                 return -1;
         }
@@ -80,6 +86,8 @@ public class Feedback {
                 return "Es fehlt " + zutat + ". :[";
             case falschZubereitet:
                 return zutat + " wurde falsch zubereitet. Sollte eigentlich " + zubereitungsArt + " sein. :[";
+            case unbekanntesRezept:
+                return "Das folgende Rezept ist nicht bekannt: " + zutat;
             default:
                 return "[Error]";
         }

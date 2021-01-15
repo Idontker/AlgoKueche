@@ -41,8 +41,12 @@ public class Lehrling {
         aktWuerze = 42;
         bearbeitet = false;
         zutatenInTopf = new ArrayList<String>();
-        kunde.rezeptauswahl(rezept);
+        boolean fine = kunde.rezeptauswahl(rezept);
+        if (!fine) {
+            animation.goToFrame("alert",  "Das Rezept \"" + rezept + "\" ist nicht bekannt. Du kannst das Programm abbrechen, oder trotzdem laufen lassen");
+        }
         animation.goToFrame("wirKochenJetzt", rezept);
+
     }
 
     /**
@@ -162,9 +166,10 @@ public class Lehrling {
         if (aktZutat.length() != 0) {
             kunde.arbeitsschritt(aktZutat + ")");
             animation.goToFrame("gebeAufTeller", aktZutat + ")");
+        } else {
+            animation.goToFrame("gebeAufTeller", "nichts");
         }
-        else{animation.goToFrame("gebeAufTeller", "nichts");}
-        
+
         if (wirdVerbraucht(aktZutat)) {
             aktZutat = "";
         }
