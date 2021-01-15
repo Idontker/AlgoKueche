@@ -4,7 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import hilfsklassen.cooking.Comment;
 
-public class TomatenSalat extends FeedbackTest {
+public class TestTomatenSalat extends TestMain {
 
     @Test
     public void richtig_1() {

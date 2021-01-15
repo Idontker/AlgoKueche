@@ -6,7 +6,7 @@ import org.junit.Test;
 import hilfsklassen.cooking.Comment;
 import hilfsklassen.cooking.Feedback;
 
-public class GurkenSushiTest extends FeedbackTest {
+public class TestGurkenSushi extends TestMain {
 
     @Test
     public void richtig() {

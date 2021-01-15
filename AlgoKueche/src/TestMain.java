@@ -7,7 +7,7 @@ import hilfsklassen.gui.MainFrame;
 import hilfsklassen.gui.GUI;
 import hilfsklassen.cooking.Feedback;
 
-public abstract class FeedbackTest {
+public abstract class TestMain {
 
     protected Lehrling lehrling;
 

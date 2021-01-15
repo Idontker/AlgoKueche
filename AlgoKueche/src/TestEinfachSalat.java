@@ -2,7 +2,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import hilfsklassen.cooking.Comment;
 
-public class EinfachSalatTest extends FeedbackTest {
+public class TestEinfachSalat extends TestMain {
 
     @Test
     public void simpler_salat_1() {

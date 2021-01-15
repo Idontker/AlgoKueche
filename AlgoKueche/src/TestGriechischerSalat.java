@@ -5,7 +5,7 @@ import org.junit.Test;
 import hilfsklassen.cooking.Comment;
 import hilfsklassen.cooking.Feedback;
 
-public class GriechischerSalat extends FeedbackTest {
+public class TestGriechischerSalat extends TestMain {
 
     private void richtig_1(String z1, String z2, String z3, String z4, String z5) {
         wirKochenJetzt("griechischer Salat");
@@ -126,7 +126,7 @@ public class GriechischerSalat extends FeedbackTest {
     public void richtigTestAll() {
         String zutat[] = new String[] { "Tomate", "Zwiebel", "Gurke", "Salat", "Feta" };
 
-        ArrayList<int[]> perms = FeedbackTest.perms(zutat.length);
+        ArrayList<int[]> perms = TestMain.perms(zutat.length);
         for (int[] p : perms) {
             richtig_0(zutat[p[0]], zutat[p[1]], zutat[p[2]], zutat[p[3]], zutat[p[4]]);
             String call = "richtig(" + zutat[p[0]] + ", " + zutat[p[1]] + ", " + zutat[p[2]] + ", " + zutat[p[3]] + ", "
