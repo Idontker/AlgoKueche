@@ -26,7 +26,7 @@ public class Chefkoch {
      */
     public void reinerSalat() {
         sam.wirKochenJetzt("reiner Salat");
-        sam.nimmAusSchrank("einen Salat");
+        sam.nimmAusSchrank("Salat");
         sam.schneide();
         sam.gibZutatAufTeller();
         sam.serviere();
