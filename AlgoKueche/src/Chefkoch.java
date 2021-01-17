@@ -20,7 +20,6 @@ public class Chefkoch {
     }
 
     public Chefkoch() {
-        MainFrame.pathToAlgoKueche = "./main/hilfsklassen/";
         sam = new Lehrling();
     }
 
