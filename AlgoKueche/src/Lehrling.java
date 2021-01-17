@@ -148,6 +148,7 @@ public class Lehrling {
             zusammenGekocht += "_" + zutatenInTopf.get(i).substring(0, zutatenInTopf.get(i).indexOf("("));
         }
         zusammenGekocht += ")";
+        zusammenGekocht=zusammenGekocht.toLowerCase();
         for (int i = 0; i < zutatenInTopf.size(); i++) {
             kunde.arbeitsschritt(zutatenInTopf.get(i) + zusammenGekocht);
         }
