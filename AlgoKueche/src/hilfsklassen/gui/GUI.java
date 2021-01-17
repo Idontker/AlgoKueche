@@ -14,7 +14,7 @@ public class GUI {
 	public static final double SCALE = 0.4;
 	public static final int HEIGHT = (int) (SCALE * 2000);
 	public static final int WIDTH = (int) (SCALE * 1500);
-	private static final int waittingTime = 4000;
+	private static final int WAITTING_TIME = 4000;
 
 	private final static Slide BADF00D = new Slide("badf00d", Color.black, "Folie nicht gefunden!");
 
@@ -53,8 +53,6 @@ public class GUI {
 
 	private GUI(boolean dummy) {
 		map = new SlideMap();
-		System.out.println(HEIGHT);
-		System.out.println(WIDTH);
 
 		frame = new MainFrame();
 
@@ -96,7 +94,7 @@ public class GUI {
 		(new Thread() {
 			@Override
 			public void run() {
-				awaitCountdown(waittingTime, countDownLatch);
+				awaitCountdown(WAITTING_TIME, countDownLatch);
 			}
 		}).start();
 
