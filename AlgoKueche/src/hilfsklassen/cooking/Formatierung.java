@@ -26,7 +26,7 @@ public class Formatierung {
             "Essig",    "Feta",     "Joghurt",  "Salz",     "Reis",     "Schnittlauch",
             "Avocado",  "Fisch",    "Fleisch",  "Steak",    "Gurke",    "Kartoffel",
             "Blatt",    "Nori",     "Tomate",   "Salat",    "Oel",      "Noriblatt",
-            "Olive",    "Paprika",  "Zwiebel",  "Salatkopf"
+            "Olive",    "Paprika",  "Zwiebel",  "Salatkopf", "Burgerpatty", "Kaesescheibe", "Zucchini", "Broetchen"
         };
         String[] artikel = new String[] { "ein", "eine", "einen", "der", "die", "das" };
         String[] str = zutat.split(" ");
