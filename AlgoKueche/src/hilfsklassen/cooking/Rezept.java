@@ -8,7 +8,7 @@ public class Rezept {
     private boolean wirdGewuerzt;
 
     public Rezept(String name, String zutatenString, boolean wirdGewuerzt) {
-        this.name = Formatierung.formatiere(name);
+        this.name = name;
         this.wirdGewuerzt = wirdGewuerzt;
         rezeptKomponenten = new ArrayList<RezeptKomponente>();
 
