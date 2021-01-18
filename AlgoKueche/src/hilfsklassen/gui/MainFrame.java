@@ -31,7 +31,7 @@ public class MainFrame extends JFrame {
     private void initFrame() {
         this.setTitle("AlgoKueche");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(WIDTH, HEIGHT);
+        this.setSize(GUI.WIDTH, GUI.HEIGHT);
     }
 
     private void initCanvas() {
