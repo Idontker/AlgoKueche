@@ -14,7 +14,7 @@ public class Chefkoch {
     public static void main(String args[]) {
         // If your or your IDE complie the files right here, you can uncomment this line
         // Otherwise set this path to the hilfsklassen folder.
-        MainFrame.pathToAlgoKueche = "C:/Users/Karol/proj/AlgoKueche/AlgoKueche/src/main/hilfsklassen/";
+        MainFrame.pathToAlgoKueche = "C:/Users/Karol/proj/AlgoKueche/AlgoKueche/src/hilfsklassen/";
         Chefkoch c = new Chefkoch();
         c.sushi();
     }
