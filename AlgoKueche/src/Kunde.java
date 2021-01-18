@@ -40,7 +40,7 @@ public class Kunde {
                     continue;
                 }
                 boolean wirdGewuert = s.length == 3;
-                String name = s[0];
+                String name = Formatierung.formatiere(s[0]);
                 String zutaten = s[1].trim();
                 menueMap.put(name, new Rezept(name, zutaten, wirdGewuert));
                 i++;
@@ -55,7 +55,6 @@ public class Kunde {
 
     public boolean rezeptauswahl(String t) {
         rezeptName = t;
-        t = t.toLowerCase();
         serviert = "";
         gemeldeterFehler = null;
         Rezept r = menueMap.get(t);
