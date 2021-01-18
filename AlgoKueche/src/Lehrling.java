@@ -39,7 +39,7 @@ public class Lehrling {
         aktWuerze = 42;
         bearbeitet = false;
         zutatenInTopf = new ArrayList<String>();
-        boolean fine = kunde.rezeptauswahl(rezept);
+        boolean fine = kunde.rezeptauswahl(Formatierung.formatiere(rezept));
         if (!fine) {
             animation.goToFrame("alert", "Das Rezept \"" + rezept
                     + "\" ist nicht bekannt. Du kannst das Programm abbrechen, oder trotzdem laufen lassen");
@@ -148,6 +148,7 @@ public class Lehrling {
             zusammenGekocht += "_" + zutatenInTopf.get(i).substring(0, zutatenInTopf.get(i).indexOf("("));
         }
         zusammenGekocht += ")";
+        zusammenGekocht=zusammenGekocht.toLowerCase();
         for (int i = 0; i < zutatenInTopf.size(); i++) {
             kunde.arbeitsschritt(zutatenInTopf.get(i) + zusammenGekocht);
         }
@@ -231,9 +232,9 @@ public class Lehrling {
      */
     private boolean wirdVerbraucht(String zutat) {
         switch (zutat) {
-            case "oel(":
-            case "essig(":
-            case "salz(":
+            case "Oel(":
+            case "Essig(":
+            case "Salz(":
                 return false;
             default:
                 return true;
@@ -245,86 +246,12 @@ public class Lehrling {
      * salat, oel, zwiebel, gurke, oliven, feta, salz, essig
      */
     private String entscheideZutat(String eingabe) {
-        String artikel[] = new String[] { "ein", "eine", "einen", "der", "die", "das" };
-        String zutat = "";
-
-        eingabe = eingabe.trim().toLowerCase();
-        String str[] = eingabe.split(" ");
-
-        if (str.length == 2 && Arrays.asList(artikel).contains(str[0])) {
-            zutat = str[1];
-        } else if (str.length == 1) {
-            zutat = str[0];
-        }
-
-        switch (zutat) {
-
-            case "essig":
-            case "feta":
-            case "joghurt":
-            case "salz":
-            case "schnittlauch":
-            case "reis":
-                // zutat = zutat
-                break;
-            case "avocado":
-            case "avocados":
-                zutat = "avocado";
-                break;
-            case "fisch":
-            case "fische":
-                zutat = "fisch";
-                break;
-            case "fleisch":
-            case "steak":
-                zutat = "fleisch";
-                break;
-            case "gurke":
-            case "gurken":
-                zutat = "gurke";
-                break;
-            case "kartoffel":
-            case "kartoffeln":
-                zutat = "kartoffel";
-                break;
-            case "blatt":
-            case "nori":
-            case "noriblatt":
-                zutat = "noriblatt";
-                break;
-            case "salat":
-            case "salate":
-            case "salatkopf":
-                zutat = "salat";
-                break;
-            case "tomate":
-            case "tomaten":
-                zutat = "tomate";
-                break;
-            case "oel":
-                zutat = "oel";
-                break;
-            case "oliven":
-            case "olive":
-                zutat = "olive";
-                break;
-            case "paprika":
-            case "paprikas":
-                zutat = "paprika";
-                break;
-            case "zwiebel":
-            case "zwiebeln":
-                zutat = "zwiebel";
-                break;
-            default:
-                zutat = null;
-                break;
-        }
-        if (zutat != null) {
-            return zutat + "(";
-        } else {
+        String zutat = Formatierung.formatiereZutat(eingabe);
+        if (zutat.equals("BADF00D")) {
             kunde.meldeFehler(Comment.zutatUnbekannt);
-            return "badf00d(";
+            return "BADF00D(";
+        } else {
+            return zutat + "(";
         }
     }
 }

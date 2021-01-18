@@ -8,7 +8,7 @@ public class Rezept {
     private boolean wirdGewuerzt;
 
     public Rezept(String name, String zutatenString, boolean wirdGewuerzt) {
-        this.name = name;
+        this.name = Formatierung.formatiere(name);
         this.wirdGewuerzt = wirdGewuerzt;
         rezeptKomponenten = new ArrayList<RezeptKomponente>();
 
@@ -20,12 +20,13 @@ public class Rezept {
             if (zutat.contains("?")) {
                 String tmp[] = zutat.split("\\?");
                 if (tmp.length > 2) {
-                    System.err.println("Error in " + name + ": in " + zutat + " sind haben zu viele _ und wird daher übersprungen");
+                    System.err.println("Error in " + name + ": in " + zutat + " sind zu viele ? und wird daher übersprungen");
                     continue;
                 }
                 wdh = Integer.parseInt(tmp[0]);
                 zutat = tmp[1];
             }
+            zutat = Formatierung.formatiere(zutat);
             for (int j = 0; j < wdh; j++) {
                 RezeptKomponente r = createRezeptKomponente(zutat);
                 rezeptKomponenten.add(r);

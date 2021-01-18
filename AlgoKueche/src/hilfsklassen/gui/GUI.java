@@ -11,10 +11,10 @@ import java.util.concurrent.CountDownLatch;
 
 public class GUI {
 	// static values
-	public static final double SCALE = 0.8;
-	public static final int HEIGHT = (int) (SCALE * 720);
-	public static final int WIDTH = (int) (HEIGHT * 3 / 4);
-	private static final int waittingTime = 4000;
+	public static final double SCALE = 0.4;
+	public static final int HEIGHT = (int) (SCALE * 2000);
+	public static final int WIDTH = (int) (SCALE * 1500);
+	private static final int WAITTING_TIME = 4000;
 
 	private final static Slide BADF00D = new Slide("badf00d", Color.black, "Folie nicht gefunden!");
 
@@ -94,7 +94,7 @@ public class GUI {
 		(new Thread() {
 			@Override
 			public void run() {
-				awaitCountdown(waittingTime, countDownLatch);
+				awaitCountdown(WAITTING_TIME, countDownLatch);
 			}
 		}).start();
 
