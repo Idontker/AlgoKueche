@@ -6,7 +6,6 @@ import hilfsklassen.cooking.*;
  * @author Karol Bakas, Stefan Gebhart, Silas Kuder
  */
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Lehrling {
 
