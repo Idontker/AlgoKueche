@@ -33,7 +33,18 @@ public class Kunde {
             String line;
             int i = 0;
             while ((line = br.readLine()) != null) {
+                int maxTime = -1;
                 line = line.toLowerCase();
+                if (line.contains("!")) {
+                    String[] tmp = line.split("!");
+                    if (tmp.length != 2) {
+                        System.err.println("Error reading line " + i + "\tSyntax for recepie is brocken, too many !");
+                        continue;
+                    }
+                    maxTime = Integer.parseInt(tmp[0]);
+                    line = tmp[1];
+                }
+
                 String s[] = line.split(":");
                 if (s.length != 2 && s.length != 3) {
                     System.err.println("Error reading line " + i + "\tSyntax for recepie is brocken, too many :");
@@ -42,7 +53,7 @@ public class Kunde {
                 boolean wirdGewuert = s.length == 3;
                 String name = Formatierung.formatiere(s[0]);
                 String zutaten = s[1].trim();
-                menueMap.put(name, new Rezept(name, zutaten, wirdGewuert));
+                menueMap.put(name, new Rezept(name, zutaten, wirdGewuert, maxTime));
                 i++;
             }
             br.close();
