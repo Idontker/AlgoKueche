@@ -42,17 +42,21 @@ public class Slide {
 		}
 	}
 
-	public Slide(String method, Color c, String imageName, String comment,boolean moreInfo) {
-		this(method,c,imageName,comment);
+	public Slide(String method, Color c, String imageName, String comment, boolean moreInfo) {
+		this(method, c, imageName, comment);
 		this.moreInfo = moreInfo;
 	}
 
-	public String getComment(){
+	public String getComment() {
 		return comment;
 	}
 
-	public boolean moreInfo(){
+	public boolean moreInfo() {
 		return moreInfo;
+	}
+
+	public String getMethod() {
+		return method;
 	}
 
 	@Override
