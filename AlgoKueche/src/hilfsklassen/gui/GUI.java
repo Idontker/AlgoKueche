@@ -191,16 +191,16 @@ public class GUI {
                 public void keyPressed(KeyEvent e) {
                     if (clickAble) {
                         if (e.getKeyCode() == KeyEvent.VK_RIGHT
-                                || e.getKeyCode() == KeyEvent.VK_KP_RIGHT) {
+                                || e.getKeyCode() == KeyEvent.VK_KP_RIGHT) { // skip one Slide
                             clickAble = false;
                             GUI.awaitCountdown(50, countDownLatch);
                         }
-                        if(e.getKeyCode() == KeyEvent.VK_SPACE){
+                        if(e.getKeyCode() == KeyEvent.VK_SPACE){ // fast forward until released
                             clickAble = false;
                             GUI.awaitCountdown(50, countDownLatch);
                             waitingTime = 250;
                         }
-                        if(e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+                        if(e.getKeyCode() == KeyEvent.VK_ESCAPE) { // Skip to feedback or alert
                             clickAble = false;
                             GUI.awaitCountdown(50, countDownLatch);
                             waitingTime = 2000;
@@ -213,7 +213,7 @@ public class GUI {
 
                 @Override
                 public void keyReleased(KeyEvent e) {
-                    if(e.getKeyCode() == KeyEvent.VK_SPACE){
+                    if(e.getKeyCode() == KeyEvent.VK_SPACE){ // end fast forward
                         clickAble = true;
                         waitingTime = 4000;
                     }
