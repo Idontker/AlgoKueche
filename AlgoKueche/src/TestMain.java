@@ -49,7 +49,7 @@ public abstract class TestMain {
     }
 
     protected boolean istGewuerzt() {
-        return lehrling.istGewuerzt();
+        return lehrling.brauchtMehrWuerze();
     }
 
     protected void legAufTeller() {
