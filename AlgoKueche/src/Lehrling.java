@@ -154,8 +154,9 @@ public class Lehrling {
     /**
      * Platziert den Inhalt des Topfes auf dem Servierteller.
      */
-    public void gibTopfAufTeller() {
+    public void gibTopfinhaltAufTeller() {
         schrittZaehler();
+        String ausgabe="";
         for (int i = 0; i < zutatenInTopf.size(); i++) {
             if (!zutatenInTopf.get(i).contains("gekocht_")) {
                 String zutat = zutatenInTopf.get(i);
@@ -166,11 +167,21 @@ public class Lehrling {
                 zutatenInTopf.remove(i);
                 i--;
             }
+            ausgabe+=zutatenInTopf.get(i).substring(0, zutatenInTopf.get(i).indexOf("("))+", ";
+        }
+        if(ausgabe.length()!=0) {
+            ausgabe=ausgabe.substring(0,ausgabe.length()-2);
         }
         zutatenInTopf.sort(null);
         String zusammenGekocht = "_zusammengekocht";
+        boolean istReisSchonDrin = false;
         for (int i = 0; i < zutatenInTopf.size(); i++) {
-            zusammenGekocht += "_" + zutatenInTopf.get(i).substring(0, zutatenInTopf.get(i).indexOf("("));
+            if(!zutatenInTopf.get(i).contains("Reis")||istReisSchonDrin==false) {
+                zusammenGekocht += "_" + zutatenInTopf.get(i).substring(0, zutatenInTopf.get(i).indexOf("("));
+                if(zutatenInTopf.get(i).contains("Reis")) {
+                    istReisSchonDrin=true;
+                }
+            }
         }
         zusammenGekocht += ")";
         zusammenGekocht = zusammenGekocht.toLowerCase();
@@ -178,7 +189,7 @@ public class Lehrling {
             kunde.arbeitsschritt(zutatenInTopf.get(i) + zusammenGekocht);
         }
         zutatenInTopf.clear();
-        animation.goToFrame("gebeAufTeller", "alles aus dem Topf");
+        animation.goToFrame("gebeAufTeller", ausgabe);
     }
 
     /**
