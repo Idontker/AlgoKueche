@@ -3,6 +3,6 @@ package hilfsklassen.cooking;
 public enum Comment { // in Summe 14
     richtig, falsch, schneidenOhneZutat, serviereLeerenTeller, falscheZutatEnthalten, mehrAlsEineZutatInDerHand,
     unfertigeZutatenServiert, zuVielServiert, verschwendung, zutatUnbekannt, kochtLeerenTopf, falschGewuerzt,
-    fehlendeZutat, falschZubereitet, versalzen, nichtAufgeraeumt, rollenOhneZutat, unbekanntesRezept
+    fehlendeZutat, falschZubereitet, versalzen, nichtAufgeraeumt, rollenOhneZutat, unbekanntesRezept, satt
 
 }

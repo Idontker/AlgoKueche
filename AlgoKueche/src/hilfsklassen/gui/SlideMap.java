@@ -9,7 +9,7 @@ public class SlideMap extends HashMap<String, Slide> {
 
     public SlideMap() {
         String[] methods = new String[] { "welcome", "wirKochenJetzt", "nimmAusSchrank", "stellZutatZurueck", "schneide", "gibInTopf",
-                "koche", "serviere", "reactionHappy", "reactionSad", "gebeAufTeller", "alert" };
+                "koche", "serviere", "reactionHappy", "reactionSad", "gebeAufTeller", "gutGewuerzt", "schlechtGewuerzt", "alert", "sumoHungrig", "sumoSatt" };
         initSlides();
         for (String s : methods) {
             if (!this.containsKey(s)) {
@@ -33,7 +33,7 @@ public class SlideMap extends HashMap<String, Slide> {
         this.put(       "stellZutatZurueck",   
             new Slide(  "stellZutatZurueck",  Color.gray,     "nimmAusSchrank.png",   "Sam hat zurueck gestellt:",true));
         this.put(       "schneide",            
-            new Slide(  "schneide",           Color.green,    "schneideSalat.png",         "Sam hat geschnitten:",true));
+            new Slide(  "schneide",           Color.green,    "schneideSalat.png",    "Sam hat geschnitten:",true));
         this.put(       "gibInTopf",           
             new Slide(  "gibInTopf",          Color.magenta,  "gibInTopf.png",        "Sam hat in den Topf geworfen:",true));
         this.put(       "koche",               
@@ -46,12 +46,16 @@ public class SlideMap extends HashMap<String, Slide> {
             new Slide(  "reactionSad",        Color.red,      "sad.png",              "Der Kunde ist unzufrieden!",true));
         this.put(       "gebeAufTeller",       
             new Slide(  "gebeAufTeller",      Color.pink,     "gibZutatAufTeller.png","Sam hat folgendes dem Teller beigefuegt:",true));
-        this.put(       "istGewuerztTrue",     
-            new Slide(  "istGewuerztTrue",    Color.green,    "abschmecken.png",      "Sam hat abgeschmeckt: Es schmeckt lecker!"));
-        this.put(       "istGewuerztFalse",    
-            new Slide(  "istGewuerztFalse",   Color.red,      "abschmecken.png",      "Sam hat abgeschmeckt: Es schmeckt nicht gut!"));
+        this.put(       "gutGewuerzt",     
+            new Slide(  "gutGewuerzt",        Color.green,    "abschmecken.png",      "Sam hat abgeschmeckt: Es schmeckt lecker!"));
+        this.put(       "schlechtGewuerzt",    
+            new Slide(  "schlechtGewuerzt",   Color.red,      "abschmecken.png",      "Sam hat abgeschmeckt: Es schmeckt nicht gut!"));
         this.put(       "alert",               
             new Slide(  "alert",              Color.DARK_GRAY, "alert.png",           "Ein Fehler ist aufgetreten: ", true));
+        this.put(       "sumoHungrig",             
+            new Slide(  "sumoHungrig",        Color.cyan,     "sumoHungrig.png",      "Der Sumoringer ist noch hungrig."));
+        this.put(       "sumoSatt",             
+            new Slide(  "sumoSatt",           Color.cyan,     "sumoSatt.png",         "Der Sumoringer ist endlich satt."));
     }
 
 }

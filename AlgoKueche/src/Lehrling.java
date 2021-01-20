@@ -17,6 +17,7 @@ public class Lehrling {
     private boolean bearbeitet;
     private boolean serviert;
     private int schritte;
+    private int aktHunger;
 
     /**
      * Initialisiert einen Lehrling.
@@ -27,7 +28,8 @@ public class Lehrling {
     }
 
     /**
-     * Muss zu Beginn jedes Rezepts aufgerufen werden.
+     * Muss zu Beginn jedes Rezepts aufgerufen werden, damit die Korrektheit der Zubereitung ueberprüft werden kann.
+     * Nutzt genau den Namen, der auf dem Arbeitsblatt steht.
      * 
      * @param rezept der Name des Rezepts. Achtet darauf, dass es genauso
      *               geschrieben ist, wie auf dem Arbeitsblatt.
@@ -37,6 +39,7 @@ public class Lehrling {
         serviert = false;
         aktZutat = "";
         aktWuerze = 42;
+        aktHunger = 42;
         bearbeitet = false;
         zutatenInTopf = new ArrayList<String>();
         int[] ret = kunde.rezeptauswahl(Formatierung.formatiere(rezept));
@@ -204,27 +207,56 @@ public class Lehrling {
     /**
      * Probiert, ob das Gericht bereits ausreichend gewuerzt ist.
      * 
-     * @return false, wenn noch nicht genug gewuerzt wurde und true, sobald genug
-     *         gewuerzt wurde (oder bereits zu viel)
+     * @return true, wenn noch weiter gewuerzt werden muss. Und false, wenn genug gewuerzt wurde.
+     * 
      */
-    public boolean istGewuerzt() {
+    public boolean brauchtMehrWuerze() {
         schrittZaehler();
         if (aktWuerze == 0) {
             kunde.setzeGewuerzt(true);
-            animation.goToFrame("istGewuerztTrue");
-            return true;
-        }
-        if (aktWuerze > 0) {
-            animation.goToFrame("istGewuerztFalse");
-            kunde.setzeGewuerzt(false);
+            animation.goToFrame("gutGewuerzt");
             return false;
         }
-        if (aktWuerze < 0) {
-            animation.goToFrame("istGewuerztFalse");
+        if (aktWuerze > 0) {
+            animation.goToFrame("schlechtGewuerzt");
             kunde.setzeGewuerzt(false);
-            kunde.meldeFehler(Comment.versalzen);
             return true;
         }
+        if (aktWuerze < 0) {
+            animation.goToFrame("schlechtGewuerzt");
+            kunde.setzeGewuerzt(false);
+            kunde.meldeFehler(Comment.versalzen);
+            return false;
+        }
+        return false;
+    }
+
+    /**
+     * Fragt den Kunden, ob er noch immer Hunger hat
+     * 
+     * @return true, wenn der Kunde satt ist, false wenn er noch Hunger hat
+     *         
+     */
+    public boolean istDerKundeSatt() {
+        schrittZaehler();
+        if (aktHunger == 42) {
+            aktHunger = (int) (Math.random() * 8) + 3;
+        }
+        
+        if (aktHunger == 0) {
+            animation.goToFrame("sumoSatt");
+            return true;
+        }
+        if (aktHunger > 0) {
+            animation.goToFrame("sumoHungrig");
+            return false;
+        }
+        if (aktHunger < 0) {
+            animation.goToFrame("sumoSatt");
+            kunde.meldeFehler(Comment.satt);
+            return true;
+        }
+        aktHunger--;
         return true;
     }
 
