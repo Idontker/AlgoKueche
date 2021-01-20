@@ -52,6 +52,7 @@ public class Lehrling {
     private void schrittZaehler() {
         schritte--;
         if (schritte <= 0) {
+            animation.setIsEndAlert(true); //don't make the animation wait if next slide is the last slide and is a programm ending error
             animation.goToFrame("alert", "Das dauert zu lange. Vermutlich hast du eine endlose Wiederholung.");
             RuntimeException e = new EndlosWiederholung(
                     "Das Programm wurde abgebrochen, da es deutlich zu lange braucht.");
