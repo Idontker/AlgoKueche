@@ -86,6 +86,9 @@ public class GUI {
         if (notActive)
             return;
         Slide next = map.get(slideName);
+        if(slideName.equals("wirKochenJetzt")) {
+            skipping=false;
+        }
         if(!skipping||slideName.equals("alert")) {
             if (next != null) {
                 showSlide(next, note);
@@ -205,8 +208,6 @@ public class GUI {
                             GUI.awaitCountdown(50, countDownLatch);
                             waitingTime = 2000;
                             skipping=true;
-                        } else {
-                            skipping=false;
                         }
                     }
                 }
