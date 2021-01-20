@@ -35,6 +35,7 @@ public class GUI {
 
 	private static CountDownLatch countDownLatch;
 	private boolean clickAble;
+	private boolean skipping=false;
 	private boolean isEndAlert=false;
 
 	// for testing
