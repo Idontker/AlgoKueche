@@ -5,14 +5,22 @@ import javax.swing.JPanel;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
 
 public class CommentPanel extends JPanel {
 
     private static final long serialVersionUID = 13L;
 
     private JLabel commentBox;
+    private HashSet<String> acceptedSlides;
 
     public CommentPanel(int w, int h) {
+        List<String> tmp = Arrays
+                .asList(new String[] { "gebeAufTeller", "gibInTopf", "reactionSad", "reactionHappy", "alert" });
+        acceptedSlides = new HashSet<String>(tmp);
+
         this.setBackground(Color.white);
         this.setPreferredSize(new Dimension(w, h));
 
@@ -29,8 +37,7 @@ public class CommentPanel extends JPanel {
         String str = buildOutputString(next, note);
 
         commentBox.setText(str);
-        // TODO: add commit aus 22.01
-        if (next.getMethod().equals("gebeAufTeller") || next.getMethod().equals("gibInTopf")) {
+        if (acceptedSlides.contains(next.getMethod())) {
             System.out.println(str);
         }
     }
