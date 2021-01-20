@@ -121,18 +121,7 @@ public class GUI {
                 skipping = false;
             }
         } else {
-            if (next.getMethod().equals("gebeAufTeller") || next.getMethod().equals("gibInTopf")) { //TODO: add commit aus 22.01
-                String str = next.getComment();
-                if (next.moreInfo()) {
-                    if (note.contains("(")) {
-                        note = note.split("\\(")[0];
-                    }
-                    // first Letter to uppercase
-                    note = note.substring(0, 1).toUpperCase() + note.substring(1);
-                    str += "     \t" + note;
-                }
-                System.out.println(str);
-            }
+           commentPanel.showComment(next, note);
         }
     }
 
@@ -159,22 +148,8 @@ public class GUI {
     }
 
     private void showSlide(Slide next, String note) {
-        actionPanel.showSlide(next);
-        String str = next.getComment();
-
-        // remove annotitations on "how was it prepeared"
-        if (next.moreInfo()) {
-            if (note.contains("(")) {
-                note = note.split("\\(")[0];
-            }
-            // first Letter to uppercase
-            note = note.substring(0, 1).toUpperCase() + note.substring(1);
-            str += "     \t" + note;
-        }
-        commentPanel.setText(str);
-        if (next.getMethod().equals("gebeAufTeller") || next.getMethod().equals("gibInTopf")) { //TODO: add commit aus 22.01
-            System.out.println(str);
-        }
+		actionPanel.showSlide(next);
+		commentPanel.showComment(next, note);
     }
 
     private void addInterruptAdapter() {
