@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Kunde {
-    private final String pathToRecipes = "res/rezpete.txt";
+    private final String pathToRecipes = "res/rezepte.txt";
     private String serviert;
     private String rezeptName;
     private Boolean gewuerzt;
