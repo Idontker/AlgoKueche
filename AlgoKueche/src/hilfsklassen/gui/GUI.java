@@ -35,6 +35,7 @@ public class GUI {
 
 	private static CountDownLatch countDownLatch;
 	private boolean clickAble;
+	private boolean isEndAlert=false;
 
 	// for testing
 	public static boolean runningTestcase = false;
@@ -70,6 +71,10 @@ public class GUI {
 		frame.setVisible(true);
 		goToFrame("welcome");
 	}
+	
+	public void setIsEndAlert(boolean b) {
+        	isEndAlert=b;
+    	}
 
 	// TODO: rename method
 	public void goToFrame(String slideName) {
@@ -79,32 +84,39 @@ public class GUI {
 	public void goToFrame(String slideName, String note) {
 		if (notActive)
 			return;
-
-		Slide next = map.get(slideName);
-		if (next != null) {
+		if(!skipping||slideName.equals("alert")) {
+		    Slide next = map.get(slideName);
+		    if (next != null) {
 			showSlide(next, note);
-		} else {
+		    } else {
 			System.err.println("Slide: " + slideName + " not found in Database");
 			showSlide(BADF00D, "");
 			commentPanel.setText(BADF00D.getComment());
-		}
+		    }
+		    if(!isEndAlert) {
+			countDownLatch = new CountDownLatch(1);
 
-		countDownLatch = new CountDownLatch(1);
+			(new Thread() {
+				@Override
+				public void run() {
+				    awaitCountdown(WAITTING_TIME, countDownLatch);
+				}
+			    }).start();
 
-		(new Thread() {
-			@Override
-			public void run() {
-				awaitCountdown(WAITTING_TIME, countDownLatch);
+			clickAble = true;
+			try {
+			    countDownLatch.await();
+			} catch (InterruptedException e) {
+			    e.printStackTrace();
 			}
-		}).start();
-
-		clickAble = true;
-		try {
-			countDownLatch.await();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		clickAble = false;
+			clickAble = false;
+		    } else {
+			isEndAlert=false;
+		    }
+		    if(slideName.equals("alert")) {
+			skipping = false;
+		    }
+        	}
 	}
 
 	public void goToFeedback(Feedback f) {
@@ -123,7 +135,7 @@ public class GUI {
 		} else {
 			next = BADF00D;
 		}
-
+		skipping=false;
 		showSlide(next, f.gibFeedbackString());
 		System.out.println("---------------------------------------------------------");
 		System.out.println();
@@ -163,12 +175,17 @@ public class GUI {
 		KeyAdapter adapterK = new KeyAdapter() {
 			public void keyPressed(KeyEvent e) {
 				if (clickAble) {
-					if (e.getKeyCode() == KeyEvent.VK_SPACE || e.getKeyCode() == KeyEvent.VK_RIGHT
-							|| e.getKeyCode() == KeyEvent.VK_KP_RIGHT) {
-						clickAble = false;
-						GUI.awaitCountdown(50, countDownLatch);
+					if (e.getKeyCode() == KeyEvent.VK_RIGHT
+					|| e.getKeyCode() == KeyEvent.VK_KP_RIGHT) {
+					    clickAble = false;
+					    GUI.awaitCountdown(50, countDownLatch);
 					}
-				}
+					if(e.getKeyCode() == KeyEvent.VK_SPACE) {
+					    clickAble = false;
+					    GUI.awaitCountdown(50, countDownLatch);
+					    skipping=true;
+					}
+			 	}
 			}
 		};
 		frame.addMouseListener(adapterM);
