@@ -69,6 +69,7 @@ public class GUI {
 
 		frame.setVisible(true);
 		goToFrame("welcome");
+		System.out.println("Hier die wichtigsten Schritte zusammengefasst: ");
 	}
 
 	// TODO: rename method
@@ -124,8 +125,8 @@ public class GUI {
 			next = BADF00D;
 		}
 
-		showSlide(next, f.gibFeedbackString());
-		System.out.println("---------------------------------------------------------");
+		showSlide(next, f.gibFeedbackString()); //TODO: Wait fix time 
+		System.out.println("-------------------------------------------------------------------");
 		System.out.println();
 	}
 
@@ -143,7 +144,7 @@ public class GUI {
 			str += "     \t" + note;
 		}
 		commentPanel.setText(str);
-		if (next.getMethod().equals("gebeAufTeller") || next.getMethod().equals("gibInTopf")) {
+		if (next.getMethod().equals("gebeAufTeller") || next.getMethod().equals("gibInTopf")) { // TODO: add Feedback
 			System.out.println(str);
 		}
 	}
