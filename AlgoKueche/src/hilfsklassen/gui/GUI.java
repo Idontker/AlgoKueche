@@ -14,9 +14,9 @@ public class GUI {
     public static final double SCALE = 0.4;
     public static final int HEIGHT = (int) (SCALE * 2000);
     public static final int WIDTH = (int) (SCALE * 1500);
-    private static final int WAITTING_TIME = 4000;
+    private int waitingTime = 4000;
 
-    private final static Slide BADF00D = new Slide("badf00d", Color.black, "Folie nicht gefunden!");
+    private static final Slide BADF00D = new Slide("badf00d", Color.black, "Folie nicht gefunden!");
 
     // GUI Main
     public static void main(String args[]) {
@@ -33,7 +33,7 @@ public class GUI {
 
     private SlideMap map;
 
-    private static CountDownLatch countDownLatch;
+    private CountDownLatch countDownLatch;
     private boolean clickAble;
     private boolean skipping=false;
     private boolean isEndAlert=false;
@@ -100,7 +100,7 @@ public class GUI {
                 (new Thread() {
                         @Override
                         public void run() {
-                            awaitCountdown(WAITTING_TIME, countDownLatch);
+                            awaitCountdown(waitingTime, countDownLatch);
                         }
                     }).start();
 
@@ -187,20 +187,35 @@ public class GUI {
                 }
             };
         KeyAdapter adapterK = new KeyAdapter() {
+                @Override
                 public void keyPressed(KeyEvent e) {
                     if (clickAble) {
                         if (e.getKeyCode() == KeyEvent.VK_RIGHT
-                        || e.getKeyCode() == KeyEvent.VK_KP_RIGHT) {
+                                || e.getKeyCode() == KeyEvent.VK_KP_RIGHT) {
                             clickAble = false;
                             GUI.awaitCountdown(50, countDownLatch);
                         }
-                        if(e.getKeyCode() == KeyEvent.VK_SPACE) {
+                        if(e.getKeyCode() == KeyEvent.VK_SPACE){
                             clickAble = false;
                             GUI.awaitCountdown(50, countDownLatch);
+                            waitingTime = 250;
+                        }
+                        if(e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+                            clickAble = false;
+                            GUI.awaitCountdown(50, countDownLatch);
+                            waitingTime = 2000;
                             skipping=true;
                         } else {
                             skipping=false;
                         }
+                    }
+                }
+
+                @Override
+                public void keyReleased(KeyEvent e) {
+                    if(e.getKeyCode() == KeyEvent.VK_SPACE){
+                        clickAble = true;
+                        waitingTime = 4000;
                     }
                 }
             };
