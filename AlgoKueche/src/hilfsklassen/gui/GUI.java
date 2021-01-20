@@ -205,8 +205,6 @@ public class GUI {
                             GUI.awaitCountdown(50, countDownLatch);
                             waitingTime = 2000;
                             skipping=true;
-                        } else {
-                            skipping=false;
                         }
                     }
                 }
@@ -216,6 +214,9 @@ public class GUI {
                     if(e.getKeyCode() == KeyEvent.VK_SPACE){
                         clickAble = true;
                         waitingTime = 4000;
+                    }
+                    if(e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+                            skipping=false;
                     }
                 }
             };
