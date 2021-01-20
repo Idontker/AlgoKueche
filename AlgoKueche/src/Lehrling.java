@@ -6,7 +6,6 @@ import hilfsklassen.cooking.*;
  * @author Karol Bakas, Stefan Gebhart, Silas Kuder
  */
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Lehrling {
 
@@ -40,31 +39,33 @@ public class Lehrling {
         aktWuerze = 42;
         bearbeitet = false;
         zutatenInTopf = new ArrayList<String>();
-        boolean fine = kunde.rezeptauswahl(Formatierung.formatiere(rezept));
+        int[] ret = kunde.rezeptauswahl(Formatierung.formatiere(rezept));
+        boolean fine = ret[0] == 1;
         if (!fine) {
             animation.goToFrame("alert", "Das Rezept \"" + rezept
                     + "\" ist nicht bekannt. Du kannst das Programm abbrechen, oder trotzdem laufen lassen");
         }
-        schritte=1000; //karol can you please help me set this per recipe?
+        schritte = ret[1];
         animation.goToFrame("wirKochenJetzt", rezept);
     }
-    
+
     private void schrittZaehler() {
         schritte--;
-        if(schritte<=0) {
+        if (schritte <= 0) {
             animation.goToFrame("alert", "Das dauert zu lange. Vermutlich hast du eine endlose Wiederholung. :( ");
-            RuntimeException e=new EndlosWiederholung("Das Programm wurde abgebrochen, da es deutlich zu lange braucht.");
+            RuntimeException e = new EndlosWiederholung(
+                    "Das Programm wurde abgebrochen, da es deutlich zu lange braucht.");
             e.setStackTrace(new StackTraceElement[0]);
             throw e;
         }
     }
-    
+
     private class EndlosWiederholung extends RuntimeException {
         private EndlosWiederholung(String s) {
             super(s);
         }
     }
-    
+
     /**
      * Nimmt eine Zutat aus dem Schrank in die Hand, als aktuelle Zutat. Achtung: Es
      * kann nur eine Zutat gleichzeitig in der Hand gehalten werden.
@@ -171,7 +172,7 @@ public class Lehrling {
             zusammenGekocht += "_" + zutatenInTopf.get(i).substring(0, zutatenInTopf.get(i).indexOf("("));
         }
         zusammenGekocht += ")";
-        zusammenGekocht=zusammenGekocht.toLowerCase();
+        zusammenGekocht = zusammenGekocht.toLowerCase();
         for (int i = 0; i < zutatenInTopf.size(); i++) {
             kunde.arbeitsschritt(zutatenInTopf.get(i) + zusammenGekocht);
         }

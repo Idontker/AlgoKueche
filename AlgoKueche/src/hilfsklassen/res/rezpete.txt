@@ -17,6 +17,6 @@ SteakMediumMitPaprikaUndZucchini: Steak(geschnitten,gekocht_8_ZusammenGekocht_St
 SteakWell-doneMitPaprikaUndZucchini: Steak(geschnitten,gekocht_10_ZusammenGekocht_Steak) Paprika(geschnitten,gekocht_20_ZusammenGekocht_Paprika_Zucchini) Zucchini(geschnitten,gekocht_20_ZusammenGekocht_Paprika_Zucchini) 
 Hamburger: Salat(geschnitten) Tomate(geschnitten) Broetchen(geschnitten) Burgerpatty(gekocht_10_ZusammenGekocht_Burgerpatty)
 Cheeseburger: Kaesescheibe() Tomate(geschnitten) Broetchen(geschnitten) Burgerpatty(gekocht_10_ZusammenGekocht_Burgerpatty)
-Sushi: 3?Reis(gekocht_20_ZusammenGekocht_Reis) 3?Fisch(geschnitten) 3?Noriblatt
-Sushi mit Gurke: 3?Reis(gekocht_20_ZusammenGekocht_Reis) 3?Gurke(geschnitten) 3?Noriblatt
-California Role: 3?Reis(gekocht_20_ZusammenGekocht_Reis) 3?Fisch(geschnitten) 3?Avocado(geschnitten) 3?Noriblatt
+40!Sushi: 3?Reis(gekocht_20_ZusammenGekocht_Reis) 3?Fisch(geschnitten) 3?Noriblatt
+40!Sushi mit Gurke: 3?Reis(gekocht_20_ZusammenGekocht_Reis) 3?Gurke(geschnitten) 3?Noriblatt
+50!California Role: 3?Reis(gekocht_20_ZusammenGekocht_Reis) 3?Fisch(geschnitten) 3?Avocado(geschnitten) 3?Noriblatt

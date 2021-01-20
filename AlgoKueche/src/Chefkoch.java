@@ -12,7 +12,7 @@ public class Chefkoch {
     private Lehrling sam; // Alberts Lehrling Sam, er kocht die Rezepte
 
     public static void main(String args[]){
-        MainFrame.pathToAlgoKueche = "C:/Users/Karol/proj/AlgoKueche/AlgoKueche/src/main/hilfsklassen/";
+        MainFrame.pathToAlgoKueche = "C:/Users/Karol/proj/AlgoKueche/AlgoKueche/src/hilfsklassen/";
         Chefkoch c = new Chefkoch();
         c.reinerSalat();
     }
