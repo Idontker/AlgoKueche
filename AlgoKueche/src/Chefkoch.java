@@ -95,7 +95,7 @@ public class Chefkoch {
             sam.nimmAusSchrank("Reis");
             sam.gibInTopf();
             sam.koche(20);
-            sam.gibTopfAufTeller();
+            sam.gibTopfinhaltAufTeller();
 
             sam.nimmAusSchrank("Fisch");
             sam.schneide();
@@ -118,7 +118,7 @@ public class Chefkoch {
             sam.nimmAusSchrank("Reis");
             sam.gibInTopf();
             sam.koche(20);
-            sam.gibTopfAufTeller();
+            sam.gibTopfinhaltAufTeller();
 
             sam.nimmAusSchrank("Fisch");
             sam.schneide();
