@@ -33,7 +33,18 @@ public class Kunde {
             String line;
             int i = 0;
             while ((line = br.readLine()) != null) {
+                int maxTime = -1;
                 line = line.toLowerCase();
+                if (line.contains("!")) {
+                    String[] tmp = line.split("!");
+                    if (tmp.length != 2) {
+                        System.err.println("Error reading line " + i + "\tSyntax for recepie is brocken, too many !");
+                        continue;
+                    }
+                    maxTime = Integer.parseInt(tmp[0]);
+                    line = tmp[1];
+                }
+
                 String s[] = line.split(":");
                 if (s.length != 2 && s.length != 3) {
                     System.err.println("Error reading line " + i + "\tSyntax for recepie is brocken, too many :");
@@ -42,7 +53,7 @@ public class Kunde {
                 boolean wirdGewuert = s.length == 3;
                 String name = Formatierung.formatiere(s[0]);
                 String zutaten = s[1].trim();
-                menueMap.put(name, new Rezept(name, zutaten, wirdGewuert));
+                menueMap.put(name, new Rezept(name, zutaten, wirdGewuert, maxTime));
                 i++;
             }
             br.close();
@@ -53,7 +64,14 @@ public class Kunde {
 
     }
 
-    public boolean rezeptauswahl(String t) {
+
+    /**
+     * 
+     * @return
+     *  int[0]: is it a valid recipe. 0 stands for false, 1 for true
+     *  int[1]: the max count of steps 
+     */
+    public int[] rezeptauswahl(String t) {
         rezeptName = t;
         serviert = "";
         gemeldeterFehler = null;
@@ -61,7 +79,7 @@ public class Kunde {
         if (r == null) {
             System.err.println("Das Rezept " + t + " gibt es nicht");
             System.err.println("Der Code kann wird nicht abgebrochen und weiter ausgefuehrt!");
-            return false;
+            return new int[]{0,0};
         } else {
             if (r.wirdGewuerzt()) {
                 gewuerzt = false;
@@ -70,7 +88,7 @@ public class Kunde {
             }
             komponenten = new ArrayList<RezeptKomponente>();
             komponenten.addAll(r.gibRezeptKomponenten());
-            return true;
+            return new int[]{1,r.getMaxTime()};
         }
     }
 

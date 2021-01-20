@@ -143,7 +143,9 @@ public class GUI {
 			str += "     \t" + note;
 		}
 		commentPanel.setText(str);
-		System.out.println(str);
+		if (next.getMethod().equals("gebeAufTeller") || next.getMethod().equals("gibInTopf")) {
+			System.out.println(str);
+		}
 	}
 
 	private void addInterruptAdapter() {

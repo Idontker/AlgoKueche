@@ -16,6 +16,7 @@ public class Lehrling {
     private int aktWuerze;
     private boolean bearbeitet;
     private boolean serviert;
+    private int schritte;
 
     /**
      * Initialisiert einen Lehrling.
@@ -38,13 +39,31 @@ public class Lehrling {
         aktWuerze = 42;
         bearbeitet = false;
         zutatenInTopf = new ArrayList<String>();
-        boolean fine = kunde.rezeptauswahl(Formatierung.formatiere(rezept));
+        int[] ret = kunde.rezeptauswahl(Formatierung.formatiere(rezept));
+        boolean fine = ret[0] == 1;
         if (!fine) {
             animation.goToFrame("alert", "Das Rezept \"" + rezept
                     + "\" ist nicht bekannt. Du kannst das Programm abbrechen, oder trotzdem laufen lassen");
         }
+        schritte = ret[1];
         animation.goToFrame("wirKochenJetzt", rezept);
+    }
 
+    private void schrittZaehler() {
+        schritte--;
+        if (schritte <= 0) {
+            animation.goToFrame("alert", "Das dauert zu lange. Vermutlich hast du eine endlose Wiederholung. :( ");
+            RuntimeException e = new EndlosWiederholung(
+                    "Das Programm wurde abgebrochen, da es deutlich zu lange braucht.");
+            e.setStackTrace(new StackTraceElement[0]);
+            throw e;
+        }
+    }
+
+    private class EndlosWiederholung extends RuntimeException {
+        private EndlosWiederholung(String s) {
+            super(s);
+        }
     }
 
     /**
@@ -55,6 +74,7 @@ public class Lehrling {
      *              nicht beachtet
      */
     public void nimmAusSchrank(String zutat) {
+        schrittZaehler();
         if (!aktZutat.isEmpty()) {
             kunde.meldeFehler(Comment.mehrAlsEineZutatInDerHand);
         }
@@ -67,6 +87,7 @@ public class Lehrling {
      * Stellt die aktuelle Zutat zurueck.
      */
     public void stellZutatZurueck() {
+        schrittZaehler();
         if (bearbeitet) {
             kunde.meldeFehler(Comment.verschwendung);
         }
@@ -79,6 +100,7 @@ public class Lehrling {
      * aktuelle Zutat.
      */
     public void schneide() {
+        schrittZaehler();
         if (aktZutat.isEmpty()) {
             animation.goToFrame("schneide", "nichts");
             kunde.meldeFehler(Comment.schneidenOhneZutat);
@@ -94,6 +116,7 @@ public class Lehrling {
      * Lehrling hat jetzt wieder die Haende frei.
      */
     public void gibInTopf() {
+        schrittZaehler();
         animation.goToFrame("gibInTopf", aktZutat + ")");
         zutatenInTopf.add(aktZutat);
         if (wirdVerbraucht(aktZutat)) {
@@ -108,6 +131,7 @@ public class Lehrling {
      * @param zeit Die Kochzeit in Minuten
      */
     public void koche(int zeit) {
+        schrittZaehler();
         if (zutatenInTopf.size() != 0) {
             animation.goToFrame("koche", zeit + " Minuten");
             for (int i = 0; i < zutatenInTopf.size(); i++) {
@@ -130,6 +154,7 @@ public class Lehrling {
      * Platziert den Inhalt des Topfes auf dem Servierteller.
      */
     public void gibTopfAufTeller() {
+        schrittZaehler();
         for (int i = 0; i < zutatenInTopf.size(); i++) {
             if (!zutatenInTopf.get(i).contains("gekocht_")) {
                 String zutat = zutatenInTopf.get(i);
@@ -147,7 +172,7 @@ public class Lehrling {
             zusammenGekocht += "_" + zutatenInTopf.get(i).substring(0, zutatenInTopf.get(i).indexOf("("));
         }
         zusammenGekocht += ")";
-        zusammenGekocht=zusammenGekocht.toLowerCase();
+        zusammenGekocht = zusammenGekocht.toLowerCase();
         for (int i = 0; i < zutatenInTopf.size(); i++) {
             kunde.arbeitsschritt(zutatenInTopf.get(i) + zusammenGekocht);
         }
@@ -159,6 +184,7 @@ public class Lehrling {
      * Platziert die Aktuelle Zutat auf dem Servierteller.
      */
     public void gibZutatAufTeller() {
+        schrittZaehler();
         if (aktZutat.endsWith(",")) {// entfernt das letzte Komma
             aktZutat = aktZutat.substring(0, aktZutat.length() - 1);
         }
@@ -181,6 +207,7 @@ public class Lehrling {
      *         gewuerzt wurde (oder bereits zu viel)
      */
     public boolean istGewuerzt() {
+        schrittZaehler();
         if (aktWuerze == 0) {
             kunde.setzeGewuerzt(true);
             animation.goToFrame("istGewuerztTrue");
@@ -198,7 +225,6 @@ public class Lehrling {
             return true;
         }
         return true;
-
     }
 
     /**
@@ -206,6 +232,7 @@ public class Lehrling {
      * werden.
      */
     public void wuerze() {
+        schrittZaehler();
         if (aktWuerze == 42) {
             aktWuerze = (int) (Math.random() * 3) + 1;
         }
@@ -216,6 +243,7 @@ public class Lehrling {
      * Serviert alles, was sich gerade auf dem Servierteller befindet.
      */
     public void serviere() {
+        schrittZaehler();
         if (!serviert) {
             animation.goToFrame("serviere");
             animation.goToFeedback(kunde.bewerte());

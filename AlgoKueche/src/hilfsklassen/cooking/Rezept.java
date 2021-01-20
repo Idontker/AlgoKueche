@@ -6,9 +6,10 @@ public class Rezept {
     private String name;
     private ArrayList<RezeptKomponente> rezeptKomponenten;
     private boolean wirdGewuerzt;
+    private int maxTime;
 
-    public Rezept(String name, String zutatenString, boolean wirdGewuerzt) {
-        this.name = name;
+    public Rezept(String name, String zutatenString, boolean wirdGewuerzt, int maxTime) {
+        this.name = Formatierung.formatiere(name);
         this.wirdGewuerzt = wirdGewuerzt;
         rezeptKomponenten = new ArrayList<RezeptKomponente>();
 
@@ -20,7 +21,8 @@ public class Rezept {
             if (zutat.contains("?")) {
                 String tmp[] = zutat.split("\\?");
                 if (tmp.length > 2) {
-                    System.err.println("Error in " + name + ": in " + zutat + " sind zu viele ? und wird daher übersprungen");
+                    System.err.println(
+                            "Error in " + name + ": in " + zutat + " sind zu viele ? und wird daher übersprungen");
                     continue;
                 }
                 wdh = Integer.parseInt(tmp[0]);
@@ -32,11 +34,23 @@ public class Rezept {
                 rezeptKomponenten.add(r);
             }
         }
+        if (maxTime != -1) {
+            this.maxTime = maxTime;
+        } else {
+            this.maxTime = 3 + rezeptKomponenten.size() * 5;
+        }
+    }
 
+    public int getMaxTime() {
+        return maxTime;
     }
 
     public boolean wirdGewuerzt() {
         return wirdGewuerzt;
+    }
+
+    public ArrayList<RezeptKomponente> gibRezeptKomponenten() {
+        return rezeptKomponenten;
     }
 
     private RezeptKomponente createRezeptKomponente(String str) {
@@ -52,9 +66,5 @@ public class Rezept {
         }
 
         return new RezeptKomponente(zutat, zubereitung);
-    }
-
-    public ArrayList<RezeptKomponente> gibRezeptKomponenten() {
-        return rezeptKomponenten;
     }
 }
