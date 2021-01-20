@@ -55,8 +55,7 @@ public class Lehrling {
     private void schrittZaehler() {
         schritte--;
         if (schritte <= 0) {
-            animation.setIsEndAlert(true); //don't make the animation wait if next slide is the last slide and is a programm ending error
-            animation.goToFrame("alert", "Die Zubereitung braucht verdaechtig lange.");
+            animation.goToFrame("timeWaste", "Die Zubereitung braucht verdaechtig lange.");
             RuntimeException e = new ZubereitungDauertZuLangeFehler(
                     "Die Zubereitung wurde abgebrochen, da sie deutlich zu lange braucht.");
             e.setStackTrace(new StackTraceElement[0]);

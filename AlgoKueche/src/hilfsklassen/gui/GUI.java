@@ -36,7 +36,6 @@ public class GUI {
     private CountDownLatch countDownLatch;
     private boolean clickAble;
     private boolean skipping=false;
-    private boolean isEndAlert=false;
 
     // for testing
     public static boolean runningTestcase = false;
@@ -72,10 +71,11 @@ public class GUI {
         frame.setVisible(true);
         goToFrame("welcome");
     }
-
-    public void setIsEndAlert(boolean b) {
-        isEndAlert=b;
-    }
+	
+	public void resetWaitingOptions() {
+		skipping = false;
+		waitingTime = 4000;
+	}
 
     // TODO: rename method
     public void goToFrame(String slideName) {
@@ -85,50 +85,52 @@ public class GUI {
     public void goToFrame(String slideName, String note) {
         if (notActive)
             return;
+        if(slideName.equals("wirKochenJetzt") || slideName.equals("alert")) {
+            resetWaitingOptions();
+		} else if(slideName.equalsIgnoreCase("timeWaste")){
+            resetWaitingOptions();
+			showSlide(map.get("alert"), note);
+			return;
+		}
+
+
         Slide next = map.get(slideName);
-        if(slideName.equals("wirKochenJetzt")) {
-            skipping=false;
-        }
-        if(!skipping||slideName.equals("alert")) {
-            if (next != null) {
-                showSlide(next, note);
-            } else {
-                System.err.println("Slide: " + slideName + " not found in Database");
-                showSlide(BADF00D, "");
-                commentPanel.setText(BADF00D.getComment());
-            }
-            if(!isEndAlert) {
-                countDownLatch = new CountDownLatch(1);
+		if(skipping){
+			commentPanel.showComment(next, note);
+			return;
+		}
+		if (next != null) {
+			showSlide(next, note);
+		} else {
+			System.err.println("Slide: " + slideName + " not found in Database");
+			showSlide(BADF00D, "");
+		}
 
-                (new Thread() {
-                        @Override
-                        public void run() {
-                            awaitCountdown(waitingTime, countDownLatch);
-                        }
-                    }).start();
-
-                clickAble = true;
-                try {
-                    countDownLatch.await();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                clickAble = false;
-            } else {
-                isEndAlert=false;
-            }
-            if(slideName.equals("alert")) {
-                skipping = false;
-            }
-        } else {
-           commentPanel.showComment(next, note);
-        }
+		// Waiting for interrupt or end of waitingtime 
+		countDownLatch = new CountDownLatch(1);
+		
+		(new Thread() {
+			@Override
+			public void run() {
+				awaitCountdown(waitingTime, countDownLatch);
+			}
+		}).start();
+		
+		clickAble = true;
+		try {
+			countDownLatch.await();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		clickAble = false;
     }
 
     public void goToFeedback(Feedback f) {
         if (notActive)
-            return;
-        int k = f.bewertungsKategorie();
+			return;
+		skipping=false;
+		
+		int k = f.bewertungsKategorie();
         Slide next;
         if (k == 0) {
             next = map.get("reactionSad");
@@ -141,7 +143,6 @@ public class GUI {
         } else {
             next = BADF00D;
         }
-        skipping=false;
         showSlide(next, f.gibFeedbackString());
         System.out.println("---------------------------------------------------------");
         System.out.println();
