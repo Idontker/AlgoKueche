@@ -25,4 +25,28 @@ public class CommentPanel extends JPanel {
         commentBox.setText(text);
     }
 
+    public void showComment(Slide next, String note) {
+        String str = buildOutputString(next, note);
+
+        commentBox.setText(str);
+        // TODO: add commit aus 22.01
+        if (next.getMethod().equals("gebeAufTeller") || next.getMethod().equals("gibInTopf")) {
+            System.out.println(str);
+        }
+    }
+
+    private String buildOutputString(Slide next, String note) {
+        String str = next.getComment();
+
+        // remove annotitations on "how was it prepeared"
+        if (next.moreInfo()) {
+            if (note.contains("(")) {
+                note = note.split("\\(")[0];
+            }
+            // first Letter to uppercase
+            note = note.substring(0, 1).toUpperCase() + note.substring(1);
+            str += "     \t" + note;
+        }
+        return str;
+    }
 }

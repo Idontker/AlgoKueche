@@ -14,9 +14,9 @@ public class GUI {
 	public static final double SCALE = 0.4;
 	public static final int HEIGHT = (int) (SCALE * 2000);
 	public static final int WIDTH = (int) (SCALE * 1500);
-	private static final int WAITTING_TIME = 4000;
+	private int waitingTime = 4000;
 
-	private final static Slide BADF00D = new Slide("badf00d", Color.black, "Folie nicht gefunden!");
+	private static final Slide BADF00D = new Slide("badf00d", Color.black, "Folie nicht gefunden!");
 
 	// GUI Main
 	public static void main(String args[]) {
@@ -33,8 +33,9 @@ public class GUI {
 
 	private SlideMap map;
 
-	private static CountDownLatch countDownLatch;
+	private CountDownLatch countDownLatch;
 	private boolean clickAble;
+	private boolean skipping = false;
 
 	// for testing
 	public static boolean runningTestcase = false;
@@ -72,6 +73,11 @@ public class GUI {
 		System.out.println("Hier die wichtigsten Schritte zusammengefasst: ");
 	}
 
+	public void resetWaitingOptions() {
+		skipping = false;
+		waitingTime = 4000;
+	}
+
 	// TODO: rename method
 	public void goToFrame(String slideName) {
 		goToFrame(slideName, "");
@@ -80,22 +86,33 @@ public class GUI {
 	public void goToFrame(String slideName, String note) {
 		if (notActive)
 			return;
+		if (slideName.equals("wirKochenJetzt") || slideName.equals("alert")) {
+			resetWaitingOptions();
+		} else if (slideName.equalsIgnoreCase("timeWaste")) {
+			resetWaitingOptions();
+			showSlide(map.get("alert"), note);
+			return;
+		}
 
 		Slide next = map.get(slideName);
+		if (skipping) {
+			commentPanel.showComment(next, note);
+			return;
+		}
 		if (next != null) {
 			showSlide(next, note);
 		} else {
 			System.err.println("Slide: " + slideName + " not found in Database");
 			showSlide(BADF00D, "");
-			commentPanel.setText(BADF00D.getComment());
 		}
 
+		// Waiting for interrupt or end of waitingtime
 		countDownLatch = new CountDownLatch(1);
 
 		(new Thread() {
 			@Override
 			public void run() {
-				awaitCountdown(WAITTING_TIME, countDownLatch);
+				awaitCountdown(waitingTime, countDownLatch);
 			}
 		}).start();
 
@@ -111,6 +128,8 @@ public class GUI {
 	public void goToFeedback(Feedback f) {
 		if (notActive)
 			return;
+		skipping = false;
+
 		int k = f.bewertungsKategorie();
 		Slide next;
 		if (k == 0) {
@@ -124,29 +143,14 @@ public class GUI {
 		} else {
 			next = BADF00D;
 		}
-
-		showSlide(next, f.gibFeedbackString()); //TODO: Wait fix time 
-		System.out.println("-------------------------------------------------------------------");
+		showSlide(next, f.gibFeedbackString());
+		System.out.println("---------------------------------------------------------");
 		System.out.println();
 	}
 
 	private void showSlide(Slide next, String note) {
 		actionPanel.showSlide(next);
-		String str = next.getComment();
-
-		// remove annotitations on "how was it prepeared"
-		if (next.moreInfo()) {
-			if (note.contains("(")) {
-				note = note.split("\\(")[0];
-			}
-			// first Letter to uppercase
-			note = note.substring(0, 1).toUpperCase() + note.substring(1);
-			str += "     \t" + note;
-		}
-		commentPanel.setText(str);
-		if (next.getMethod().equals("gebeAufTeller") || next.getMethod().equals("gibInTopf")) { // TODO: add Feedback
-			System.out.println(str);
-		}
+		commentPanel.showComment(next, note);
 	}
 
 	private void addInterruptAdapter() {
@@ -162,13 +166,31 @@ public class GUI {
 			}
 		};
 		KeyAdapter adapterK = new KeyAdapter() {
+			@Override
 			public void keyPressed(KeyEvent e) {
 				if (clickAble) {
-					if (e.getKeyCode() == KeyEvent.VK_SPACE || e.getKeyCode() == KeyEvent.VK_RIGHT
-							|| e.getKeyCode() == KeyEvent.VK_KP_RIGHT) {
+					if (e.getKeyCode() == KeyEvent.VK_RIGHT || e.getKeyCode() == KeyEvent.VK_KP_RIGHT) { // skip one
+																											// Slide
 						clickAble = false;
 						GUI.awaitCountdown(50, countDownLatch);
 					}
+					if (e.getKeyCode() == KeyEvent.VK_SPACE) { // fast forward until released
+						clickAble = false;
+						GUI.awaitCountdown(50, countDownLatch);
+						waitingTime = 250;
+					}
+					if (e.getKeyCode() == KeyEvent.VK_ESCAPE) { // Skip to feedback or alert
+						clickAble = false;
+						GUI.awaitCountdown(50, countDownLatch);
+						skipping = true;
+					}
+				}
+			}
+
+			@Override
+			public void keyReleased(KeyEvent e) {
+				if (e.getKeyCode() == KeyEvent.VK_SPACE) { // end fast forward
+					waitingTime = 4000;
 				}
 			}
 		};

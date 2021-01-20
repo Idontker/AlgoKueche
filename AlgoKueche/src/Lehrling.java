@@ -17,6 +17,7 @@ public class Lehrling {
     private boolean bearbeitet;
     private boolean serviert;
     private int schritte;
+    private int aktHunger;
 
     /**
      * Initialisiert einen Lehrling.
@@ -27,7 +28,8 @@ public class Lehrling {
     }
 
     /**
-     * Muss zu Beginn jedes Rezepts aufgerufen werden.
+     * Muss zu Beginn jedes Rezepts aufgerufen werden, damit die Korrektheit der Zubereitung ueberprüft werden kann.
+     * Nutzt genau den Namen, der auf dem Arbeitsblatt steht.
      * 
      * @param rezept der Name des Rezepts. Achtet darauf, dass es genauso
      *               geschrieben ist, wie auf dem Arbeitsblatt.
@@ -37,6 +39,7 @@ public class Lehrling {
         serviert = false;
         aktZutat = "";
         aktWuerze = 42;
+        aktHunger = 42;
         bearbeitet = false;
         zutatenInTopf = new ArrayList<String>();
         int[] ret = kunde.rezeptauswahl(Formatierung.formatiere(rezept));
@@ -52,16 +55,16 @@ public class Lehrling {
     private void schrittZaehler() {
         schritte--;
         if (schritte <= 0) {
-            animation.goToFrame("alert", "Das dauert zu lange. Vermutlich hast du eine endlose Wiederholung. :( ");
-            RuntimeException e = new EndlosWiederholung(
-                    "Das Programm wurde abgebrochen, da es deutlich zu lange braucht.");
+            animation.goToFrame("timeWaste", "Die Zubereitung braucht verdaechtig lange.");
+            RuntimeException e = new ZubereitungDauertZuLangeFehler(
+                    "Die Zubereitung wurde abgebrochen, da sie deutlich zu lange braucht.");
             e.setStackTrace(new StackTraceElement[0]);
             throw e;
         }
     }
 
-    private class EndlosWiederholung extends RuntimeException {
-        private EndlosWiederholung(String s) {
+    private class ZubereitungDauertZuLangeFehler extends RuntimeException {
+        private ZubereitungDauertZuLangeFehler(String s) {
             super(s);
         }
     }
@@ -153,8 +156,9 @@ public class Lehrling {
     /**
      * Platziert den Inhalt des Topfes auf dem Servierteller.
      */
-    public void gibTopfAufTeller() {
+    public void gibTopfinhaltAufTeller() {
         schrittZaehler();
+        String ausgabe="";
         for (int i = 0; i < zutatenInTopf.size(); i++) {
             if (!zutatenInTopf.get(i).contains("gekocht_")) {
                 String zutat = zutatenInTopf.get(i);
@@ -165,11 +169,21 @@ public class Lehrling {
                 zutatenInTopf.remove(i);
                 i--;
             }
+            ausgabe+=zutatenInTopf.get(i).substring(0, zutatenInTopf.get(i).indexOf("("))+", ";
+        }
+        if(ausgabe.length()!=0) {
+            ausgabe=ausgabe.substring(0,ausgabe.length()-2);
         }
         zutatenInTopf.sort(null);
         String zusammenGekocht = "_zusammengekocht";
+        boolean istReisSchonDrin = false;
         for (int i = 0; i < zutatenInTopf.size(); i++) {
-            zusammenGekocht += "_" + zutatenInTopf.get(i).substring(0, zutatenInTopf.get(i).indexOf("("));
+            if(!zutatenInTopf.get(i).contains("Reis")||istReisSchonDrin==false) {
+                zusammenGekocht += "_" + zutatenInTopf.get(i).substring(0, zutatenInTopf.get(i).indexOf("("));
+                if(zutatenInTopf.get(i).contains("Reis")) {
+                    istReisSchonDrin=true;
+                }
+            }
         }
         zusammenGekocht += ")";
         zusammenGekocht = zusammenGekocht.toLowerCase();
@@ -177,7 +191,7 @@ public class Lehrling {
             kunde.arbeitsschritt(zutatenInTopf.get(i) + zusammenGekocht);
         }
         zutatenInTopf.clear();
-        animation.goToFrame("gebeAufTeller", "alles aus dem Topf");
+        animation.goToFrame("gebeAufTeller", ausgabe);
     }
 
     /**
@@ -203,27 +217,56 @@ public class Lehrling {
     /**
      * Probiert, ob das Gericht bereits ausreichend gewuerzt ist.
      * 
-     * @return false, wenn noch nicht genug gewuerzt wurde und true, sobald genug
-     *         gewuerzt wurde (oder bereits zu viel)
+     * @return true, wenn noch weiter gewuerzt werden muss. Und false, wenn genug gewuerzt wurde.
+     * 
      */
-    public boolean istGewuerzt() {
+    public boolean brauchtMehrWuerze() {
         schrittZaehler();
         if (aktWuerze == 0) {
             kunde.setzeGewuerzt(true);
-            animation.goToFrame("istGewuerztTrue");
-            return true;
-        }
-        if (aktWuerze > 0) {
-            animation.goToFrame("istGewuerztFalse");
-            kunde.setzeGewuerzt(false);
+            animation.goToFrame("gutGewuerzt");
             return false;
         }
-        if (aktWuerze < 0) {
-            animation.goToFrame("istGewuerztFalse");
+        if (aktWuerze > 0) {
+            animation.goToFrame("schlechtGewuerzt");
             kunde.setzeGewuerzt(false);
-            kunde.meldeFehler(Comment.versalzen);
             return true;
         }
+        if (aktWuerze < 0) {
+            animation.goToFrame("schlechtGewuerzt");
+            kunde.setzeGewuerzt(false);
+            kunde.meldeFehler(Comment.versalzen);
+            return false;
+        }
+        return false;
+    }
+
+    /**
+     * Fragt den Kunden, ob er noch immer Hunger hat
+     * 
+     * @return true, wenn der Kunde satt ist, false wenn er noch Hunger hat
+     *         
+     */
+    public boolean istDerKundeSatt() {
+        schrittZaehler();
+        if (aktHunger == 42) {
+            aktHunger = (int) (Math.random() * 8) + 3;
+        }
+        
+        if (aktHunger == 0) {
+            animation.goToFrame("sumoSatt");
+            return true;
+        }
+        if (aktHunger > 0) {
+            animation.goToFrame("sumoHungrig");
+            return false;
+        }
+        if (aktHunger < 0) {
+            animation.goToFrame("sumoSatt");
+            kunde.meldeFehler(Comment.satt);
+            return true;
+        }
+        aktHunger--;
         return true;
     }
 
