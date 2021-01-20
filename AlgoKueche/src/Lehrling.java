@@ -52,7 +52,7 @@ public class Lehrling {
     private void schrittZaehler() {
         schritte--;
         if (schritte <= 0) {
-            animation.goToFrame("alert", "Das dauert zu lange. Vermutlich hast du eine endlose Wiederholung. :( ");
+            animation.goToFrame("alert", "Das dauert zu lange. Vermutlich hast du eine endlose Wiederholung.");
             RuntimeException e = new EndlosWiederholung(
                     "Das Programm wurde abgebrochen, da es deutlich zu lange braucht.");
             e.setStackTrace(new StackTraceElement[0]);
