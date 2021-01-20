@@ -86,6 +86,9 @@ public class GUI {
         if (notActive)
             return;
         Slide next = map.get(slideName);
+        if(slideName.equals("wirKochenJetzt")) {
+            skipping=false;
+        }
         if(!skipping||slideName.equals("alert")) {
             if (next != null) {
                 showSlide(next, note);
@@ -214,9 +217,6 @@ public class GUI {
                     if(e.getKeyCode() == KeyEvent.VK_SPACE){
                         clickAble = true;
                         waitingTime = 4000;
-                    }
-                    if(e.getKeyCode() == KeyEvent.VK_ESCAPE) {
-                            skipping=false;
                     }
                 }
             };
