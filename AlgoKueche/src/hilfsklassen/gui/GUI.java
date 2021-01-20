@@ -190,7 +190,6 @@ public class GUI {
                 @Override
                 public void keyReleased(KeyEvent e) {
                     if(e.getKeyCode() == KeyEvent.VK_SPACE){ // end fast forward
-                        clickAble = true;
                         waitingTime = 4000;
                     }
                 }
