@@ -41,7 +41,7 @@ public abstract class TestMain {
     }
 
     protected void gibTopfAufTeller() {
-        lehrling.gibTopfAufTeller();
+        lehrling.gibTopfinhaltAufTeller();
     }
 
     protected void koche(int zeit) {
