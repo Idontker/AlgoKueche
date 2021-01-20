@@ -118,7 +118,7 @@ public class GUI {
                 skipping = false;
             }
         } else {
-            if (next.getMethod().equals("gebeAufTeller") || next.getMethod().equals("gibInTopf")) {
+            if (next.getMethod().equals("gebeAufTeller") || next.getMethod().equals("gibInTopf")) { //TODO: add commit aus 22.01
                 String str = next.getComment();
                 if (next.moreInfo()) {
                     if (note.contains("(")) {
@@ -169,7 +169,7 @@ public class GUI {
             str += "     \t" + note;
         }
         commentPanel.setText(str);
-        if (next.getMethod().equals("gebeAufTeller") || next.getMethod().equals("gibInTopf")) {
+        if (next.getMethod().equals("gebeAufTeller") || next.getMethod().equals("gibInTopf")) { //TODO: add commit aus 22.01
             System.out.println(str);
         }
     }
@@ -203,7 +203,6 @@ public class GUI {
                         if(e.getKeyCode() == KeyEvent.VK_ESCAPE) {
                             clickAble = false;
                             GUI.awaitCountdown(50, countDownLatch);
-                            waitingTime = 2000;
                             skipping=true;
                         } else {
                             skipping=false;
