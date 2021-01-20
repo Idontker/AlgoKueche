@@ -53,16 +53,16 @@ public class Lehrling {
         schritte--;
         if (schritte <= 0) {
             animation.setIsEndAlert(true); //don't make the animation wait if next slide is the last slide and is a programm ending error
-            animation.goToFrame("alert", "Das dauert zu lange. Vermutlich hast du eine endlose Wiederholung.");
-            RuntimeException e = new EndlosWiederholung(
-                    "Das Programm wurde abgebrochen, da es deutlich zu lange braucht.");
+            animation.goToFrame("alert", "Die Zubereitung braucht verdaechtig lange.");
+            RuntimeException e = new ZubereitungDauertZuLangeFehler(
+                    "Die Zubereitung wurde abgebrochen, da sie deutlich zu lange braucht.");
             e.setStackTrace(new StackTraceElement[0]);
             throw e;
         }
     }
 
-    private class EndlosWiederholung extends RuntimeException {
-        private EndlosWiederholung(String s) {
+    private class ZubereitungDauertZuLangeFehler extends RuntimeException {
+        private ZubereitungDauertZuLangeFehler(String s) {
             super(s);
         }
     }
