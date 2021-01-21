@@ -158,7 +158,7 @@ public class Kunde {
                     // return "Zu viele "+komponente.gibZutat()+komponente.gibZubereitung()+". :(";
                 }
             }
-            return new Feedback(Comment.falscheZutatEnthalten, serviertKlon, "");
+            return new Feedback(Comment.falscheZutatEnthalten, serviertKlon.split("\\(")[0], "");
             // return serviert+" gehoert da nicht rein. :("; //falls es sich um unbekannte
             // Komponenten handelt, gib sie alle aus.
         }
