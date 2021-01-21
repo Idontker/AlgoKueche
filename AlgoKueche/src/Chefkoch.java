@@ -16,7 +16,11 @@ public class Chefkoch {
         // Otherwise set this path to the hilfsklassen folder.
         MainFrame.pathToAlgoKueche = "C:/Users/Karol/proj/AlgoKueche/AlgoKueche/src/hilfsklassen/";
         Chefkoch c = new Chefkoch();
+        c.salatMitEssigUndOel();
+        c.familiensalatMitEssigUndOel();
         c.sushi();
+        c.californiaRole();
+        c.vieleSalate(10);
     }
 
     public Chefkoch() {
@@ -26,67 +30,42 @@ public class Chefkoch {
     /**
      * Wiederholungsaufgabe
      */
-    public void reinerSalat() {
-        sam.wirKochenJetzt("reiner Salat");
+    public void salatMitEssigUndOel() {
+        sam.wirKochenJetzt("Salat mit Essig und Oel");
         sam.nimmAusSchrank("Salat");
         sam.schneide();
         sam.gibZutatAufTeller();
+        sam.nimmAusSchrank("Essig");
+        sam.gibZutatAufTeller();
+        sam.stellZutatZurueck();
+        sam.nimmAusSchrank("Oel");
+        sam.gibZutatAufTeller();
+        sam.stellZutatZurueck();
         sam.serviere();
     }
 
     /**
-     * Aufgabe zur Motivierung von Wiederholungen mit fester Anzahl
+     * Aufgabe zur Motivierung von Wiederholungen mit fester Anzahl mit for
      */
+    public void familiensalatMitEssigUndOel() {
+        sam.wirKochenJetzt("Familiensalat mit Essig und Oel");
 
-    public void familienReinerSalat() {
-        sam.wirKochenJetzt("reiner Salat Familienportion");
-
-        sam.nimmAusSchrank("einen Salat");
-        sam.schneide();
-        sam.gibZutatAufTeller();
-        sam.nimmAusSchrank("einen Salat");
-        sam.schneide();
-        sam.gibZutatAufTeller();
-        sam.nimmAusSchrank("einen Salat");
-        sam.schneide();
-        sam.gibZutatAufTeller();
-        sam.nimmAusSchrank("einen Salat");
-        sam.schneide();
-        sam.gibZutatAufTeller();
-
-        sam.serviere();
-    }
-
-    /**
-     * Aufgabe zur Motivierung von Wiederholungen mit fester Anzahl mit for geloest
-     */
-    public void familienReinerSalatBesser() {
-        sam.wirKochenJetzt("reiner Salat Familienportion");
-
-        for (int i = 0; i < 4; i++) {
-            sam.nimmAusSchrank("einen Salat");
+        for (int i = 1; i <= 4; i = i + 1) {
+            sam.nimmAusSchrank("Salat");
             sam.schneide();
             sam.gibZutatAufTeller();
-        }
-        sam.serviere();
-    }
-
-    public void familienTomatensalat() {
-        sam.wirKochenJetzt("Tomatensalat Familienportion");
-
-        for (int i = 0; i < 4; i++) {
-            sam.nimmAusSchrank("einen Salat");
-            sam.schneide();
+            sam.nimmAusSchrank("Essig");
             sam.gibZutatAufTeller();
-            sam.nimmAusSchrank("Tomate");
-            sam.schneide();
+            sam.stellZutatZurueck();
+            sam.nimmAusSchrank("Oel");
             sam.gibZutatAufTeller();
+            sam.stellZutatZurueck();
         }
         sam.serviere();
     }
 
     /**
-     * Aufgabe 2
+     * Aufgabe 3
      */
     public void sushi() {
         sam.wirKochenJetzt("Sushi");
@@ -109,7 +88,7 @@ public class Chefkoch {
     }
 
     /**
-     * Aufgabe 3
+     * Aufgabe 4
      */
     public void californiaRole() {
         sam.wirKochenJetzt("California Role");
@@ -138,22 +117,9 @@ public class Chefkoch {
     /**
      * Abschliessende Aufgabe
      */
-    public void serviereVieleReineSalate(int anzahl) {
+    public void vieleSalate(int anzahl) {
         for (int i = 0; i < anzahl; i++) {
-            sam.wirKochenJetzt("reiner Salat");
-            sam.nimmAusSchrank("einen Salat");
-            sam.schneide();
-            sam.gibZutatAufTeller();
-            sam.serviere();
-        }
-    }
-
-    /**
-     * Abschliessende Aufgabe
-     */
-    public void serviereVieleReineSalateBesser(int anzahl) {
-        for (int i = 0; i < anzahl; i++) {
-            reinerSalat();
+            salatMitEssigUndOel();
         }
     }
 }
