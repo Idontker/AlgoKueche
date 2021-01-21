@@ -23,3 +23,4 @@ griechischer Salat:Salat(geschnitten) Tomate(geschnitten) Zwiebel(geschnitten) G
 40!Sushi: 3?Reis(gekocht_20_ZusammenGekocht_Reis) 3?Fisch(geschnitten) 3?Noriblatt
 40!Sushi mit Gurke: 3?Reis(gekocht_20_ZusammenGekocht_Reis) 3?Gurke(geschnitten) 3?Noriblatt
 50!California Role: 3?Reis(gekocht_20_ZusammenGekocht_Reis) 3?Fisch(geschnitten) 3?Avocado(geschnitten) 3?Noriblatt
+40!Familiensalat mit Essig und Oel:4?Salat(geschnitten) 4?Oel 4?Essig
