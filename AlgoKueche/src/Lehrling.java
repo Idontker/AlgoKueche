@@ -25,7 +25,7 @@ public class Lehrling {
     public Lehrling() {
         animation = GUI.startGUI();
         kunde = new Kunde();
-        aktHunger = 42;
+        aktHunger = (int) (Math.random() * 8) + 3;
     }
 
     /**
@@ -251,27 +251,18 @@ public class Lehrling {
      *         
      */
     public boolean istDerKundeSatt() {
-        if (aktHunger == 42) {
-            aktHunger = (int) (Math.random() * 8) + 3;
-        }
-        
         if (aktHunger == 0) {
             animation.goToFrame("sumoSatt");
-            aktHunger--;
             return true;
         }
         if (aktHunger > 0) {
             animation.goToFrame("sumoHungrig");
-            aktHunger--;
             return false;
         }
         if (aktHunger < 0) {
             animation.goToFrame("sumoVoll");
-            kunde.meldeFehler(Comment.satt);
-            aktHunger--;
             return true;
         }
-        aktHunger--;
         return true;
     }
 
@@ -292,11 +283,11 @@ public class Lehrling {
      * Serviert alles, was sich gerade auf dem Servierteller befindet.
      */
     public void serviere() {
-        schrittZaehler();
         if (!serviert) {
             animation.goToFrame("serviere");
             animation.goToFeedback(kunde.bewerte());
             serviert = true;
+            aktHunger--;
         } else {
             System.out.println("Das Gericht wurde bereits serviert.");
         }
