@@ -15,7 +15,7 @@ public class GUI {
 	public static final int HEIGHT = (int) (SCALE * 2000);
 	public static final int WIDTH = (int) (SCALE * 1500);
 	public static final int STD_WAITING_TIME = 4000;
-	private int waitingTime = GUI.STD_WAITING_TIME;
+	private int waitingTime;
 
 	private static final Slide BADF00D = new Slide("badf00d", Color.black, "Folie nicht gefunden!");
 
@@ -72,7 +72,9 @@ public class GUI {
 		addInterruptAdapter();
 
 		frame.setVisible(true);
+		waitingTime = 0;
 		goToFrame("welcome");
+		waitingTime = STD_WAITING_TIME;
 		System.out.println("Hier die wichtigsten Schritte zusammengefasst: ");
 	}
 
