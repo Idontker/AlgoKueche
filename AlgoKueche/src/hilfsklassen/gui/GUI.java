@@ -14,7 +14,8 @@ public class GUI {
 	public static final double SCALE = 0.4;
 	public static final int HEIGHT = (int) (SCALE * 2000);
 	public static final int WIDTH = (int) (SCALE * 1500);
-	private int waitingTime = 4000;
+	public static final int STD_WAITING_TIME = 4000;
+	private int waitingTime = GUI.STD_WAITING_TIME;
 
 	private static final Slide BADF00D = new Slide("badf00d", Color.black, "Folie nicht gefunden!");
 
@@ -131,19 +132,19 @@ public class GUI {
 		skipping = false;
 
 		int k = f.bewertungsKategorie();
-		Slide next;
+		String reactionFrame;
 		if (k == 0) {
-			next = map.get("reactionSad");
+			reactionFrame = "reactionSad";
 		} else if (k == 1) {
-			next = map.get("reactionHappy");
+			reactionFrame = "reactionHappy";
 		} else if (k == 2) {
-			next = map.get("reactionHappy");
+			reactionFrame = "reactionHappy";
 		} else if (k == 3) {
-			next = map.get("alert");
+			reactionFrame = "alert";
 		} else {
-			next = BADF00D;
+			reactionFrame = "BADF00D";
 		}
-		showSlide(next, f.gibFeedbackString());
+		goToFrame(reactionFrame, f.gibFeedbackString());
 		System.out.println("---------------------------------------------------------");
 		System.out.println();
 	}
@@ -190,7 +191,7 @@ public class GUI {
 			@Override
 			public void keyReleased(KeyEvent e) {
 				if (e.getKeyCode() == KeyEvent.VK_SPACE) { // end fast forward
-					waitingTime = 4000;
+					waitingTime = GUI.STD_WAITING_TIME;
 				}
 			}
 		};
