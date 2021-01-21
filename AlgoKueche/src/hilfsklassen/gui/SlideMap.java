@@ -9,7 +9,8 @@ public class SlideMap extends HashMap<String, Slide> {
 
     public SlideMap() {
         String[] methods = new String[] { "welcome", "wirKochenJetzt", "nimmAusSchrank", "stellZutatZurueck", "schneide", "gibInTopf",
-                "koche", "serviere", "reactionHappy", "reactionSad", "gebeAufTeller", "gutGewuerzt", "schlechtGewuerzt", "alert", "sumoHungrig", "sumoSatt" };
+                "koche", "serviere", "reactionHappy", "reactionSad", "gebeAufTeller", "gutGewuerzt", "schlechtGewuerzt", "alert", 
+                "sumoHungrig", "sumoSatt", "wuerze" };
         initSlides();
         for (String s : methods) {
             if (!this.containsKey(s)) {
@@ -56,6 +57,8 @@ public class SlideMap extends HashMap<String, Slide> {
             new Slide(  "sumoHungrig",        Color.red,       "sumoHungrig.png",       "Der Sumoringer ist noch hungrig."));
         this.put(       "sumoSatt",             
             new Slide(  "sumoSatt",           Color.green,     "sumoSatt.png",        "Der Sumoringer ist endlich satt."));
+        this.put(       "wuerze",             
+            new Slide(  "wuerze",             Color.yellow,     "wuerze.png",        "Sam wuerzt das Gericht etwas."));
     }
 
 }

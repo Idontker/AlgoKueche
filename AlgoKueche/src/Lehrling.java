@@ -281,6 +281,7 @@ public class Lehrling {
         if (aktWuerze == 42) {
             aktWuerze = (int) (Math.random() * 3) + 1;
         }
+        animation.goToFrame("wuerze");
         aktWuerze--;
     }
 
