@@ -76,7 +76,7 @@ public class GUI {
 
 	public void resetWaitingOptions() {
 		skipping = false;
-		waitingTime = 4000;
+		waitingTime = GUI.STD_WAITING_TIME;
 	}
 
 	// TODO: rename method
@@ -117,6 +117,7 @@ public class GUI {
 			}
 		}).start();
 
+		long start = System.currentTimeMillis();
 		clickAble = true;
 		try {
 			countDownLatch.await();
@@ -124,6 +125,8 @@ public class GUI {
 			e.printStackTrace();
 		}
 		clickAble = false;
+		long end = System.currentTimeMillis();
+		System.err.println("[TIME]: " + (end - start));
 	}
 
 	public void goToFeedback(Feedback f) {
@@ -167,6 +170,8 @@ public class GUI {
 			}
 		};
 		KeyAdapter adapterK = new KeyAdapter() {
+			boolean first = true;
+
 			@Override
 			public void keyPressed(KeyEvent e) {
 				if (clickAble) {
@@ -175,10 +180,11 @@ public class GUI {
 						clickAble = false;
 						GUI.awaitCountdown(50, countDownLatch);
 					}
-					if (e.getKeyCode() == KeyEvent.VK_SPACE) { // fast forward until released
+					if (e.getKeyCode() == KeyEvent.VK_SPACE && first) { // fast forward until released
 						clickAble = false;
 						GUI.awaitCountdown(50, countDownLatch);
 						waitingTime = 250;
+						first = false;
 					}
 					if (e.getKeyCode() == KeyEvent.VK_ESCAPE) { // Skip to feedback or alert
 						clickAble = false;
@@ -192,6 +198,7 @@ public class GUI {
 			public void keyReleased(KeyEvent e) {
 				if (e.getKeyCode() == KeyEvent.VK_SPACE) { // end fast forward
 					waitingTime = GUI.STD_WAITING_TIME;
+					first = true;
 				}
 			}
 		};
