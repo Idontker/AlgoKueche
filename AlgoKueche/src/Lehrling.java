@@ -49,6 +49,9 @@ public class Lehrling {
                     + "\" ist nicht bekannt. Du kannst das Programm abbrechen, oder trotzdem laufen lassen");
         }
         schritte = ret[1];
+        if(aktHunger<0){
+            kunde.meldeFehler(Comment.satt);
+        }
         animation.goToFrame("wirKochenJetzt", rezept);
     }
 
@@ -263,7 +266,7 @@ public class Lehrling {
             return false;
         }
         if (aktHunger < 0) {
-            animation.goToFrame("sumoHungrig");
+            animation.goToFrame("sumoVoll");
             kunde.meldeFehler(Comment.satt);
             aktHunger--;
             return true;

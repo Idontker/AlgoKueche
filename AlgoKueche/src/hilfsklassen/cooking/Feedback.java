@@ -43,6 +43,7 @@ public class Feedback {
             case serviereLeerenTeller:
             case unfertigeZutatenServiert:
             case zuVielServiert:
+            case satt:
                 return 0; // negativ
             default:
                 return -1;
@@ -82,8 +83,10 @@ public class Feedback {
                 return "Es fehlt " + zutat + ".";
             case falschZubereitet:
                 return zutat + " wurde falsch zubereitet.";
+            case satt:
+                return "Er ist satt und will nichts mehr zu essen";
             default:
-                return "[Error]";
+                return "[Error] Kein Feedback für diesen Fehlertyp definiert";
 
         }
     }
