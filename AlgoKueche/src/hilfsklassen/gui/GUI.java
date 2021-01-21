@@ -21,6 +21,8 @@ public class GUI {
 
 	// GUI Main
 	public static void main(String args[]) {
+        MainFrame.pathToAlgoKueche = "C:/Users/Karol/proj/AlgoKueche/AlgoKueche/src/hilfsklassen/";
+        //MainFrame.pathToAlgoKueche = "D:/XData/Dokumente/Ausbildung/Uni/7.Semester/Studienbegl Praktikum/AlgoKueche/AlgoKueche/src/hilfsklassen/";
 		GUI g = startGUI();
 		g.slideShow();
 	}

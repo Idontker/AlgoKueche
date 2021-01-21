@@ -51,7 +51,9 @@ public class CommentPanel extends JPanel {
                 note = note.split("\\(")[0];
             }
             // first Letter to uppercase
-            note = note.substring(0, 1).toUpperCase() + note.substring(1);
+            if (note.length() > 1) {
+                note = note.substring(0, 1).toUpperCase() + note.substring(1);
+            }
             str += "     \t" + note;
         }
         return str;
