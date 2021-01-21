@@ -4,27 +4,29 @@ import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
 
 public class ActionPanel extends JPanel {
 
-    private static final long serialVersionUID = 3L;
+	private static final long serialVersionUID = 3L;
+	boolean fast = false;
 
-    private JLabel imageLabel;
+	private JLabel imageLabel;
 
-    public ActionPanel(int w, int h) {
-        imageLabel = new JLabel();
+	public ActionPanel(int w, int h) {
+		imageLabel = new JLabel();
 		imageLabel.setVisible(false);
 
 		this.setBackground(MainFrame.DEFAULT_COLOR);
 		this.setPreferredSize(new Dimension(w, h));
-		
+
 		this.add(imageLabel);
 		this.setVisible(true);
-    }
+	}
 
-    public void showSlide(Slide next) {
+	public void showSlide(Slide next) {
 		JLabel tmp = null;
 		if (next.image != null) { // create new Label with ImageIcon
 			ImageIcon icon = new ImageIcon(
@@ -40,6 +42,11 @@ public class ActionPanel extends JPanel {
 			imageLabel = tmp;
 		}
 		// update Background and comment
-		this.setBackground(next.c);
+		if (!fast || next.getMethod().equals("reactionHappy") || next.getMethod().equals("reactionSad")
+				|| next.getMethod().equals("alert")) {
+			this.setBackground(next.c);
+		} else {
+			this.setBackground(Color.BLUE);
+		}
 	}
 }

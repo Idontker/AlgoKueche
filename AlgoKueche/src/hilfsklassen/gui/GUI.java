@@ -87,7 +87,8 @@ public class GUI {
 	public void goToFrame(String slideName, String note) {
 		if (notActive)
 			return;
-		if (slideName.equals("wirKochenJetzt") || slideName.equals("alert")) {
+		// slideName.equals("wirKochenJetzt")
+		if (slideName.equals("alert") || slideName.equals("reactionHappy") || slideName.equals("reactionSad")) {
 			resetWaitingOptions();
 		} else if (slideName.equalsIgnoreCase("timeWaste")) {
 			resetWaitingOptions();
@@ -117,7 +118,6 @@ public class GUI {
 			}
 		}).start();
 
-		long start = System.currentTimeMillis();
 		clickAble = true;
 		try {
 			countDownLatch.await();
@@ -125,8 +125,6 @@ public class GUI {
 			e.printStackTrace();
 		}
 		clickAble = false;
-		long end = System.currentTimeMillis();
-		System.err.println("[TIME]: " + (end - start));
 	}
 
 	public void goToFeedback(Feedback f) {
@@ -185,6 +183,7 @@ public class GUI {
 						GUI.awaitCountdown(50, countDownLatch);
 						waitingTime = 250;
 						first = false;
+						actionPanel.fast = true;
 					}
 					if (e.getKeyCode() == KeyEvent.VK_ESCAPE) { // Skip to feedback or alert
 						clickAble = false;
@@ -199,6 +198,7 @@ public class GUI {
 				if (e.getKeyCode() == KeyEvent.VK_SPACE) { // end fast forward
 					waitingTime = GUI.STD_WAITING_TIME;
 					first = true;
+					actionPanel.fast = false;
 				}
 			}
 		};
