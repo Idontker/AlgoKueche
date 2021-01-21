@@ -25,6 +25,7 @@ public class Lehrling {
     public Lehrling() {
         animation = GUI.startGUI();
         kunde = new Kunde();
+        aktHunger = 42;
     }
 
     /**
@@ -39,7 +40,6 @@ public class Lehrling {
         serviert = false;
         aktZutat = "";
         aktWuerze = 42;
-        aktHunger = 42;
         bearbeitet = false;
         zutatenInTopf = new ArrayList<String>();
         int[] ret = kunde.rezeptauswahl(Formatierung.formatiere(rezept));
@@ -248,22 +248,24 @@ public class Lehrling {
      *         
      */
     public boolean istDerKundeSatt() {
-        schrittZaehler();
         if (aktHunger == 42) {
             aktHunger = (int) (Math.random() * 8) + 3;
         }
         
         if (aktHunger == 0) {
             animation.goToFrame("sumoSatt");
+            aktHunger--;
             return true;
         }
         if (aktHunger > 0) {
             animation.goToFrame("sumoHungrig");
+            aktHunger--;
             return false;
         }
         if (aktHunger < 0) {
-            animation.goToFrame("sumoSatt");
+            animation.goToFrame("sumoHungrig");
             kunde.meldeFehler(Comment.satt);
+            aktHunger--;
             return true;
         }
         aktHunger--;
