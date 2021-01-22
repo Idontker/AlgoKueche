@@ -131,8 +131,8 @@ public class Lehrling {
     }
 
     /**
-     * Kocht alle Zutaten im Topf. Der Lehrling ist solange mit Umruehren
-     * beschaftigt.
+     * Kocht alle Zutaten im Topf für <zeit> Minuten. Der Lehrling ist solange 
+     * mit Umruehren beschaftigt. 
      * 
      * @param zeit Die Kochzeit in Minuten
      */
