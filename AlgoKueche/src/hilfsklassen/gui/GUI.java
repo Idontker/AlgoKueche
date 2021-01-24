@@ -10,235 +10,222 @@ import java.awt.event.KeyAdapter;
 import java.util.concurrent.CountDownLatch;
 
 public class GUI {
-    // static values
-    public static final double SCALE = 0.4;
-    public static final int HEIGHT = (int) (SCALE * 2000);
-    public static final int WIDTH = (int) (SCALE * 1500);
-    private int waitingTime = 4000;
+	// static values
+	public static final double SCALE = 0.4;
+	public static final int HEIGHT = (int) (SCALE * 2000);
+	public static final int WIDTH = (int) (SCALE * 1500);
+	public static final int STD_WAITING_TIME = 4000;
+	private int waitingTime;
 
-    private static final Slide BADF00D = new Slide("badf00d", Color.black, "Folie nicht gefunden!");
+	private static final Slide BADF00D = new Slide("badf00d", Color.black, "Folie nicht gefunden!");
 
-    // GUI Main
-    public static void main(String args[]) {
-        GUI g = startGUI();
-        g.slideShow();
-    }
+	// GUI Main
+	public static void main(String args[]) {
+        MainFrame.pathToAlgoKueche = "C:/Users/Karol/proj/AlgoKueche/AlgoKueche/src/hilfsklassen/";
+        //MainFrame.pathToAlgoKueche = "D:/XData/Dokumente/Ausbildung/Uni/7.Semester/Studienbegl Praktikum/AlgoKueche/AlgoKueche/src/hilfsklassen/";
+		GUI g = startGUI();
+		g.slideShow();
+	}
 
-    // GUI attributes
-    private boolean notActive;
-    private MainFrame frame;
-    private ActionPanel actionPanel;
+	// GUI attributes
+	private boolean notActive;
+	private MainFrame frame;
+	private ActionPanel actionPanel;
 
-    private CommentPanel commentPanel;
+	private CommentPanel commentPanel;
 
-    private SlideMap map;
+	private SlideMap map;
 
-    private CountDownLatch countDownLatch;
-    private boolean clickAble;
-    private boolean skipping=false;
-    private boolean isEndAlert=false;
+	private CountDownLatch countDownLatch;
+	private boolean clickAble;
+	private boolean skipping = false;
 
-    // for testing
-    public static boolean runningTestcase = false;
+	// for testing
+	public static boolean runningTestcase = false;
 
-    public static GUI startGUI() {
-        if (runningTestcase) {
-            return new GUI();
-        } else {
-            return new GUI(false);
-        }
-    }
+	public static GUI startGUI() {
+		if (runningTestcase) {
+			return new GUI();
+		} else {
+			return new GUI(false);
+		}
+	}
 
-    private GUI() {
-        notActive = true;
-    }
+	private GUI() {
+		notActive = true;
+	}
 
-    private GUI(boolean dummy) {
-        map = new SlideMap();
+	private GUI(boolean dummy) {
+		map = new SlideMap();
 
-        frame = new MainFrame();
+		frame = new MainFrame();
 
-        int actionHeight = (int) (HEIGHT * 0.8);
-        int commentHeight = (int) (HEIGHT * 0.1);
+		int actionHeight = (int) (HEIGHT * 0.8);
+		int commentHeight = (int) (HEIGHT * 0.1);
 
-        actionPanel = new ActionPanel(GUI.WIDTH, actionHeight);
-        commentPanel = new CommentPanel(GUI.WIDTH, commentHeight);
+		actionPanel = new ActionPanel(GUI.WIDTH, actionHeight);
+		commentPanel = new CommentPanel(GUI.WIDTH, commentHeight);
 
-        frame.addToCanvas(actionPanel);
-        frame.addToCanvas(commentPanel);
+		frame.addToCanvas(actionPanel);
+		frame.addToCanvas(commentPanel);
 
-        addInterruptAdapter();
+		addInterruptAdapter();
 
-        frame.setVisible(true);
-        goToFrame("welcome");
-    }
+		frame.setVisible(true);
+		waitingTime = 0;
+		goToFrame("welcome");
+		waitingTime = STD_WAITING_TIME;
+		System.out.println("Hier die wichtigsten Schritte zusammengefasst: ");
+	}
 
-    public void setIsEndAlert(boolean b) {
-        isEndAlert=b;
-    }
+	public void resetWaitingOptions() {
+		skipping = false;
+		waitingTime = GUI.STD_WAITING_TIME;
+	}
 
-    // TODO: rename method
-    public void goToFrame(String slideName) {
-        goToFrame(slideName, "");
-    }
+	// TODO: rename method
+	public void goToFrame(String slideName) {
+		goToFrame(slideName, "");
+	}
 
-    public void goToFrame(String slideName, String note) {
-        if (notActive)
-            return;
-        Slide next = map.get(slideName);
-        if(slideName.equals("wirKochenJetzt")) {
-            skipping=false;
-        }
-        if(!skipping||slideName.equals("alert")) {
-            if (next != null) {
-                showSlide(next, note);
-            } else {
-                System.err.println("Slide: " + slideName + " not found in Database");
-                showSlide(BADF00D, "");
-                commentPanel.setText(BADF00D.getComment());
-            }
-            if(!isEndAlert) {
-                countDownLatch = new CountDownLatch(1);
+	public void goToFrame(String slideName, String note) {
+		if (notActive)
+			return;
+		// slideName.equals("wirKochenJetzt")
+		if (slideName.equals("alert") || slideName.equals("reactionHappy") || slideName.equals("reactionSad")) {
+			resetWaitingOptions();
+		} else if (slideName.equalsIgnoreCase("timeWaste")) {
+			resetWaitingOptions();
+			showSlide(map.get("alert"), note);
+			return;
+		}
 
-                (new Thread() {
-                        @Override
-                        public void run() {
-                            awaitCountdown(waitingTime, countDownLatch);
-                        }
-                    }).start();
+		Slide next = map.get(slideName);
+		if (skipping) {
+			commentPanel.showComment(next, note);
+			return;
+		}
+		if (next != null) {
+			showSlide(next, note);
+		} else {
+			System.err.println("Slide: " + slideName + " not found in Database");
+			showSlide(BADF00D, "");
+		}
 
-                clickAble = true;
-                try {
-                    countDownLatch.await();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                clickAble = false;
-            } else {
-                isEndAlert=false;
-            }
-            if(slideName.equals("alert")) {
-                skipping = false;
-            }
-        } else {
-            if (next.getMethod().equals("gebeAufTeller") || next.getMethod().equals("gibInTopf")) { //TODO: add commit aus 22.01
-                String str = next.getComment();
-                if (next.moreInfo()) {
-                    if (note.contains("(")) {
-                        note = note.split("\\(")[0];
-                    }
-                    // first Letter to uppercase
-                    note = note.substring(0, 1).toUpperCase() + note.substring(1);
-                    str += "     \t" + note;
-                }
-                System.out.println(str);
-            }
-        }
-    }
+		// Waiting for interrupt or end of waitingtime
+		countDownLatch = new CountDownLatch(1);
 
-    public void goToFeedback(Feedback f) {
-        if (notActive)
-            return;
-        int k = f.bewertungsKategorie();
-        Slide next;
-        if (k == 0) {
-            next = map.get("reactionSad");
-        } else if (k == 1) {
-            next = map.get("reactionHappy");
-        } else if (k == 2) {
-            next = map.get("reactionHappy");
-        } else if (k == 3) {
-            next = map.get("alert");
-        } else {
-            next = BADF00D;
-        }
-        skipping=false;
-        showSlide(next, f.gibFeedbackString());
-        System.out.println("---------------------------------------------------------");
-        System.out.println();
-    }
+		(new Thread() {
+			@Override
+			public void run() {
+				awaitCountdown(waitingTime, countDownLatch);
+			}
+		}).start();
 
-    private void showSlide(Slide next, String note) {
-        actionPanel.showSlide(next);
-        String str = next.getComment();
+		clickAble = true;
+		try {
+			countDownLatch.await();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		clickAble = false;
+	}
 
-        // remove annotitations on "how was it prepeared"
-        if (next.moreInfo()) {
-            if (note.contains("(")) {
-                note = note.split("\\(")[0];
-            }
-            // first Letter to uppercase
-            note = note.substring(0, 1).toUpperCase() + note.substring(1);
-            str += "     \t" + note;
-        }
-        commentPanel.setText(str);
-        if (next.getMethod().equals("gebeAufTeller") || next.getMethod().equals("gibInTopf")) { //TODO: add commit aus 22.01
-            System.out.println(str);
-        }
-    }
+	public void goToFeedback(Feedback f) {
+		if (notActive)
+			return;
+		skipping = false;
 
-    private void addInterruptAdapter() {
-        MouseAdapter adapterM = new MouseAdapter() {
-                @Override
-                public void mouseClicked(MouseEvent e) {
-                    if (clickAble) {
-                        if (e.getButton() == MouseEvent.BUTTON1) {
-                            clickAble = false;
-                            GUI.awaitCountdown(50, countDownLatch);
-                        }
-                    }
-                }
-            };
-        KeyAdapter adapterK = new KeyAdapter() {
-                @Override
-                public void keyPressed(KeyEvent e) {
-                    if (clickAble) {
-                        if (e.getKeyCode() == KeyEvent.VK_RIGHT
-                                || e.getKeyCode() == KeyEvent.VK_KP_RIGHT) { // skip one Slide
-                            clickAble = false;
-                            GUI.awaitCountdown(50, countDownLatch);
-                        }
-                        if(e.getKeyCode() == KeyEvent.VK_SPACE){ // fast forward until released
-                            clickAble = false;
-                            GUI.awaitCountdown(50, countDownLatch);
-                            waitingTime = 250;
-                        }
-                        if(e.getKeyCode() == KeyEvent.VK_ESCAPE) { // Skip to feedback or alert
-                            clickAble = false;
-                            GUI.awaitCountdown(50, countDownLatch);
-                            skipping=true;
-                        }
-                    }
-                }
+		int k = f.bewertungsKategorie();
+		String reactionFrame;
+		if (k == 0) {
+			reactionFrame = "reactionSad";
+		} else if (k == 1) {
+			reactionFrame = "reactionHappy";
+		} else if (k == 2) {
+			reactionFrame = "reactionHappy";
+		} else if (k == 3) {
+			reactionFrame = "alert";
+		} else {
+			reactionFrame = "BADF00D";
+		}
+		goToFrame(reactionFrame, f.gibFeedbackString());
+		System.out.println("---------------------------------------------------------");
+		System.out.println();
+	}
 
-                @Override
-                public void keyReleased(KeyEvent e) {
-                    if(e.getKeyCode() == KeyEvent.VK_SPACE){ // end fast forward
-                        clickAble = true;
-                        waitingTime = 4000;
-                    }
-                }
-            };
-        frame.addMouseListener(adapterM);
-        frame.addKeyListener(adapterK);
-    }
+	private void showSlide(Slide next, String note) {
+		actionPanel.showSlide(next);
+		commentPanel.showComment(next, note);
+	}
 
-    private static void awaitCountdown(int waitBefore, CountDownLatch countDown) {
-        try {
-            Thread.sleep(waitBefore);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        countDown.countDown();
+	private void addInterruptAdapter() {
+		MouseAdapter adapterM = new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (clickAble) {
+					if (e.getButton() == MouseEvent.BUTTON1) {
+						clickAble = false;
+						GUI.awaitCountdown(50, countDownLatch);
+					}
+				}
+			}
+		};
+		KeyAdapter adapterK = new KeyAdapter() {
+			boolean first = true;
 
-    }
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (clickAble) {
+					if (e.getKeyCode() == KeyEvent.VK_RIGHT || e.getKeyCode() == KeyEvent.VK_KP_RIGHT) { // skip one
+																											// Slide
+						clickAble = false;
+						GUI.awaitCountdown(50, countDownLatch);
+					}
+					if (e.getKeyCode() == KeyEvent.VK_SPACE && first) { // fast forward until released
+						clickAble = false;
+						GUI.awaitCountdown(50, countDownLatch);
+						waitingTime = 250;
+						first = false;
+						actionPanel.fast = true;
+					}
+					if (e.getKeyCode() == KeyEvent.VK_ESCAPE) { // Skip to feedback or alert
+						clickAble = false;
+						GUI.awaitCountdown(50, countDownLatch);
+						skipping = true;
+					}
+				}
+			}
 
-    // methods for testing.
-    private void slideShow() {
-        for (String key : map.keySet()) {
-            goToFrame(key);
-        }
-        goToFrame("b4df00d");
-    }
+			@Override
+			public void keyReleased(KeyEvent e) {
+				if (e.getKeyCode() == KeyEvent.VK_SPACE) { // end fast forward
+					waitingTime = GUI.STD_WAITING_TIME;
+					first = true;
+					actionPanel.fast = false;
+				}
+			}
+		};
+		frame.addMouseListener(adapterM);
+		frame.addKeyListener(adapterK);
+	}
+
+	private static void awaitCountdown(int waitBefore, CountDownLatch countDown) {
+		try {
+			Thread.sleep(waitBefore);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		countDown.countDown();
+
+	}
+
+	// methods for testing.
+	private void slideShow() {
+		for (String key : map.keySet()) {
+			goToFrame(key);
+		}
+		goToFrame("b4df00d");
+	}
 
 }

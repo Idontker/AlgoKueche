@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Kunde {
-    private final String pathToRecipes = "res/rezpete.txt";
+    private final String pathToRecipes = "res/rezepte.txt";
     private String serviert;
     private String rezeptName;
     private Boolean gewuerzt;
@@ -158,7 +158,7 @@ public class Kunde {
                     // return "Zu viele "+komponente.gibZutat()+komponente.gibZubereitung()+". :(";
                 }
             }
-            return new Feedback(Comment.falscheZutatEnthalten, serviertKlon, "");
+            return new Feedback(Comment.falscheZutatEnthalten, serviertKlon.split("\\(")[0], "");
             // return serviert+" gehoert da nicht rein. :("; //falls es sich um unbekannte
             // Komponenten handelt, gib sie alle aus.
         }

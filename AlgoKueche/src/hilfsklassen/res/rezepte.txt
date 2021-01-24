@@ -23,3 +23,6 @@ griechischer Salat:Salat(geschnitten) Tomate(geschnitten) Zwiebel(geschnitten) G
 40!Sushi: 3?Reis(gekocht_20_ZusammenGekocht_Reis) 3?Fisch(geschnitten) 3?Noriblatt
 40!Sushi mit Gurke: 3?Reis(gekocht_20_ZusammenGekocht_Reis) 3?Gurke(geschnitten) 3?Noriblatt
 50!California Role: 3?Reis(gekocht_20_ZusammenGekocht_Reis) 3?Fisch(geschnitten) 3?Avocado(geschnitten) 3?Noriblatt
+40!Familiensalat mit Essig und Oel:4?Salat(geschnitten) 4?Oel 4?Essig
+15!Spiegelei: Ei(gekocht_6_ZusammenGekocht_Ei) : gewuerzt
+60!Gulasch: Fleisch(geschnitten,gekocht_40_ZusammenGekocht_Fleisch_Kartoffel_Kartoffel_Kartoffel_Paprika_Paprika_Paprika_Zwiebel) 3?Kartoffel(geschnitten,gekocht_40_ZusammenGekocht_Fleisch_Kartoffel_Kartoffel_Kartoffel_Paprika_Paprika_Paprika_Zwiebel) Zwiebel(geschnitten,gekocht_40_ZusammenGekocht_Fleisch_Kartoffel_Kartoffel_Kartoffel_Paprika_Paprika_Paprika_Zwiebel) 3?Paprika(geschnitten,gekocht_40_ZusammenGekocht_Fleisch_Kartoffel_Kartoffel_Kartoffel_Paprika_Paprika_Paprika_Zwiebel):gewuerzt

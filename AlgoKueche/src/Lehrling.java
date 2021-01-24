@@ -25,6 +25,7 @@ public class Lehrling {
     public Lehrling() {
         animation = GUI.startGUI();
         kunde = new Kunde();
+        aktHunger = (int) (Math.random() * 8) + 3;
     }
 
     /**
@@ -39,7 +40,6 @@ public class Lehrling {
         serviert = false;
         aktZutat = "";
         aktWuerze = 42;
-        aktHunger = 42;
         bearbeitet = false;
         zutatenInTopf = new ArrayList<String>();
         int[] ret = kunde.rezeptauswahl(Formatierung.formatiere(rezept));
@@ -49,14 +49,16 @@ public class Lehrling {
                     + "\" ist nicht bekannt. Du kannst das Programm abbrechen, oder trotzdem laufen lassen");
         }
         schritte = ret[1];
+        if(aktHunger<0){
+            kunde.meldeFehler(Comment.satt);
+        }
         animation.goToFrame("wirKochenJetzt", rezept);
     }
 
     private void schrittZaehler() {
         schritte--;
         if (schritte <= 0) {
-            animation.setIsEndAlert(true); //don't make the animation wait if next slide is the last slide and is a programm ending error
-            animation.goToFrame("alert", "Die Zubereitung braucht verdaechtig lange.");
+            animation.goToFrame("timeWaste", "Die Zubereitung braucht verdaechtig lange.");
             RuntimeException e = new ZubereitungDauertZuLangeFehler(
                     "Die Zubereitung wurde abgebrochen, da sie deutlich zu lange braucht.");
             e.setStackTrace(new StackTraceElement[0]);
@@ -129,8 +131,8 @@ public class Lehrling {
     }
 
     /**
-     * Kocht alle Zutaten im Topf. Der Lehrling ist solange mit Umruehren
-     * beschaftigt.
+     * Kocht alle Zutaten im Topf für <zeit> Minuten. Der Lehrling ist solange 
+     * mit Umruehren beschaftigt. 
      * 
      * @param zeit Die Kochzeit in Minuten
      */
@@ -249,11 +251,6 @@ public class Lehrling {
      *         
      */
     public boolean istDerKundeSatt() {
-        schrittZaehler();
-        if (aktHunger == 42) {
-            aktHunger = (int) (Math.random() * 8) + 3;
-        }
-        
         if (aktHunger == 0) {
             animation.goToFrame("sumoSatt");
             return true;
@@ -263,11 +260,9 @@ public class Lehrling {
             return false;
         }
         if (aktHunger < 0) {
-            animation.goToFrame("sumoSatt");
-            kunde.meldeFehler(Comment.satt);
+            animation.goToFrame("sumoVoll");
             return true;
         }
-        aktHunger--;
         return true;
     }
 
@@ -280,6 +275,7 @@ public class Lehrling {
         if (aktWuerze == 42) {
             aktWuerze = (int) (Math.random() * 3) + 1;
         }
+        animation.goToFrame("wuerze");
         aktWuerze--;
     }
 
@@ -287,11 +283,11 @@ public class Lehrling {
      * Serviert alles, was sich gerade auf dem Servierteller befindet.
      */
     public void serviere() {
-        schrittZaehler();
         if (!serviert) {
             animation.goToFrame("serviere");
             animation.goToFeedback(kunde.bewerte());
             serviert = true;
+            aktHunger--;
         } else {
             System.out.println("Das Gericht wurde bereits serviert.");
         }
