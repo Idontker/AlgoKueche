@@ -18,7 +18,7 @@ public class Chefkoch {
         MainFrame.pathToAlgoKueche = "D:/XData/Dokumente/Ausbildung/Uni/7.Semester/Studienbegl Praktikum/AlgoKueche/AlgoKueche/src/hilfsklassen/";
         Chefkoch c = new Chefkoch();
         while(!c.sam.istDerKundeSatt()){
-            c.reinerSalat();
+            c.salatMitEssigUndOel();
         }
     }
 
