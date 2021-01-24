@@ -11,10 +11,15 @@ import hilfsklassen.gui.MainFrame;
 public class Chefkoch {
     private Lehrling sam; // Alberts Lehrling Sam, er kocht die Rezepte
 
-    public static void main(String args[]){
-        MainFrame.pathToAlgoKueche = "C:/Users/Karol/proj/AlgoKueche/AlgoKueche/src/hilfsklassen/";
+    public static void main(String args[]) {
+        // If your or your IDE complie the files right here, you can uncomment this line
+        // Otherwise set this path to the hilfsklassen folder.
+        //MainFrame.pathToAlgoKueche = "C:/Users/Karol/proj/AlgoKueche/AlgoKueche/src/hilfsklassen/";
+        MainFrame.pathToAlgoKueche = "D:/XData/Dokumente/Ausbildung/Uni/7.Semester/Studienbegl Praktikum/AlgoKueche/AlgoKueche/src/hilfsklassen/";
         Chefkoch c = new Chefkoch();
-        c.reinerSalat();
+        while(!c.sam.istDerKundeSatt()){
+            c.reinerSalat();
+        }
     }
 
     public Chefkoch() {
