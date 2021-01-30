@@ -25,7 +25,7 @@ public class Lehrling {
     public Lehrling() {
         animation = GUI.startGUI();
         kunde = new Kunde();
-        aktHunger = (int) (Math.random() * 8) + 3;
+        aktHunger = 5000;
     }
 
     /**
@@ -251,6 +251,9 @@ public class Lehrling {
      *         
      */
     public boolean istDerKundeSatt() {
+        if(aktHunger > 4000){
+            aktHunger = (int) (Math.random() * 8) + 3;
+        }
         if (aktHunger == 0) {
             animation.goToFrame("sumoSatt");
             return true;
