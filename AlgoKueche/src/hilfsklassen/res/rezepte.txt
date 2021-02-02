@@ -20,6 +20,8 @@ griechischer Salat:Salat(geschnitten) Tomate(geschnitten) Zwiebel(geschnitten) G
 10!SteakWell-done: Steak(gekocht_10_ZusammenGekocht_Steak)
 25!Hamburger: Salat(geschnitten) Tomate(geschnitten) Broetchen(geschnitten) Burgerpatty(gekocht_10_ZusammenGekocht_Burgerpatty)
 25!Cheeseburger: Kaesescheibe() Tomate(geschnitten) Broetchen(geschnitten) Burgerpatty(gekocht_10_ZusammenGekocht_Burgerpatty)
+25!vegetarischerHamburger: Salat(geschnitten) Tomate(geschnitten) Broetchen(geschnitten) Veggiepatty(gekocht_10_ZusammenGekocht_Veggiepatty)
+25!vegetarischerCheeseburger: Kaesescheibe() Tomate(geschnitten) Broetchen(geschnitten) Veggiepatty(gekocht_10_ZusammenGekocht_Veggiepatty)
 40!Sushi: 3?Reis(gekocht_20_ZusammenGekocht_Reis) 3?Fisch(geschnitten) 3?Noriblatt
 40!Sushi mit Gurke: 3?Reis(gekocht_20_ZusammenGekocht_Reis) 3?Gurke(geschnitten) 3?Noriblatt
 50!California Role: 3?Reis(gekocht_20_ZusammenGekocht_Reis) 3?Fisch(geschnitten) 3?Avocado(geschnitten) 3?Noriblatt
