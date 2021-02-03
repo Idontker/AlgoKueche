@@ -11,146 +11,22 @@ import hilfsklassen.gui.MainFrame;
 public class Chefkoch {
     private Lehrling sam; // Alberts Lehrling Sam, er kocht die Rezepte
 
-    public static void main(String args[]) {
-        // If your or your IDE complie the files right here, you can uncomment this line
-        // Otherwise set this path to the hilfsklassen folder.
-        //MainFrame.pathToAlgoKueche = "C:/Users/Karol/proj/AlgoKueche/AlgoKueche/src/hilfsklassen/";
-        MainFrame.pathToAlgoKueche = "D:/XData/Dokumente/Ausbildung/Uni/7.Semester/Studienbegl Praktikum/AlgoKueche/AlgoKueche/src/hilfsklassen/";
-        Chefkoch c = new Chefkoch();
-        
-        c.salat("ohne Dressing");
-        c.salat("Essig und Oel");
-        c.salat("Joghurtdressing");
-
-        c.spiegelei();
-
-        c.gulasch();
-
-        System.out.println( c.rikuSaettigen());        
-    }
-
     public Chefkoch() {
         sam = new Lehrling();
     }
 
-    /**
-     * Wiederholungsaufgabe
+    /*
+     *  2021-01-29
      */
-    public void salat(String dressing) {
-        if(dressing.equals("ohne Dressing")){
-            reinerSalat();
-        }
-        else{
-            if(dressing.equals("Essig und Oel")){
-                salatMitEssigUndOel();
-            }
-            else{
-                if(dressing.equals("Joghurtdressing")){
-                    salatMitJoghurtdressing();
-                }
-                else{
-                    System.out.println("Dressing unbekannt.");
-                }
-            }
-        }
-    }
-
-
-
-    public void spiegelei(){
-        sam.wirKochenJetzt("Spiegelei");
-        sam.nimmAusSchrank("Ei");
-        sam.gibInTopf();
-        sam.koche(6);
-        while(sam.brauchtMehrWuerze() == true){
-            sam.wuerze();
-        }
-        sam.gibTopfinhaltAufTeller();
-        sam.serviere();
-    }
-
-    public void gulasch(){
-        sam.wirKochenJetzt("gulasch");
-        schneidenUndInTopf("Fleisch");
-        schneidenUndInTopf("Zwiebel");
-        for(int i=1; i <= 3; i = i+1){
-            schneidenUndInTopf("Kartoffel");
-            schneidenUndInTopf("Paprika");
-        }
-        sam.koche(40);
-        while(sam.brauchtMehrWuerze() == true){
-            sam.wuerze();
-        }
-        sam.gibTopfinhaltAufTeller();
-        sam.serviere();
-    }
+   
+        //Stefan, bitte hier deine Musterlösungen
 
     /*
-    //Loesung Aufgabe 2
-    public void rikuSaettigen(){
-        while(sam.kundeIstSatt() == false){
-            reinerSalat();
-        }
-    }
-    */
+     *  2021-01-22
+     */
 
-    //Endgueltige Loesung Aufgabe 3b
-    public double rikuSaettigen(){
-        int anzahl = 0;
-        while(sam.istDerKundeSatt() == false){
-            reinerSalat();
-            anzahl = anzahl + 1;
-        }
-        return anzahl * 1.25;
-    }
-
-    
-
-    private void schneidenUndInTopf(String zutat){
-        sam.nimmAusSchrank(zutat);
-        sam.schneide();
-        sam.gibInTopf();
-    }
     /*
-    Für die Wiederholungsaufgabe
-    */
-    public void reinerSalat() {
-            sam.wirKochenJetzt("reiner Salat");
-            sam.nimmAusSchrank("Salat");
-            sam.schneide();
-            sam.gibZutatAufTeller();
-            sam.serviere();
-    }
-
-    public void salatMitEssigUndOel() {
-        sam.wirKochenJetzt("Salat mit Essig und Oel");
-        sam.nimmAusSchrank("Salat");
-        sam.schneide();
-        sam.gibZutatAufTeller();
-        sam.nimmAusSchrank("Essig");
-        sam.gibZutatAufTeller();
-        sam.stellZutatZurueck();
-        sam.nimmAusSchrank("Oel");
-        sam.gibZutatAufTeller();
-        sam.stellZutatZurueck();
-        sam.serviere();
-    }
-
-    public void salatMitJoghurtdressing() {
-        sam.wirKochenJetzt("Salat mit Joghurtdressing");
-        sam.nimmAusSchrank("Salat");
-        sam.schneide();
-        sam.gibZutatAufTeller();
-        sam.nimmAusSchrank("Schnittlauch");
-        sam.schneide();
-        sam.gibZutatAufTeller();
-        sam.nimmAusSchrank("Joghurt");
-        sam.gibZutatAufTeller();
-        sam.serviere();
-    }
-
-    /**
-     * Aufgabe 3
+     * 2021-01-22 Aufgabe 3
      */
     public void sushi() {
         sam.wirKochenJetzt("Sushi");
@@ -173,7 +49,7 @@ public class Chefkoch {
     }
 
     /**
-     * Aufgabe 4
+     * 2021-01-22 Aufgabe 4
      */
     public void californiaRole() {
         sam.wirKochenJetzt("California Role");
@@ -197,5 +73,75 @@ public class Chefkoch {
         }
 
         sam.serviere();
+    }
+
+    /*
+     *  2021-01-15
+     */
+
+    // 2021-01-15 gemeinsamer Einstieg, nach Aufgabe 4
+    public void reinerSalat() {
+            sam.wirKochenJetzt("reiner Salat");
+            salatVorbereiten();
+            sam.serviere();
+    }
+
+    // 2021-01-15 Aufgabe 2
+    public void salatMitEssigUndOel() {
+        sam.wirKochenJetzt("Salat mit Essig und Oel");
+        sam.nimmAusSchrank("Salat");
+        sam.schneide();
+        sam.gibZutatAufTeller();
+        sam.nimmAusSchrank("Essig");
+        sam.gibZutatAufTeller();
+        sam.stellZutatZurueck();
+        sam.nimmAusSchrank("Oel");
+        sam.gibZutatAufTeller();
+        sam.stellZutatZurueck();
+        sam.serviere();
+    }
+
+    // 2021-01-15 Aufgabe 3
+    public void salatVorbereiten(){
+        sam.nimmAusSchrank("Salat");
+        sam.schneide();
+        sam.gibZutatAufTeller();
+    }
+
+    // 2021-01-15 Aufgabe 5a)
+    public void salatMitJoghurtdressing() {
+        sam.wirKochenJetzt("Salat mit Joghurtdressing");
+        sam.nimmAusSchrank("Salat");
+        sam.schneide();
+        sam.gibZutatAufTeller();
+        sam.nimmAusSchrank("Schnittlauch");
+        sam.schneide();
+        sam.gibZutatAufTeller();
+        sam.nimmAusSchrank("Joghurt");
+        sam.gibZutatAufTeller();
+        sam.serviere();
+    }
+
+    // 2021-01-15 Aufgabe 5b)
+    public void griechischerSalat(){
+        sam.wirKochenJetzt("griechischer Salat");
+        gemueseVorbereiten("Salat");
+        gemueseVorbereiten("Tomate");
+        gemueseVorbereiten("Zwiebel");
+        gemueseVorbereiten("Gurke");
+        gemueseVorbereiten("Feta");
+        sam.nimmAusSchrank("Oel");
+        sam.gibZutatAufTeller();
+        sam.stellZutatZurueck();
+        sam.nimmAusSchrank("Olive");
+        sam.gibZutatAufTeller();
+        sam.serviere();
+    }
+    
+    //praktische Hilfsmethode
+    public void gemueseVorbereiten(String zutat){ //nimm, schneide, gib auf Teller
+        sam.nimmAusSchrank(zutat);
+        sam.schneide();
+        sam.gibZutatAufTeller();
     }
 }
