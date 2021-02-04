@@ -140,9 +140,7 @@ public class Chefkoch {
      * 2021-01-22
      */
 
-    /*
-     * 2021-01-22 Aufgabe 3
-     */
+    // 2021-01-22 Aufgabe 3
     public void sushi() {
         sam.wirKochenJetzt("Sushi");
 
@@ -163,9 +161,7 @@ public class Chefkoch {
         sam.serviere();
     }
 
-    /**
-     * 2021-01-22 Aufgabe 4
-     */
+    // 2021-01-22 Aufgabe 4
     public void californiaRole() {
         sam.wirKochenJetzt("California Role");
 
