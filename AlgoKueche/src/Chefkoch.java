@@ -15,13 +15,19 @@ public class Chefkoch {
         sam = new Lehrling();
     }
 
+    public static void main(String[] args) {
+        MainFrame.pathToAlgoKueche = "C:/Users/Karol/proj/AlgoKueche/AlgoKueche/src/hilfsklassen/";
+        Chefkoch c = new Chefkoch();
+        c.crabRole(true);
+    }
+
     /*
-     *  2021-01-29
+     * 2021-01-29
      */
-   
+
     // 2021-01-29 Wiederholungsaufgabe
     public void eintopf(boolean vegetarisch) {
-        if(vegetarisch==true) {
+        if (vegetarisch == true) {
             sam.wirKochenJetzt("vegetarischer Eintopf");
         } else {
             sam.wirKochenJetzt("Eintopf");
@@ -32,7 +38,7 @@ public class Chefkoch {
         sam.nimmAusSchrank("Zwiebel");
         sam.schneide();
         sam.gibInTopf();
-        for(int i=1;i<=3;i=i+1) {
+        for (int i = 1; i <= 3; i = i + 1) {
             sam.nimmAusSchrank("Paprika");
             sam.schneide();
             sam.gibInTopf();
@@ -47,7 +53,7 @@ public class Chefkoch {
 
     // 2021-01-29 Blatt Stufe I
     public void burger(String burger) {
-        if(burger.equals("Hamburger")) {
+        if (burger.equals("Hamburger")) {
             sam.wirKochenJetzt("Hamburger");
             sam.nimmAusSchrank("Salat");
             sam.schneide();
@@ -87,7 +93,7 @@ public class Chefkoch {
         sam.nimmAusSchrank("Zwiebel");
         sam.schneide();
         sam.gibInTopf();
-        for(int i=1;i<=3;i=i+1) {
+        for (int i = 1; i <= 3; i = i + 1) {
             sam.nimmAusSchrank("Kartoffel");
             sam.schneide();
             sam.gibInTopf();
@@ -98,8 +104,8 @@ public class Chefkoch {
 
     // 2021-01-29 Blatt Stufe II + III
     public void steak(String garungsgrad, String beilage) {
-        if(garungsgrad.equals("rare")) {
-            if(beilage.equals("Paprika und Zucchini")) {
+        if (garungsgrad.equals("rare")) {
+            if (beilage.equals("Paprika und Zucchini")) {
                 sam.wirKochenJetzt("Steak rare mit Paprika und Zucchini");
                 paprikaUndZucchiniZubereiten();
             } else {
@@ -110,8 +116,8 @@ public class Chefkoch {
             sam.gibInTopf();
             sam.koche(5);
         } else {
-            if(garungsgrad.equals("medium")) {
-                if(beilage.equals("Paprika und Zucchini")) {
+            if (garungsgrad.equals("medium")) {
+                if (beilage.equals("Paprika und Zucchini")) {
                     sam.wirKochenJetzt("Steak medium mit Paprika und Zucchini");
                     paprikaUndZucchiniZubereiten();
                 } else {
@@ -122,7 +128,7 @@ public class Chefkoch {
                 sam.gibInTopf();
                 sam.koche(8);
             } else {
-                if(beilage.equals("Paprika und Zucchini")) {
+                if (beilage.equals("Paprika und Zucchini")) {
                     sam.wirKochenJetzt("Steak well-done mit Paprika und Zucchini");
                     paprikaUndZucchiniZubereiten();
                 } else {
@@ -139,7 +145,7 @@ public class Chefkoch {
     }
 
     /*
-     *  2021-01-22
+     * 2021-01-22
      */
 
     /*
@@ -148,7 +154,7 @@ public class Chefkoch {
     public void sushi() {
         sam.wirKochenJetzt("Sushi");
 
-        for (int i = 0; i < 3; i++) {
+        for (int i = 1; i <= 3; i = i + 1) {
             sam.nimmAusSchrank("Reis");
             sam.gibInTopf();
             sam.koche(20);
@@ -171,7 +177,7 @@ public class Chefkoch {
     public void californiaRole() {
         sam.wirKochenJetzt("California Role");
 
-        for (int i = 0; i < 3; i++) {
+        for (int i = 1; i <= 3; i = i + 1) {
             sam.nimmAusSchrank("Reis");
             sam.gibInTopf();
             sam.koche(20);
@@ -193,14 +199,14 @@ public class Chefkoch {
     }
 
     /*
-     *  2021-01-15
+     * 2021-01-15
      */
 
     // 2021-01-15 gemeinsamer Einstieg, nach Aufgabe 4
     public void reinerSalat() {
-            sam.wirKochenJetzt("reiner Salat");
-            salatVorbereiten();
-            sam.serviere();
+        sam.wirKochenJetzt("reiner Salat");
+        salatVorbereiten();
+        sam.serviere();
     }
 
     // 2021-01-15 Aufgabe 2
@@ -219,7 +225,7 @@ public class Chefkoch {
     }
 
     // 2021-01-15 Aufgabe 3
-    public void salatVorbereiten(){
+    public void salatVorbereiten() {
         sam.nimmAusSchrank("Salat");
         sam.schneide();
         sam.gibZutatAufTeller();
@@ -240,7 +246,7 @@ public class Chefkoch {
     }
 
     // 2021-01-15 Aufgabe 5b)
-    public void griechischerSalat(){
+    public void griechischerSalat() {
         sam.wirKochenJetzt("griechischer Salat");
         gemueseVorbereiten("Salat");
         gemueseVorbereiten("Tomate");
@@ -254,11 +260,41 @@ public class Chefkoch {
         sam.gibZutatAufTeller();
         sam.serviere();
     }
-    
-    //praktische Hilfsmethode
-    public void gemueseVorbereiten(String zutat){ //nimm, schneide, gib auf Teller
+
+    // praktische Hilfsmethode
+    public void gemueseVorbereiten(String zutat) { // nimm, schneide, gib auf Teller
         sam.nimmAusSchrank(zutat);
         sam.schneide();
         sam.gibZutatAufTeller();
+    }
+
+    public void crabRole(boolean vegan) {
+        if (vegan == true) {
+            sam.wirKochenJetzt("vegane Crab Role");
+        } else {
+            sam.wirKochenJetzt("Crab Role");
+        }
+
+        for (int i = 1; i <= 3; i = i + 1) {
+            sam.nimmAusSchrank("Reis");
+            sam.gibInTopf();
+            sam.koche(20);
+            sam.gibTopfinhaltAufTeller();
+
+            if (vegan == false) {
+                sam.nimmAusSchrank("Krabbenfleisch");
+                sam.schneide();
+                sam.gibZutatAufTeller();
+            }
+
+            sam.nimmAusSchrank("Avocado");
+            sam.schneide();
+            sam.gibZutatAufTeller();
+
+            sam.nimmAusSchrank("Noriblatt");
+            sam.gibZutatAufTeller();
+        }
+
+        sam.serviere();
     }
 }

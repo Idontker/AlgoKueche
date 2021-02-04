@@ -31,3 +31,5 @@ Salat mit Tomaten:Salat(geschnitten) Essig Oel Tomaten
 15!Spiegelei: Ei(gekocht_6_ZusammenGekocht_Ei) : gewuerzt
 60!Gulasch: Fleisch(geschnitten,gekocht_40_ZusammenGekocht_Fleisch_Kartoffel_Kartoffel_Kartoffel_Paprika_Paprika_Paprika_Zwiebel) 3?Kartoffel(geschnitten,gekocht_40_ZusammenGekocht_Fleisch_Kartoffel_Kartoffel_Kartoffel_Paprika_Paprika_Paprika_Zwiebel) Zwiebel(geschnitten,gekocht_40_ZusammenGekocht_Fleisch_Kartoffel_Kartoffel_Kartoffel_Paprika_Paprika_Paprika_Zwiebel) 3?Paprika(geschnitten,gekocht_40_ZusammenGekocht_Fleisch_Kartoffel_Kartoffel_Kartoffel_Paprika_Paprika_Paprika_Zwiebel):gewuerzt
 Obstsalat: 3?Apfel(geschnitten) 4?Banane(geschnitten) Mango(geschnitten)
+Crab Role: 3?Reis(gekocht_20_ZusammenGekocht_Reis) 3?Krabbenfleisch(geschnitten) 3?Avocado(geschnitten) 3?Noriblatt
+vegane Crab Role: 3?Reis(gekocht_20_ZusammenGekocht_Reis) 3?Avocado(geschnitten) 3?Noriblatt
