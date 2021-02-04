@@ -144,4 +144,123 @@ public class Chefkoch {
         sam.schneide();
         sam.gibZutatAufTeller();
     }
+    
+    // 2021-01-29 Wiederholungsaufgabe
+    public void eintopf(boolean vegetarisch) {
+        if(vegetarisch==true) {
+            sam.wirKochenJetzt("vegetarischer Eintopf");
+        } else {
+            sam.wirKochenJetzt("Eintopf");
+            sam.nimmAusSchrank("Fleisch");
+            sam.schneide();
+            sam.gibInTopf();
+        }
+        sam.nimmAusSchrank("Zwiebel");
+        sam.schneide();
+        sam.gibInTopf();
+        for(int i=1;i<=3;i=i+1) {
+            sam.nimmAusSchrank("Paprika");
+            sam.schneide();
+            sam.gibInTopf();
+            sam.nimmAusSchrank("Kartoffel");
+            sam.schneide();
+            sam.gibInTopf();
+        }
+        sam.koche(10);
+        sam.gibTopfinhaltAufTeller();
+        sam.serviere();
+    }
+
+    // 2021-01-29 Blatt Stufe I
+    public void burger(String burger) {
+        if(burger.equals("Hamburger")) {
+            sam.wirKochenJetzt("Hamburger");
+            sam.nimmAusSchrank("Salat");
+            sam.schneide();
+            sam.gibZutatAufTeller();
+        } else {
+            sam.wirKochenJetzt("Cheeseburger");
+            sam.nimmAusSchrank("Kaesescheibe");
+            sam.gibZutatAufTeller();
+        }
+        sam.nimmAusSchrank("Tomate");
+        sam.schneide();
+        sam.gibZutatAufTeller();
+        sam.nimmAusSchrank("Broetchen");
+        sam.schneide();
+        sam.gibZutatAufTeller();
+        sam.nimmAusSchrank("Burgerpatty");
+        sam.gibInTopf();
+        sam.koche(10);
+        sam.gibTopfinhaltAufTeller();
+        sam.serviere();
+    }
+
+    // 2021-01-29 Hilfsmethode fuer Blatt Stufe III
+    private void paprikaUndZucchiniZubereiten() {
+        sam.nimmAusSchrank("Paprika");
+        sam.schneide();
+        sam.gibInTopf();
+        sam.nimmAusSchrank("Zucchini");
+        sam.schneide();
+        sam.gibInTopf();
+        sam.koche(20);
+        sam.gibTopfinhaltAufTeller();
+    }
+
+    // 2021-01-29 Hilfsmethode fuer Blatt Stufe III
+    private void bratkartoffelnZubereiten() {
+        sam.nimmAusSchrank("Zwiebel");
+        sam.schneide();
+        sam.gibInTopf();
+        for(int i=1;i<=3;i=i+1) {
+            sam.nimmAusSchrank("Kartoffel");
+            sam.schneide();
+            sam.gibInTopf();
+        }
+        sam.koche(20);
+        sam.gibTopfinhaltAufTeller();
+    }
+
+    // 2021-01-29 Blatt Stufe II + III
+    public void steak(String garungsgrad, String beilage) {
+        if(garungsgrad.equals("rare")) {
+            if(beilage.equals("Paprika und Zucchini")) {
+                sam.wirKochenJetzt("Steak rare mit Paprika und Zucchini");
+                paprikaUndZucchiniZubereiten();
+            } else {
+                sam.wirKochenJetzt("Steak rare mit Bratkartoffeln");
+                bratkartoffelnZubereiten();
+            }
+            sam.nimmAusSchrank("Steak");
+            sam.gibInTopf();
+            sam.koche(5);
+        } else {
+            if(garungsgrad.equals("medium")) {
+                if(beilage.equals("Paprika und Zucchini")) {
+                    sam.wirKochenJetzt("Steak medium mit Paprika und Zucchini");
+                    paprikaUndZucchiniZubereiten();
+                } else {
+                    sam.wirKochenJetzt("Steak medium mit Bratkartoffeln");
+                    bratkartoffelnZubereiten();
+                }
+                sam.nimmAusSchrank("Steak");
+                sam.gibInTopf();
+                sam.koche(8);
+            } else {
+                if(beilage.equals("Paprika und Zucchini")) {
+                    sam.wirKochenJetzt("Steak well-done mit Paprika und Zucchini");
+                    paprikaUndZucchiniZubereiten();
+                } else {
+                    sam.wirKochenJetzt("Steak well-done mit Bratkartoffeln");
+                    bratkartoffelnZubereiten();
+                }
+                sam.nimmAusSchrank("Steak");
+                sam.gibInTopf();
+                sam.koche(10);
+            }
+        }
+        sam.gibTopfinhaltAufTeller();
+        sam.serviere();
+    }
 }
