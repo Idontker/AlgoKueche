@@ -1,5 +1,3 @@
-import hilfsklassen.gui.MainFrame;
-
 /**
  * Das ist die Klasse Chefkoch, in der ihr arbeiten werdet. Alle
  * Arbeitsauftraege stehen auf dem jeweiligen Arbeitsblatt. Die Arbeitsschritte,
@@ -13,12 +11,6 @@ public class Chefkoch {
 
     public Chefkoch() {
         sam = new Lehrling();
-    }
-
-    public static void main(String[] args) {
-        MainFrame.pathToAlgoKueche = "C:/Users/Karol/proj/AlgoKueche/AlgoKueche/src/hilfsklassen/";
-        Chefkoch c = new Chefkoch();
-        c.crabRole(true);
     }
 
     /*
@@ -266,35 +258,5 @@ public class Chefkoch {
         sam.nimmAusSchrank(zutat);
         sam.schneide();
         sam.gibZutatAufTeller();
-    }
-
-    public void crabRole(boolean vegan) {
-        if (vegan == true) {
-            sam.wirKochenJetzt("vegane Crab Role");
-        } else {
-            sam.wirKochenJetzt("Crab Role");
-        }
-
-        for (int i = 1; i <= 3; i = i + 1) {
-            sam.nimmAusSchrank("Reis");
-            sam.gibInTopf();
-            sam.koche(20);
-            sam.gibTopfinhaltAufTeller();
-
-            if (vegan == false) {
-                sam.nimmAusSchrank("Krabbenfleisch");
-                sam.schneide();
-                sam.gibZutatAufTeller();
-            }
-
-            sam.nimmAusSchrank("Avocado");
-            sam.schneide();
-            sam.gibZutatAufTeller();
-
-            sam.nimmAusSchrank("Noriblatt");
-            sam.gibZutatAufTeller();
-        }
-
-        sam.serviere();
     }
 }
